@@ -1,0 +1,24 @@
+% !TEX root = semexp-thesis.tex
+
+% hide draft info
+\makeatletter
+\AtBeginDocument{
+	\sbox{\swa@draftPageLine}{}
+}
+\makeatother
+
+% patch date format
+\usepackage[style=iso]{datetime2}
+
+% declaration of authorship:
+% - patch date format manually (datetime2 doesn't work here??)
+\makeatletter
+\expandafter\patchcmd{\endstatement}{\datedate}{\two@digits{\thedateyear}-\two@digits{\thedatemonth}-\two@digits{\thedateday}}{\typeout{patch 1 successful}}{\typeout{patch 1 failed}}
+\makeatother
+% - remove article before date
+\makeatletter
+\expandafter\patchcmd{\endstatement}{\@location, den }{\@location, }{\typeout{patch 2 successful}}{\typeout{patch 2 failed}}
+\makeatother
+
+% debug patching
+%\tracingpatches
