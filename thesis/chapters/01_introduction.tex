@@ -1,6 +1,121 @@
 % !TEX root = ../semexp-thesis.tex
 
+\setchapterpreamble[uc][.75\textwidth]{%
+	\dictum[John C. Maxwell]{%
+		The future belongs to the curious. The ones who are not afraid to try it, explore it, poke at it, question it, and turn it inside out.
+	}
+}
+
 \chapter{Introduction}
 \label{cha:introduction}
 
-Carpe Squeak~\cite{thiede2022augmenting,thiede2023squeak,thiede2023symbolic,thiede2023object,thiede2023time,thiede2024bringing,thiede2024talking}!
+In the realm of software development, curiosity is key.
+%As programmers want to develop a new feature, fix a bug, or just understand a system, they need to gather a plethora of insights:
+Programmers spend significant time searching for useful interfaces, concepts, objects, and methods---and they spend significant time trying out things, understanding systems, plugging concepts together, building new prototypes and experimenting with them.
+All of this involves raising a vast amount of questions:
+\emph{%
+	what packages and methods are there that could do this job for me?
+	Which parts of this system do I need to touch to add a new feature?
+	How does this feature work?
+	What state does this object have, and how can I access or manipulate it?
+	Why has this cache not been reset?
+	How have others solved this problem?
+	What would it look and feel like if we placed this button there?
+	Can I do this to achieve that and does this make a good solution?
+}
+% todo: maybe put stronger emphasis on interface research/combination and prototyping?
+
+All this need for knowledge can be expressed as \emph{questions}, and we can say programmers have \emph{conversations} with the system in which they run \emph{experiments} to collect the information required to answer these questions~\cite{taeumel2022pattern}.
+Good such conversations are vivid, rapid, rich: every answer leads to a new thought, a revised question, an alternative approach, and with every further question, programmers gradually develop their understanding of the systems and problems they are working with, until they achieve a viable solution and their curiosity is satisfied for the moment.
+
+\emph{Exploratory programming systems}~\cite{sandberg1988smalltalk,rein2018exploratory} are designed to support such conversations by offering several \emph{tools}, through which programmers can directly interact with systems or their parts to answer their questions.
+In Squeak, a crucial tool for exploratory programming is the \emph{workspace}:
+%through it, programmers can prototype new solutions, browse existing implementations, or inspect objects from the live system.
+through it, programmers can write and evaluate scripts to prototype new solutions, browse classes to research existing implementations and discover relevant methods and protocols, or inspect objects to explore their state and capabilities.
+%for example, a Smalltalk programmer can use an \emph{inspector} to search the internal state of an object, study the source code of a class in a \emph{browser} to discover helpful protocols and methods, or evaluate a script in a \emph{workspace} to try out methods and their combinations.
+
+\ParSep
+
+However, every question has its price.
+Even simple questions might demand the full attention and structured thinking from programmers:
+\emph{%
+%\begin{quote}\itshape
+	when has this order been filed? I can find that out by inspecting this object. Ah, it has a \code{createDate} field, but oh no, why is this just a plain number? It could be a Unix timestamp. How can I convert that into a human-readable version? Is there any method on \code{Date} that does this for me? Let me browse this class ... seems not so. Maybe \code{DateAndTime}? Yes, \code{DateAndTime fromUnixTime: createDate} should do the job ... but wait, surely this order has not been created in year 56170? Is this actually a millisecond timestamp? Okay, so I can divide it by 1000 and try again ... fix that syntax slip ... alright, so this order has been filed on March 14th this year. What was I going to do again?
+}%\end{quote}
+
+We note two major challenges in the exploratory programming workflow for that traditional exploratory programming systems have not yet found sufficient solutions: \emph{semantic distances} and \emph{information overload}.
+First, programmers regularly face significant semantic distances between their high-level intentions and the low-level interfaces of systems, which require them to manually translate conceptual questions into technical system instructions and translate technical results back into their mental model.
+Second, they are challenged by information overload as the number of possible information sources (such as comprehensive interfaces, documentation, and examples) or experiments and prototypes often massively exceed human capabilities for information processing within limited time, forcing programmers to consider only a small fraction of the available data.
+
+Consequently, exploratory conversations are impeded by mental overheads and distractions, restraining programmers from maintaining their flow, exhausting all options, and finding optimal solutions.
+
+\ParSep
+
+On the other hand, the ongoing advent of artificial intelligence (AI) and machine learning (ML) methods has already simplified or enriched various other domains.
+Search engines and recommender algorithms on online marketplaces, social media platforms, or streaming services use \emph{document embeddings}~\cite{mikolov2013efficient,reimers2019sentencebert} to search, compare, and group entities based on their semantics (from Ancient Greek \emph{sēmantikós}, i.e., significance or meaning).
+\emph{Generative AI} methods such as ChatGPT\footnote{\url{https://chat.openai.com/}} and other large language models (LLMs)~\cite{vaswani2017attention,radford2018improving,zhao2023survey} have been widely adopted by people and companies in the last two years for creating, automating, and learning.
+
+In particular, programming is experiencing a shift: millions of developer generate code with the help of GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, or similar products or use conversational agents such as GitHub Copilot Chat\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}} to explore and modify code bases.
+Similarly, tools such as Microsoft Visual Studio IntelliCode\footnote{\url{https://visualstudio.microsoft.com/services/intellicode/}} or Sourcegraph\footnote{\url{https://sourcegraph.com/}} employ embeddings to find and rank relevant source code snippets.
+
+We subsume both these technologies---\emph{retrieval} using embeddings and \emph{text generation} using LLMs---under the term \emph{semantic technologies}.
+
+\ParSep
+
+Yet, only few approaches have used the capabilities of semantic technologies to improve the exploratory programming workflow.
+However, we believe that semantic technologies have significant potential to support exploratory programmers in processing extensive information and bridging semantic distances.
+This leads us to our primary research question:
+
+\begin{quote}
+	How can tool developers use semantic technologies to improve the exploratory programming experience?
+\end{quote}
+
+We decompose this question into the following secondary research questions:
+
+\begin{enumerate}[label=RQ\arabic*]
+	\item \bold{How can tool developers use semantic technologies to gather, process, and augment information for exploratory programmers?}
+		How can they retrieve relevant information from the programming system? How can they analyze this information and generate new knowledge?
+		How can they manage information throughout this process?
+	\item \bold{How can tool developers integrate new semantic capabilities into the exploratory programming workflow?}
+		How should they design programming tools that harness the potential of semantic capabilities?
+		How can exploratory programmers interact with these capabilities, and how does this affect their programming experience?
+		In light of new semantic capabilities, can existing UI languages and mechanisms of exploratory programming systems uphold their adequacy, or do new, more semantics-oriented interfaces offer greater benefits?
+	\item \bold{What are practical considerations for tool developers that use semantic technologies?}
+		What current challenges and limitations of semantic technologies should they be aware of and how can they cope with them?
+		How can they design semantic interfaces to achieve both a good user experience and developer experience?
+\end{enumerate}
+
+We propose an \emph{augmented exploratory programming workflow} model in which the exploratory activities of programmers are tracked and anticipated and programmers are enabled to access and interact with AI-suggested experiments and results through a \emph{semantic workspace}.
+We believe that our approach will allow tool developers to tightly integrate semantic technologies into exploratory programming systems, streamline and augment the exploratory workflow, and provide a solid programming experience to programmers by enabling them to cooperate with intelligent tools.
+
+To study this hypothesis, we make the following contributions:
+
+\begin{enumerate}[label=C\arabic*]
+	\item We present the \emph{augmented exploratory programming workflow} model, which captures the traditional process of exploratory programmers and their challenges and describes possible starting points for integrating semantic technologies.
+	\item We propose a new \emph{semantic workspace} as an archetype for exploratory programming systems that support an augmented exploratory programming workflow by providing new or enhanced \emph{semantic interfaces} for programmers.
+	\item We describe our architecture and implementation of a \emph{semantic exploration kernel} consisting of different components that use semantic technologies to provide semantic functionalities for exploratory programming systems, namely \emph{semantic suggestions} and \emph{semantic conversations}.
+	\item We discuss the feasibility and limitations, programming experience, and development considerations of our approach by implementing a prototype of the semantic workspace in Squeak/Smalltalk using OpenAI's transformer models and by showcasing different applications of the prototype.
+\end{enumerate}
+
+We organize the remainder of this thesis as follows:
+%in \cref{cha:background}, we introduce theoretical foundations behind exploratory programming (systems) and semantic technologies and describe how the challenges of the former may be addressed by the opportunities of the latter.
+%In \cref{cha:approach}, we present our model of the augmented exploratory programming workflow and describe our conception of a semantic workspace.
+%In \cref{cha:architecture}, we describe the high-level architecture of the semantic exploration kernel and explain its fundamental components (\emph{artifact boards} and \emph{semantic conversation interfaces}) before we detail their implementation by discussing retrieval technologies in \cref{cha:retrieval} and building an \emph{exploratory programming agent} in \cref{cha:agent}.
+%In \cref{cha:implementation}, we describe the implementation of our prototype by integrating it with a framework for semantic technologies and the Squeak/Smalltalk programming system.
+
+\begin{description}[noextralabelsep]
+	\item[\cref{cha:background}] introduces theoretical foundations behind exploratory programming (systems) and semantic technologies and describes how the challenges of the former may be addressed by the opportunities of the latter.
+	\item[\cref{cha:approach}] presents our model of the augmented exploratory programming workflow and describes our conception of a semantic workspace.
+	\item[\cref{cha:architecture}] describes the high-level architecture of the semantic exploration kernel and explains its fundamental components: \emph{artifact boards} and \emph{semantic conversation interfaces}.
+	\item[\cref{cha:retrieval}] discusses the application of retrieval technologies for anticipating exploratory programming activities.
+	\item[\cref{cha:agent}] describes our construction of an \emph{exploratory programming agent} for implementing conversational interfaces and automated experiments.
+	\item[\cref{cha:implementation}] describes the implementation of our prototype by integrating it with a framework for semantic technologies and the Squeak/Smalltalk programming system.
+	\item[\cref{cha:application}] illustrates the applications of the semantic workspace through different case studies.
+	\item[\cref{cha:discussion}] provides discussion of the opportunities and challenges of semantic technologies for augmenting the exploratory programming workflow with regard to technical feasibility, programming experience, and considerations for tool developers.
+	\item[\cref{cha:related_work}] provides an overview of related work in the fields of exploratory programming and semantic technologies.
+	\item[\cref{cha:conclusion}] summarizes our results and discusses possible future work.
+\end{description}
+
+% NEXT: reread. insert more examples? continue with background.
+% todo for later: improve layout
+% todo for later: maybe move all tool links to an appendix?

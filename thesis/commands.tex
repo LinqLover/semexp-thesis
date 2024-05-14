@@ -20,5 +20,44 @@
 \expandafter\patchcmd{\endstatement}{\@location, den }{\@location, }{\typeout{patch 2 successful}}{\typeout{patch 2 failed}}
 \makeatother
 
+
+% customize chapter preamble
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{--- #1\par}
+\renewcommand*\dictumrule{}
+
+
+% better asterism
+\renewcommand{\asterism}{\smash{%
+	\raisebox{-.5ex}{%
+		\setlength{\tabcolsep}{.2pt}%
+		*}}}
+
+
+% Semantic markup
+\newcommand\bold[1]{\textbf{#1}}
+\renewcommand\code[1]{%
+	\texttt{#1}}
+	%\textsf{#1}} % This looks more like Smalltalk
+\newcommand\hardcode[1]{%
+	\texttt{#1}}
+
+
+% enumitem
+% add noextralabelsep option (only insert regular space after label)
+\makeatletter
+\enitkv@key{}{noextralabelsep}[true]{%
+	\enit@sepfrommarginfalse
+	\enit@calcset\labelsep\tw@{\fontdimen2\font}
+}
+\makeatother
+
+
+% Automatic reference labels (\cref)
+\usepackage[nameinlink]{cleveref}
+
+
 % debug patching
 %\tracingpatches
