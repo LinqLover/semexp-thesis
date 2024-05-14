@@ -19,6 +19,7 @@
 %  print - do not color links
 %
 \PassOptionsToPackage{disable}{todonotes}
+% TODO: adjust options for brint (-oneside, -draft, +print)
 \documentclass[draft,master,oneside]{swathesis}
 \usepackage[backend=biber]{biblatex}
 \usepackage[linktoc=all]{hyperref}
@@ -58,8 +59,9 @@
 \input{acknowledgments}
 \cleardoublepage
 \tableofcontents
+% TODO: revise required lists
 \listoffigures
-\listoftables
+%\listoftables
 %\lstlistoflistings
 %\listofacronyms %
 \mainmatter
