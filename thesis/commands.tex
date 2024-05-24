@@ -1,5 +1,15 @@
 % !TEX root = semexp-thesis.tex
 
+% include with relative paths
+\usepackage{import}
+\newcommand{\thimport}[2][.]{%
+	\IfFileExists{#1/#2/../#2}{%
+		\subimport{#1/#2}{../#2}%
+	}{%
+		\input{#1/#2}%
+	}
+}
+
 % hide draft info
 \makeatletter
 \AtBeginDocument{
