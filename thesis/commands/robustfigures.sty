@@ -1,0 +1,40 @@
+% !TEX root = ../semexp-thesis.tex
+
+\newcommand{\shrug}{%
+	\texttt{%
+		% ¯\_(ツ)_/¯
+		\raisebox{0.81em}{\char`\_}%
+		\kern-0.2ex\raisebox{-0.12em}{\char`\\}%
+		\kern-0.3ex\char`\_%
+		\kern-0.5ex(%
+		\kern-0.25ex\raisebox{0.25ex}{\rotatebox{45}{\raisebox{-.75ex}"%
+		\kern-1.5ex\rotatebox{-90})}}\kern-0.5ex)%
+		\kern-0.5ex\char`\_%
+		\kern-0.3ex\raisebox{-0.12em}{/}%
+		\kern-0.2ex\raisebox{0.81em}{\char`\_}%
+	}%
+}
+
+\let\StandardIncludeGraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+	\IfFileExists{#2}{%
+		\StandardIncludeGraphics[#1]{#2}%
+	}{%
+		\ClassWarning{robustfigures}{Figure #2 does not exist}%
+		\noindent\colorbox{gray!20}{%
+			\begin{minipage}[t][4.2cm][t]{0.8\textwidth}
+				\vspace*{\fill}
+				\centering
+				Missing figure
+
+				\texttt{\detokenize{#2}}
+
+				\medskip
+
+				\huge
+				\shrug
+				\vspace*{\fill}
+			\end{minipage}
+		}%
+	}%
+}

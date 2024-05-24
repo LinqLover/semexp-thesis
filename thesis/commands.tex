@@ -53,9 +53,30 @@
 	%\textsf{#1}} % This looks more like Smalltalk
 \newcommand\hardcode[1]{%
 	\texttt{#1}}
+\newcommand\name[1]{\textsc{#1}}
+
+% example box
+\newlength{\globalparindent}
+\setlength{\globalparindent}{\parindent}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	examplebox/.style={
+		%title={\refstepcounter{exa}example~\theexa.},
+		before upper =	{\parindent=\globalparindent},
+		}
+}
+\newtcolorbox{example}{examplebox}
 
 
 % enumitem
+% ... have them look nicer
+\AtBeginDocument{%
+	\setlist[description]{
+		% copied over from swathesis
+		noitemsep,font=\normalfont\scshape,leftmargin=\parindent,topsep=.5\baselineskip,partopsep=.5\baselineskip,
+		listparindent=1em, % visible hanging indent for new paragraphs inside items
+	}
+}
 % add noextralabelsep option (only insert regular space after label)
 \makeatletter
 \enitkv@key{}{noextralabelsep}[true]{%
@@ -67,6 +88,16 @@
 
 % Automatic reference labels (\cref)
 \usepackage[nameinlink]{cleveref}
+
+
+% biblatex: separator between multiple citations: change to semicolon only for \cites
+\DeclareMultiCiteCommand{\cites}[\mkbibbrackets]{\cite}{\addsemicolon\space}
+
+
+% Automatically insert placeholders for missing figures
+\ifdraft{%
+	\usepackage{commands/robustfigures}
+}{}
 
 
 % debug patching
