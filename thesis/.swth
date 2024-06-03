@@ -1,5 +1,5 @@
 # swth config file
 MODE="master"
 LATEX="texfot --quiet pdflatex"
-BIBTEX="bibtex"
+BIBTEX="biber --isbn13 --isbn-normalise"
 MAIN="semexp-thesis"
