@@ -53,12 +53,29 @@
 % TODO metadata
 \extratitle{\raggedleft Thiede, \\ Augmented Exploratory Programming\par}
 \title{The Semantic Workspace:\\[-4pt] Augmenting Exploratory Programming\\[0pt] with Integrated Generative AI Tools}
-%\subtitle{Ein Untertitel ist Optional}
+%\subtitle{This is Optionally Optional}
 \othertitle{Der semantische Workspace:\\[-4pt] Augmentierung explorativer Programmierung\\[0pt] mittels integrierter generativer KI-Werkzeuge}
-%\othersubtitle{This is Optionally Optional}
+%\othersubtitle{Ein Untertitel ist optional}
 
 \begin{document}
 \frontmatter
+% add squeak logos to title page
+\AddToHook{shipout/background}{%
+	\ifnum\value{abspage}=1
+		\AddToShipoutPictureBG*{%
+			\put(\dimexpr\paperwidth/2-9cm,\dimexpr\paperheight-8.45cm){%
+				\rotatebox{10}{%
+					\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/squeak.pdf}%
+				}%
+			}%
+			\put(\dimexpr\paperwidth/2+5.4cm,\dimexpr\paperheight-8.3cm){%
+				\rotatebox{-10}{%
+					\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/smalltalk.pdf}%
+				}%
+			}%
+		}%
+	\fi%
+}
 \maketitle
 \input{abstract}
 \input{acknowledgments}
