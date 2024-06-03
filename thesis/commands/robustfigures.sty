@@ -17,6 +17,7 @@
 
 \let\StandardIncludeGraphics\includegraphics
 \renewcommand{\includegraphics}[2][]{%
+	% TODO: should support common extensions
 	\IfFileExists{#2}{%
 		\StandardIncludeGraphics[#1]{#2}%
 	}{%

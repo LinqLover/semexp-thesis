@@ -63,9 +63,27 @@
 	examplebox/.style={
 		%title={\refstepcounter{exa}example~\theexa.},
 		before upper =	{\parindent=\globalparindent},
-		}
+		},
+	summarybox/.style={
+		%title={\refstepcounter{sum}summary~\theexa.},
+		before upper =	{\parindent=\globalparindent},
+		},
 }
-\newtcolorbox{example}{examplebox}
+% todo refactor: automatically provide paragraph/section here
+\newtcolorbox{example}{
+	examplebox,
+	breakable,
+	enhanced,
+	before skip=\bigskipamount,
+	after skip=\bigskipamount,
+}
+\newtcolorbox{summary}{
+	summarybox,
+	breakable,
+	enhanced,
+	before skip=\bigskipamount,
+	after skip=\bigskipamount,
+}
 
 
 % enumitem
@@ -92,6 +110,10 @@
 
 % biblatex: separator between multiple citations: change to semicolon only for \cites
 \DeclareMultiCiteCommand{\cites}[\mkbibbrackets]{\cite}{\addsemicolon\space}
+
+
+% circled numbers
+\usepackage{circledsteps}
 
 
 % Automatically insert placeholders for missing figures
