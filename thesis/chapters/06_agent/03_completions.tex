@@ -1,0 +1,38 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{Optimizing for Semantic Completions}
+\label{sec:suggestions/completions}
+
+As described in \cref{sec:suggestions/generation}, resource consumption and pecuniary cost are particularly critical for generating semantic completions.
+Given the desired omnipresence of relevant and up-to-date completions throughout the entire programming session, this even holds true when following the two-stage generation approach described there.
+
+To optimize the exploratory programming agent for this use case, we provide the LLM with an extensive pre-generated context but disable its function interfaces and limit the research process of the agent to a single invocation of the model.
+That is, we eliminate the autonomy of the agent to improve its performance. % todo: generally define "performance" clearer
+
+In our prototype for semantic code completion, we statically (i.e., at development time) anticipate a range of likely experiments required by the agent and dynamically (i.e,. prior to the only invocation of the LLM) execute them and present their results to the agent.
+These pre-generated experiments include the definition, protocols, and messages of the receiver class of the current draft, correlated classes provided with the same information, and the source code of correlated methods.
+If a current receiver object is available (e.g., when the programmer is typing their draft into the script pane of an inspector), we also include its full state (i.e., all instance variables and truncated variable fields).
+
+Similarly, we attempt to provide dynamic context for all displayed classes by including previews for their message results through a form of symbolic execution (i.e., we locate sample instances of each class in the image and send each unary message to them in a sandbox). % todo: is this ok to call symbex?
+To improve the ability of the agent to follow the given task, we provide it with a one-shot prompt of processing a similar request.
+To mitigate the limited proficiency of GPT-4 regarding Smalltalk programming, this shot also includes an extensive example of the Smalltalk syntax.
+
+\begin{figure}
+	\centering
+	\begin{threeparttable}
+		\centering
+		{\footnotesize
+		\thimport{03_completions/prompt_design}}
+	\end{threeparttable}
+	\caption[Optimized prompt design of the exploratory programming agent for generatic semantic code completions.]{
+		Optimized prompt design of the exploratory programming agent for generativ semantic code completions.
+		Instead of enabling the agent to perform different experiments autonomously, we provide it with extensive pre-generated information and request a final answer in a single invocation of the LLM.
+
+		% Note that ellipses (...)
+	}
+	\label{fig:agent/completions/prompt_design}
+\end{figure}
+
+As for other invocations of the agent, we instruct it to engage in inner monologue before returning a single code completion.
+We request the LLM to return $k \in [5, 20]$ completions in parallel, which multiplies the cost for the outputs but not for the provided context, while latencies are typically not increased due elastic scaling of the API.
+\Cref{fig:agent/completions/prompt_design} displays the full prompt schema of our agent for generating a semantic code completion.

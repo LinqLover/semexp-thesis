@@ -156,6 +156,18 @@
 \newcommand\hardcode[1]{%
 	\texttt{#1}}
 \newcommand\name[1]{\textsc{#1}}
+\newenvironment{multicode}{%
+	\begin{quote}%
+		\ttfamily%
+		%\sffamily% % This looks more like Smalltalk
+		\setlength{\parindent}{0pt}%
+	}{\end{quote}}
+
+% Manual linebreak arrows in code
+\usepackage{MnSymbol}
+\newcommand{\multicodeforcebreak}{%
+	\\\phantom{....}\llap{\raisebox{0.2ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\hspace*{2pt}}}}%
+}
 
 % example box
 \newlength{\globalparindent}
@@ -260,6 +272,11 @@
 % biblatex: separator between multiple citations: change to semicolon only for \cites
 \DeclareMultiCiteCommand{\cites}[\mkbibbrackets]{\cite}{\addsemicolon\space}
 
+
+% yet another table package (but a pretty nice one)
+\usepackage{tabularray}
+% for subfloats in tblrs
+\UseTblrLibrary{counter,varwidth}
 
 % circled numbers
 \usepackage{circledsteps}

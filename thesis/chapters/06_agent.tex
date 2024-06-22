@@ -1,4 +1,22 @@
 % !TEX root = ../semexp-thesis.tex
 
-\chapter{Agent}
+\chapter{Building an Exploratory Programming Agent with GPT-4}
 \label{cha:agent}
+
+In this chapter, we describe our implementation of semantic object interfaces through a conversational autonomous agent.
+In our prototype, we use OpenAI's LLM GPT-4\footnote{Used in the version \code{gpt-4-0125-preview}.}, which ranks among the most powerful models in several benchmarks regarding abilities such as problem solving, creative tasks, and code writing at the time of writing~\cite{borji2023battle,chiang2024chatbot}.
+% todo: are these reasonable benchmarks?
+
+We implement the agent's policies through prompt engineering and map the system interface to a set of tools for function calling.
+Finally, we optimize the agent's performance for generating semantic code completions.
+
+% todo: somewhere provide full prompt/conversation(s) (appendix?)
+
+\thimport{01_prompts}
+\thimport{02_interfaces}
+\thimport{03_completions}
+
+\begin{summary}
+	We have implemented an exploratory programming agent for semantic object interfaces by \emph{prompting} a GPT-4 model with a set of behavioral policies and initial research steps, connecting it to the system through \emph{functions} for executing experiments, and pre-generating a statically structured prompt to efficiently generate code completions.
+\end{summary}
+

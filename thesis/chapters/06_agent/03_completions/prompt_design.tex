@@ -1,0 +1,57 @@
+% !TEX root = ../../../semexp-thesis.tex
+
+\sffamily
+
+\begin{tblr}{
+	colspec = {
+		|
+		Q[1ex]
+		X[2,l,h]
+		X[1,l,m]
+		|
+	},
+	% TODO: add vertical margin inside table frame - does not work
+	row{1} = {
+		abovesep = 5pt,
+		belowsep = 5pt
+	},
+	column{3} =	{ font=\itshape },
+	width =	\columnwidth,
+	hspan =	minimal,
+	rowsep =	0pt,
+	colsep =	3pt,
+}
+	\hline
+	%
+	\SetCell[c=3]{l} \bold{\emph{Code completion agent}} \\
+	& \bold{System:} You are a code completion agent...	& identity \\
+	& \bold{System:} You will complete a method...	& task and rules \\
+	& \bold{System:} Use the following information...	& data description \\
+
+	\SetCell[c=3]{l} \bold{\emph{Example}} \\
+	& {\bold{User:} \code{DateAndTime>>yyyymmddString}\\
+	\code{\null\qquad	\textasciicircum}}	& draft \\
+	& {\bold{User:} \code{self}: \code{2024-06-22T00:30:37.216061+02:00}\\
+	\code{class}: \code{DateAndTime}\\
+	\code{utcMicroseconds}: \code{1719009070988843}\\
+	\code{...}}	& receiver object state \\
+	& {\bold{User:} \code{Magnitude subclass: \#DateAndTime...}\\
+	\code{(\textquotesingle{}accessing\textquotesingle{} getSeconds -> 1870 setSeconds:...}}	& receiver class: definition and protocols with preview results \\
+	& {\bold{User:} Related classes and methods:\\
+	\code{ArrayedCollection subclass: \#String}\\
+	example: \code{\textquotesingle{}hi\textquotesingle{}}\\
+	\code{(\textquotesingle{}accessing\textquotesingle{} byteAt: byteSize -> 2 ...}}	& correlated classes: definition and protocols with preview results \\
+	& {\bold{User:} \code{SequenceableCollection>>streamContents: blockWithArg}\\
+	\code{\null\qquad	\textasciicircum{} self new...}}	& correlated methods: definition and implementation \\
+	& {\bold{Assistant:} \code{DateAndTime>>yyyymmddString}\\
+	\code{\null\qquad	\textasciicircum{} String streamContents: [:stream | self...}}	& completion \\
+
+	\SetCell[c=3]{l} \bold{\emph{Task}} \\
+	& \bold{User:} \emph{<information about the task in the same format as above>} \\
+	& \bold{System:} Now complete this:	& \SetCell[r=2]{l} repetition of the task context \\
+	& \bold{User:} \emph{<draft again>}	& \\
+
+	\hline
+\end{tblr}
+
+% TODO: should we analogously provide conrete output examples for functions?

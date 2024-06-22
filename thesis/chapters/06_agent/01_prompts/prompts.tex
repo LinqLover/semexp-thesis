@@ -1,0 +1,56 @@
+% !TEX root = ../../../semexp-thesis.tex
+
+\sffamily
+%\newcommand{\tabitem}{\hspace*{1ex}\llap{\textbullet}~~}
+\newcommand{\tabitem}{\hspace*{1ex}\llap{}~~}
+
+\begin{tblr}{
+	colspec = {
+		|
+		Q[0.2em]
+		X[2,l,h]
+		X[1,l,m]
+		|
+	},
+	% TODO: add vertical margin inside table frame - does not work
+	row{1} = {
+		abovesep = 5pt,
+		belowsep = 5pt
+	},
+	column{3} =	{ font=\itshape },
+	width =	\columnwidth,
+	hspan =	minimal,
+	rowsep =	0pt,
+	colsep =	3pt,
+}
+	\hline
+	%
+	\SetCell[c=3]{l} \bold{HEADER} & \\
+
+	&	\bold{\emph{Exploratory programming agent}} \\
+	&	\tabitem \bold{System:} You are an exploratory programming agent...	& identity \\
+	&	\tabitem \bold{System:} You can call the following functions...	& interface description \\
+	&	\tabitem \bold{System:} To solve a task, you should...	& rules and traits for problem solving \\
+
+	&	\bold{\emph{Conversation mode (optional)}} \\
+	&	\tabitem \bold{System:} You are an object...	& object identity \\
+	&	\tabitem \bold{System:} Keep your answers brief...	& output format \\[5pt]
+
+	&	\bold{\emph{Semantic messaging (optional)}} \\
+	&	\tabitem \bold{System:} You must call the \code{evalAndReturn} function...	& \SetCell[r=2]{l} output format \\
+	&	\tabitem \bold{System:} Format the return value as...	& \\[5pt]
+
+	&	\bold{\emph{Bootstrapping exploration}} \\
+	&	\tabitem \bold{System:} This object represents...	& hardcoded semantic context \\
+	&	\tabitem \bold{Assistant:} To understand this object, I will first...	& zero-shot chain-of-thought \\
+	&	\tabitem \bold{Assistant:} \code{eval(self printString)}	& \SetCell[r=4]{l} initial object context \\
+	&	\tabitem \bold{Result:} \code{an Object(12345)}	& \\
+	&	\tabitem \bold{Assistant:} \code{eval(self allInstVarNames)}	& \\
+	&	\tabitem \bold{Result:} \code{\#(\textquotesingle foo\textquotesingle{} \textquotesingle bar\textquotesingle)}	& \\[5pt]
+	%
+	\SetCell[c=3]{l} \bold{BODY} & \\
+
+	&	\tabitem \bold{User:} What does this object...?	& user question \\
+
+	\hline
+\end{tblr}

@@ -1,0 +1,51 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{Implementing Policies through Prompts}
+\label{sec:agent/prompts}
+
+We define a set of \emph{policies} that define the behavior and the communication styles of the exploratory agent:
+
+\begin{description}
+	\item[Identity and context:]
+	The agent shall identify as an exploratory programming agent who supports the programmer in exploring an object in a system.
+	In conversation mode, the assistant shall also identify as the focused object itself, allowing users to address the object in the second person within the chat and thus increasing experienced immediacy%
+	\footnote{This follows the conversation style of message sends which are usually named in imperative or interrogative speech (such as the cascade-terminating message \code{\#yourself} in Smalltalk).}%
+	.
+	\item[Traits for problem solving and tool usage:]
+	The agent shall adopt a structured problem-solving approach by explicating ideas and steps in advance.
+	It shall check the results of experiments and iterate as necessary before providing an answer to the programmer.
+	When referring to object protocols, the agent shall browse the implementation or senders of messages whose behavior is unclear, and it shall test message sends before suggesting them to the programmer.
+	\item[Output format:]
+	The agent shall provide brief and concise answers and avoid long sentences unless requested otherwise.
+	% todo: for below, we have not yet introduced semantic messages!
+	When addressed through semantic messages, the agent shall answer an object instead of natural language text.
+	Objects can be existing or newly created objects from the system; in particular, primitive values (such as numbers of booleans) or dynamically structured JSON objects are desired.
+\end{description}
+
+To configure the agent to follow these policies, we describe them comprehensively in the system prompt of the agent conversation~(\cref{fig:agent/prompts/design}).
+While we iterated our prompt design several times, we did not conduct a systematic, evaluation-based approach to prompt engineering; yet our prototypical agent already showed promising results.
+
+\paragraph{Bootstrapping exploration}
+We initialize the agent conversation with a sequence of pre-generated messages that feature inner monologue and (resolved) function calls by the assistant and demonstrate its steps for getting a first overview of the object (e.g., by retrieving a textual representation of the object and browsing its protocols).
+Additionally, we inject further context into the pre-generated conversation prefix through system messages in natural language (e.g., hardcoded information about the role or particular messages of the object).
+
+\begin{figure}
+	\centering
+	\begin{threeparttable}
+		\centering
+		{\footnotesize
+		\thimport{01_prompts/prompts}}
+	\end{threeparttable}
+	\caption[Schematic prompt design of the exploratory programming agent.]{
+		Schematic prompt design of the exploratory programming agent.
+		Policies for the identity, strategies, and output formats of the agent are translated into comprehensive system instructions.
+		Through pre-generated assistant messages and tool calls, the agent is stimulated to engage in inner monologue and perform several experiments.
+	}
+	\label{fig:agent/prompts/design}
+\end{figure}
+
+This pre-generated conversation prefix serves several purposes:
+first, it provides a broad context about the object to the agent within the first invocation, which serves as the base for further experiments by the agent or even contains the required information already.
+Second, the first likely actions of the agent are anticipated, improving the average response time of the agent.
+Third, the prefix ``stimulates'' the agent toward an exploratory mindset, engagement in inner monologue, and eagerness to perform several experiments.
+Thus, pre-generated conversation prefixes present a hybrid of zero-shot chain-of-thought prompting~\cite{kojima2022large}, few-shot prompting~\cite{brown2020language}, and retrieval-augmented generation~\cite{lewis2020retrieval}.
