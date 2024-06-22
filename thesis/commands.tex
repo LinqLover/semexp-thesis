@@ -149,29 +149,50 @@
 \setlength{\globalparindent}{\parindent}
 \usepackage[most]{tcolorbox}
 \tcbset{
-	examplebox/.style={
-		%title={\refstepcounter{exa}example~\theexa.},
-		before upper =	{\parindent=\globalparindent},
+	smallbox/.style={
+		%title	= {\refstepcounter{exa}example~\theexa.},
+		before upper	= {\parindent=\globalparindent},
 		},
-	summarybox/.style={
-		%title={\refstepcounter{sum}summary~\theexa.},
-		before upper =	{\parindent=\globalparindent},
+	largebox/.style={
+		%title	= {\refstepcounter{sum}summary~\theexa.},
+		before upper	= {\parindent=\globalparindent},
 		},
 }
 % todo refactor: automatically provide paragraph/section here
-\newtcolorbox{example}{
-	examplebox,
+\newtcolorbox{smallbox}{
+	smallbox,
 	breakable,
 	enhanced,
 	before skip=\bigskipamount,
 	after skip=\bigskipamount,
 }
-\newtcolorbox{summary}{
-	summarybox,
+\newtcolorbox{largebox}{
+	largebox,
 	breakable,
 	enhanced,
-	before skip=\bigskipamount,
+	before skip=2\bigskipamount,
 	after skip=\bigskipamount,
+}
+\newenvironment{example}{%
+	\smallbox
+	\paragraph{Example.}
+	\setlist[1]{leftmargin=2em}
+}{
+	\endsmallbox%
+}
+\newenvironment{summary}{%
+	\largebox
+	\section*{Summary}\vspace{-1em}
+	\setlist[1]{leftmargin=2em}
+}{%
+	\endlargebox%
+}
+\newenvironment{genericbox}[1]{%
+	\smallbox
+	\paragraph{#1.}
+	\setlist[1]{leftmargin=2em}
+}{
+	\endsmallbox%
 }
 
 
