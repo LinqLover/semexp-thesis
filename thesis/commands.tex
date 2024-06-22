@@ -64,6 +64,15 @@
 		\setlength{\tabcolsep}{.2pt}%
 		*}}}
 
+% shared list of figures and tables
+% CREDITS: https://tex.stackexchange.com/a/120651/221054
+\makeatletter
+\renewcommand*{\ext@figure}{lot}
+\let\c@figure\c@table
+\let\ftype@figure\ftype@table
+\let\listoffiguresandtables\listoftables
+\renewcommand*\listtablename{List of Figures and Tables}
+\makeatother
 
 
 % COMMANDS
