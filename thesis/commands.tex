@@ -65,6 +65,72 @@
 
 % COMMANDS
 
+% landscape pages
+\usepackage{afterpage}
+\usepackage{pdflscape}
+\usepackage{environ}
+\newif\ifpreviewing
+\ifdraft{%
+	% just convenience for some PDF readers
+	\previewingtrue  % Comment out this line to revert to standard behavior; restore landscape pages to A4
+}{}
+\makeatletter
+\newbox\landscapefigure@saved@page
+\def\afterpagebody#1{%
+	\afterpage{
+		\begin{landscape}
+			\ifpreviewing%  % CREDITS: https://tex.stackexchange.com/a/719759/221054
+				\AtBeginShipoutNext{%
+					\setbox\landscapefigure@saved@page=\hbox{\resizebox{!}{0.707\height}{\box\AtBeginShipoutBox}}
+					\setbox\AtBeginShipoutBox=\hbox{\box\landscapefigure@saved@page}
+					\pdfpageheight=210mm
+					\pdfpagewidth=148.5mm
+					\hoffset=-0.293in
+					\voffset=-0.293in
+				}%
+			\fi%
+			\begin{figure}
+				#1
+			\end{figure}
+		\end{landscape}
+	}%
+}
+\makeatother
+\NewEnviron{landscapefigure}{%
+	\expandafter\afterpagebody\expandafter{\BODY}%
+}
+\let\oldfigure\figure
+\let\endoldfigure\endfigure
+
+\makeatletter
+\newcommand{\DefaultFigureOptions}{}
+\begingroup
+	\edef\@tempa{\csname fps@figure\endcsname}%
+	\global\let\DefaultFigureOptions\@tempa
+\endgroup
+\makeatother
+\makeatother
+
+% add new figure Z option for landscape page
+\BeforeBeginEnvironment{document}{%
+	\RenewDocumentEnvironment{figure}{ O{tbp} }{%
+		% hack: should use \DefaultFigureOptions here, but expansion issue
+		\IfStrEq{#1}{Z}{%
+			\typeout{will use landscapefigure}%
+			\landscapefigure
+		}{%
+			\typeout{will use oldfigure}%
+			\oldfigure[#1]
+		}%
+	}{%
+		\IfStrEq{#1}{Z}{%
+			\endlandscapefigure
+		}{%
+			\endoldfigure
+		}%
+	}
+}
+
 
 % Semantic markup
 \newcommand\bold[1]{\textbf{#1}}
