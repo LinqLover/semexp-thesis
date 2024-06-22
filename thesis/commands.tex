@@ -220,11 +220,33 @@
 }
 % add noextralabelsep option (only insert regular space after label)
 \makeatletter
+\newif\ifenit@noextralabelsep
 \enitkv@key{}{noextralabelsep}[true]{%
 	\enit@sepfrommarginfalse
-	\enit@calcset\labelsep\tw@{\fontdimen2\font}
+	\enitkv@setkeys{enumitem}{style=sameline} % consistent spacing in labels and text -- but unfortunately not for labelsep, which we fix below
+	\enit@calcset\labelsep\tw@{0em} % eliminate static labelsep
+	\global\enit@noextralabelseptrue
+}
+% introduce dynamic space after item instead
+\let\originalitem\item
+\RenewDocumentCommand{\item}{o}{%
+	\IfNoValueTF{#1}{%
+		\originalitem%
+	}{%
+		\originalitem[#1]%
+		\ifenit@noextralabelsep%
+			{\enit@format\ }%
+			\ignorespaces%
+		\fi%
+	}%
+}
+\let\origenddescription\enddescription
+\renewcommand{\enddescription}{%
+	\global\enit@noextralabelsepfalse%
+	\origenddescription%
 }
 \makeatother
+
 
 
 % Automatic reference labels (\cref)
