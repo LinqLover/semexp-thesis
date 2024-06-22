@@ -10,6 +10,24 @@
 	}
 }
 
+
+% TEMPLATE PATCHES
+
+% make pdf bookmark labels of chapters bold
+\usepackage{bookmark}
+\makeatletter
+\bookmarksetup{
+	open,
+	addtohook={%
+		\ifnum\bookmarkget{level}=0 %
+			\if@mainmatter
+				\bookmarksetup{bold}%
+			\fi
+		\fi
+	},
+}
+\makeatother
+
 % hide draft info
 \makeatletter
 \AtBeginDocument{
@@ -30,7 +48,6 @@
 \expandafter\patchcmd{\endstatement}{\@location, den }{\@location, }{\typeout{patch 2 successful}}{\typeout{patch 2 failed}}
 \makeatother
 
-
 % customize chapter preamble
 \setkomafont{dictumtext}{\itshape\small}
 \setkomafont{dictumauthor}{\normalfont}
@@ -38,12 +55,15 @@
 \renewcommand*\dictumauthorformat[1]{--- #1\par}
 \renewcommand*\dictumrule{}
 
-
 % better asterism
 \renewcommand{\asterism}{\smash{%
 	\raisebox{-.5ex}{%
 		\setlength{\tabcolsep}{.2pt}%
 		*}}}
+
+
+
+% COMMANDS
 
 
 % Semantic markup
