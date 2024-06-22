@@ -68,6 +68,11 @@
 		\setlength{\tabcolsep}{.2pt}%
 		*}}}
 
+% subparagraphs: italic instead of bold
+%\let\originalsubparagraph
+%\renewcommand\subparagraph[1]{\originalsubparagraph{\emph{#1}}}
+\addtokomafont{subparagraph}{\normalfont\itshape}
+
 % shared list of figures and tables
 % CREDITS: https://tex.stackexchange.com/a/120651/221054
 \makeatletter
