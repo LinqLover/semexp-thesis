@@ -54,21 +54,24 @@ However, workspaces can also serve as a starting point for better integrated exp
 %:
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{02_expsys/squeak_tools.png}
-	% todo: larger?
-	\caption[A collection of exploratory programming tools in Squeak/Smalltalk.]{
-		A collection of different interconnected tools in the exploratory programming system Squeak/Smalltalk.
-		At the heart is the workspace \Circled{1} through which programmers can execute \emph{do-it} code snippets to retrieve information from objects.
-		From the workspace, programmers can invoke other tools such as \emph{object inspection tools} to examine the variables (\Circled{2a} inspector) and nested properties (\Circled{2b} explorer) of particular objects, \emph{code browsing tools} to study the implementation of methods (\Circled{3a} system browser) or their users (\Circled{3b} message trace), \emph{debugging tools} to explore method behavior in context (\Circled{4} debugger), \emph{symbolic execution tools} to find messages through constraints (\Circled{5} message finder 2), or \emph{code completion tools} to browse available protocols in an editor context (\Circled{6}).
-		Each of these tools can assist programmers in different parts of their exploratory process by providing domain- or task-specific support.
-	}
-	\label{fig:background/expsys/squeak_tools}
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{02_expsys/squeak_tools.png}
+		% todo: larger?
+		\caption[A collection of exploratory programming tools in Squeak"/Smalltalk.]{
+			A collection of different interconnected tools in the exploratory programming system Squeak"/Smalltalk.
+			At the heart is the workspace \Circled{1} through which programmers can execute \emph{do-it} code snippets to retrieve information from objects.
+			From the workspace, programmers can invoke other tools such as \emph{object inspection tools} to examine the variables (\Circled{2a} inspector) and nested properties (\Circled{2b} explorer) of particular objects, \emph{code browsing tools} to study the implementation of methods (\Circled{3a} system browser) or their users (\Circled{3b} message trace), \emph{debugging tools} to explore method behavior in context (\Circled{4} debugger), \emph{symbolic execution tools} to find messages through constraints (\Circled{5} simulation method finder\footnote{\url{https://github.com/LinqLover/SimulationStudio}}), or \emph{code completion tools} to browse available protocols in an editor context (\Circled{6} Autocompletion\footnote{\url{https://github.com/LeonMatthes/Autocompletion}}).
+			Each of these tools can assist programmers in different parts of their exploratory process by providing domain- or task-specific support.
+		}
+		\label{fig:background/expsys/squeak_tools}
+	\end{minipage}
 \end{figure}
 
 %\begin{description}
 %	\item[Object inspection tools]
 	\paragraph{Object inspection tools}
+	\label{par:background/expsys/tools/inspection}
 	Through inspection tools, programmers can explore and modify the internal state of any object in the system.
 	The standard inspection tools in Squeak are the \emph{inspector} and \emph{explorer}, which provide low-level access to the list of instance variables or fields in an object~\cites[chap.~8]{goldberg1984smalltalk}[sec.~6.3]{thiede2023squeak}.
 
@@ -78,16 +81,21 @@ However, workspaces can also serve as a starting point for better integrated exp
 
 	%\item[Code browsing tools]
 	\paragraph{Code browsing tools}
+	\label{par:background/expsys/tools/browsing}
 	Through browsing tools, programmers can explore and modify the implementation, protocols, and documentation of classes~\cite[sec.~6.2]{thiede2023squeak}.
 	In Squeak, different code browsers allow programmers to navigate and search software systems along their organization and inner relationships:
 	\emph{system browsers} provide access to classes through package structures or class hierarchies~\cite[chap.~9]{goldberg1984smalltalk}; \emph{message traces} and similar tools can be used to explore methods through different usage graphs~\cite[chap.~10]{goldberg1984smalltalk}.
-	For example, the \emph{senders/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name~\cite{thiede2022augmenting}; other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), or a full-text search through source code and comments.
-	\footnotetext{Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet may activate.}
+	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name~\cite{thiede2022augmenting}; other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), or a full-text search through source code and comments.
+	\footnotetext{%
+		\label{fn:dynamic_dispatching}
+		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet may activate.
+	}
 
 	Thus, code browsing tools provide means for programmers to answer questions about the organization and implementation of systems through high-level and task-specific views and query interfaces.
 
 	%\item[Debugging tools]
 	\paragraph{Debugging tools}
+	\label{par:background/expsys/tools/debugging}
 	In the first place, (symbolic) debuggers were designed to allow programmers to examine faulty programs by executing them step-by-step and finding the underlying cause of a bug~\cites[sec.~17.4]{goldberg1983smalltalk}[sec.~18f.]{goldberg1984smalltalk}.
 	However, debuggers have also proven as useful tools for exploring the behavior of software systems beyond bug-fixing, as they provide a concrete context for comprehending abstract source code and navigating through an actual call graph of a program~\cite[sec.~6.4]{thiede2023squeak}.
 	Many tools also support \emph{programming in the debugger} to modify the behavior of a running program, which allows for a ``programming into existence'' practice for interface-first, iterative prototyping~\cite{rosson1993active}.
@@ -101,6 +109,7 @@ However, workspaces can also serve as a starting point for better integrated exp
 
 	%\item[Symbolic execution tools]
 	\paragraph{Symbolic execution tools}
+	\label{par:background/expsys/tools/symbex}
 	\emph{Symbolic execution engines} make it possible to execute programs and send messages to objects despite the lack of concrete context by substituting unknown state with symbols and executing all possible code paths concurrently~\cite{cadar2013symbolic,thiede2023symbolic}.
 	This provides a basis for exploratory programming tools that can search the behavior of objects through speculative execution.
 	Squeak's \emph{method finder} allows programmers to find unknown methods by specifying constraints over the inputs and outputs of message sends~\cite[sec.~1.8]{thiede2023squeak}%
@@ -119,7 +128,8 @@ However, workspaces can also serve as a starting point for better integrated exp
 
 	%\item[Code completion tools]
 	\paragraph{Code completion tools}
-	Autocompletion tools support programmers at writing code by automatically suggesting possibly relevant message and variable names next to the text caret.
+	\label{par:background/expsys/tools/completion}
+	Autocompletion tools support programmers at writing code by automatically suggesting possibly relevant message names (also referred to as \emph{selectors}) and variables next to the text caret.
 	Suggestions can be contextualized in various degrees, e.g., by considering the syntactic context of existing code, usage statistics from the current programming session~\cite{robbes2008program}, or information from runtime or typing systems~\cite{pluquet2009fast}.
 	Some modern code completion tools also employ large language models to suggest completions of entire statements or methods~(see \cref{sec:background/semtec}).
 

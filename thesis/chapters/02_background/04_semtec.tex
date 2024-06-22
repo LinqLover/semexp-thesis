@@ -119,7 +119,7 @@ To mitigate these problems in parts, several techniques have been established:
 	Other than fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, affecting its performance~\cite{zhao2023survey}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 
 	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information or provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups or full text searches) and include them in the prompt~\cite{lewis2020retrieval}.
-	This often includes semantic retrieval methods~(\cref{sec:background/semtec/retrieval}).
+	This often includes semantic retrieval methods~(see \cref{sec:background/semtec/retrieval}).
 
 	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into the GPT-4 model, and instructs it to answer the query based on the provided information\footnote{
 		Microsoft. 2023-11-21. \emph{How Copilot Works.}
