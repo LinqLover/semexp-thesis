@@ -67,23 +67,40 @@
 
 \begin{document}
 \frontmatter
+
 % add squeak logos to title page
-\AddToHook{shipout/background}{%
-	\ifnum\value{abspage}=1
-		\AddToShipoutPictureBG*{%
-			\put(\dimexpr\paperwidth/2-9cm,\dimexpr\paperheight-8.45cm){%
-				\rotatebox{10}{%
-					\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/squeak.pdf}%
-				}%
-			}%
-			\put(\dimexpr\paperwidth/2+5.4cm,\dimexpr\paperheight-8.3cm){%
-				\rotatebox{-10}{%
-					\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/smalltalk.pdf}%
-				}%
-			}%
-		}%
-	\fi%
+% titlepagenumber: must define outside of ifbool!
+\makeatletter
+% workaround: use counter because ifnum+def doesn't work...
+\newcounter{titlepagenumber}
+\setcounter{titlepagenumber}{%
+	\if@twoside 2\else 1\fi
 }
+\newcommand*\titlepagebcor{%
+	\if@twoside 1.2cm\else 0cm\fi % approximated! exact values are too deeply hidden in the document class
+}
+\makeatother
+\newbool{enableSqueakDecorations}
+\setbool{enableSqueakDecorations}{true} % TODO: disable for submission
+\ifbool{enableSqueakDecorations}{%
+	\AddToHook{shipout/background}{%
+		\ifnum\value{abspage}=\value{titlepagenumber} %
+			\AddToShipoutPictureBG*{%
+				\put(\dimexpr\paperwidth/2-\titlepagebcor-9cm,\dimexpr\paperheight-8.45cm){%
+					\rotatebox{10}{%
+						\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/squeak.pdf}%
+					}%
+				}%
+				\put(\dimexpr\paperwidth/2-\titlepagebcor+5.4cm,\dimexpr\paperheight-8.3cm){%
+					\rotatebox{-10}{%
+						\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/smalltalk.pdf}%
+					}%
+				}%
+			}%
+		\fi%
+	}
+}{}
+
 \maketitle
 \input{abstract}
 \input{acknowledgments}
