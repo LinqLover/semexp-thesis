@@ -19,8 +19,10 @@
 %  print - do not color links
 %
 \PassOptionsToPackage{disable}{todonotes}
-% TODO: adjust options for brint (-oneside, -draft, +print)
-\documentclass[draft,master,oneside]{swathesis}
+\PassOptionsToPackage{russian}{babel}
+% TODO: adjust options for print (+twoside, -draft, +print)
+\documentclass[draft,master]{swathesis}
+\KOMAoption{twoside}{off}
 \usepackage[utf8]{inputenx}
 \usepackage[backend=biber]{biblatex}
 \AfterPackage*{biblatex}{\ExecuteBibliographyOptions{
