@@ -17,7 +17,7 @@
 
 To delegate parts of the research process to the exploratory programming system, we construct an \emph{exploratory programming agent}, which uses a generative LLM for planning, generating experiments, and communicating with the programmer in natural language.
 To connect the agent with the programming system, we propose the design of an \emph{semantic object interface} that describes the communication between the programmer, the agent, and the system~(\cref{fig:design/agent/framework})~\cite{thiede2024talking}.
-Our approach follows the object-oriented paradigm of many programming systems in that semantic interfaces focus on a single object from the running system.
+Our approach follows the object-oriented paradigm of many programming systems in that semantic object interfaces focus on a single object from the running system.
 Thus, semantic object interfaces resemble traditional message sending to objects, and programmers can interact with objects via the agent by the means of natural-language and semantic questions.
 
 As part of this framework, the agent takes high-level and context-dependent \emph{semantic} questions from the programmer and translates them into low-level technical experiments to answer the questions.
@@ -85,5 +85,53 @@ Analogously, every message send to an unknown system is preceded by browsing its
 	After identifying relevant messages such as \code{Shop>>orders}, \code{Order>>productItems}, and \code{Product>>price}, it plans how to combine this information to compute the most profitable product and runs a script that queries the system for this information as another experiment.
 	Finally, the agent evaluate the results of this experiment and returns an answer in natural language to the programmer.
 \end{example}
+
+% todo: discuss again whether this should go into approach 3.2.3 instead. pro there: it is actually pretty conceptual. pro here: we can include more details without interrupting flow? we do not have to rewrite/shorten it?
+\subsection*{Integrating Semantic Object Interfaces into Exploratory Programming Systems}
+\label{sec:design/agent/interfaces}
+
+To support immediate access to semantic object interfaces from within existing exploratory programming systems, we aim for a tight integration with traditional tools.
+For this, we identify two primary interfaces in existing exploratory programming systems through which programmers explore objects: \emph{object inspection tools} and \emph{message sending through scripts}.
+We propose to extend these interfaces with semantic capabilities: object inspection tools with a \emph{conversation mode} and message sending with a language extension for \emph{semantic messaging}.
+
+\paragraph{A conversation mode for object inspection tools}
+\label{par:design/agent/interfaces/inspector}
+
+Inspection tools allow programmers to explore and manipulate the internal state of objects through a list of variables or properties~(see \cref{par:background/expsys/tools/inspection}).
+We propose a new \emph{conversation mode} in inspection tools that allow programmers to ask semantic questions about an object.
+Thus, in addition to the usually technical state inspection, they can then also chat with an object through the exploratory programming agent.
+
+Through the chat interface, programmers can express questions in natural language without needing to know the vocabulary and protocols of the object's domain.
+Additionally, they can ask follow-up questions in the context of a conversation without repeating or editing their original thoughts.
+
+\paragraph{Semantic messaging in scripts}
+\label{par:design/agent/interfaces/messaging}
+
+Scripting is another popular access point for exploration.
+Especially programmers who are proficient in the programming language and familiar with the protocols of a system often prefer message sending through scripts to manually exploring object graphs through inspection tools.
+For example, the following script retrieves the product with the highest quantity from a list of order items:
+
+\begin{multicode}
+	(self orderItems detectMax: \#quantity) product.
+\end{multicode}
+
+We propose an extension to the scripting language that allows for \emph{semantic messaging}: similar to pseudocode, programmers can write semantic messages with fictitious names (that do not have to match the vocabulary of an object) to express their intents but send these messages to objects just like regular messages.
+Unlike regular messages, semantic messages do not require an implementation at the receiver object but get processed by an exploratory programming agent, which interprets the message as a question and internally inspects the object or sends it regular messages to determine a return value.
+For instance, the above example could be expressed as any of the following:
+\begin{multicode}
+	self mostOftenBoughtArticle.
+
+	self orderItems theOneWithHighestAmount.
+\end{multicode}
+Like regular messages, semantic messages can also pass arguments, e.g.:
+\begin{multicode}
+	aProduct numberOfSalesTo: aCustomer.
+
+	aProduct numberOfSalesFrom: \textquotesingle Q3 2023\textquotesingle{} to: \textquotesingle Q4 2023\textquotesingle.
+\end{multicode}
+
+Thus, programmers can keep in their scripting flow when asking questions even if they are unaware of certain protocols, and they do not have to translate their questions into running code or implement algorithms for more complex problems.
+
+\ParSep
 
 Thus, semantic object interfaces allow programmers to delegate parts of their research process to the programming system by expressing conceptual questions, letting an exploratory programming agent research them autonomously and conduct low-level experiments, and receiving conceptual answers in natural language.
