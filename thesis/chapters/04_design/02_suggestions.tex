@@ -15,8 +15,10 @@ To handle this complexity and maintain flexibility in the design of new artifact
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{02_suggestions/classes.png}
-	\caption[TODO]{
-		TODO
+	\caption[The general object model of our \emph{blackboard framework} for creating suggestions.]{
+		The general object model of our blackboard framework for creating suggestions (UML class diagram with Smalltalk-styled method signatures).
+		A central \emph{board} maintains many \emph{artifacts} of different types and roles, and it has access to \emph{strategies} that consume existing artifacts to produce new artifacts.
+		When asked for suggestion artifacts of certain roles, the board identifies and schedules all required strategies and returns the new suggestions to the requestor.
 	}
 	\label{fig:design/suggestions/classes}
 \end{figure}
@@ -45,14 +47,15 @@ To support debugging and observability, strategies can also be executed synchron
 	To provide them with further possibly relevant message sends for their method draft, the semantic workspace invokes the suggestion engine with both artifacts and requests suggestions of the role ``correlated message''.
 
 	Once invoked, the suggestion engine identifies two strategies that can suggest correlated messages: a \emph{correlated selectors} strategy and a \emph{method harvester} strategy~(\cref{sec:suggestions/search/correlations}).
-	Both strategies require artifacts of the role ``similar method'' which are currently not present on the board.
-	For this reason, suggestion engine finds two other strategies that can produce similar method artifacts: a \emph{semantic search} strategy and a \emph{TF-IDF identifier search} strategy.
+	Both strategies require artifacts of the role ``similar method'', which are currently not present on the board.
+	For this reason, the suggestion engine finds two other strategies that can produce similar method artifacts: a \emph{semantic method search} strategy and a \emph{TF-IDF selector search} strategy.
 	Both these search strategies require artifacts of the role ``input'', thus their requirements are met and the engine schedules them.
 
+	\vspace{\baselineskip}
 	\begin{center}
 		\includegraphics[width=\textwidth]{02_suggestions/example.png}
-		\captionof{figure}[TODO]{
-			TODO
+		\captionof{figure}[The involved artifacts and scheduled strategies of invoking the blackboard framework to find correlated methods for a given input method and notes.]{
+			The involved artifacts and scheduled strategies of invoking the blackoard framework with our example.
 		}
 		\label{fig:design/suggestions/example}
 	\end{center}

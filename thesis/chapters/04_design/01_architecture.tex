@@ -6,13 +6,21 @@
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{01_architecture/architecture.png}
-	\caption[TODO]{
-		TODO
+	\caption[The high-level architecture of the \emph{semantic exploration kernel} and its environment.]{
+		The high-level architecture of the \emph{semantic exploration kernel} and its environment.
+		The architecture is structured in three layers for semantic tools, domain concepts, and underlying infrastructure.
+
+		\capparagraph{Legend.}
+		New components are colored \bold{\textcolor{red}{red}} and existing components \bold{\textcolor{gray}{gray}}.
+		Arrows indicate dependencies from a higher-level component to a lower-level component.
+		\CircledInverted{Numbers} reference the chapter or section in this thesis that further describes a component.
 	}
 	\label{fig:design/architecture/architecture}
 \end{figure}
 
-\Cref{fig:design/architecture/architecture} displays the high-level architecture of the semantic exploration kernel.
+\Cref{fig:design/architecture/architecture} displays the high-level architecture of the semantic exploration kernel and its environment.
+The overarching semantic exploratory programming system can be divided into three layers: the \emph{semantic workspace} for (graphical) programming tooling, the \emph{semantic exploration kernel} for the domain logic of the system, and the \emph{infrastructure layer} for required packages and integrations.
+
 The semantic workspace provides different semantic tools, through which programmers can interact with the system~(\cref{sec:approach/workspace}).
 The semantic exploration kernel consists of two components for processing the semantic context of the programming session and augmenting it: the suggestion engine and the exploratory programming agent.
 
