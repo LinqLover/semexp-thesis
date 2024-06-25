@@ -9,7 +9,7 @@ Within this framework, we investigate different manifestations of the augmented 
 \begin{figure}
 	\centering
 	\includegraphics[width=.85\textwidth]{02_workspace/spectrum.png}
-	\caption[The support spectrum of different semantic tools in the semantic workspace.]{
+	\caption[The support spectrum of different \emph{semantic tools} in the semantic workspace.]{
 		The support spectrum of different tools in the semantic workspace.
 		Low-level semantic tools collect context from tracking the actions of programmers in the programming system and \emph{augment} their exploration through new suggestions.
 		High-level semantic tools retrieve explicit conceptual descriptions from programmers and \emph{automate} a larger part of the research process.
@@ -53,8 +53,9 @@ In the following, we describe each semantic tool concept in detail.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{02_workspace/suggestions.png}
-	\caption[TODO]{
-		TODO
+	\caption[Our concept of a \emph{semantic suggestions} tool in the semantic workspace.]{
+		Our concept of a \emph{semantic suggestions} tool in the semantic workspace.
+		The augmented programming system tracks the experimental actions of the programmer through traditional programming tools (\bold{\textcolor{gray}{gray}}), anticipates the possible next steps of the programmer, and provides them with a list of suggestions for further experiments as well as an optional summary of their results (\bold{\textcolor{red}{red}}).
 	}
 	\label{fig:approach/workspace/suggestions}
 \end{figure}
@@ -141,8 +142,9 @@ The semantic workspace does not wait until the programmer finishes their input a
 \begin{figure}
 	\centering
 	\includegraphics[width=0.58\textwidth]{02_workspace/completions.png}
-	\caption[TODO]{
-		TODO
+	\caption[Our concept of a \emph{semantic completions} tool in the semantic workspace.]{
+		Our concept of a \emph{semantic completions} tool in the semantic workspace.
+		While programmers gradually express their plan to the system, e.g., by drafting a script in a traditional workspace (\bold{\textcolor{gray}{gray}}), the augmented programming system reconstructs their underlying intentions and suggests them contextualized experiments as completions of their existing inputs (\bold{\textcolor{red}{red}}).
 	}
 	\label{fig:approach/workspace/completions}
 \end{figure}
@@ -193,8 +195,10 @@ The programmer can ask follow-up questions based on an answer by the system, and
 \begin{figure}
 	\centering
 	\includegraphics[width=0.35\textwidth]{02_workspace/conversation.png}
-	\caption[TODO]{
-		TODO
+	\caption[Our concept of a \emph{semantic conversations} tool in the semantic workspace.]{
+		Our concept of a \emph{semantic conversations} tool in the semantic workspace.
+		Programmers express their abstract, contextual questions to the augmented programming system by interacting with an object in the software system through messages in natural language.
+		Internally, the programming system conducts all steps of the required research process for answering the questions autonomously and returns an abstract, natural-language answer to the programmer.
 	}
 	\label{fig:approach/workspace/conversation}
 \end{figure}
