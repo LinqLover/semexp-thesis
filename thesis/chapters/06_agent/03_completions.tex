@@ -15,7 +15,7 @@ If a current receiver object is available (e.g., when the programmer is typing t
 
 Similarly, we attempt to provide dynamic context for all displayed classes by including previews for their message results through a form of symbolic execution (i.e., we locate sample instances of each class in the image and send each unary message to them in a sandbox). % todo: is this ok to call symbex?
 To improve the ability of the agent to follow the given task, we provide it with a one-shot prompt of processing a similar request.
-To mitigate the limited proficiency of GPT-4 regarding Smalltalk programming, this shot also includes an extensive example of the Smalltalk syntax.
+To mitigate the limited proficiency of GPT-4 regarding the Smalltalk programming language, this shot also includes an extensive example of the Smalltalk syntax.
 
 \begin{figure}
 	\centering
@@ -34,5 +34,5 @@ To mitigate the limited proficiency of GPT-4 regarding Smalltalk programming, th
 \end{figure}
 
 As for other invocations of the agent, we instruct it to engage in inner monologue before returning a single code completion.
-We request the LLM to return $k \in [5, 20]$ completions in parallel, which multiplies the cost for the outputs but not for the provided context, while latencies are typically not increased due elastic scaling of the API.
+We request the LLM to return $k \in [5, 20]$ completions in parallel, which multiplies the cost for the outputs but not for the provided context, while latencies are typically not increased due to elastic scaling of the API.
 \Cref{fig:agent/completions/prompt_design} displays the full prompt schema of our agent for generating a semantic code completion.

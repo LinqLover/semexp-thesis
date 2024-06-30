@@ -25,7 +25,7 @@ We define a set of \emph{policies} that define the behavior and the communicatio
 To configure the agent to follow these policies, we describe them comprehensively in the system prompt of the agent conversation~(\cref{fig:agent/prompts/design}).
 While we iterated our prompt design several times, we did not conduct a systematic, evaluation-based approach to prompt engineering; yet our prototypical agent already showed promising results.
 
-\paragraph{Bootstrapping exploration}
+\paragraph*{Bootstrapping exploration}
 We initialize the agent conversation with a sequence of pre-generated messages that feature inner monologue and (resolved) function calls by the assistant and demonstrate its steps for getting a first overview of the object (e.g., by retrieving a textual representation of the object and browsing its protocols).
 Additionally, we inject further context into the pre-generated conversation prefix through system messages in natural language (e.g., hardcoded information about the role or particular messages of the object).
 

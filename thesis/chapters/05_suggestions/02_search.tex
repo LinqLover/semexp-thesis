@@ -19,7 +19,7 @@ Similarly, when queried with an unfinished draft of a method or script, embeddin
 
 To overcome these limitations, we provide another search strategy based on the TF-IDF (term frequency and inverse document frequency) metric~\cite{salton1988term}.
 This metric is based on the assumption that the less often a term occurs in a corpus of documents, the more important each occurence of this term in a particular document is for the semantics of this document.
-For example, stopwords in natural language (e.g., common words such as ``and'' or ``is'') or general-purpose selectors from standard frameworks in programming languages (e.g., \code{ifTrue:} or \code{do:} in Smalltalk) have a low significance about specific documents (on their own), while rare words or method names are more commonly associated with specific domain concepts.
+For example, stopwords in natural language (e.g., common words such as ``and'' or ``is'') or keywords and general-purpose identifiers from standard frameworks in programming languages (e.g., \code{self} or \code{ifTrue:} in Smalltalk) have a low significance about specific documents (on their own), while rare words or method names are more commonly associated with specific domain concepts.
 
 Thus, we can estimate the similarity of two documents by comparing the occurrences of each term (or \emph{term frequencies}) in both documents, weighted by their rareness (or \emph{inverse document frequencies}).
 For this, the term frequency of a term $t$ in a document $d$, the inverse document frequency of a document $d$ in a corpus $D$, and the TF-IDF score are commonly defined as follows, with $d(t)$ indicating the number of occurences of $t$ in $d$:
@@ -43,11 +43,13 @@ However, they can be simpler to calculate, especially in the context of ranking 
 \end{example}
 
 In our prototype, we use TF-IDF search for methods based on the selectors and references to classes and variables in a method retrieved from its bytecode.
-We apply a binary weighting scheme for term frequencies (simplifying their definition to $\text{tf}(t, d) = 1_{\{d(t) > 0\}}$) and exponentially weighted inverse document frequencies with a power of $4$.
+We apply a binary weighting scheme for term frequencies (simplifying their definition to $\text{tf}(t, d) = 1_{\{d(t) > 0\}}$) and exponentially weight inverse document frequencies with a power of $4$.
 This approach yields a satisfying quality of results and a satisfying performance of search (typically 250 milliseconds for 25 MB of source code) even without maintaining an index.
 
 \subsection{Correlation Search for Code Artifacts}
 \label{sec:suggestions/search/correlations}
+
+% todo: find source for this?
 
 After finding similar artifacts to a set of input artifacts, we can extract frequent parts from them in a second step.
 Statistically speaking, we say these parts \emph{correlate} with the structure of artifacts like the input artifacts.
@@ -100,7 +102,7 @@ We rank correlated artifacts based on their number of occurences in the similar 
 			rectangle \coterm{borderColor:} \interm{Color} \coterm{blue}.
 		\end{multicode}
 	\end{itemize}
-	From these similar methods, the suggestion engine suggests the following new correlated artifacts:
+	From these similar methods, the suggestion engine suggests the following most relevant new correlated artifacts:
 	\begin{itemize}
 		\item \code{\#color:} (used in 1 highly similar and 1 moderately similar
 		method)
@@ -109,7 +111,7 @@ We rank correlated artifacts based on their number of occurences in the similar 
 		\item \code{\#border:} (used in 1 highly similar method)
 		\item \code{\#shadow:} (used in 1 moderately similar method)
 	\end{itemize}
-	Thus, the programmer can complete their script with the most likely suggestion.
+	Thus, the programmer can complete their script by using the most likely suggestion.
 	% todo: too slow?
 	% todo: color legend?
 \end{example}

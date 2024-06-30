@@ -30,7 +30,6 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A ranking must contain the most relevant suggestions from the corpus, e.g., those who are most similar to the reference artifact.
 
 	Formally, we operationalize this objective by requiring that for every prefix $L$ of the ranking, a ranking method must maximize the sum of relevance scores $R_i$ from all contained artifacts:
-
 	\begin{align}
 		\text{Relevance}(L) = \sum_{i \in L} R_i
 	\end{align}
@@ -39,7 +38,6 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A ranking must not contain multiple highly similar suggestions that do not add value to the exploration, such as different almost identical versions of a method.
 
 	We measure this objective by counting the number of suggestion pairs $(i, j)$ in the ranking that do not deceed a treshold $\theta$ for their mutual similarity $S(i, j)$:
-
 	\begin{align}
 		\text{Irredundancy}(L) = | \{ i, j \in L \mid S(i, j) > \theta \} |
 	\end{align}
@@ -48,7 +46,6 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A ranking must contain diverse suggestions that display different types and topics from the corpus.
 
 	We formalize the diversity of a ranking by adding all mutual distances between two suggestions, which explicitly promotes outliers from different regions of the embedding space:
-
 	\begin{align}
 		\text{Diversity}(L) = \sum_{i, j \in L} 1 - S(i, j)
 	\end{align}
@@ -71,10 +68,9 @@ At the same time, diversity and representativeness are typically minimized becau
 
 \paragraph{Probabilistic sampling}
 We convert the relevance scores of the corpus into a probability distribution by scaling each relevance score exponentially to a probability $p_i$:
-
-\begin{align*}
+\begin{align}
 	p_i = \frac{\exp \frac{R_i}{T}}{\sum_j \exp \frac{R_j}{T}}
-\end{align*}
+\end{align}
 
 Based on this probability distribution, we randomly sample $k$ unique artifacts.
 Through a temperature parameter $T$, the probability distribution can be sharpened or flattened, modeling the ranking closer to top-k selection or uniform random selection, respectively.
@@ -100,7 +96,7 @@ Similar to plain probabilistic sampling, this method can be controlled through a
 Cluster-based probabilistic sampling provides a trade-off between the other discussed methods with respect to all considered objectives:
 in our experiments, it yielded a moderate relevance of suggestions that is between that of top-k selection and plain probabilistic sampling, a moderate representativeness close to probabilistic sampling, and a sufficient irredundancy and diversity between probabilistic sampling and clustering.
 
-\begin{genericbox}{Negative results}
+\begin{genericbox}{Failed attempts}
 	We also experimented with two other ranking methods that did not yield usable results for us:
 
 	\subparagraph{Explicitly amplifying diversity}
