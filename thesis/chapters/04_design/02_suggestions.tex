@@ -46,7 +46,7 @@ To support debugging and observability, strategies can also be executed synchron
 	A programmer has drafted a new method and a short list of todo notes in their programming system.
 	To provide them with further possibly relevant message sends for their method draft, the semantic workspace invokes the suggestion engine with both artifacts and requests suggestions of the role ``correlated message''.
 
-	Once invoked, the suggestion engine identifies two strategies that can suggest correlated messages: a \emph{correlated selectors} strategy and a \emph{method harvester} strategy~(\cref{sec:suggestions/search/correlations}).
+	Once invoked, the suggestion engine identifies two strategies that can suggest correlated messages: a \emph{correlated selectors} strategy and a \emph{method harvester} strategy~(see \cref{sec:suggestions/search/correlations}).
 	Both strategies require artifacts of the role ``similar method'', which are currently not present on the board.
 	For this reason, the suggestion engine finds two other strategies that can produce similar method artifacts: a \emph{semantic method search} strategy and a \emph{TF-IDF selector search} strategy.
 	Both these search strategies require artifacts of the role ``input'', thus their requirements are met and the engine schedules them.

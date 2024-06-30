@@ -88,7 +88,7 @@ However, workspaces can also serve as a starting point for better integrated exp
 	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name~\cite{thiede2022augmenting}; other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), or a full-text search through source code and comments.
 	\footnotetext{%
 		\label{fn:dynamic_dispatching}
-		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet may activate.
+		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet might activate.
 	}
 
 	Thus, code browsing tools provide means for programmers to answer questions about the organization and implementation of systems through high-level and task-specific views and query interfaces.
@@ -116,7 +116,9 @@ However, workspaces can also serve as a starting point for better integrated exp
 	\footnote{While Squeak does not include a symbolic execution engine at the time of writing, the method finder employs equivalent brute-force strategies to resolve the provided constraints.}%
 	\footnote{
 		An evolved version of Squeak's built-in method finder is available through the \name{SimulationStudio} package.
-		Christoph Thiede: ``Method Finder 2.'' The general-purpose Squeak developers list, 2022-09-20. URL: \url{https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M}.
+		Christoph Thiede: ``Method Finder 2.'' The general-purpose Squeak developers list, 2022-09-20. URL:
+		%\url{https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M}.
+		\url{https://web.archive.org/web/20240630205751/https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M/}
 	}%
 	.
 	Tools such as \name{IntelliTest}\footnote{

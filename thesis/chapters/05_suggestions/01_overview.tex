@@ -28,14 +28,14 @@ We distinguish between three groups of artifacts:
 	From the later, \emph{correlated code artifacts} can be extracted to summarize common building blocks of similar solutions, such as frequently sent messages, executed methods, instantiated classes, or references variables.
 	A programmer who is editing a method has a higher statistical probability to use some of these correlated artifacts.
 
-	Beyond code artifacts, the suggestion engine may also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communications from information sources that are related to the development of the software system.
+	Beyond code artifacts, the suggestion engine might also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communications from information sources that are related to the development of the software system.
 	% todo: emphasize anywhere again that browsing is experiment?
 
 	\item[Generated artifacts] are newly synthesized experiments from the suggestion engine.
 
 	This includes generated and contextualized \emph{code expressions} based on similar and correlated artifacts.
 	Generated code expressions can range from single message sends to entire class definitions and method implementations.
-	However, the suggestion engine may also generate other types of artifacts to outline cluttered implementations, summarize long documentation artifacts, or suggest a list of steps to debug an error based on prior developer communications.
+	However, the suggestion engine might also generate other types of artifacts to outline cluttered implementations, summarize long documentation artifacts, or suggest a list of steps to debug an error based on prior developer communications.
 \end{description}
 
 For each suggestable role of artifact, the suggestion engines defines one or multiple strategies that process and combine prior artifacts and produce new artifacts.

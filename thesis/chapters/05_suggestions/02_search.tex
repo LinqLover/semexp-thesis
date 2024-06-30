@@ -13,8 +13,8 @@ For this, we embed each query (i.e., each input artifact) using a text embedding
 Thus, the reconstruction of programmers' intentions in semantic search manifests as the semantic embeddings of their experimental activities.
 
 However, embedding-based search is only applicable to a limited extent:
-first, computing and storing embeddings involves noticeable costs in terms of time, storage, and"/or financial expenses~(\cref{cha:discussion/somewhere}).
-Second, the embedding search may be too sensitive to the format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
+first, computing and storing embeddings involves noticeable costs in terms of time, storage, and"/or financial expenses~(see \cref{sec:discussion/somewhere}).
+Second, the embedding search might be too sensitive to the format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
 Similarly, when queried with an unfinished draft of a method or script, embedding-based search will primarily find artifacts of a similar length such as stub methods rather than fully implemented methods.
 
 To overcome these limitations, we provide another search strategy based on the TF-IDF (term frequency and inverse document frequency) metric~\cite{salton1988term}.
@@ -34,7 +34,7 @@ This allows us to compare two documents based on their cosine similarity analogo
 % todo: include corpus + cosine similarity in background
 
 Other than transformer-based embeddings, TF-IDF embeddings are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms or homonyms).
-However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores may not need to be caculated for every term.
+However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores might not need to be caculated for every term.
 
 \begin{example}
 	In a corpus with the three documents ``Squeak is a system for programmers'', ``Smalltalk is a programming language'', and ``The squeak mouse is a birthday present for the dog'', a TF-IDF search will consider the first and the third document most similar to each other due to their shared use of the term ``Squeak''.
@@ -52,14 +52,14 @@ This approach yields a satisfying quality of results and a satisfying performanc
 After finding similar artifacts to a set of input artifacts, we can extract frequent parts from them in a second step.
 Statistically speaking, we say these parts \emph{correlate} with the structure of artifacts like the input artifacts.
 For code-related artifacts such as methods or documentation, this are the different code artifacts used by the similar artifacts, such as invoked methods, instantiated classes, or referenced variables.
-Their cumulative occurence increases the probability that programmers may also want to consider them for the input artifacts they are writing.
+Their cumulative occurence increases the probability that programmers might also want to consider them for the input artifacts they are writing. % todo: is this correct language?
 
 To extract these used artifacts from a given method, we employ two different data sources: a \emph{static dependency graph} and a \emph{dynamic dependency graph}.
 
 The \emph{static dependency graph} is modeled from the terms in a method that are accessible from the abstract syntax tree (AST) or bytecode of the method.
 In our prototype for Smalltalk, we extract all literals from a method and filter them for message selectors, local variable references, and bindings to classes and global variables.
 
-However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages (\cref{fn:dynamic_dispatching}).
+However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages~(see \cref{fn:dynamic_dispatching}).
 Using a \emph{dynamic dependency graph}, we enrich this information with the execution context from Babylonian examples for each similar method artifact.
 In our prototype, we employ a \emph{method harvester} that runs all examples in an instrumented interpreter using \name{SimulationStudio} to construct this graph.
 Thus, we can suggest a set of concrete methods that are executed by many similar methods.

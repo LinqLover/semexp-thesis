@@ -16,7 +16,7 @@
 \end{figure}
 
 To delegate parts of the research process to the exploratory programming system, we construct an \emph{exploratory programming agent}, which uses a generative LLM for planning, generating experiments, and communicating with the programmer in natural language.
-To connect the agent with the programming system, we propose the design of an \emph{semantic object interface} that describes the communication between the programmer, the agent, and the system~(\cref{fig:design/agent/framework})~\cite{thiede2024talking}.
+To connect the agent with the programming system, we propose the design of an \emph{semantic object interface} that describes the communication between the programmer, the agent, and the system~\cite{thiede2024talking}~(\cref{fig:design/agent/framework}).
 Our approach follows the object-oriented paradigm of many programming systems in that semantic object interfaces focus on a single object from the running system.
 Thus, semantic object interfaces resemble traditional message sending to objects, and programmers can interact with objects via the agent by the means of natural-language and semantic questions.
 
@@ -30,7 +30,7 @@ Our framework comprises three fundamental actors:
 
 	\item[The object] is any object in the system, for example a particular domain object, a code object (such as a class or method), or an artifact from the programming system (such as a call graph, a benchmark, or a program trace).
 	It is usually part of an \emph{object graph} which embeds it into a larger context of the system.
-	It is also linked to any form of \emph{implementation} that describes the object's behavior through further objects; this may manifest as code, tests, or other kinds of specifications such as contracts.
+	It is also linked to any form of \emph{implementation} that describes the object's behavior through further objects; this can manifest as code, tests, or other kinds of specifications such as contracts.
 
 	Objects can be accessed either by sending them \emph{messages} (which in many languages is also referred to as \emph{invoking methods}) or through \emph{reflection interfaces} that expose their internal state, implementation, or location in the object graph.
 
@@ -63,6 +63,7 @@ This framework allows programmers to ask arbitrary questions about objects in a 
 
 To answer these questions, the agent conducts experiments by utilizing three types of interfaces that are offered by the traditional programming system:
 
+% todo: from feedback: align lengths of items here?
 \begin{description}[noextralabelsep]
 	\item[State inspection] allows the internal state of objects to be explored, for instance, by looking up a variable or enumerating all properties.
 	\item[Implementation browsing] explores the specified behavior of objects\linebreak{}through their protocols, implementation, and documentation.
