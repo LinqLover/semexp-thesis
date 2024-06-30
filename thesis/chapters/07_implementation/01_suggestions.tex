@@ -1,0 +1,26 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{Semantic Suggestions}
+\label{sec:implementation/suggestions}
+
+We implement semantic suggestions through a \emph{suggestion space} window that is placed as a vertical docking bar at the edge of the screen~(\cref{fig:implementation/suggestions/space}).
+To track the experiments of programmers, we observe their mouse and keyboard focus by using Morphic's event filter mechanism.
+From the focused windows, we extract the currently browsed classes and methods or drafted scripts and notes as input artifacts for the suggestion engine.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{02_workspace/suggestions/space.png}
+	\caption[TODO]{
+		TODO
+	}
+	\label{fig:implementation/suggestions/space}
+\end{figure}
+
+In the suggestion space, we display similar code and documentation artifacts, correlated code artifacts, and an optional summary.
+Suggestions are updated continously in the background as the programmer conducts experiments by browsing methods or writing code or notes.
+
+To enable semantic retrieval of all classes and methods in the image, we maintain either of them in a semantic corpus~(see \cref{sec:semtex/model/search}).
+We subscribe to the \code{SystemChangeNotifier} interface to incoporate updates from the system.
+We compute embeddings for new documents asynchronously in the background after the current world cycle has ended (i.e., \code{[aCorpus computeEmbeddings] future forkAt: Processor systemBackgroundPriority}).
+This strategy allows for bulk-updating the corpus and avoiding the overhead of multiple requests to the OpenAI API after many code changes have been applied as part of a single operation (such as installing a package).
+At the same time, corpus updates are run in the background without introducing noticable lags.

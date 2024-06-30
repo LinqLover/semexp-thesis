@@ -158,10 +158,31 @@
 }
 
 
+% Linebreaks within camelCaseWords
+% CREDITS: https://tex.stackexchange.com/a/423540/221054
+%\ExplSyntaxOn
+%\NewDocumentCommand{\camelCaseHyphenated}{m}{%
+%	\camelcasetext:n { #1 }%
+%}
+%\cs_new_protected:Nn \camelcasetext:n {
+%	\tl_map_inline:nn { #1 }
+%		{
+%		% if the current char is uppercase, add a discretionary hyphen
+%		\str_if_eq:eeT { ##1 } { \str_uppercase:n { ##1 } }
+%		{ \- }
+%		##1
+%	}
+%}
+%\ExplSyntaxOff
+% TODO: does not work with \textquotesingle, does not break within single words
+% workaround instead:
+\hyphenation{does-Not-Un-der-stand}
+
 % Semantic markup
 \newcommand\bold[1]{\textbf{#1}}
 \renewcommand\code[1]{%
 	\texttt{#1}}
+	%\texttt{\camelCaseHyphenated{#1}}}
 	%\textsf{#1}} % This looks more like Smalltalk
 \newcommand\hardcode[1]{%
 	\texttt{#1}}

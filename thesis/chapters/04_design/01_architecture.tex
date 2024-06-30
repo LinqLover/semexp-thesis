@@ -38,7 +38,7 @@ The suggestion engine and the exploratory programming agent can interact with ea
 particular strategies that require reasoning about other artifacts or code generation invoke the exploratory programming agent.
 In the other direction, when the agent needs a broader overview of system parts, it will employ the suggestion engine to retrieve relevant artifacts.
 
-Both the semantic workspace and the semantic exploration kernel depend on a traditional exploratory programming system~(\cref{sec:implementation/workspace}).
+Both the semantic workspace and the semantic exploration kernel depend on a traditional exploratory programming system~(\cref{cha:implementation}).
 The semantic workspace integrates semantic interfaces for its tools into the existing programming system, for example, through a completion menu in code editors or a conversational interface in several exploration tools.
 Similarly, it also hooks into the existing user interface to observe experiments such as opened tabs or windows.
 The exploration kernel interacts with the traditional system to access classes, methods, and objects for retrieving suggestions or executing experiments.
@@ -46,15 +46,15 @@ The exploration kernel interacts with the traditional system to access classes, 
 In our implementation, semantic workspace and exploration kernel also depend on a couple of other packages:
 
 \begin{description}
-	\item[\name{SemanticText}]
-	The exploration kernel uses our \name{SemanticText} framework, which provides access to semantic technologies for retrieving documents, generating text with conversational LLMs, and implementing specialized agents\footnote{\url{https://github.com/LinqLover/Squeak-SemanticText}}~(\cref{sec:implementation/semtex}).
+	\item[\semtex:]
+	The exploration kernel uses our \semtex framework, which provides access to semantic technologies for retrieving documents, generating text with conversational LLMs, and implementing specialized agents\footnote{\url{https://github.com/LinqLover/Squeak-SemanticText}}~(\cref{apx:semtex}).
 	This framework also provides a graphical user interface component for conversational agents, which is employed by the semantic workspace for semantic conversations.
 
-	\item[\name{SimulationStudio}]
-	Further, the exploration kernel uses our \name{SimulationStudio} framework for instrumented code interpretation\footnote{\url{https://github.com/LinqLover/SimulationStudio}} to collect type information about suggested artifacts (\emph{method harvesting}, \cref{sec:suggestions/search/correlations}) and execute experiments from the agent in an isolated sandbox~(\cref{sec:agent/interfaces}). % todo: decide when and where to use "method harvesting"
+	\item[\name{SimulationStudio}:]
+	Further, the exploration kernel uses our \name{SimulationStudio} framework for instrumented code interpretation\footnote{\url{https://github.com/LinqLover/SimulationStudio}} to construct a dynamic call graph about suggested methods (\emph{method harvesting}, \cref{sec:suggestions/search/correlations}) and execute experiments from the agent in an isolated sandbox~(\cref{sec:agent/interfaces}).
 
-	\item[\name{Autocompletion}]
-	Finally, we use and extend the \name{Autocompletion} package\footnote{\url{https://github.com/LeonMatthes/Autocompletion}} to integrate semantic completions into the programming system~(\cref{sec:implementation/workspace/completions}).
+	\item[\name{Autocompletion}:]
+	Finally, we use and extend the \name{Autocompletion} package\footnote{\url{https://github.com/LeonMatthes/Autocompletion}} to integrate semantic completions into the programming system~(\cref{sec:implementation/completions}).
 \end{description}
 
 In the rest of this chapter, we introduce our blackboard framework for the suggestion engine and semantic object interfaces for the exploratory programming agent.

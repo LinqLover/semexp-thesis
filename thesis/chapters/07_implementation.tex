@@ -1,4 +1,20 @@
 % !TEX root = ../semexp-thesis.tex
 
-\chapter{Implementation}
+\chapter{Integrating the Semantic Workspace into Squeak}
 \label{cha:implementation}
+
+In this chapter, we describe how we integrate our prototypical implementation of the semantic workspace with semantic technologies and the Squeak"/Smalltalk exploratory programming system.
+
+To make semantic technologies accessible in Squeak, we use our \semtex framework, which provides a domain model for semantic search and text generation, integrates different language models from the OpenAI API, and offers fundamental tooling for prototyping semantic applications.
+We provide a detailed presentation of the framework in \cref{apx:semtex}.
+
+In the following, we briefly address particular implementation considerations for each semantic tool in the semantic workspace---semantic suggestions, semantic completions, and semantic conversations.
+
+\thimport{01_suggestions}
+\thimport{02_completions}
+\thimport{03_conversations}
+
+\begin{summary}
+	We have implemented the three tools of the semantic workspace in Squeak by using our \semtex framework for accessing semantic technologies~(see \cref{apx:semtex}).
+	We have described several design decisions and implementation details for integrating suggestions, completions, and conversations into the programming interface of Squeak.
+\end{summary}

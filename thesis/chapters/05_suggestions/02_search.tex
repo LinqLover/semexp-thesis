@@ -9,7 +9,7 @@ In the following, we describe different strategies for finding similar artifacts
 \label{sec:suggestions/search/similar}
 
 A central strategy for similarity search in the suggestion engine is \emph{semantic search using document embeddings}.
-For this, we embed each query (i.e., each input artifact) using a text embedding model, search a vector database of all other available artifact (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
+For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts.}, search a vector database of all other available artifact (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
 Thus, the reconstruction of programmers' intentions in semantic search manifests as the semantic embeddings of their experimental activities.
 
 However, embedding-based search is only applicable to a limited extent:
@@ -61,8 +61,8 @@ In our prototype for Smalltalk, we extract all literals from a method and filter
 
 However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages (\cref{fn:dynamic_dispatching}).
 Using a \emph{dynamic dependency graph}, we enrich this information with the execution context from Babylonian examples for each similar method artifact.
+In our prototype, we employ a \emph{method harvester} that runs all examples in an instrumented interpreter using \name{SimulationStudio} to construct this graph.
 Thus, we can suggest a set of concrete methods that are executed by many similar methods.
-% todo: where introduce the term method harvesting, if at all? make consistent with other mentions!
 
 We rank correlated artifacts based on their number of occurences in the similar artifacts, weighted by the relevance of these similar artifacts.
 
