@@ -1,0 +1,26 @@
+% !TEX root = ../../../semexp-thesis.tex
+
+\section{Language Providers}
+\label{sec:semtex/providers}
+
+\semtex defines interfaces for text embedding and generation models that can be implemented by different \emph{providers}.
+As the default provider, we implemented a basic client for the OpenAI API%
+\footnote{
+	\emph{OpenAI API}.
+	URL:
+	%\url{https://platform.openai.com/docs}
+	\url{http://archive.today/2024.06.30-211140/https://platform.openai.com/docs/overview}
+}.
+The client accesses the HTTP endpoints using Squeak's \code{WebClient} package and supports token-based authentication and rate limits.
+
+To support incremental receipt of generated text chunks and avoid delays, the client can handle \emph{server-sent events}\footnote{%
+	``Server-Sent Events''.
+	In: \emph{HTML Living Standard}, section 9.2.
+	WHATWG, 2024-06-26.
+	URL:
+	%\url{https://html.spec.whatwg.org/commit-snapshots/\seqsplit{25aaad7f6a10785efe041fb05a597400e700ef10}/\#server-sent-events}%
+	\href{https://html.spec.whatwg.org/commit-snapshots/25aaad7f6a10785efe041fb05a597400e700ef10/\#server-sent-events}{https://html.spec.whatwg.org/commit-snapshots/\seqsplit{25aaad7f6a10785efe041fb05a597400e700ef10}/\#server-sent-events}%
+} emitted by the API, transform them into an internal \code{Generator}, and update the returned \code{SemanticMessage} asynchronously for each new chunk.
+Users that request streamed completions initially receive an empty \code{SemanticMessage} and can subscribe to observer signals for incorporating each appended chunk into their data model or interface (such as a graphical display).
+
+Next to the OpenAI provider, \semtex also implements a \emph{mocking provider} for simulating real language models~(see \cref{sec:semtex/tools/mocking}).

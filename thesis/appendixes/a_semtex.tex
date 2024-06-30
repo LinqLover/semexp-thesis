@@ -3,3 +3,20 @@
 \chapter{Accessing Semantic Technologies through the \semtex Framework}
 \label{apx:semtex}
 
+In this appendix, we describe our design and implementation of the \semtex framework for accessing semantic technologies in Squeak.
+The \semtex framework provides an object-oriented domain model for semantic search using document embeddings and for text generation and machine reasoning using conversational agents\footnote{\url{https://github.com/LinqLover/Squeak-SemanticText}}.
+It also implements a client for relevant language models of the OpenAI API.
+Finally, it offers basic tooling to support prototyping of semantic applications.
+
+In the following, we describe the three central parts of the framework: domain model, providers for different language models, and tool support.
+
+\thimport{01_model}
+\thimport{02_providers}
+\thimport{03_tools}
+
+\begin{summary}
+	We have described the \semtex framework for accessing semantic technologies in Squeak.
+	\semtex models a \emph{semantic corpus} that can emit (ranked) \emph{search results} for embedding searches and a \emph{conversation} with \emph{messages} and \emph{functions} to implement conversational \emph{agents}.
+	Searches and conversations can be powered using different \emph{language model providers} such as the built-in OpenAI API client.
+	To facilitate prototyping of semantic applications despite the nondeterminism, latencies, and cost of LLMs, \semtex offers different tools for editing conversations, mocking LLMs, and estimating or tracking expenses.
+\end{summary}

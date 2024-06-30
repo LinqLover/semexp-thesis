@@ -176,7 +176,11 @@
 %\ExplSyntaxOff
 % TODO: does not work with \textquotesingle, does not break within single words
 % workaround instead:
+\hyphenation{Se-man-tic-Search-Re-sult-Rank-ing}
 \hyphenation{does-Not-Un-der-stand}
+
+% line breaks anywhere in long sequences (e.g., as part of certain URLs)
+\usepackage{seqsplit}
 
 % Semantic markup
 \newcommand\bold[1]{\textbf{#1}}
@@ -188,11 +192,17 @@
 	\texttt{#1}}
 \newcommand\name[1]{\textsc{#1}}
 \newenvironment{multicode}{%
+	\renewcommand\t{\null\qquad}%
+	\newcommand\n{\newline}%
 	\begin{quote}%
 		\ttfamily%
 		%\sffamily% % This looks more like Smalltalk
 		\setlength{\parindent}{0pt}%
+		\raggedright%
 	}{\end{quote}}
+\newcommand\printit[1]{%
+	\emph{$ \to $ #1}%
+}
 
 % Manual linebreak arrows in code
 \usepackage{MnSymbol}
@@ -294,6 +304,7 @@
 
 % Automatic reference labels (\cref)
 \usepackage[nameinlink]{cleveref}
+\crefalias{subappendix}{section}
 
 
 % absolute page counter

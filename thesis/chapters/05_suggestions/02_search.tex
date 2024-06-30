@@ -77,26 +77,26 @@ We rank correlated artifacts based on their number of occurences in the similar 
 	\let\oldmulticode\multicode \let\endoldmulticode\endmulticode
 	\RenewDocumentEnvironment{multicode}{}{\setlength{\baselineskip}{1em}\oldmulticode}{\endoldmulticode}
 	\begin{multicode}
-		circle := \interm{Circle} new. \\
+		circle := \interm{Circle} new. \n
 		color := \interm{Color} \interm{red}.
 	\end{multicode}
 	Based on the used identifiers, the suggestion engine identifies similar methods such as:
 	\begin{itemize}
 		\item High similarity (3 common terms):
 		\begin{multicode}
-			circle := \interm{Circle} new. \\
-			circle \coterm{color:} \interm{Color} \coterm{green}. \\
+			circle := \interm{Circle} new. \n
+			circle \coterm{color:} \interm{Color} \coterm{green}. \n
 			circle \coterm{border:} \#thick.
 		\end{multicode}
 		\item Moderate similarity (2 common terms):
 		\begin{multicode}
-			triangle := \coterm{Triangle} new. \\
-			triangle \coterm{color:} \interm{Color} \coterm{green}. \\
+			triangle := \coterm{Triangle} new. \n
+			triangle \coterm{color:} \interm{Color} \coterm{green}. \n
 			triangle \coterm{shadow:} true.
 		\end{multicode}
 		\item Low similarity (1 common term):
 		\begin{multicode}
-			rectangle := \coterm{Rectangle} new. \\
+			rectangle := \coterm{Rectangle} new. \n
 			rectangle \coterm{borderColor:} \interm{Color} \coterm{blue}.
 		\end{multicode}
 	\end{itemize}

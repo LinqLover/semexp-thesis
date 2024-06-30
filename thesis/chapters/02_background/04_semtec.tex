@@ -76,7 +76,7 @@ To compute a \emph{document embedding} (also referred to as \emph{sentence embed
 \emph{Semantic retrieval systems} (also referred to as \emph{vector databases} or \emph{vector stores}) compute and index document embeddings for entities such as web pages, files, or source code~\cite{lewis2020retrieval}.
 This allows them to efficiently perform a \emph{similarity search} to recommend semantically related entities to a given entity.
 
-Semantic retrieval systems can also offer a \emph{semantic search} mode by taking a free-form query from a user, embedding it, and comparing it to the existing document embeddings.
+Semantic retrieval systems can also offer a more general form of \emph{semantic search} by taking a free-form query from a user, embedding it, and comparing it to the existing document embeddings.
 Based on the training of the embedding model, this can even yield useful results when query and documents are in different formats; to improve search quality, queries and documents can be transformed into a consistent representation through preprocessing prior to computing embeddings, e.g., by generating possible questions for documents or hypothetical relevant documents (\emph{hypothetical document embeddings}, \name{HyDE})~\cite{mao2021generation,gao2022precise} for questions using static heuristics or another language model.
 
 Other popular applications of document embeddings include clustering (grouping and anomaly detection) and classification (e.g., based on languages or sentiments).
