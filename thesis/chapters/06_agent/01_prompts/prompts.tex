@@ -43,9 +43,9 @@
 	&	\bold{\emph{Bootstrapping exploration}} \\
 	&	\tabitem \bold{System:} This object represents...	& hardcoded semantic context \\
 	&	\tabitem \bold{Assistant:} To understand this object, I will first...	& zero-shot chain-of-thought \\
-	&	\tabitem \bold{Assistant:} \code{eval(self printString)}	& \SetCell[r=4]{l} initial object context \\
+	&	\tabitem \bold{Assistant:} \code{eval("self printString")}	& \SetCell[r=4]{l} initial object context \\
 	&	\tabitem \bold{Result:} \code{an Object(12345)}	& \\
-	&	\tabitem \bold{Assistant:} \code{eval(self allInstVarNames)}	& \\
+	&	\tabitem \bold{Assistant:} \code{eval("self allInstVarNames")}	& \\
 	&	\tabitem \bold{Result:} \code{\#(\textquotesingle foo\textquotesingle{} \textquotesingle bar\textquotesingle)}	& \\[5pt]
 	%
 	\SetCell[c=3]{l} \bold{BODY} & \\
