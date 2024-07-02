@@ -26,11 +26,11 @@ The semantic exploration kernel consists of two components for processing the se
 
 \begin{description}[noextralabelsep]
 	\item[The suggestion engine] captures the implicit concept of programmers from their previous experiments, reconstructs their plans and intentions, and creates new suggestions.
-	For this, it defines a \emph{blackboard framework} that manages various \emph{artifacts} such as methods, classes, or scripts and orchestrates \emph{strategies} for suggesting new artifacts based on existing ones~(\cref{sec:design/suggestions}).
+	For this, it defines a \emph{blackboard framework} that manages various \emph{artifacts} such as methods, classes, and scripts and orchestrates \emph{strategies} for suggesting new artifacts based on existing ones~(\cref{sec:design/suggestions}).
 	Next to the generic framework, the suggestion engine also provides several types of artifacts and strategies that employ semantic retrieval methods for searching objects, generating experiments, and structuring and ranking results~(\cref{cha:suggestions}).
 	\item[The exploratory programming agent] receives explicit questions and answers them by autonomously conducting exploratory research processes.
 	It connects to its environment through \emph{semantic object interfaces}, which allow programmers to ask semantic questions to objects in the system~(\cref{sec:design/agent}).
-	Internally, it employs a generative LLM to support natural language conversations and machine reasoning. % todo: use this term in background?
+	Internally, it employs a generative LLM to support natural-language conversations and machine reasoning. % todo: use this term in background?
 	The agent is configured through a set of \emph{policies} that define its behavior and a set of \emph{system functions} through that the agent can interact with objects in the system~(\cref{cha:agent}).
 \end{description}
 
@@ -40,7 +40,7 @@ In the other direction, when the agent needs a broader overview of system parts,
 
 Both the semantic workspace and the semantic exploration kernel depend on a traditional exploratory programming system~(\cref{cha:implementation}).
 The semantic workspace integrates semantic interfaces for its tools into the existing programming system, for example, through a completion menu in code editors or a conversational interface in several exploration tools.
-Similarly, it also hooks into the existing user interface to observe experiments such as opened tabs or windows.
+Similarly, it also hooks into the existing user interface to observe experiments through artifacts such as opened tabs and windows.
 The exploration kernel interacts with the traditional system to access classes, methods, and objects for retrieving suggestions or executing experiments.
 
 In our implementation, semantic workspace and exploration kernel also depend on a couple of other packages:

@@ -61,7 +61,7 @@ In the following, we describe each semantic tool concept in detail.
 \end{figure}
 
 The approach of \emph{semantic suggestions} is to augment the research process of exploratory programmers by providing them with possible experiments based on their previous experimental activities.
-For this, the semantic workspace tracks the experiments that programmers execute through the interfaces of traditional exploratory programming systems such as do-its, code browsers, or method finders.
+For this, the semantic workspace tracks the experiments that programmers execute through the interfaces of traditional exploratory programming systems such as do-its, code browsers, and method finders.
 Based on these observed experiments, it attempts to reconstruct the plans of programmers such as an intention to understand the (scattered) implementation of a concept or to develop a new prototype for a user interface.
 Using this reconstructed plan, the semantic workspace then generates further possibly relevant experiments and suggests them to the programmer.
 
@@ -73,7 +73,7 @@ For this reason, the number of generated suggestions is usually in the two- to t
 This necessitates a structured and ranked presentation of suggestions, which is achieved by grouping them based on their type (such as classes versus methods) and ranking them based on their relevance, similarity, and diversity~(see \cref{sec:suggestions/ranking}).
 
 Optionally, semantic suggestions can include summaries and deduced results of all experiments.
-For example, the central aspects from a complex implementation or lengthy documentation could be briefly summarized in the context of the anticipated plans of programmers as a natural language synopsis.
+For example, the central aspects from a complex implementation or lengthy documentation could be briefly summarized in the context of the anticipated plans of programmers as a natural-language synopsis.
 
 Semantic suggestions can be applied for different types of plans and experimental activities, including but not limited to the following use cases:
 
@@ -171,11 +171,11 @@ For example, the system can present a completed code expression together with th
 
 \paragraph{Natural-language communication}
 % todo: find better name for this? documentation? human-to-human communication?
-Another frequent activity of programmers regards to writing messages for human communication with other programmers, such as documentation artifacts, bug reports, or commit messages.
+Another frequent activity of programmers regards to writing messages for human communication with other programmers, such as documentation artifacts, bug reports, and commit messages.
 This can be considered as another type of plans and experiments that programmers conduct to express their intentions to the system and benefit from the outputs of the system (e.g., through answers to their questions from other programmers or through reminders to their ``future selves'' about their original intentions)\footnote{This perspective can also apply to source code which ``must be written for people to read,
 and only incidentally for machines to execute''~\cite[p.~xxii]{abelson1996structure}.}.
 
-Semantic completions can assist programmers with writing such natural language text by automatically browsing and suggesting relevant classes, methods, or other artifacts such as bug reports or commits, generating example experiments, and completing the sentences started by programmers to fill in this information.
+Semantic completions can assist programmers with writing such natural-language text by automatically browsing and suggesting relevant classes, methods, or other artifacts such as bug reports and commits, generating example experiments, and completing the sentences started by programmers to fill in this information.
 For example, when a programmer creates a bug report, the system could automatically summarize prior notes and experiments from other workspaces into a consolidated text and insert a test to reproduce the bug.
 
 \ParSep
@@ -215,7 +215,7 @@ Thus, just like programmers can send messages to objects through inspect and int
 	Finally, the system answers the question of the programmer with an answer like: ``I was created at March 14th this year.''
 \end{example}
 
-Reference objects can be arbitrary objects from the system, ranging from domain objects over code objects such as classes and methods to derived artifacts of software systems such as test results, program traces, or views from other tools.
+Reference objects can be arbitrary objects from the system, ranging from domain objects over code objects such as classes and methods to derived artifacts of software systems such as test results, program traces, and views from other tools.
 
 Thus, semantic conversations provide an abstract, reactive interface through that programmers can express questions about objects and communicate with the system in natural language.
 This allows them to avoid context switches and distractions and handle overarching research processes more efficiently.

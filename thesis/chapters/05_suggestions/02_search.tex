@@ -33,7 +33,7 @@ By combining the TF-IDF scores of a document for all terms in the corpus into a 
 This allows us to compare two documents based on their cosine similarity analogously to other types of embeddings.
 % todo: include corpus + cosine similarity in background
 
-Other than transformer-based embeddings, TF-IDF embeddings are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms or homonyms).
+Other than transformer-based embeddings, TF-IDF embeddings are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms and homonyms).
 However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores might not need to be caculated for every term.
 
 \begin{example}

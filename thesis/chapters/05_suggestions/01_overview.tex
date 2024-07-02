@@ -19,13 +19,13 @@ We distinguish between three groups of artifacts:
 \begin{description}[noextralabelsep]
 	\item[Input artifacts] are captured from the original exploratory session and experiments of the programmer.
 
-	This includes code artifacts such as \emph{methods} and \emph{classes} that the programmer is browsing or editing, \emph{do-it scripts} that they are writing or executing, and other types of information such as \emph{to-do lists} or \emph{bug reports} that they are interacting with.
+	This includes code artifacts such as \emph{methods} and \emph{classes} that the programmer is browsing or editing, \emph{do-it scripts} that they are writing or executing, and other types of information such as \emph{to-do lists} and \emph{bug reports} that they are interacting with.
 
 	\item[Retrieved artifacts] refer to any piece of information that is available in the programming system and has been identified by the suggestion engine as potentially relevant for the next steps of the programmer's research process.
 
-	Most retrieved artifacts relate to the implementation of systems: \emph{users} of code artifacts such as message senders, class users, or variable references provide context about their tasks and interfaces.
+	Most retrieved artifacts relate to the implementation of systems: \emph{users} of code artifacts such as message senders, class users, and variable references provide context about their tasks and interfaces.
 	\emph{Similar code artifacts} exemplify how other methods and classes solve related problems, use similar protocols, or implement similar interfaces.
-	From the later, \emph{correlated code artifacts} can be extracted to summarize common building blocks of similar solutions, such as frequently sent messages, executed methods, instantiated classes, or references variables.
+	From the later, \emph{correlated code artifacts} can be extracted to summarize common building blocks of similar solutions, such as frequently sent messages, executed methods, instantiated classes, and references variables.
 	A programmer who is editing a method has a higher statistical probability to use some of these correlated artifacts.
 
 	Beyond code artifacts, the suggestion engine might also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communications from information sources that are related to the development of the software system.

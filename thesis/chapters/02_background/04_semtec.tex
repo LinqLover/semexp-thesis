@@ -29,7 +29,7 @@ This lays the foundation for performing different arithmetic operations to compa
 
 The language models that power these semantic technologies---\emph{embedding models} that compute embedding representations of documents and \emph{generative LLMs} that can produce plausible texts (usually referred to as shortly LLMs)---are commonly based on the \emph{transformer architecture}~\cite{vaswani2017attention}%
 \footnote{
-	We acknowledge the existence of alternative architectures such as long-short term memory (LSTMs), latent semantic analysis (LSA), convolutional neural networks (CNNs), or hybrid approaches but restrict our focus in this short introduction to the transformer architecture, which is used predominantly in modern large general-purpose embedding and text generation models~\cite{oralkbekova2023contemporary}.
+	We acknowledge the existence of alternative architectures such as long-short term memory (LSTMs), latent semantic analysis (LSA), convolutional neural networks (CNNs), and hybrid approaches but restrict our focus in this short introduction to the transformer architecture, which is used predominantly in modern large general-purpose embedding and text generation models~\cite{oralkbekova2023contemporary}.
 }.
 Here, we provide a high-level overview of transformer models, focusing on their conceptual operating principles and deliberately omitting mathematical and technical details.
 
@@ -72,7 +72,7 @@ In the following, we describe how transformers are used by embedding models for 
 \subsection{Semantic Retrieval with Embedding Models}
 \label{sec:background/semtec/retrieval}
 
-To compute a \emph{document embedding} (also referred to as \emph{sentence embedding} or \emph{text embedding}) of a text, models such as \name{BERT} (bidirectional encoder representations from transformers), \name{XLNet}, or \name{T5} use only the encoder component of transformers that was trained using self-supervised learning and aggregate the resulting embedding sequence into a single embedding vector~\cite{devlin2019bert,raffel2023exploring}.
+To compute a \emph{document embedding} (also referred to as \emph{sentence embedding} or \emph{text embedding}) of a text, models such as \name{BERT} (bidirectional encoder representations from transformers), \name{XLNet}, and \name{T5} use only the encoder component of transformers that was trained using self-supervised learning and aggregate the resulting embedding sequence into a single embedding vector~\cite{devlin2019bert,raffel2023exploring}.
 \emph{Semantic retrieval systems} (also referred to as \emph{vector databases} or \emph{vector stores}) compute and index document embeddings for entities such as web pages, files, or source code~\cite{lewis2020retrieval}.
 This allows them to efficiently perform a \emph{similarity search} to recommend semantically related entities to a given entity.
 
@@ -84,7 +84,7 @@ Other popular applications of document embeddings include clustering (grouping a
 \subsection{Text Generation with LLMs}
 \label{sec:background/semtec/generation}
 
-Generative LLMs such as \name{GPT} (generative pre-trained transformer), \name{LLaMA}, or \name{PaLM} use only the decoder component of transformers:
+Generative LLMs such as \name{GPT} (generative pre-trained transformer), \name{LLaMA}, and \name{PaLM} use only the decoder component of transformers:
 instead of encoding and transforming an input text, they treat it as a part of the output text and generate a likely completion of it~\cite{radford2018improving,openai2024gpt4}.
 They are usually trained using a combination of self-supervised learning with large text corpora and reinforcement learning from human feedback (RLHF) to fine-tune completions~\cite{ouyang2022training}.
 
@@ -101,7 +101,7 @@ Beyond simple text completion, LLMs can also be trained to adhere to certain tex
 	Additionally, they can be enabled via pre-training or instructions to access external systems through \emph{function calls}: an LLM emits a special output sequence that requests the invocation of a system function with a set of arguments, a handler executes this invocation and passes back the result with the text to the LLM, and the LLM continues the generation based on the result~\cite{hao2023toolkengpt,mialon2023augmented,yang2023autogpt}.
 	For instance, when presented with a mathematical word problem, GPT-4 can break down the task, plan a solution approach, and source out primitive arithmetic tasks to an external calculator function~\cite{openai2024gpt4}.
 
-	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} or \name{ChatDev} orchestrate multiple agents that cooperate intending to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
+	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} and \name{ChatDev} orchestrate multiple agents that cooperate intending to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
 \end{description}
 
 Being statistical models without an actual understanding of matters in human terms, LLMs suffer from several weaknesses such as limited logical reasoning, not adhering to instructions, and hallucinations where false information is generated~\cite{openai2024gpt4}.
@@ -115,7 +115,7 @@ To mitigate these problems in parts, several techniques have been established:
 
 	Other than fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, affecting its performance~\cite{zhao2023survey}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 
-	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information or provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups or full text searches) and include them in the prompt~\cite{lewis2020retrieval}.
+	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information or provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
 	This often includes semantic retrieval methods~(see \cref{sec:background/semtec/retrieval}).
 
 	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into the GPT-4 model, and instructs it to answer the query based on the provided information\footnote{
