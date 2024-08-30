@@ -3,13 +3,25 @@
 \sffamily
 %\newcommand{\tabitem}{\hspace*{1ex}\llap{\textbullet}~~}
 \newcommand{\tabitem}{\hspace*{1ex}\llap{}~~}
+\newcommand{\itemizethis}[1]{%
+	\if\relax\detokenize{#1}\relax%
+		% do nothing
+	\else%
+		\setlength{\leftmargini}{.3cm}%
+		\begin{varwidth}[t]{\linewidth}%
+		\begin{itemize}[topsep=0pt,parsep=0pt]
+			\item #1
+		\end{itemize}%
+		\end{varwidth}%
+	\fi%
+}
 
 \begin{tblr}{
 	colspec = {
 		|
 		Q[0.2em]
 		X[2,l,h]
-		X[1,l,m]
+		X[1.15,l,m]
 		|
 	},
 	% TODO: add vertical margin inside table frame - does not work
@@ -17,11 +29,16 @@
 		abovesep = 5pt,
 		belowsep = 5pt
 	},
-	column{3} =	{ font=\itshape },
+	column{3} = {
+		font = \itshape,
+		cmd = \itemizethis,
+	},
 	width =	\columnwidth,
 	hspan =	minimal,
 	rowsep =	0pt,
 	colsep =	3pt,
+	% for itemizethis:
+	measure =	vbox,
 }
 	\hline
 	%
@@ -40,7 +57,7 @@
 	&	\tabitem \bold{System:} You must call the \code{evalAndReturn} function...	& \SetCell[r=2]{l} output format \\
 	&	\tabitem \bold{System:} Format the return value as...	& \\[5pt]
 
-	&	\bold{\emph{Bootstrapping exploration}} \\
+	&	\bold{\emph{Bootstrapping the exploration}} \\
 	&	\tabitem \bold{System:} This object represents...	& hardcoded semantic context \\
 	&	\tabitem \bold{Assistant:} To understand this object, I will first...	& zero-shot chain-of-thought \\
 	&	\tabitem \bold{Assistant:} \code{eval("self printString")}	& \SetCell[r=4]{l} initial object context \\

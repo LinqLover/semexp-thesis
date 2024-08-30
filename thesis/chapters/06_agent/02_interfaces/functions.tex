@@ -3,7 +3,7 @@
 \begin{tblr}{
 	colspec = {
 		Q[l,h]
-		X[l,m]
+		X[j,m]
 	},
 	column{1} =	{ font=\ttfamily },
 	row{1} = 	{ font=\bfseries },
@@ -23,6 +23,6 @@
 	browsePackage(packageName)	& Return a hierarchical list of classes within a package. \\
 	browseClass(className)	& Enumerate all methods defined on a class or one of its superclasses or their metaclasses (for static methods), grouped by the defining class and the method category (protocol) within the class organization. \\
 	browseMethod(className, selector)	& Retrieve the source code of a method defined in a class. \\
-	{ browseSenders(selector[, query]) \\ \hspace*{1em}\textrm{\textit{Examples:}}\\\hspace*{1em}browseSender("printOn:")\\\hspace*{1em}browseSender("printOn:",\\\hspace*{2em}\llap{\raisebox{0.2ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\hspace*{2pt}}}}"date yyy-mm-dd") }	& Search all methods in the system that send messages with the name of a selector and return a representative sample of methods. If an optional query argument has been provided, rank the methods based on their relevance to the query. \\
+	{ browseSenders(selector[, query]) \\ \hspace*{1em}\textrm{\textit{Examples:}}\\\hspace*{1em}browseSender("printOn:")\\\hspace*{1em}browseSender("printOn:",\\\hspace*{2em}\llap{\raisebox{0.2ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\hspace*{2pt}}}}"date yyy-mm-dd") }	& Search the system for all methods that send messages with the name of a selector and return a representative sample of these methods. If an optional query argument has been provided, rank the methods based on their relevance to the query~(see \cref{sec:suggestions/ranking}). \\
 	\hline
 \end{tblr}

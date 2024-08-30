@@ -35,15 +35,15 @@ Our framework comprises three fundamental actors:
 	Objects can be accessed either by sending them \emph{messages} (which in many languages is also referred to as \emph{invoking methods}) or through \emph{reflection interfaces} that expose their internal state, implementation, or location in the object graph.
 
 	\item[The exploratory programming agent] is an intelligent mediator between the programmer and the object in the system.
-	The goal of this mediation is to translate conceptual questions from the programmer into interactions with the system and translate their results into answers for the programmer.
+	It automatically translates conceptual questions from the programmer into interactions with the system and translates the results of these interactions back into answers for the programmer.
 
 	Internally, the agent conducts research processes autonomusly: it interprets the programmer's question, develops a plan, designs and conducts experiments, evaluates their results, and repeats as necessary (until all required information has been collected) before delivering a reasoned answer to the questions and returns it to the programmer.
 
 	The agent uses two resources: a set of \emph{policies} and a \emph{conversation history}.
-	First, \emph{policies} define abstract agent behavior, such as the types and frequency of experiments and the format of answers.
-	Second, the \emph{conversation history} consists of past communications with the programmer as well as experiments from the current conversation.
+	\emph{Policies} define abstract agent behavior, such as the types and frequency of experiments and the format of answers.
+	The \emph{conversation history} consists of past communications with the programmer and experiments from the current conversation.
 	It serves as a context for handling subsequent requests.
-	Thus, the programmer does not need to repeatedly explicate their intentions in every question but grows a shared vocabulary and knowledge with the agent as a conversation evolves.
+	Thus, the programmer does not need to repeatedly explicate their intentions in every question but grows a shared vocabulary and knowledge with the agent as the conversation evolves.
 \end{description}
 
 Our framework allows programmers to ask arbitrary questions about objects in a system that can reference two different aspects:
@@ -57,12 +57,12 @@ Our framework allows programmers to ask arbitrary questions about objects in a s
 	\item[Epistemic questions] (or ``how'' questions) refer to the behavior of objects, domain concepts, and their implementation.
 	Programmers ask these questions to explore the capabilities of a system, understand the technical foundations, or ideate and prototype new applications.
 
-	For example, in a sales system, epistemic questions could include ``What information do we store about customers?'', ``How is the tagging system for products modeled like?'', or ``How can we analyze the shopping behavior of customers?''.
+	For example, in a sales system, epistemic questions could include ``What information do we store about customers?'', ``How is the tagging system for products modeled?'', or ``How can we analyze the shopping behavior of customers?''.
 
 	Note that given the uniform object model of many programming systems, epistemic questions about a domain object equal functional questions about a code object from the implementation of the domain; however, the former perspective provides additional context about the system through a concrete example.
 \end{description}
 
-To answer both functional and epistemic questions, the agent conducts experiments by utilizing three types of interfaces that are already offered by most traditional programming systems:
+To answer both functional and epistemic questions, the agent automatically conducts experiments by utilizing three types of interfaces that most existing programming systems already offer:
 
 % todo: from feedback: align lengths of items here?
 \begin{description}[noextralabelsep]
@@ -75,7 +75,7 @@ To answer both functional and epistemic questions, the agent conducts experiment
 	Following the singularity of objects and meta objects noted above, implementation browsing of domain objects equals state inspection of their classes, but is associated with a different connotation by adhering to the context of the original object.
 	For example, using symbolic execution methods, both the state and effective behavior of objects can explored at once.
 	\item[Message sending] constitutes regular communication with objects to activate their behavior.
-	As opposed to state inspection and implementation browsing, normal messages can be sent without requiring reflective capabilities\footnote{From our classification, we exclude special reflective messages such as \code{instVarNamed:} in Smalltalk as well as restricted visibility of messages such as the \code{private} access modifiers in Java.}.
+	As opposed to state inspection and implementation browsing, normal messages can be sent without requiring reflective capabilities.\footnote{From our classification, we exclude special reflective messages such as \code{instVarNamed:} in Smalltalk as well as restricted visibility of messages such as the \code{private} access modifiers in Java.}
 \end{description}
 
 Note that the agent generally does not require any manual preparation for specific systems and packages from domain experts or programmers but will learn about the system on its own.
@@ -86,7 +86,7 @@ Analogously, every message send to a previously unknown system is preceded by br
 	A programmer asks ``Which product has generated the highest profit?'' about a selected shop object.
 	In response, the agent first executes a series of experiments by browsing the shop's implementation to explore several messages, classes, and their documentation related to the concepts ``product'' and ``profit'' to understand what these concepts mean and how they are represented in the system.
 
-	After identifying relevant messages such as \code{Shop>>orders}, \code{Order>>productItems}, and \code{Product>>price}, it plans how to combine this information to compute the most profitable product and runs a script that queries the system for this information as another experiment.
+	After identifying relevant messages such as \code{Shop>>orders}, \code{Order>>\allowbreak productItems}, and \code{Product>>price}, it plans how to combine this information to compute the most profitable product and runs a script that queries the system for this information as another experiment.
 
 	Finally, the agent evaluates the results of this experiment and returns a summarized answer in natural language to the programmer.
 	The question was answered and the programmer can continue by asking another question to the agent or performing another exploratory activity.
@@ -96,32 +96,34 @@ Analogously, every message send to a previously unknown system is preceded by br
 \subsection*{Integrating Semantic Object Interfaces into Exploratory Programming Systems}
 \label{sec:design/agent/interfaces}
 
-To support immediate access to semantic object interfaces from within existing exploratory programming systems, we aim for a tight integration with traditional tools.
-For this, we identify two primary interfaces in existing exploratory programming systems through which programmers explore objects: \emph{object inspection tools} and \emph{message sending through scripts}.
+To support immediate access to semantic object interfaces from within exploratory programming systems, we aim for tight integration with traditional tools.
+For this, we identify two primary interfaces in such systems through which programmers explore objects: \emph{object inspection tools} and \emph{message sending through scripts}.
 We propose to extend these interfaces with semantic capabilities: object inspection tools with a \emph{conversation mode} and message sending with a language extension for \emph{semantic messaging}.
 
 \paragraph{A conversation mode for object inspection tools}
 \label{par:design/agent/interfaces/inspector}
+
+% TODO: should we also include inspector sketch from paper here?
 
 Inspection tools allow programmers to explore and manipulate the internal state of objects through a list of variables or properties~(see \cref{par:background/expsys/tools/inspection}).
 We propose a new \emph{conversation mode} in inspection tools that allow programmers to ask semantic questions about an object.
 Thus, in addition to the usually technical state inspection, they can then also chat with an object through the exploratory programming agent.
 
 Through the chat interface, programmers can express questions in natural language without needing to know the vocabulary and protocols of the object's domain.
-Additionally, they can ask follow-up questions in the context of a conversation without repeating or editing their original thoughts.
+Additionally, they can ask follow-up questions in the context of a conversation without repeating or editing their original thoughts, like in a real-life conversation between two programmers.
 
 \paragraph{Semantic messaging in scripts}
 \label{par:design/agent/interfaces/messaging}
 
-Scripting is another popular access point for exploration.
+Scripting is another popular starting point for exploration.
 Especially programmers who are proficient in the programming language and familiar with the protocols of a system often prefer message sending through scripts to manually exploring object graphs through inspection tools.
-For example, the following script retrieves the product with the highest quantity from a list of order items:
+For example, the following Smalltalk script retrieves the product with the highest quantity from a list of order items:
 
 \begin{multicode}
 	(self orderItems detectMax: \#quantity) product.
 \end{multicode}
 
-We propose an extension to the scripting language that allows for \emph{semantic messaging}: similar to pseudocode, programmers can write semantic messages with fictitious names (that do not have to match the vocabulary of an object) to express their intents but send these messages to objects just like regular messages.
+We propose an extension to object-oriented scripting languages that allows for \emph{semantic messaging}: similar to pseudocode, programmers can write semantic messages with fictitious names (that do not even have to match the vocabulary of an object) to express their intents but send these messages to objects just like regular messages.
 Unlike regular messages, semantic messages do not require an implementation at the receiver object but get processed by an exploratory programming agent, which interprets the message as a question and internally inspects the object or sends it regular messages to determine a return value.
 For instance, the above example could be expressed as any of the following:
 \begin{multicode}
@@ -137,7 +139,7 @@ Like regular messages, semantic messages can also pass arguments, e.g.:
 \end{multicode}
 
 \noindent
-Thus, programmers can keep in their scripting flow when asking questions even if they are unaware of certain protocols, and they do not have to translate their questions into running code or implement algorithms for more complex problems.
+Thus, programmers can maintain their scripting flow when asking questions even if they are unaware of certain protocols, and they do not have to express questions using specific protocols and syntax or implement algorithms for more problems.
 
 \ParSep
 

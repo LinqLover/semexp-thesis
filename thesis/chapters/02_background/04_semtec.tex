@@ -93,7 +93,8 @@ One of the earliest practical applications of LLMs that had a wider impact on th
 Beyond simple text completion, LLMs can also be trained to adhere to certain text formats and patterns and follow \emph{instructions} in the prompt, allowing the construction of specialized \emph{agents} with different characteristics:
 
 \begin{description}[noextralabelsep]
-	\item[Conversational agents] engage in conversations with human users by generating messages (that complete a conversation history) on behalf of a virtual \emph{assistant}~\cite{bai2022training}.
+	\item[Conversational agents] engage in conversations with human \emph{users} by generating messages (that complete a conversation history) on behalf of a virtual \emph{assistant}~\cite{bai2022training}.
+	Optionally, \emph{system} messages can be used to provide further instructions to agents.
 	For example, OpenAI's ChatGPT, Google Gemini, or GitHub Copilot Chat allow users to write, edit, review, or summarize text or source code or discuss a wide range of topics through a chat interface~\cite{openai2024gpt4}.
 
 	\item[Autonomous agents] are instructed to generate \emph{inner monologues} that mimic structured thinking, resulting in basic capabilities for self-organized problem solving~\cite{yang2023autogpt}.
@@ -104,14 +105,14 @@ Beyond simple text completion, LLMs can also be trained to adhere to certain tex
 	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} and \name{ChatDev} orchestrate multiple agents that cooperate intending to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
 \end{description}
 
-Being statistical models without an actual understanding of matters in human terms, LLMs suffer from several weaknesses such as limited logical reasoning, not adhering to instructions, and hallucinations where false information is generated~\cite{openai2024gpt4}.
+Being statistical models without an actual understanding of matters in human terms, LLMs suffer from several weaknesses such as limited logical reasoning, not adhering to instructions, and \emph{hallucinations} where false information is generated~\cite{openai2024gpt4}.
 To mitigate these problems in parts, several techniques have been established:
 
 \begin{description}
 	\item[Fine-tuning:] Adjust the output style and behavior of models by training a base model on a curated set of positive examples of texts or conversations~\cite{kojima2022large,wei2022finetuned}.
 
 	\item[Prompt engineering:] Adjust the output style and behavior by strategically developing prompts and instructions that are most likely to influence models in an intended way~\cite{white2023prompt}.
-	For example, \emph{chain-of-thought} prompting instructs models to explicate their thoughts as inner monologue (``think out aloud'') or expressing upfront plans in a certain structure and have been shown to improve their problem-solving abilities~\cite{wei2023chainofthought}.
+	For example, \emph{chain-of-thought} prompting instructs models to explicate their thoughts as inner monologue (``think out aloud'') or expressing upfront plans in a certain structure and has been shown to improve their problem-solving abilities~\cite{wei2023chainofthought}.
 
 	Other than fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, affecting its performance~\cite{zhao2023survey}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 

@@ -3,8 +3,7 @@
 \section{Exploratory Programming}
 \label{sec:background/exp}
 
-\emph{Exploratory programming} is a programming and software engineering practice that promotes a notion of projects in which requirements or existing systems are not fully understood~\cite{sandberg1988smalltalk,kery2017exploring,rein2018exploratory}.
-Programmers start with a limited understanding of both the \emph{problem space} and the \emph{solution space}:
+\emph{Exploratory programming} is a software engineering practice that promotes a notion of projects where programmers have a rather emergent than upfront understanding of the problem domain~\cite{sandberg1988smalltalk,kery2017exploring,rein2018exploratory}:
 for example, they might not know how a new user interface should look and feel like to achieve a good user experience, or they might be unaware of the facilities and limitations that an existing code base or framework provides.
 To acquire such knowledge, the exploratory programming practice tightly intertwines reverse engineering, prototyping, and testing in an iterative manner~\cite{taeumel2022pattern}.
 
@@ -21,13 +20,13 @@ To acquire such knowledge, the exploratory programming practice tightly intertwi
 	\label{fig:background/exp/simple_process}
 \end{figure}
 
-In our model of an \emph{exploratory programming workflow}, we employ a research metaphor:
-exploratory programmers are like scientists in the project domain who apply the scientific method and iteratively refine their comprehension of both the problem space and the solution space.
+In our model of an \emph{exploratory programming workflow}, we employ a metaphor from ordinary science:
+exploratory programmers are like scientists in the project domain who apply the scientific method and iteratively refine their comprehension of both the problem domain and the solution domain.
 To refine their comprehension, they ask questions and find answers to them.
 \Cref{fig:background/exp/simple_process} displays a single instance of a \emph{research process} in our exploratory programming workflow model.
 
 Finding answers requires programmers to descend from the conceptual level of the original questions (their \emph{mental model}) into a lower abstraction level where they can dissect questions into their underlying terms, concepts, and technical foundations (the \emph{technical model}).
-Here, they interact with the underlying systems by planning, executing, and evaluating a potentially large number of \emph{experiments} and repeat until they are able to provide an answer to the original question.
+Here, they interact with the underlying systems by planning, executing, and evaluating a substantial number of \emph{experiments} and repeat until they are able to provide an answer to the original question.
 Experiments include a wide range of activities that are aimed at the generation of knowledge:
 for example, programmers can research information in the documentation or implementation of a system or related communication platforms; inspect objects of a system at runtime to understand their internal state; run scripts to test interfaces and observe their effect; build and test prototypes; etc.
 

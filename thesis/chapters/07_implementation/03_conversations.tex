@@ -13,21 +13,19 @@ Second, the decorator embeds a minimal version of the conversation editor GUI of
 \begin{figure}
 	\begin{minipage}{\textwidth}
 		\centering
-		% TODO: rerecord with high-dpi
-		% TODO: fix user color to black again
 		% todo: reconsider relevance of screenshot and choice of example, update captions, move footnote into figure
 		\includegraphics[width=.7\textwidth]{03_conversations/inspector.png}
 		\caption[Our integration of a semantic conversational interface into Squeak's inspector.]{
-			Our integration of a semantic conversational interface into Squeak's inspector.
+			Our integration of a semantic conversational interface into Squeak's inspector (here: ``chat'' item in the field list on the left).
 			In this example, the user chats with an archive of the Squeak mailing list\footnote{\url{https://github.com/hpi-swa-lab/squeak-inbox-talk}} to identify exceptionally large posts.
 		}
 		\label{fig:implementation/conversations/inspector}
 	\end{minipage}
 \end{figure}
 
-To implement semantic messages in Squeak, we use the dynamic message dispatch mechanism of Smalltalk's meta-object protocol by patching the method \code{Object>>\#doesNotUnderstand:}~\cite[sec.~5.11]{ingalls2020evolution} and forwarding all unknown messages to the agent.
+To implement semantic messages in Squeak, we use the dynamic message-dispatch mechanism of Smalltalk's meta-object protocol by patching the method \code{Object>>\#doesNotUnderstand:}~\cite[sec.~5.11]{ingalls2020evolution} and forwarding all unknown messages to the agent.
 Through an additional policy and a change in the function design (that is, by requiring an eventual call of the \code{evalAndReturn()} function from \cref{tab:agent/functions/interface}), we configure the agent to return Smalltalk objects instead of natural-language text.
-Because we desired a distinction between regular and semantic messages during our experiments, we also implemented two alternative forms of semantic message processing:
+Because we desired a distinction between regular and semantic messages during our experiments, we also implemented two alternative forms for expressing semantic messages:
 \begin{description}[noextralabelsep]
 	\item[Semantic proxies,] which are constructed explicitly and override \code{\#doesNotUnderstand:} to handle semantic messages:
 	\begin{multicode}
@@ -39,7 +37,7 @@ Because we desired a distinction between regular and semantic messages during ou
 	\begin{multicode}
 		self ? \#mostOftenBoughtArticle.
 
-		pendingOrders ! \#cancelItemsFromSpringCollection.
+		pendingOrders ! \#cancelItemsFromSpringSeries.
 	\end{multicode}
 	Here, the \code{?} operator indicates a declarative query for information.
 	In contrast, the \code{!} operator permits side effects, allowing programmers to modify the state of objects in a semantic style.
