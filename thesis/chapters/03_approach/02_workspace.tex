@@ -44,7 +44,6 @@ In the semantic workspace, we propose three concepts for novel semantic tools th
 	\item[Semantic conversations] provide an interface through that programmers can express conceptual questions about objects (such as domain objects or classes) in natural language and retrieve answers at the same abstraction level.
 	Internally, an exploratory programming agent conducts the necessary plans, experiments, and deductions to generate answers.
 \end{description}
-
 In the following, we describe each semantic tool concept in detail.
 
 \subsection{Semantic Suggestions}
@@ -92,6 +91,7 @@ Semantic suggestions can be applied for different types of plans and experimenta
 	\end{description}
 	%senders of the currently viewed methods (i.e., methods that possibly invoke the former methods, see \cref{par:background/expsys/tools/browsing}), the comment and implementation of messages that the current methods send, the comment and definition of classes that the current methods reference, \emph{similar} methods (e.g., methods that pursue the same goal or include common strategies)
 
+	\noindent
 	Beyond code artifacts, the system could also suggest other types of semantic suggestions in this context such as relevant excerpt from related documentation artifacts, design documents, or specifications.
 
 	Depending on the quantity and complexity of related artifacts, the system might also summarize all suggestions, e.g., by describing the implementation of a scattered concept or shortening and paraphrasing documentation artifacts.
@@ -119,6 +119,7 @@ Semantic suggestions can be applied for different types of plans and experimenta
 		\item[exception handlers] for this and similar errors in the software system.
 	\end{description}
 
+	\noindent
 	%This information is prepared and provided to the programmer to provide starting points for further research.
 	Additionally, the system might also summarize the results to extract and suggest particular debugging and solution strategies (such as checking the state of an object, initializing a resource, or inserting a missing exception handler).
 

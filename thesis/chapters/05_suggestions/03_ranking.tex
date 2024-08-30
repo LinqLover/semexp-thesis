@@ -57,6 +57,7 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A more elaborated measure would be the Kantorovich distance~\cite{vaserstein1969markov} which indicates the cost of transforming the distribution of the corpus into that of the ranking, and which should also be minimized.
 \end{description}
 
+\noindent
 To meet these requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
 
 \paragraph{Top-k selection}
@@ -71,7 +72,6 @@ We convert the relevance scores of the corpus into a probability distribution by
 \begin{align}
 	p_i = \frac{\exp \frac{R_i}{T}}{\sum_j \exp \frac{R_j}{T}}
 \end{align}
-
 Based on this probability distribution, we randomly sample $k$ unique artifacts.
 Through a temperature parameter $T$, the probability distribution can be sharpened or flattened, modeling the ranking closer to top-k selection or uniform random selection, respectively.
 This approach corresponds to the \emph{softmax} function used in several machine learning application.
