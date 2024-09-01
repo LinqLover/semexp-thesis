@@ -1,13 +1,25 @@
 % !TEX root = ../../../semexp-thesis.tex
 
 \sffamily
+\newcommand{\itemizethis}[1]{%
+	\if\relax\detokenize{#1}\relax%
+		% do nothing
+	\else%
+		\setlength{\leftmargini}{.3cm}%
+		\begin{varwidth}[t]{\linewidth}%
+		\begin{itemize}[topsep=0pt,parsep=0pt]
+			\item #1
+		\end{itemize}%
+		\end{varwidth}%
+	\fi%
+}
 
 \begin{tblr}{
 	colspec = {
 		|
 		Q[1ex]
 		X[2,l,h]
-		X[1,l,m]
+		X[1.15,l,m]
 		|
 	},
 	% TODO: add vertical margin inside table frame - does not work
@@ -15,11 +27,16 @@
 		abovesep = 5pt,
 		belowsep = 5pt
 	},
-	column{3} =	{ font=\itshape },
+	column{3} = {
+		font = \itshape,
+		cmd = \itemizethis,
+	},
 	width =	\columnwidth,
 	hspan =	minimal,
 	rowsep =	0pt,
 	colsep =	3pt,
+	% for itemizethis:
+	measure =	vbox,
 }
 	\hline
 	%
