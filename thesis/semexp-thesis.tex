@@ -54,7 +54,12 @@
 \author{Christoph Thiede}
 \location{Berlin}
 % TODO metadata
+% hide extratitle in oneside mode
+\makeatletter
+\if@twoside
 \extratitle{\raggedleft Thiede, \\ Augmented Exploratory Programming\par}
+\fi
+\makeatother
 \title{The Semantic Workspace:\texorpdfstring{\\[-4pt]}{} Augmenting Exploratory Programming\texorpdfstring{\\[0pt]}{} with Integrated Generative AI Tools}
 %\subtitle{This is Optionally Optional}
 \othertitle{Der semantische Workspace:\\[-4pt] Augmentierung explorativer Programmierung\\[0pt] mittels integrierter generativer KI-Werkzeuge}
@@ -66,16 +71,13 @@
 	},
 }}
 
-\begin{document}
-\frontmatter
-
 % add squeak logos to title page
 % titlepagenumber: must define outside of ifbool!
 \makeatletter
 % workaround: use counter because ifnum+def doesn't work...
 \newcounter{titlepagenumber}
 \setcounter{titlepagenumber}{%
-	\if@twoside 2\else 1\fi
+	\if@twoside 3\else 1\fi
 }
 \newcommand*\titlepagebcor{%
 	\if@twoside 1.2cm\else 0cm\fi % approximated! exact values are too deeply hidden in the document class
@@ -84,9 +86,10 @@
 \newbool{enableSqueakDecorations}
 \setbool{enableSqueakDecorations}{true} % TODO: disable for submission
 \ifbool{enableSqueakDecorations}{%
-	\AddToHook{shipout/background}{%
+	%\AddToHook{shipout/background}{%
+	\AddToShipoutPictureBG*{% % todo: does not work in twoside mode ... but we won't want it there anyway
 		\ifnum\value{abspage}=\value{titlepagenumber} %
-			\AddToShipoutPictureBG*{%
+			%\AddToShipoutPictureBG*{%
 				\put(\dimexpr\paperwidth/2-\titlepagebcor-9cm,\dimexpr\paperheight-8.45cm){%
 					\rotatebox{10}{%
 						\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/squeak.pdf}%
@@ -97,10 +100,13 @@
 						\includegraphics[width=3cm,height=3cm,keepaspectratio]{figures/smalltalk.pdf}%
 					}%
 				}%
-			}%
+			%}%
 		\fi%
 	}
 }{}
+
+\begin{document}
+\frontmatter
 
 \maketitle
 \input{abstract}
