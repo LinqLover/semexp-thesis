@@ -326,6 +326,51 @@
     \CircledParamOpts{fill color=black, inner color=white, outer color=none, #1}{1}{#2}%
 }
 
+% rainbow text (based on the gradient-text package)
+% CREDITS: https://tex.stackexchange.com/a/701906/221054 (edited)
+\makeatletter
+\ExplSyntaxOn
+\clist_new:N\l_gtext_First_clist
+\clist_new:N\l_gtext_Last_clist
+\int_new:N\l_gtext_MaxIndex_int
+\int_new:N\l_gtext_Ratio_int
+\newcommand{\gr@dient}[8]{
+	\int_set:Nn\l_gtext_MaxIndex_int{\int_eval:n{\str_count:n{#1}}}
+	\int_step_inline:nnn{1}{\l_gtext_MaxIndex_int}{
+		\exp_args:Ne\str_if_eq:nnTF{\str_item:Nn{#1}{##1}}{~}{}{
+			\int_set:Nn\l_gtext_Ratio_int{\int_eval:n{\l_gtext_Ratio_int+1}}
+		}
+		\color_select:nn{#8}{
+			\int_mod:nn{\int_eval:n{(\int_use:N\l_gtext_Ratio_int*#5+(\l_gtext_MaxIndex_int-##1)*#2)/\l_gtext_MaxIndex_int} + 240*100}{240},
+			\int_eval:n{(\int_use:N\l_gtext_Ratio_int*#6+(\l_gtext_MaxIndex_int-##1)*#3)/\l_gtext_MaxIndex_int},
+			\int_eval:n{(\int_use:N\l_gtext_Ratio_int*#7+(\l_gtext_MaxIndex_int-##1)*#4)/\l_gtext_MaxIndex_int}
+		}\str_item:Nn{#1}{##1}
+	}
+}
+
+\NewDocumentCommand\gradient{mmmm}{{
+  \clist_set:Nn\l_gtext_First_clist {#3}
+  \clist_set:Nn\l_gtext_Last_clist {#4}
+  \gr@dient{#2}
+  {\clist_item:Nn\l_gtext_First_clist{1}}
+  {\clist_item:Nn\l_gtext_First_clist{2}}
+  {\clist_item:Nn\l_gtext_First_clist{3}}
+  {\clist_item:Nn\l_gtext_Last_clist{1}}
+  {\clist_item:Nn\l_gtext_Last_clist{2}}
+  {\clist_item:Nn\l_gtext_Last_clist{3}}
+  {#1}
+}}
+\ExplSyntaxOff
+
+\NewDocumentCommand\gradientRGB{mmm}{
+  \gradient{RGB}{#1}{#2}{#3}
+}
+
+\NewDocumentCommand\gradientHSB{mmm}{
+  \gradient{HSB}{#1}{#2}{#3}
+}
+\makeatother
+
 
 % Automatically insert placeholders for missing figures
 \ifdraft{%

@@ -4,12 +4,18 @@
 \label{sec:suggestions/overview}
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{01_overview/graph.png}
-	\caption[TODO]{
-		TODO
-	}
-	\label{fig:suggestions/overview/graph}
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics[height=17\baselineskip]{01_overview/graph.png}
+		\caption[Merge graph of all available artifact types and strategies in the suggestion engine.]{
+			Merge graph of all available artifact types and strategies in the suggestion engine.
+			\bold{\textcolor{gray}{Gray}} boxes represent artifact types (grouped by their roles\footnotemark), \bold{\gradientHSB{colorful}{-45,240,200}{195,240,200}} boxes represent strategies, and arrows display possible inputs and outputs.
+			\footnotetext{Technically, each box represents a tuple of an artifact type and an artifact role. For example, ``open method'', ``sender'', and ``similar method'' are all artifacts of the type ``method'' in different roles.}
+			Arrows starting or ending in a group of artifacts or strategies refer to all of its items.
+			For sake of simplicity, we do not distinguish optional and required inputs in this figure.
+		}
+		\label{fig:suggestions/overview/graph}
+	\end{minipage}
 \end{figure}
 
 The suggestion engine defines different types and roles of artifacts and different strategies for recording and linking different kinds of information from the programming system.

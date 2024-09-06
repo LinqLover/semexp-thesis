@@ -14,15 +14,6 @@ In other situations, such as when suggesting users of a class or method, the sug
 Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to formatting chronologic information.
 In this situation, both suggestions relevant to the problem and suggestions exemplifying different uses of the protocol matter are desired.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{03_ranking/method_objectives}
-	\caption[TODO]{
-		TODO
-	}
-	\label{fig:suggestions/ranking/method_objectives}
-\end{figure}
-
 We identify four different \emph{objectives} for ranking suggestions, which must be balanced differently depending on the context in which the suggestion engine is invocated:
 
 \begin{description}
@@ -56,6 +47,15 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A comprehensive operationalization of this objective would provide little intuition but can be approached by comparing statistical properties (such as the mean and standard deviation) of the ranking to that of the corpus and requiring the difference to be minimal.
 	A more elaborated measure would be the Kantorovich distance~\cite{vaserstein1969markov} which indicates the cost of transforming the distribution of the corpus into that of the ranking, and which should also be minimized.
 \end{description}
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=\textwidth]{03_ranking/method_objectives.png}
+	\caption[Different methods for semantic ranking achieve different trade-offs between our defined objectives.]{
+		The discussed methods for semantic ranking achieve different trade-offs between our defined objectives.
+	}
+	\label{fig:suggestions/ranking/method_objectives}
+\end{figure}
 
 \noindent
 To meet these requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
