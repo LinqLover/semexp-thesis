@@ -48,17 +48,21 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	A more elaborated measure would be the Kantorovich distance~\cite{vaserstein1969markov} which indicates the cost of transforming the distribution of the corpus into that of the ranking, and which should also be minimized.
 \end{description}
 
-\begin{figure}[b]
+\noindent
+To meet these requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
+
+\begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{03_ranking/method_objectives.png}
 	\caption[Different methods for semantic ranking achieve different trade-offs between our defined objectives.]{
 		The discussed methods for semantic ranking achieve different trade-offs between our defined objectives.
+		Top-k selection delivers the most relevant ranking but selects redundant, homogeneous, and non-representative items.
+		%Probabilistic sampling maximizes diversity and representativeness but does ignores the relevance or redundance of items.
+		Probabilistic sampling maximizes diversity and representativeness, while clustering can improve the irredundancy of items.
+		With probabilistic sampling from clusters, we find a moderate balance of all objectives.
 	}
 	\label{fig:suggestions/ranking/method_objectives}
 \end{figure}
-
-\noindent
-To meet these requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
 
 \paragraph{Top-k selection}
 We sort all suggestions based on their relevance score and select the $k$ most relevant artifacts.
