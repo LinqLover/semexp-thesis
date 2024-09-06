@@ -25,7 +25,7 @@
 \KOMAoption{twoside}{off}
 \KOMAoption{appendixprefix}{false}
 \usepackage[utf8]{inputenx}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,backref=true]{biblatex}
 \AfterPackage*{biblatex}{\ExecuteBibliographyOptions{
 	maxnames=32,
 	url=true
@@ -132,10 +132,11 @@
 \thimport[chapters]{11_conclusion}
 
 
-\printbibliography[heading=bibintoc]
+%\printbibliography[heading=bibintoc]
 \clearpage
 \appendix
 \input{appendix}
+\printbibliography[heading=bibintoc]
 \backmatter
 \markboth{}\relax
 
