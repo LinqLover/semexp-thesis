@@ -142,10 +142,8 @@
 	\RenewDocumentEnvironment{figure}{ O{tbp} }{%
 		% hack: should use \DefaultFigureOptions here, but expansion issue
 		\IfStrEq{#1}{Z}{%
-			\typeout{will use landscapefigure}%
 			\landscapefigure
 		}{%
-			\typeout{will use oldfigure}%
 			\oldfigure[#1]
 		}%
 	}{%
