@@ -305,6 +305,8 @@
 % Automatic reference labels (\cref)
 \usepackage[nameinlink]{cleveref}
 \crefalias{subappendix}{section}
+% ensure footnote references include chapter number
+\labelformat{footnote}{\thechapter.#1}
 
 
 % absolute page counter
