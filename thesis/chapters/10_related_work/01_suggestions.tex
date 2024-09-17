@@ -1,0 +1,18 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{Suggestions in Programming Systems}
+\label{sec:related_work/suggestions}
+
+Traditionally, programmers can search source code through code browsers or other tools that retrieve methods based on call graphs~\cites[chap.~10]{goldberg1984smalltalk}[sec.~6.2]{kraemer2010stacksplorer}{thiede2023squeak}, semantic similarity~\cite{husain2020codesearchnet}, or their runtime behavior~\cite[sec.~1.8]{thiede2023squeak}~(see \cref{par:background/expsys/tools/symbex}).
+To improve the discoverability of relevant solutions, many approaches have been proposed that provide programmers with suggestions of existing or new code.
+
+One of the most established recommender systems for source code are traditional code completion tools, which are integrated in many programming systems and usually suggest single contextually relevant identifiers while programmers are typing code.
+To make contextually relevant suggestions, they typically incorporate the call graph or usage statistics of software systems~\cite{thiede2022augmenting}, typing and runtime information, or previous changes of programmers~\cite{robbes2008program}.
+Examples of traditional code completion tools include Microsoft IntelliSense in Visual Studio and Visual Studio Code\footnote{\url{https://code.visualstudio.com/docs/editor/intellisense}} as well as the \name{Autocompletion} package for Squeak we used in our prototype.
+Other tools also suggest possible methods for exploratory code browsing~\cite{robillard2005automatic,bruch2006fruit} or even use recommender systems to assist programmers at navigating through complex user interfaces of programming systems~\cite{murphy2012improving}.
+
+Beyond recommending existing source code, contemporary suggestion tools also offer new code that they synthesize with the help of LLMs based on the existing source code context.
+Popular tools of this kind such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and IntelliCode Compose~\cite{svyatkovskiy2020intellicode} provide code completions through two different interfaces:
+either, they insert a \emph{ghost text} in the editor after the existing code typed by programmers, or they display a separate suggestion pane, from where programmers can accept them to insert them in the editor.
+Most programmers use generated code completions to accelerate their coding process and to explore different interfaces and solution approaches~\cite{barka2023grounded}.
+Other code suggestion tools also recommend code changes to fix bugs, adhere with coding styles (often based on the annotations of linters), or continue refactorings that programmers have begun~\cite{vaithilingam2023towards}.

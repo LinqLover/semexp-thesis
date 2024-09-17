@@ -1,0 +1,39 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{High-Level Programming Interfaces}
+\label{sec:related_work/interfaces}
+
+While suggestion tools usually contribute small portions of work to programmers, high-level interfaces provide new means for programmers through that they can explicitly delegate tasks to high-level tools.
+
+\paragraph{Question-based debugging tools}
+\label{par:related_work/interfaces/debugging}
+
+Different tools have been proposed to support programmers during debugging sessions by answering high-level questions~\cite{myers2004natural,deRoover2011soul}.
+For example, the \name{Whyline} approach allows programmers to ask questions about the causes of certain events in their program~\cite{ko2004designing}.
+While these questions are limited to a rigid box of building blocks that can be combined to form queries of predefined patterns, this approach already abstracts away from low-level interactions and queries to the system~\cite{perscheid2014follow}.
+
+\name{ChatDBG} provides an LLM-based agent to answer natural-language questions about an errored program in a debugger~\cite{levin2024chatdbg}.
+It automatically conducts small experiments by inspecting different parts of the stack and executing scripts in the program context to identify the root causes of errors and recommend possible fixes.
+
+\paragraph{Natural-language prototyping tools}
+\label{par:related_work/interfaces/prototyping}
+
+Tools such as \name{Spellburst}~\cite{angert2023spellburst} and \name{OpenUI}\footnote{\url{https://github.com/wandb/openui}} facilitate iterative prototyping of visualizations and user interfaces by allowing progammers to provide natural-language instructions.
+\name{Spellburst} also offers a node-based visual programming interface for managing derivations and alternatives of prototypes.
+
+\paragraph{Natural-language programming interfaces}
+\label{sec:related_work/nlp}
+
+The vision of \emph{natural-language programming} is to enable programmers to write entire programs in natural language and refrain from technical details.
+Past approaches to this vision employ rule-based grammatical heuristics or LLMs to translate natural-language descriptions into code~\cite{mihalcea2006nlp}.
+Different metaphors such as tools\footnote{\name{GPTScript}: \url{https://github.com/gptscript-ai/gptscript}} and operating systems~\cite{mei2024aios} were discussed to structure natural-language directives to scale to larger no-code applications.
+
+\name{Navā} is an extension to traditional programming languages that allows for finding and invoking methods on components through declarative queries by using an extensive ontology of domain-specific, programming-related, and common-sense knowledge~\cite{samimi2014call}.
+While component developers and users are still required to express intentions in a formal language to maintain and access a detailed specification, this approach enables programmers to communicate with software systems in a semantic, interface-agnostic style.
+
+\paragraph{Conversational programming agents}
+\label{par:related_work/interfaces/agents}
+
+Conversational agents such as GitHub Copilot Chat, Tabnine Chat, or Sourcegraph Cody~\cite{hartman2024ai} allow programmers to ask questions across a wide range of topics:
+programmers can chat with them in natural language to explore and understand code bases or to learn about other libraries and general programming practices; ask them to explain and fix errors in their code; or request refactorings or additions to their code~\cite{peter2022designing,kuramitsu2023kogi,stevens2023programmers}.
+However, these agents typically only have access to the static context of a code base and are unable to conduct experiments or research about other packages on their own.
