@@ -7,10 +7,8 @@ In this chapter, we describe our implementation of semantic object interfaces th
 In our prototype, we use OpenAI's LLM \gptfouro\footnote{Used in the version \code{gpt-4o-2024-05-13}.}, which ranks among the state-of-the-art models for our required cabilities such as problem solving and code writing at the time of writing~\cite{openai2024gpt4}.
 
 We implement the agent's policies through prompt engineering and map the system interface to a set of functions that the LLM can call.%
-\footnote{We provide the full conversation including all system prompts and function calls for the example from \cref{fig:application/text/text} in the GitHub repository (\url{https://github.com/hpi-swa-lab/SemanticSqueak/blob/11637e5/assets/Text.conversation}).} % TODO: make sure this figure exists!
+\footnote{We provide the full conversation including all system prompts and function calls for the example from \cref{fig:application/text/text} in \cref{apx:conversation}.} % in the GitHub repository (\url{https://github.com/hpi-swa-lab/SemanticSqueak/blob/11637e5/assets/Text.conversation})
 Finally, we optimize the agent's performance for generating semantic code completions.
-
-% todo: somewhere provide full prompt/conversation(s) (appendix?)
 
 \thimport{01_prompts}
 \thimport{02_interfaces}
