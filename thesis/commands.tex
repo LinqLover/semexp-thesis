@@ -308,12 +308,116 @@
 % Automatic reference labels (\cref)
 \usepackage[nameinlink]{cleveref}
 \crefalias{subappendix}{section}
+
 % ensure footnote references include chapter number
-\labelformat{footnote}{\thechapter.#1}
+%\labelformat{footnote}{\thechapter.#1}
+% In fact, this is more complicated because we want different formats for \cref and \footref.
+% CREDITS: https://tex.stackexchange.com/a/726697/221054 and https://tex.stackexchange.com/a/351559/221054
+% (1) Define separate labels + references for footnotes
+\makeatletter
+\newcommand{\footnotelabel}[1]% #1 = unmodified label name
+{\bgroup
+	\edef\@currentlabelname{\thechapter}%
+	\label{#1}%
+\egroup}
+
+\newcommand{\footnoteref}[1]{\hyperlink{\getrefbykeydefault{#1}{anchor}{Doc Start}}%
+	{footnote \nameref*{#1}.\ref*{#1}}} % simulates cleveref + nameinlink
+\makeatother
+
+% (2) Patch \label and \cref for footnotes
+% (2.1) Allow checking the type of a label
+\usepackage[hyperref,counter]{zref} % Using the counter mechanism behind `nameref`
+
+\makeatletter
+\AtBeginDocument{%
+	\let\latex@@label\label%
+
+	\renewcommand{\label}[1]{%
+		\zref@label{#1}%
+		\latex@@label{#1}%
+	}
+	% Get the underlying counter type
+	\newcommand{\extractlabelcounter}[1]{%
+		\zref@ifrefundefined{#1}{%
+		???????}{%
+		\zref@extract{#1}{counter}%
+		}%
+	}
+	% Get the anchor name for hyperref or nameref -> has a `*` inside if it is unnumbered
+	\newcommand{\extractlabelanchor}[1]{%
+		\zref@ifrefundefined{#1}{%
+		???????}{%
+		\zref@extract{#1}{anchor}%
+		}%
+	}
+}
+
+% Check if there's a `*` inside of the anchor name
+\ExplSyntaxOn
+\cs_new:Npn \checkifnumbered#1#2#3{%
+  \tl_set:Nx \l_tmpa_tl {\extractlabelanchor{#1}}
+  \tl_if_in:NnTF \l_tmpa_tl {*} {#2} {#3}
+}
+\ExplSyntaxOff
+\makeatother
+
+\newcommand{\checklabeltype}[4]{%
+	\ifnum0=\pdfstrcmp{\extractlabelcounter{#1}}{#2}
+	#3%
+	\else
+	#4%
+	\fi
+}
+
+% (2.2) Do the patches
+\RequirePackage{xstring}
+\AtBeginDocument{%
+	\let\oldlabel\label
+	\renewcommand\label[1]{%
+		% if #1 begins with "fn:", use \footnotelabel, else use \oldlabel
+		\IfBeginWith{#1}{fn:}{%
+			\let\newlabel\label%
+			\let\label\oldlabel%
+			\footnotelabel{#1}%
+			\let\label\newlabel%
+		}{\oldlabel{#1}}}
+	\let\oldcref\cref
+	\renewcommand\cref[1]{%
+	    \checklabeltype{#1}{footnote}{\footnoteref{#1}}{\oldcref{#1}}}
+}
 
 
 % absolute page counter
 \usepackage{zref-abspage}
+
+
+% SI numbers
+\usepackage{siunitx}
+% no space for percentages
+\DeclareSIUnit[quantity-product = ]\percent{\char`\%}
+% dollar units
+\newcommand{\USD}[1]{\${\num{#1}}}
+\DeclareSIUnit{\cent}{\textcent}
+
+% Redefine \qty and \num to use text mode unless in math mode (https://tex.stackexchange.com/a/726242/221054)
+\usepackage{letltxmacro}
+\LetLtxMacro\origqty\qty
+\renewcommand\qty[3][]{%
+  \ifmmode
+    \origqty[#1]{#2}{#3}%
+  \else
+    \origqty[mode=text,#1]{#2}{#3}%
+  \fi
+}
+\LetLtxMacro\orignum\num
+\renewcommand\num[2][]{%
+  \ifmmode
+    \orignum[#1]{#2}%
+  \else
+    \orignum[mode=text,#1]{#2}%
+  \fi
+}
 
 
 % biblatex: separator between multiple citations: change to semicolon only for \cites
@@ -322,6 +426,7 @@
 
 % yet another table package (but a pretty nice one)
 \usepackage{tabularray}
+\UseTblrLibrary{siunitx}
 % for subfloats in tblrs
 \UseTblrLibrary{counter,varwidth}
 
@@ -330,6 +435,7 @@
 \newcommand{\CircledInverted}[2][]{%
     \CircledParamOpts{fill color=black, inner color=white, outer color=none, #1}{1}{#2}%
 }
+
 
 % rainbow text (based on the gradient-text package)
 % CREDITS: https://tex.stackexchange.com/a/701906/221054 (edited)

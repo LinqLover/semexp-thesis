@@ -1,0 +1,21 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\section{Ethical Considerations of Semantic Technologies}
+\label{sec:discussion/ethics}
+
+We are concerned about several ethical issues regarding the use of (cloud-based) language models in exploratory programming systems.
+These include the concentration of economic and political power, high energy intake and water consumption (a typical question to our exploratory programming agent might use \qty{0.05}{kWh} and between \qty{50}{ml} and \qty{750}{ml} water~\cite{li2023making}\footnote{%
+	Actual numbers might vary because the data in \cite{li2023making} refers to the older model \gptthree, depends on the region of compute clusters, and relies on ambigue estimates by Microsoft.
+}), and the training of models based on the intellectual property of unconsulted content creators and labor of inadequately provided click workers\footnote{%
+	Billy Perrigo.
+	2023-01-18.
+	\emph{OpenAI Used Kenyan Workers on Less Than \$2 per Hour to Make ChatGPT Less Toxic.}
+	Time.
+	%\url{https://time.com/6247678/openai-chatgpt-kenya-workers/}
+	\url{https://web.archive.org/web/20240704034409/https://time.com/6247678/openai-chatgpt-kenya-workers/}%
+}.
+Language models can also exhibit potentially unsafe biases that are poorly understood and could impact the accessibility, internationalization, or safety of data analyses or recommended solutions~\cite{openai2024gpt4}.
+
+Before adopting semantic programming tools in practice, we advise to consider these implications and evaluate possible measures.
+For example, tool developers should favor language models that were trained on fair and open-source datasets, run them locally if possible (e.g., in the case of small language models), or host them in trusted and ecological compute clusters.
+More generally, we emphasize the need for future research on explainable and efficient language models, evaluation and mitigation of biases, and political regulations regarding training and operation of language models.

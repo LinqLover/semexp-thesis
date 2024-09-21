@@ -9,11 +9,11 @@ In the following, we describe different strategies for finding similar artifacts
 \label{sec:suggestions/search/similar}
 
 A central strategy for similarity search in the suggestion engine is \emph{semantic search using document embeddings}~\cite{lewis2020retrieval,mikolov2013efficient}.
-For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts.}, search a vector database of all other available artifact (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
+For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts with a reduced dimension size of 256~(see \cref{sec:discussion/performance/memory}).}, search a vector database of all other available artifact (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
 Thus, the reconstruction of programmers' intentions in semantic search manifests as the semantic embeddings of their experimental activities.
 
 However, embedding-based search is only applicable to a limited extent:
-first, computing and storing embeddings involves noticeable costs in terms of time, storage, and"/or financial expenses~(see \cref{sec:discussion/somewhere}).
+first, computing and storing embeddings involves noticeable costs in terms of time, storage, and financial expenses~(see \cref{sec:discussion/performance}).
 Second, the embedding search might be too sensitive to the format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
 Similarly, when queried with an unfinished draft of a method or script, embedding-based search will primarily find artifacts of a similar length such as stub methods rather than fully implemented methods.
 
@@ -44,7 +44,7 @@ However, they can be simpler to calculate, especially in the context of ranking 
 
 In our prototype, we use TF-IDF search for methods based on the selectors and references to classes and variables in a method retrieved from its bytecode.
 We apply a binary weighting scheme for term frequencies (simplifying their definition to $\text{tf}(t, d) = 1_{\{d(t) > 0\}}$) and exponentially weight inverse document frequencies with a power of $4$.
-This approach yields a satisfying quality of results and a satisfying performance of search (typically 250 milliseconds for 25 MB of source code) even without maintaining an index.
+This approach yields a satisfying quality of results and a satisfying performance of search (typically 250 milliseconds for \qty{25}{MB} of source code) even without maintaining an index.
 
 \subsection{Correlation Search for Code Artifacts}
 \label{sec:suggestions/search/correlations}

@@ -1,0 +1,36 @@
+% !TEX root = ../../../semexp-thesis.tex
+
+\sisetup{
+	table-alignment-mode = format,
+}
+
+\begin{tblr}{
+	colspec = {
+		Q[0.2em,l]
+		l
+		X[-1,si={table-format=2.2{*},table-alignment-mode=format,table-number-alignment=right}] @{ }c@{ } X[-1,si={table-format=2.2{*},table-alignment-mode=format,table-number-alignment=left}]
+		X[-1,si={table-format={*}2.4,table-align-text-before=false,table-alignment-mode=format,table-number-alignment=right}] @{ }c@{ } X[-1,si={table-format={*}2.4,table-align-text-before=false,table-alignment-mode=format,table-number-alignment=left}]
+		X[-1,si={table-format={*}2,table-align-text-before=false,table-alignment-mode=format,table-number-alignment=right}] @{ }c@{ } X[-1,si={table-format={*}3.2,table-align-text-before=false,table-alignment-mode=format,table-number-alignment=left}]
+	},
+	column{1,2} =	{ font=\bfseries },
+	row{1} = 	{ font=\bfseries },
+	width =	\dimexpr\textwidth-2pt\relax, % avoid overfull hbox
+	rowsep =	1pt,
+	measure = 	vbox, % required for linebreaks in header columns when the table is centered
+}
+	\hline
+	%
+	\SetCell[c=2]{l,m} Semantic interface	&	&	\SetCell[c=3]{c,m}{{{Response time}}}	&	&	& \SetCell[c=3]{c,m}{{{Monetary cost\\per query}}}	&	&	& \SetCell[c=3]{c,m}{{{Monetary cost\\per hour}}}	\\
+	\hline
+	\SetCell[c=2]{l} Semantic suggestions	&	& 0.5 s	& --	& 0.9 s	& \$0.0001	& --	& \$0.001	&	&	& \$0.08	\\
+	%&	Similarity search	& 0.5 s	& --	& 0.9 s	& \$0.0001	& --	& \$0.001	&	&	& \$0.08	\\
+	%&	TF-IDF search	& 0.1 s	& --	& 0.9 s	& 	& -	&	&	-	&	\\
+	\SetCell[c=2]{l} Semantic completions	\\
+	&	Stage-1 generations	& 10 s	& --	& 15 s	&	&	& \$0.15	&	&	& \$18	\\
+	&	Stage-2 generations	& 1.1 s	& --	& 1.3 s	&	&	& \$0.0005	&	&	& \$1.8	\\
+	&	\cline[dashed]{2-11}Total	& 11 s	& --	& 16.3 s	&	&	&	&	&	& \$20	\\
+	\SetCell[c=2]{l} Semantic conversations	\\
+	&	{Simple to moderate\\tasks}	& 2 s	& --	& 4 s	& \$0.1	& --	& \$0.5	& \$1	& --	& \$60	\\
+	&	Complex tasks	& 5 s	& --	& 10 s	& \$0.5	& --	& \$5	& \$5	& --	& \$30	\\
+	\hline
+\end{tblr}
