@@ -46,6 +46,8 @@ Our framework comprises three fundamental actors:
 	Thus, the programmer does not need to repeatedly explicate their intentions in every question but grows a shared vocabulary and knowledge with the agent as the conversation evolves.
 \end{description}
 
+\subsection*{Answering Questions through Automated Experiments}
+
 Our framework allows programmers to ask arbitrary questions about objects in a system that can reference two different aspects:
 
 \begin{description}[noextralabelsep]
@@ -92,7 +94,6 @@ Analogously, every message send to a previously unknown system is preceded by br
 	The question was answered and the programmer can continue by asking another question to the agent or performing another exploratory activity.
 \end{example}
 
-% todo: discuss again whether this should go into approach 3.2.3 instead. pro there: it is actually pretty conceptual. pro here: we can include more details without interrupting flow? we do not have to rewrite/shorten it?
 \subsection*{Integrating Semantic Object Interfaces into Exploratory Programming Systems}
 \label{sec:design/agent/interfaces}
 
@@ -103,10 +104,18 @@ We propose to extend these interfaces with semantic capabilities: object inspect
 \paragraph{A conversation mode for object inspection tools}
 \label{par:design/agent/interfaces/inspector}
 
-% TODO: should we also include inspector sketch from paper here?
+\begin{figure}
+	\centering
+	\includegraphics[height=10\baselineskip]{03_agent/inspector.png}
+	\caption[Possible integration of a conversational semantic interface into a traditional object inspection tool.]{
+		Possible integration of a conversational semantic interface into a traditional object inspection tool.
+		Programmers can ask conceptual questions about objects in natural languages besides inspecting their internal state.
+	}
+	\label{fig:design/agent/interfaces/inspector}
+\end{figure}
 
 Inspection tools allow programmers to explore and manipulate the internal state of objects through a list of variables or properties~(see \cref{par:background/expsys/tools/inspection}).
-We propose a new \emph{conversation mode} in inspection tools that allow programmers to ask semantic questions about an object.
+We propose a new \emph{conversation mode} in inspection tools that allow programmers to ask semantic questions about an object~(\cref{fig:design/agent/interfaces/inspector}).
 Thus, in addition to the usually technical state inspection, they can then also chat with an object through the exploratory programming agent.
 
 Through the chat interface, programmers can express questions in natural language without needing to know the vocabulary and protocols of the object's domain.
