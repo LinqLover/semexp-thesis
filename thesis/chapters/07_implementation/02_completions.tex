@@ -19,8 +19,10 @@ For the user interface of completions, we use the \name{Autocompletion} package\
 We contribute two new types of completion entries: \emph{correlated identifiers} and \emph{generated expressions}.
 
 First, we provide regular selectors and variable names based on correlated suggestion artifacts from the suggestion space and merge them with traditional \name{Autocompletion} entries.
-This enhances the original ranking of entries, which combines alphabetical order and most recently used information, with their semantic relevance.
+This considers the original ranking of entries, which was only based on alphabetical order and most recently used date, and ehances it with their semantic relevance.
 We hook into the presentation of entries to enrich suggested identifiers with usage information mined from their precending similar code artifacts as well as related documentation.
 
 Second, we include contextualized generated expressions into the completion menu~(see \cref{sec:suggestions/generation}).
 Analogously to the suggestion space, semantic completions are computed asynchronously in the background to avoid noticable delays in the user interface.
+
+To generate a preview of the result of generated expressions, we run them in the editor context inside an isolated sandbox of \name{SimulationStudio} and include the results in the presentation of each entry.
