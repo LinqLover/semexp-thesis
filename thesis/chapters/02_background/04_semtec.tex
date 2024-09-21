@@ -116,7 +116,7 @@ Beyond simple text completion, LLMs can also be trained to adhere to certain tex
 	\item[Autonomous agents] are instructed to generate \emph{inner monologues} that mimic structured thinking, resulting in basic capabilities for self-organized problem solving such as a step-by-step analysis~\cite{yang2023autogpt}.
 
 	Additionally, they can be enabled via pre-training or instructions to access external systems through \emph{function calls}: an LLM emits a special output sequence that requests the invocation of a system function with a set of arguments, a handler executes this invocation and passes back the result with the text to the LLM, and the LLM continues the generation based on the result~\cite{hao2023toolkengpt,mialon2023augmented,yang2023autogpt}.
-	For instance, when presented with a mathematical word problem, GPT-4 can break down the task, plan a solution approach, and source out primitive arithmetic tasks to an external calculator function~\cite{openai2024gpt4}.
+	For instance, when presented with a mathematical word problem, \gptfouro can break down the task, plan a solution approach, and source out primitive arithmetic tasks to an external calculator function~\cite{openai2024gpt4}.
 
 	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} and \name{ChatDev} orchestrate multiple agents that cooperate intending to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
 \end{description}
@@ -135,7 +135,7 @@ To mitigate these problems in parts, several techniques have been established:
 	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or in order to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
 	This often includes semantic retrieval methods~(see \cref{sec:background/semtec/retrieval}).
 
-	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a GPT-4 model, and instructs it to answer the query based on the provided information\footnote{
+	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a \gptfouro model, and instructs it to answer the query based on the provided information\footnote{
 		Microsoft. 2023-11-21. \emph{How Copilot Works.}
 		URL:
 		%\url{https://www.microsoft.com/en-us/bing/do-more-with-ai/how-bing-chat-works} (accessed 2024-05-29)

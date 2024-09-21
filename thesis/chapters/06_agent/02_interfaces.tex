@@ -26,9 +26,9 @@ In our prototype, we generally choose a medium-to-coarse-grained function design
 
 \paragraph{Evaluating code}
 Unspecialized LLMs are not always proficient in particular programming languages:
-for example, when writing Smalltalk code, GPT-4o often produces syntax errors and shows insufficient knowledge of standard libraries such as the \code{Collections} package.
+for example, when writing Smalltalk code, \gptfouro often produces syntax errors and shows insufficient knowledge of standard libraries such as the \code{Collections} package.
 To support the model in correcting its own errors, we extend a small number of built-in error messages of a system with practical suggestions based on typical faults of the model~\cite{traver2010compiler}:
-for example, because GPT-4o often forgets necessary brackets when chaining message sends, we extend all \code{MessageNotUnderstood} errors from the system with an explaining comment and provide an example of correcting an incorrect message chain, which the model then considers in the next attempt.
+for example, because \gptfouro often forgets necessary brackets when chaining message sends, we extend all \code{MessageNotUnderstood} errors from the system with an explaining comment and provide an example of correcting an incorrect message chain, which the model then considers in the next attempt.
 
 We reduce the dependency of the agent on language proficiency by exposing most interfaces through dedicated functions instead of instructing the model to access them through evaluating reflection code.
 For example, while it could be elegant to have the agent retrieve the protocols of a class by calling \code{eval("(Smalltalk at: aClassName) organization categories")}\footnote{A similar technique is used in the current version of ChatGPT Plus when browsing long documents.}, we offer a dedicated \code{browse\-Class()} function for this purpose instead~(\cref{tab:agent/functions/interface}).
