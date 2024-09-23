@@ -217,7 +217,7 @@
 	\\\phantom{....}\llap{\raisebox{0.2ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\hspace*{2pt}}}}%
 }
 
-% example box
+% boxes
 \newlength{\globalparindent}
 \setlength{\globalparindent}{\parindent}
 \usepackage[most]{tcolorbox}
@@ -246,16 +246,30 @@
 	before skip=2\bigskipamount,
 	after skip=\bigskipamount,
 }
-\newenvironment{example}{%
+\usepackage{needspace}
+% optional argument: number of lines to hold together before page break
+\newenvironment{example}[1][3]{%
+	\ifnum#1>0
+		\newdimen\bigskipmax
+		\bigskipmax=\dimexpr
+			\bigskipamount + \gluestretch\bigskipamount % maximum is required to avoid being outsmarted by glues
+		\relax
+		\needspace{\dimexpr
+			\bigskipmax % before skip
+			+ \globalparindent % before upper
+			+ \baselineskip*#1 % content
+			+ \globalparindent % after upper
+		\relax}
+	\fi%
 	\smallbox
 	\paragraph{Example.}
 	\setlist[1]{leftmargin=2em}
 }{
 	\endsmallbox%
 }
-\newenvironment{summary}{%
+\newenvironment{summary}{% TODO: rename to chaptersummary
 	\largebox
-	\section*{Summary}\vspace{-1em}
+	\section*{Chapter Summary}\vspace{-1em}
 	\setlist[1]{leftmargin=2em}
 }{%
 	\endlargebox%
