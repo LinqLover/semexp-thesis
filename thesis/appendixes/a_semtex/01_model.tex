@@ -13,21 +13,22 @@ This class extends the responsibilities of a regular collection for containing a
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{a_semtex/model/search.png}
-	\caption[TODO]{
-		TODO
+	\includegraphics[width=\textwidth]{01_model/search.png}
+	\caption[The general object model for semantic search in \semtex.]{
+		The general object model for semantic search in \semtex (UML class diagram with Smalltalk-styled method signatures; default multiplicities are $1$; dashed arrows indicate the return class of message sends).
+		Programmers can use the entry class \code{SemanticCorpus} (\bold{\textcolor{red}{red}}) to index domain objects with an embedding model and search, rank, or cluster them.
 	}
 	\label{fig:semtex/model/search}
 \end{figure}
 
 For each object, the corpus computes and stores an \code{embedding} vector that is represented by a \code{FloatArray}, allowing for efficient comparison, memory consumption, and serialization.
-To compute embeddings, the corpus is provided with a \code{SemanticEmbeddingModel} (which may be implemented by different providers, see \cref{sec:semtex/providers}) and a \code{SemanticEmbeddingConfig} for controlling the embedding properties such as the length of embedding vectors.
+To compute embeddings, the corpus is provided with a \code{EmbeddingModel} (which may be implemented by different providers, see \cref{sec:semtex/providers}) and a \code{EmbeddingConfig} for controlling the embedding properties such as the length of embedding vectors.
 To embed non-textual object elements, the corpus can be provided with a \emph{text conversion} function through composition or specialization (e.g., by registering an evaluable block or overriding a method)\footnote{Currently accessible through \code{SemanticPluggableCorpus}.}.
 
 The semantic corpus provides methods for searching objects that are \emph{similar} to a reference object or to a natural-language \emph{query} string.
-For each search, it answers a \code{SemanticSearchResultSet}, which contains a \emph{relevance score} for each object in the corpus\footnote{At the time of writing, these classes have not yet been extracted from the \code{SemanticCorpus} in our public implementation.}.
-A result set can be \emph{ranked} into a \code{SemanticSearchResultRanking} of a finite length using the different ranking methods discussed in \cref{sec:suggestions/ranking}, such as top-k selection and probabilistic sampling.
-Additionally, the semantic corpus also supports cluster-based selection of representative objects.
+For each search, it answers a \code{SearchResultSet}, which contains a \emph{relevance score} for each object in the corpus\footnote{At the time of writing, these classes have not yet been extracted from the \code{SemanticCorpus} in our public implementation.}.
+A result set can be \emph{ranked} into a \code{SearchResultRanking} of a finite length using the different ranking methods discussed in \cref{sec:suggestions/ranking}, such as top-k selection and probabilistic sampling.
+Additionally, the semantic corpus also supports cluster-based selection of representative objects without a reference object.
 
 %\begin{example}
 %	A programmer wants to find classes in the system that implement means for semantic search.
@@ -39,7 +40,7 @@ Additionally, the semantic corpus also supports cluster-based selection of repre
 %		\null\qquad	as: SemanticCorpus. \newline
 %		results := corpus findObjectsSimilarToQuery: \textquotesingle semantic search database\textquotesingle. \newline
 %		ranking := results top: 5. \newline
-%		ranking \printit{a SemanticSearchResultRanking(\allowbreak\#SemanticCorpus->0.45 \#SemanticAgent->0.433 \#SemanticAgentParser->0.412 \#WordNet->0.412 \#SemanticMathAgent->0.402)}
+%		ranking \printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.45 \#SemanticAgent->0.433 \#SemanticAgentParser->0.412 \#WordNet->0.412 \#SemanticMathAgent->0.402)}
 %		% todo: introduce printit notation anywhere?
 %	\end{multicode}
 %
@@ -52,11 +53,11 @@ Additionally, the semantic corpus also supports cluster-based selection of repre
 %		\t	content: \#comment \n
 %		\t	findTopObjects: 5 \n
 %		\t	similarToQuery: \textquotesingle semantic search database\textquotesingle{} %\n
-%		\printit{a SemanticSearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
+%		\printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
 %	\end{multicode}
 %\end{example}
 
-\begin{example}
+\begin{example}[5]
 	A programmer wants to find classes in the system that implement means for semantic search.
 	For this, they can create a semantic corpus of all classes based on their names and comments, perform a search, and rank the results:
 
@@ -64,36 +65,39 @@ Additionally, the semantic corpus also supports cluster-based selection of repre
 		corpus := self systemNavigation allClasses \newline
 		\null\qquad	asSemanticCorpusWithTitle: \#name \newline
 		\null\qquad	content: \#comment. \newline
-		results := corpus findObjectsSimilarToQuery: \textquotesingle semantic search database\textquotesingle. \newline
+		results := corpus findObjectsForQuery: \textquotesingle semantic search database\textquotesingle. \newline
 		ranking := results top: 5. \newline
-		ranking \printit{a SemanticSearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
+		ranking \printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
 		% todo: introduce printit notation anywhere?
 	\end{multicode}
 \end{example}
+
+\FloatBarrier
 
 \subsection{Conversations}
 \label{sec:semtex/model/conversations}
 
 To support text generation and machine reasoning, we integrate different conversational LLMs into \semtex.
 For this, the framework defines a \code{SemanticConversation} class~(\cref{fig:semtex/model/conversation}).
-A conversation contains a number of \code{SemanticMessage}s each of with is specified with a \code{role} (either system, user, or assistant) and a \code{text}.
+A conversation consists of a sequence of \code{Message}s each of with is specified with a \code{role} (either system, user, or assistant) and a \code{text}.
 A programmer can set up a conversation with a sequence of initial messages, such as a system message for providing instructions and a user message for the first question of the user, and ask the conversation to \code{complete} itself, which will request the (stateless) LLM and append a new generated assistant message to the conversation.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{a_semtex/model/conversation.png}
-	\caption[TODO]{
-		TODO
+	\includegraphics[width=\textwidth]{01_model/conversation.png}
+	\caption[The general object model for conversational agents in \semtex.]{
+		The general object model for conversational agents in \semtex (UML class diagram with same semantics as before).
+		Programmers can create a \code{SemanticConversation} (\bold{\textcolor{red}{red}}) with a set of messages and request an answer from a conversation model or implement an \code{Agent} class (\bold{\textcolor{red}{red}}) and declare callable functions via pragmas on it.
 	}
 	\label{fig:semtex/model/conversation}
 \end{figure}
 
-To allow for the construction of agents, the conversation can also be equipped with a \code{SemanticFunctionSpec} that provides one or multiple \code{SemanticFunction}s.
+To allow for the construction of agents, the conversation can also be equipped with a \code{FunctionSpec} that provides one or multiple \code{Function}s.
 Each function has a name, can specify an optional list of arguments and their constraints as well as a description, and contains an action object (e.g., a block).
-When the LLM is invoked, it can issue one or multiple \code{SemanticFunctionCall}s based on the function specification as part of the generated assistant message.
-The conversation automatically resolves these function calls by \code{call}ing each issued function with the generated arguments, storing the result in a new \code{SemanticFunctionMessage}, and providing all function messages to the LLM in another request, which uses the results for generating the next assistant message.
+When the LLM is invoked, it can issue one or multiple \code{FunctionCall}s based on the function specification as part of the generated assistant message.
+The conversation automatically resolves these function calls by \code{call}ing each issued function with the generated arguments, storing the result in a new \code{FunctionMessage}, and providing all function messages to the LLM in another request, which uses the results for generating the next assistant message.
 
-Analogously to semantic corpora, each conversation is configured through a \code{SemanticConversationModel} reference and a \code{SemanticConversationConfig} for controlling the generation behavior through parameters such as the model temperature and the maximum number of generated tokens.
+Analogously to semantic corpora, each conversation is configured through a \code{ConversationModel} reference and a \code{ConversationConfig} for controlling the generation behavior through parameters such as the model temperature and the maximum number of tokens to generate.
 
 \begin{example}
 	A programmer wants to create a chatbot that can retrieve the current time and date.
@@ -110,8 +114,8 @@ Analogously to semantic corpora, each conversation is configured through a \code
 \end{example}
 
 Additionally, \semtex supports the construction of class-based agents by providing the base class \code{SemanticAgent} which users can specialize to provide custom instructions and functions.
-The \code{SemanticAgent} class provides a custom DSL (domain-specific language) for specifying a function signatures with its arguments, their constraints, and their descriptions through method pragmas.
-The agent class offers support for automatically dispatching function calls and handling errors during function calling.
+The \code{SemanticAgent} class provides a custom DSL (domain-specific language) for specifying function signatures with its arguments, their constraints, and their descriptions through method pragmas.
+The agent class will automatically dispatch function calls and handle errors from called functions.
 
 \begin{example}
 	A programmer wants to build a chatbot that can access the running Squeak image to assist the user.
@@ -124,12 +128,12 @@ The agent class offers support for automatically dispatching function calls and 
 		\t	poolDictionaries: \textquotesingle\textquotesingle \n
 		\t	category: \textquotesingle SemanticText-Model-Agents\textquotesingle \n
 		\n
-		SemanticAgent>>initializeConversation: aConversation \n
+		SemanticSqueakAgent>>initializeConversation: aConversation \n
 		\t	super initializeConversation: aConversation. \n
 		\t	aConversation addSystemMessage: \textquotesingle You are a Squeak"/Smalltalk assistant.\textquotesingle. \n
 		%\t	aConversation addAssistantMessage: \textquotesingle Hi, how can I help you?\textquotesingle. \n
 		\n
-		SemanticAgent>>eval: aString \n
+		SemanticSqueakAgent>>eval: aString \n
 		\t	\textquotedbl Evaluate a Smalltalk expression in the running Squeak image.\textquotedbl \n
 		\t	<function: eval( \n
 		\t	\t	expression: string \textquotedbl %examples: \n
@@ -144,7 +148,7 @@ The agent class offers support for automatically dispatching function calls and 
 	Finally, the programmer invokes the agent:
 
 	\begin{multicode}
-		SemanticMathAgent makeNewConversation \n
+		SemanticSqueakAgent makeNewConversation \n
 		\t	addUserMessage: \textquotesingle how many windows are open\textquotesingle; \n
 		\t	getAssistantReply \printit{\textquotesingle You currently have 138 open windows in your Squeak environment.\textquotesingle}
 	\end{multicode}
