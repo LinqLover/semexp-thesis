@@ -30,33 +30,6 @@ For each search, it answers a \code{SearchResultSet}, which contains a \emph{rel
 A result set can be \emph{ranked} into a \code{SearchResultRanking} of a finite length using the different ranking methods discussed in \cref{sec:suggestions/ranking}, such as top-k selection and probabilistic sampling.
 Additionally, the semantic corpus also supports cluster-based selection of representative objects without a reference object.
 
-%\begin{example}
-%	A programmer wants to find classes in the system that implement means for semantic search.
-%	For this, they can semantically search all classes based on their names:
-%
-%	\begin{multicode}
-%		corpus := self systemNavigation allClasses \newline
-%		\null\qquad	collect: \#name \newline
-%		\null\qquad	as: SemanticCorpus. \newline
-%		results := corpus findObjectsSimilarToQuery: \textquotesingle semantic search database\textquotesingle. \newline
-%		ranking := results top: 5. \newline
-%		ranking \printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.45 \#SemanticAgent->0.433 \#SemanticAgentParser->0.412 \#WordNet->0.412 \#SemanticMathAgent->0.402)}
-%		% todo: introduce printit notation anywhere?
-%	\end{multicode}
-%
-%	To further improve the quality of the search results, the programmer can also include the comment of each class into the embeddings.
-%	For this, they use some additional convenience methods for converting domain objects into text and computing a ranking directly:
-%
-%	\begin{multicode}
-%		self systemNavigation \n
-%		\t	semanticWithTitle: \#name \n
-%		\t	content: \#comment \n
-%		\t	findTopObjects: 5 \n
-%		\t	similarToQuery: \textquotesingle semantic search database\textquotesingle{} %\n
-%		\printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
-%	\end{multicode}
-%\end{example}
-
 \begin{example}[5]
 	A programmer wants to find classes in the system that implement means for semantic search.
 	For this, they can create a semantic corpus of all classes based on their names and comments, perform a search, and rank the results:
@@ -67,8 +40,7 @@ Additionally, the semantic corpus also supports cluster-based selection of repre
 		\null\qquad	content: \#comment. \newline
 		results := corpus findObjectsForQuery: \textquotesingle semantic search database\textquotesingle. \newline
 		ranking := results top: 5. \newline
-		ranking \printit{a SearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
-		% todo: introduce printit notation anywhere?
+		ranking \printit{\footnote{We use the notation \code{<expr> \printit{<result>}} to indicate a \emph{print-it} evaluation~\cite[p. 13]{thiede2023squeak}.} a SearchResultRanking(\allowbreak\#SemanticCorpus->0.533 \#SemanticHelpSearchTopic->0.442 \#SemanticText->0.385 \#SemanticAgentParser->0.364 \#SemanticMathAgent->0.338)}
 	\end{multicode}
 \end{example}
 
@@ -84,7 +56,7 @@ A programmer can set up a conversation with a sequence of initial messages, such
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{01_model/conversation.png}
+	\includegraphics[width=\textwidth]{01_model/conversation.png} % TODO: complete -> getAssistantMessage
 	\caption[The general object model for conversational agents in \semtex.]{
 		The general object model for conversational agents in \semtex (UML class diagram with same semantics as before).
 		Programmers can create a \code{SemanticConversation} (\bold{\textcolor{red}{red}}) with a set of messages and request an answer from a conversation model or implement an \code{Agent} class (\bold{\textcolor{red}{red}}) and declare callable functions via pragmas on it.
@@ -109,7 +81,7 @@ Analogously to semantic corpora, each conversation is configured through a \code
 		\t	\t	config temperature: 0.2]; \n
 		\t	addFunction: \#getTime action: [Time now]; \n
 		\t	addUserMessage: \textquotesingle What time is it?\textquotesingle; \n
-		\t	getAssistantMessage \printit{\textquotesingle The current time is 13:59.\textquotesingle}
+		\t	getAssistantReply \printit{\textquotesingle The current time is 13:59.\textquotesingle}
 	\end{multicode}
 \end{example}
 
