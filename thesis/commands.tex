@@ -72,6 +72,13 @@
 	\raisebox{-.5ex}{%
 		\setlength{\tabcolsep}{.2pt}%
 		*}}}
+% variable spacing around asterisms
+\let\OldParSep\ParSep
+\renewcommand*\ParSep{%
+	\vspace{0em minus 1em}%
+	\OldParSep%
+	\vspace{0em minus 1em}%
+}
 
 % subparagraphs: italic instead of bold
 %\let\originalsubparagraph
