@@ -286,6 +286,13 @@
 % enumitem
 % ... have them look nicer
 \AtBeginDocument{%
+	\setlist{
+		% copied over from swathesis
+		noitemsep,topsep=.5\baselineskip,leftmargin=1em,partopsep=.5\baselineskip,
+		listparindent=1em, % visible hanging indent for new paragraphs inside items
+	}
+	% copied over from swathesis
+	\setlist[1]{leftmargin=0pt}
 	\setlist[description]{
 		% copied over from swathesis
 		noitemsep,font=\normalfont\scshape,leftmargin=\parindent,topsep=.5\baselineskip,partopsep=.5\baselineskip,

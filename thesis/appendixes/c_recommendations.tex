@@ -1,0 +1,47 @@
+% !TEX root = ../../semexp-thesis.tex
+
+\chapter{Recommendations for Tool Developers}
+\label{apx:recommendations}
+
+Here, we provide practical recommendations for tool developers who consider integrating semantic technologies or AI into programming systems.
+
+\begin{genericbox}{Remark}
+	Note that this collection is based solely on our subjective experiences and challenges from this work.
+	It does not aim to be exhaustive, align with best practices, or rely on significant evidence from other work.
+\end{genericbox}
+
+\begin{enumerate}
+	\item \bold{Consider the limited accuracy of semantic technologies.}
+	Before designing a new tool or interaction, prototype critical invocations of language models in a playground and approximate a minimum viable configuration there (such as input data, prompts, or hyperparameters).
+
+	Make sure to evaluate whether model responses are sufficiently reasonable, correct, and useful for the intended applications.
+	Communicate the risk of hallucinations to programmers.
+
+	\item \bold{Design means for bidirectional cooperation.}
+	Share comprehensive context and artifacts of programmers with semantic technologies to enable conceptual support by the system.
+	Allow programmers to intervene in the work of semantic agents by letting them inspect their internal steps (such as inner monologue, function calling, or selected context), provide feedback or request changes, and choose between multiple options.
+
+	Explaining the behavior of large language models at different levels may be challenging, but it can benefit both programmers (for validating responses and building up on them) and tool developers (for evaluating and debugging semantic applications).
+
+	\item \bold{Display the progress and cost of semantic operations.}
+	Show progress bars or stream responses from LLMs continuously to reduce visible latencies.
+	Provide easy access to monitor or predict the financial cost of semantic tools, or implement rate limits to avoid fear of unforeseen expenses.
+
+	\item \bold{Optimize semantic applications.}
+	Favor smaller, more efficient, and open-source language models when possible.
+	Systematically tune LLM prompts and preprocess documents before embedding them to improve structure and reduce size.
+	Consider fine-tuning language models for specific use cases.
+
+	\item \bold{Collect data for training and evaluation early on.}
+	Logging all requests and responses from language models or semantic tools even in an early stage of prototypes can create a valuable asset for discussing prompt-tuning decisions, avoiding model drift, or fine-tuning models later.
+
+	\item \bold{Pay attention to ethical and legal concerns.}
+	Bear in mind disadvantages of large language models such as unsafe biases, high resource consumption, and unfair practices along their supply chain, and favor responsible and sustainable options.
+	Respect applicable laws and liabilities such as privacy, intellectual property, and accountability by requiring programmers to opt in for semantic features, informing them about data collection, transfer, and usage and their rights, and anonymizing any collected data.
+
+	In the practice of many programming tools, tool developers can avoid most legal responsibilities by requiring programmers to build or run applications from source and bring their own API keys.
+
+	\item \bold{Consider traditional implementations.}
+	While ideating and prototyping new tools or features, see semantic technologies as a placeholder for any type of implementation.
+	Discuss whether required functionalities can be best served by traditional algorithms and heuristics (such as parsers or decision trees), human interactions (e.g., by requesting brief annotations from programmers), or semantic technologies (when complex reasoning, creativity, or common-sense knowledge is required).
+\end{enumerate}
