@@ -14,22 +14,22 @@ Based on this model, we have identified two major challenges: large semantic dis
 We have introduced \emph{semantic technologies} as a possible remedy: semantic retrieval, which embeds domain artifacts into a numeric space and allows to search and compare them based on their position and distance in that space, and LLMs, which can process and generate unstructured text and code, conduct conversations with human beings, and solve problems through inner monologue.
 
 To address the challenges of exploratory programmers, we have proposed our model of the \emph{augmented exploratory programming workflow}, in which semantic technologies are integrated into programming systems to support programmers at different stages of their research~(\cref{cha:approach}).
-In our concept of the \emph{semantic workspace}, we have proposed different tools for such integrations along a level-of-support spectrum ranging from augmentation to automation interfaces:
-\emph{semantic suggestions}, for which the systems follows the steps and experiments of programmers and suggests new artifacts or experiments such as methods to browse;
-\emph{semantic completions}, which continue the plans of programmers through contextually generated text insertions;
-and \emph{semantic conversations}, through which programmers can ask conceptual questions about objects by using a natural-language chat interface or an extension to the programming language.
+In our concept of the \emph{semantic workspace}, we have proposed three different tools for such integrations along a level-of-support spectrum ranging from augmentation to automation interfaces:
+(i) \emph{semantic suggestions}, for which the system follows the steps and experiments of programmers and suggests new artifacts or experiments such as methods to browse;
+(ii) \emph{semantic completions}, which continue the plans of programmers through contextually generated text insertions;
+and (iii) \emph{semantic conversations}, through which programmers can ask conceptual questions about objects by using a natural-language chat interface or an extension to the programming language.
 
-We have described our design of a \emph{semantic exploration kernel}~(\cref{cha:design}) to harness semantic technologies and make it possible to integrate them in programming systems through two main components:
+We have described our design of a \emph{semantic exploration kernel}~(\cref{cha:design}) to harness semantic technologies for programming tools through two main components:
 a \emph{suggestion engine}, which collects artifacts and experiments of programmers in our blackboard framework and defines different retrieval strategies for searching and recommending further artifacts;
-and an \emph{exploratory programming agent}, which employ LLMs to plan and conduct experiments, interact with the system through technical interfaces and generated code, and communicate with programmers through high-level interfaces.
+and an \emph{exploratory programming agent}, which employs LLMs to plan and conduct experiments, interacts with the system through technical interfaces and generated code, and communicates with programmers through high-level interfaces.
 To create suggestions, we have explored different approaches for finding \emph{similar} and \emph{correlated} artifacts based on semantic embeddings and call graphs, and we have compared different ranking methods such as top-k selection, probabilistic sampling, and clustering to optimize for the relevance, diversity, irredundancy, and representativeness of results, finding that \emph{probabilistic sampling from clusters} balanced all objectives most effectively~(\cref{cha:suggestions}).
 To construct a viable exploratory programming agent based on the \gptfouro model, we have defined behavioral policies through prompts and designed system functions for automated experiments~(\cref{cha:agent}).
 Finally, we have implemented these ideas in a prototype for the Squeak"/Smalltalk environment by using our \semtex framework and the OpenAI API~(\cref{cha:implementation}).
 
 In our experiments~(\cref{cha:application}), we have successfully used the semantic workspace to prototype a UI with the help of semantic suggestions and completions for available protocols and usage patterns of the UI framework, as well as to understand the design and usage of Squeak's text-formatting package by having a semantic conversation with an example object.
 Beyond that, we have illustrated how semantic object interfaces can be integrated into further programming tools such as code browsers or debuggers to broaden our vision of a semantic exploratory programming system.
-While our preliminary experiences were promising, semantic tools currently provide many irrelevant or incorrect outputs due to the low accuracy of semantic technologies, and semantic completions and conversations are too expensive, unsustainable, and slow for using them frequently and interactively~(\cref{cha:discussion}).
-Despite that, we think that semantic tools have great potential for improving the exploratory programming experience, since they allow programmers to delegate flexible parts of their research process and thus better maintain their high-level flow.
+While our preliminary experiences were promising, semantic tools currently produce many irrelevant or incorrect outputs due to the low accuracy of semantic technologies, and semantic completions and conversations are too expensive, unsustainable, and slow to use them frequently and interactively~(\cref{cha:discussion}).
+Despite that, we think that semantic tools have much potential for improving the exploratory programming experience, since they allow programmers to delegate flexible parts of their research process and thus better maintain their high-level flow.
 
 \ParSep
 
@@ -50,7 +50,7 @@ Another opportunity would be the conduction of a quantitative user study to dete
 Finally, we want to explore further means for enabling and fostering a broader collaboration of programmers and semantic exploratory programming systems.
 On the one hand, this could be achieved by tracking more exploratory activities of programmers to capture their context for semantic tools.
 On the other hand, we want to improve means for keeping programmers ``in the loop'' while semantic agents conduct research on their own.
-This involves finding better ways for explaining the results and steps of semantic technologies, including technical model interpretability~\cite{chefer2021generic} and tools or visualizations for human-readable explanations, as well as defining scope policies for the experiments and decisions of agents and creating a channel for inquiries from systems to programmers.
+This involves finding better ways to explain the results and steps of semantic technologies, including technical model interpretability~\cite{chefer2021generic} and tools or visualizations for human-readable explanations, as well as defining scope policies for the experiments and decisions of agents and creating a channel for inquiries from systems to programmers.
 By integrating semantic suggestions into different programming tools---such as relevance-based ranking in code search tools or contextual stack-trace filters in (omniscient) debuggers---, we also want to expand fine-grained, proactive support of semantic technologies in exploratory programming systems.
 Ultimately, we envision a form of semantic exploratory programming in which the system continuously ``thinks along'' the actions of a programmer (like a helpful pair programmer) by anticipating their intentions, exploring different ways to fulfill them through deep reasoning and research, and offering distilled results to allow programmers stay in their flow.
 
