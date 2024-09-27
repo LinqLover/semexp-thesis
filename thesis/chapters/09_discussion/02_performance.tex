@@ -10,8 +10,8 @@ While memory consumption did not exceed \qty{100}{MB} in our experiments, respon
 	\centering
 	\footnotesize
 	\thimport{02_performance/overview}
-	\caption[Overview of response times and memory consumptions for the tools in our prototype of the semantic workspace.]{
-		Overview of response times and memory consumptions for the tools in our prototype of the semantic workspace.
+	\caption[Main response times and memory consumptions for the tools in our prototype of the semantic workspace.]{
+		Main response times and memory consumptions for the tools in our prototype of the semantic workspace.
 		Scattering of values is caused by the varying complexity of tasks, different suggestion strategies employed, and the uncertain frequency with that programmers may use tools.
 	}
 	\label{tab:discussion/performance/overview}
@@ -20,27 +20,25 @@ While memory consumption did not exceed \qty{100}{MB} in our experiments, respon
 \subsection*{Response Times}
 \label{sec:discussion/performance/latencies}
 
-% TODO: generally: spell out units or use \qty? use ca./circa/about/approximately/take/consume/require/present/past? be consitent about 1.1 to 1.3 seconds (repeating snoun or not?)
-
 \paragraph{Semantic retrieval}
 \label{par:discussion/performance/latencies/retrieval}
 
 For semantic retrieval, response times occur in two situations: searching similar artifacts and embedding new artifacts in a semantic corpus.
 While our implementation of similarity search in the \semtex framework currently employs a linear in-memory search and does not use any indexes, it already performs fast enough for most use cases.
 We conducted our experiments in a Squeak 6.1Alpha image without additional packages installed\footnote{Testing environment: Squeak6.1alpha \#23073 64-bit, SistaV1; OpenSmalltalk VM 20231218\-1441 (2.5G bytecodes/sec, 170M sends/sec); Ubuntu 22.04 (virtualized in VirtualBox); AMD Ryzen 7 2700X @ \qty{3.7}{GHz}.}, which contains about \num{65000} methods and \num{3000} classes.
-In this image, searching for the $k = 100$ most similar methods to a given existing method took not longer than 150 milliseconds; searching for similar classes took about 10 milliseconds.
+Here, searching for the $k = 100$ most similar methods to an existing method took not longer than 150 milliseconds; searching for similar classes took about 10 milliseconds.
 
 When performing a semantic search with an arbitrary query such as the contents of a workspace, the query needs to be embedded first, adding a latency between 400 milliseconds for short scripts (\qty{1}{SLOC}\footnote{SLOC: Source lines of code (excluding empty lines).}) and 750 milliseconds for long scripts (\qty{200}{SLOC}) in our experiments.
 Analogously, embedding new or changed methods and classes in a corpus involves similar latencies, but these are performed in the background and are usually invisible to programmers.
 After changing larger amounts of code, such as when installing a new package, we can embed many documents in a single API request and parallelize requests to balance elastic scaling and possible rate limits.
 For example, in our (not perfectly balanced) prototype implementation, embedding the full \code{Collections} package of Squeak (about \num{3100} classes and \qty{1900}{SLOC}) takes 7 seconds in the background; embedding all methods in the standard image (when installing our prototype initially) takes about three minutes.
 
-Our implementation of TF-IDF search for similar methods takes about 15 milliseconds per literal of the query method ($R^2 = 0.99$) in the standard image.
+Our implementation of TF-IDF search for similar methods takes about 15 milliseconds per literal of the query method (correlation strength: $R^2 = 0.99$) in the standard image.
 Since \qty{75}{\percent} of methods in the standard image contain not more than 6 literals, most queries will take fewer than 100 milliseconds; \qty{99}{\percent} of methods contain not more than 34 literals and can be queried for similar methods within less than 900 milliseconds.
 However, a few methods may contain more than 500 literals (usually ``data methods'' that contain serialized objects such as images or sounds), causing query times of 10 seconds or more.
 
 Correlation search and ranking typically consume 2--5 milliseconds only.
-Thus, a full pass of creating semantic suggestions for an open workspace typically requires between 500 milliseconds and 700 miliseconds.
+Thus, a full pass of creating semantic suggestions for an open workspace typically requires between 500 and 700 miliseconds.
 To reduce these latencies, we could use local, smaller embedding models and maintain indices for semantic and TF-IDF search.
 
 \paragraph{Exploratory programming agent}
