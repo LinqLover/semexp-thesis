@@ -7,13 +7,13 @@ As described in \cref{sec:suggestions/generation}, resource consumption and pecu
 Because up-to-date and immediate completions are desired throughout the entire programming session, this even holds true when following the two-stage generation approach described there.
 
 To optimize the exploratory programming agent for this use case, we provide the LLM with an extensive pre-generated context but disable its function interfaces and limit the research process of the agent to a single invocation of the model.
-That is, we eliminate the autonomy of the agent to improve its performance. % todo: generally define "performance" clearer
+That is, we eliminate the autonomy of the agent to improve its performance.
 
 In our prototype for semantic code completions, we statically (i.e., at development time) anticipate a range of likely experiments required by the agent and dynamically (i.e,. prior to the only invocation of the LLM) execute them and present their results to the agent for stage-1 generations.
 These pre-generated experiments include browsing the definition, protocols, and messages of the receiver class of the current draft, correlated classes provided with the same information, and the source code of correlated methods.
 If a current receiver object is available (e.g., when the programmer is typing their draft into the script pane of an inspector), we also include its full state (i.e., all instance variables and truncated variable fields).
 
-Similarly, we attempt to provide dynamic context for all displayed classes by including previews for their message results through a form of symbolic execution (i.e., we locate sample instances of each class in the image and send each unary message to them in a sandbox). % todo: is this ok to call symbex?
+Similarly, we attempt to provide dynamic context for all displayed classes by including previews for their message results through a form of speculative execution (i.e., we locate sample instances of each class in the image and send each unary message to them in a sandbox).
 To improve the ability of the agent to follow the given task, we provide it with a one-shot prompt of processing a similar request.
 To mitigate the limited proficiency of \gptfouro regarding the Smalltalk programming language, this shot also includes an extensive example of the Smalltalk syntax.
 
