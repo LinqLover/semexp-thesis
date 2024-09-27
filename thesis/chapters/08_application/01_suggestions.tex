@@ -3,7 +3,7 @@
 \section{Prototyping User Interfaces with Semantic Suggestions and Completions}
 \label{sec:application/suggestions}
 
-In this scenario, we describe how a programmer builds a prototype for a simple counter application in the Morphic framework of Squeak with the help of semantic suggestions and completions.
+In this case study, we describe how a programmer builds a prototype for a simple counter application in the Morphic framework of Squeak with the help of semantic suggestions and completions.
 
 To start the exploration, the programmer opens a workspace, types in a simple do-it for creating and showing a simple morph (i.e., a graphical object), and executes it:
 
@@ -18,7 +18,7 @@ To start the exploration, the programmer opens a workspace, types in a simple do
 		\includegraphics[width=\linewidth]{01_suggestions/workspace_start.png} & % TODO: improve resolution, maybe scale down workspace
 		\includegraphics[width=\linewidth]{01_suggestions/app_start.png} % TODO: improve resolution
 	\end{tblr}
-	% TODO: is it okay to leave out SOME captions?
+	\captionof{figure}{Bootstrapping the prototyping of a Morphic UI application in a workspace.}
 \end{center}
 
 As the programmer is viewing the plain default morph and the workspace is ready for further experiments, the programmer wonders about the different possibilities for visual customization that th morph offers.
@@ -28,12 +28,14 @@ However, once the programmer has entered the do-it, the \emph{suggestion space} 
 in a list, the programmer can view different common selectors for modifying the appearance, layout, or composition of the morph.
 For each selector, the suggestion space displays the parameter signature of the message, any available documentation from the \code{Morph} class, and a short list of example usage snippets from other packages in the system:
 
-\begin{center}
-	\includegraphics[height=30\baselineskip]{01_suggestions/suggestion_space.png} % TODO: improve resolution, prepend Morph>> to layoutPolicy:, one example should use Color gray, LESS details on border styles!
+\noindent
+\begin{minipage}{\textwidth}
+	\centering
+	\includegraphics[height=28\baselineskip]{01_suggestions/suggestion_space.png} % TODO screenshot: improve resolution, prepend Morph>> to layoutPolicy:, one example should use Color gray, LESS details on border styles!
 	\captionof{figure}[Using the suggestion space to browse relevant protocols of the class \code{Morph} for prototyping a user interface.]{
 		Using the suggestion space to browse relevant protocols of the class \code{Morph} for prototyping a user interface.
 	}
-\end{center}
+\end{minipage}
 
 Within this list, the programmer discovers the \code{\#color:} selector and decides to adjust the color of their counter morph.
 To achieve that, they simply reuse one of the included usage examples and apply it in the workspace (\code{counter color: Color gray}).
@@ -78,6 +80,7 @@ Again, the programmer compares the different implementations, chooses their pref
 		\includegraphics[width=\linewidth,valign=c]{01_suggestions/workspace_final.png} & % TODO: improve resolution, slightly shrink workspace horizontally?
 		\includegraphics[width=\linewidth,valign=c]{01_suggestions/app_final.png} % TODO: improve resolution
 	\end{tblr}
+	\captionof{figure}{The complete prototype of our Morphic counter application in Squeak.}
 \end{center}
 
 In summary, the programmer could build a UI prototype in a more fluent process, spend less time, and achieve a better-grounded result by using semantic suggestions and semantic completions.
