@@ -224,6 +224,21 @@
 	\\\phantom{....}\llap{\raisebox{0.2ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\hspace*{2pt}}}}%
 }
 
+% Smalltalk syntax highlighting
+\newcommand\stSignature[1]{\bold{#1}}
+\newcommand\stComment[1]{\emph{\textcolor[HTML]{008080}{#1}}}
+\newcommand\stPragmaKeyword[1]{\bold{\textcolor[HTML]{008000}{#1}}}
+\newcommand\stArg[1]{\textcolor[HTML]{000080}{#1}}
+\newcommand\stBlockArg[1]{\stArg{#1}}
+\newcommand\stSelf[1]{\textcolor[HTML]{800000}{#1}}
+\newcommand\stSuper[1]{\textcolor[HTML]{800000}{#1}}
+\newcommand\stGlobal[1]{\textcolor[HTML]{000000}{#1}}
+\newcommand\stSymbol[1]{\textcolor[HTML]{000080}{#1}}
+\newcommand\stString[1]{\textcolor[HTML]{800080}{#1}}
+\newcommand\stNumber[1]{\textcolor[HTML]{800000}{#1}}
+\newcommand\stKeyword[1]{\textcolor[HTML]{000080}{#1}}
+\newcommand\stReturn[1]{\textcolor[HTML]{800000}{#1}}
+
 % boxes
 \newlength{\globalparindent}
 \setlength{\globalparindent}{\parindent}
