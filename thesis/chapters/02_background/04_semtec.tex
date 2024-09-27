@@ -25,7 +25,8 @@ This lays the foundation for performing different arithmetic operations to compa
 	However, in this work, we use the term semantics exclusively for conceptual or common sense-based interpretations, and thus subsume any information from traditional code analysis tools such as type inference under the term syntax.
 \end{genericbox}
 
-\subsection{The Transformer Architecture}
+\subsection*{The Transformer Architecture}
+\label{sec:background/semtec/transformers}
 
 \begin{figure}[Z]
 	\centering
@@ -83,7 +84,7 @@ Internally, a full transformer consists of two components: the \emph{encoder} an
 
 In the following, we describe how transformers are used by embedding models for semantic retrieval and by generative LLMs for text completions.
 
-\subsection{Semantic Retrieval with Embedding Models}
+\subsection*{Semantic Retrieval with Embedding Models}
 \label{sec:background/semtec/retrieval}
 
 To compute a \emph{document embedding} (also referred to as \emph{sentence embedding} or \emph{text embedding}) of a text, models such as \name{BERT} (bidirectional encoder representations from transformers) %, \name{XLNet}, and \name{T5}
@@ -97,7 +98,7 @@ For this, search quality can be improved by transforming queries and documents i
 
 Other popular applications of document embeddings include clustering (for unsupervised grouping and anomaly detection) and classification (for supervised grouping, e.g., based on languages or sentiments).
 
-\subsection{Text Generation with LLMs}
+\subsection*{Text Generation with LLMs}
 \label{sec:background/semtec/generation}
 
 Generative LLMs such as \name{GPT} (generative pre-trained transformer), \name{LLaMA}, and \name{PaLM} use only the decoder component of transformers:
@@ -133,7 +134,7 @@ To mitigate these problems in parts, several techniques have been established:
 	Unlike fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, often affecting its performance~\cite{zhao2023survey}\footnote{While it is possible to cache the contextualized input embeddings produced in the decoder, only few cloud-based LLMs such as Anthrophic Claude support this functionality through their API.}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 
 	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or in order to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
-	This often includes semantic retrieval methods~(see \cref{sec:background/semtec/retrieval}).
+	This often includes semantic retrieval methods.
 
 	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a \gptfouro model, and instructs it to answer the query based on the provided information\footnote{
 		Microsoft. 2023-11-21. \emph{How Copilot Works.}

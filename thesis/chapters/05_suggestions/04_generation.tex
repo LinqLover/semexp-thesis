@@ -9,7 +9,7 @@ The actual generation is delegated to the exploratory programming agent, which e
 
 However, the requirement for interactive completions conflicts with the high latencies and monetary costs of the exploring programming agent:
 on the one hand, semantic completions should not introduce temporal distances in the research process of programmers but be updated with a high frequency to always honor the latest input of the programmer.
-On the other hand, the agent fundamentally depends on invocations of resource-intensive generative LLMs that typically involve latencies of several seconds for complex requests~(see \cref{sec:discussion/performance}).
+On the other hand, the agent fundamentally depends on invocations of resource-intensive generative LLMs that typically involve latencies of several seconds for complex requests.
 
 To solve this conflict, we divide the generation of semantic completions into two stages.
 In the first stage, the agent performs a full generation of completions based on extensive context from other suggested artifacts and a comprehensive chain of thought.

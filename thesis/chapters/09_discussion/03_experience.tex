@@ -1,12 +1,12 @@
 % !TEX root = ../../semexp-thesis.tex
 
-\section{Impact of Semantic Tools on the Exploratory Programming Experience}
+\section{Exploratory Programming Experience}
 \label{sec:discussion/experience}
 
 In the following, we discuss how semantic tools can support exploratory programmers in maintaining their workflow.
 For this, we analyze the main influences of the semantic workspace on the experienced immediacy of programmers~\cite{ungar1997debugging}: how well it supports programmers in the hierarchical research process, how closely it is integrated in the surrounding programming system, and how existing performance limitations may disrupt programmers in their flow.
 
-\subsection{Supporting the Research Process: Improved Semantic Immediacy}
+\subsection*{Improved Support of the Research Process}
 \label{sec:discussion/experience/process}
 
 We propose semantic interfaces for programming in this thesis because we intend to assist programmers in handling the---typically hierarchical---research process of common exploratory practices and thus improve their experience of semantic immediacy.
@@ -50,7 +50,7 @@ So, by commonly relying on vague natural language questions, programmers may imp
 \label{par:discussion/experience/process/delegation}
 
 When programmers remain on a conceptual level of abstraction, they have to delegate control to another instance, namely the exploratory programming system.
-If responsibilities are clearly separated and temporal immediacy is maintained~(see \cref{sec:discussion/experience/performance}), this can be an effective division of labor.
+If responsibilities are clearly separated and temporal immediacy is maintained, this can be an effective division of labor.
 However, as contemporary semantic technologies---and thus semantic tools based on them---are still prone to provide incorrect or no answers, programmers' trust in these tools might diminish.
 If semantic tools err or fail or programmers suspect them thereof, semantic abstractions become leaky%
 \footnote{\label{fn:joels_law}Joel Spolsky: ``The Law of Leaky Abstractions.'' In: \emph{Joel on Software}, 2002-11-11. URL: \url{https://web.archive.org/web/20240913095009/https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/}}%
@@ -66,7 +66,7 @@ In addition, even when the internal steps of the system are explained conceptual
 \paragraph{Level of support}
 \label{par:discussion/experience/process/support}
 
-In our concept of the semantic workspace, we explored different gradations between augmentation and automation for semantic tools, both of which intend different cooperation styles between the programmer and the system~(see \cref{sec:approach/workspace}). % TODO: ever "have" (perfect)?
+In our concept of the semantic workspace, we explored different gradations between augmentation and automation for semantic tools, both of which intend different cooperation styles between the programmer and the system.
 
 Automation interfaces are designed for programmers to maintain a high-level flow and avoid descending into subordinate research processes.
 When tools meet these expectations, this can substantially reduce distractions in programmers, streamline their workflow, and make them more efficient, leading to an improved semantic programming experience.
@@ -80,12 +80,12 @@ In this setting, suggestions by semantic tools are rather optional and not stric
 For example, suggestions for similar methods or code completions only provide selective inspirations for programmers but are never exhaustive, so programmers will still commonly conduct own research beyond the provided recommendations.
 In addition, programmers may actively seek to engage in subordinate research processes on their own for educational purposes or intrinsic motivation to low-level coding~\cite{tanimoto2023five}.
 
-\subsection{Integration into Programming System: Low Spatial Distances}
+\subsection*{Integration into Programming System}
 \label{sec:discussion/experience/integration}
 
 In our prototype of the semantic workspace, we attempt to minimize spatial and semantic distances by integrating semantic tools as closely as possible into the existing programming system.
-To this end, we integrate semantic conversations directly into object inspectors and other exploration tools~(see \cref{sec:application/system}), so programmers can ask semantic questions as easily as they can select traditional elements (such as variables or menu commands) in these tools.
-Semantic messages~(see \cref{sec:design/agent/interfaces}) further reduce spatial and semantic distances when programmers are currently interacting with objects through scripts, since they allow asking high-level questions through the same scripting interface.
+To this end, we integrate semantic conversations directly into object inspectors and other exploration tools, so programmers can ask semantic questions as easily as they can select traditional elements (such as variables or menu commands) in these tools.
+Semantic messages further reduce spatial and semantic distances when programmers are currently interacting with objects through scripts, since they allow asking high-level questions through the same scripting interface.
 
 We place semantic completions into the autocompletion menu of workspaces and code browsers to assure that they are not farther away than a few lines from the text cursor of the programmer.
 
@@ -94,10 +94,10 @@ This reduces the chance of programmers discovering relevant suggestions unless t
 However, this placement is our trade-off to avoid disrupting programmers with many possibly irrelevant suggestions closer to their cursor.
 Finally, the traditional equivalent to the suggestion space---opening multiple code browsers or message traces---involves even larger spatial distances due to the typical layout and size of these tools.
 
-\subsection{Performance Limitations: Threats to Temporal Immediacy and Financial Budgets}
+\subsection*{Performance Limitations}
 \label{sec:discussion/experience/performance}
 
-A noticeable resource consumption~(see \cref{sec:discussion/performance}) can impede the programming experience in different ways:
+A noticeable resource consumption can impede the programming experience in different ways:
 large response times can reduce the experience of temporal immediacy, but programmers usually accept delays of up to 4 seconds for common tasks, though delays below 1--2 seconds are preffered for frequent tasks~\cite[p.~473]{shneiderman2005designing}.
 These thresholds are usually met by our prototypes for semantic completions and simple semantic suggestions.
 However, the delay of semantic completions and some semantic conversations for complex questions may challenge the patience of programmers, until LLMs are further accelerated.

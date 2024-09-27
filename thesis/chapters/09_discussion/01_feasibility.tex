@@ -1,13 +1,13 @@
 % !TEX root = ../../semexp-thesis.tex
 
-\section{Potential of Semantic Technologies}
+\section*{Potential of Semantic Technologies}
 \label{sec:discussion/feasibility}
 
 To deliver relevant suggestions and conversations for semantic tools, the semantic exploration kernel hinges on the capabilities of the underlying semantic technologies.
 Here, we provide insights on using language models and other suggestion strategies for powering the suggestion engine and the exploratory programming agent of our prototype.
 
-Over the past six months, we have successfully used our prototype of semantic suggestions and semantic conversations for several tasks of a similar size to that of the examples in \cref{cha:application} and \cref{fig:implementation/conversations/inspector}. % TODO: once we have completed screenshots for integration chapter, can we make this a range here or are the examples too theoretical?
-At the same time, semantic interfaces have not yet become part of our daily used toolset, which we mainly trace back to the high monetary cost, limited accuracy, and noticeable delays of our current prototype as discussed in \cref{sec:discussion/performance} below.
+Over the past six months, we have successfully used our prototype of semantic suggestions and semantic conversations for several tasks of a similar size to that of the examples in \cref{cha:application} and \crefrange{fig:implementation/suggestions/space}{fig:implementation/conversations/inspector}.
+At the same time, semantic interfaces have not yet become part of our daily used toolset, which we mainly trace back to the high monetary cost, limited accuracy, and noticeable delays of our current prototype as discussed below.
 Still, we believe that these observations are no fundamental limitations to our approach but can be improved through the onward evolution of faster and more powerful language models and systematic prompt engineering or fine-tuning.
 
 \begin{genericbox}{Remark}
@@ -17,7 +17,7 @@ Still, we believe that these observations are no fundamental limitations to our 
 	Thus, any limitations noted in this discussion only refer to our prototype and do not necessarily indicate fundamental issues with the overall approach.
 \end{genericbox}
 
-\subsection{Semantic Retrieval}
+\subsection*{Semantic Retrieval}
 \label{sec:discussion/feasibility/retrieval}
 
 In our prototype of the suggestion engine, we implemented semantic retrieval for method and class artifacts.
@@ -29,7 +29,7 @@ However, the \code{text-embedding-3-large} model by OpenAI that we used offers l
 This impedes semantic similarity search and semantic ranking, in particular reducing the relevance and irredundancy of ranked suggestions.
 We believe that the fitness of embeddings could be improved by fine-tuning an embedding model for conceptual similarity, using ad-hoc fine-tuned text embeddings~\cite{su2023one}, or preprocessing documents with the help of another LLM prior to embedding them.
 
-Being too sensitive to the document size, semantic search using embeddings also cannot be used to find related methods to an early unfinished draft of the programmer~(see \cref{sec:suggestions/search/similar}).
+Being too sensitive to the document size, semantic search using embeddings also cannot be used to find related methods to an early unfinished draft of the programmer~(see \cpageref{sec:suggestions/search/similar}).
 For this purpose, our TF-IDF search strategy yielded better results.
 However, as TF-IDF only compares isolated literals, it does not support synonymous or homonymous identifiers, causing false negatives (missing suggestions) for similar implementations that use different names and false positives for implementations that overload names.
 The same limitations apply to our (also term-based) correlation search.
@@ -42,11 +42,11 @@ first, relevance scores from semantic similarity search underrepresent conceptua
 Second, relevance scores from TF-IDF search are too imprecise for methods with few literals---for example, a method with a single selector that is also contained in the query will receive a perfect score of \qty{100}{\percent}.
 To create a global ranking of artifacts from different search strategies, their relevance scores need to be normalized to a common scale.
 
-\subsection{Exploratory Programming Agent}
+\subsection*{Exploratory Programming Agent}
 \label{sec:discussion/feasibility/agent}
 
 Due to their statistical foundations, LLMs and thus agents based on them are inherently subject to the risk of erring or failing.
-To err means to provide wrong answers, either caused by limited reasoning abilities or by the tendency of LLMs to hallucinate~(see \cref{sec:background/semtec/generation}): for instance, our agent was unable in some cases to write executable scripts based on given source code or error messages, and it would occasionally send fictitious messages to objects.
+To err means to provide wrong answers, either caused by limited reasoning abilities or by the tendency of LLMs to hallucinate: for instance, our agent was unable in some cases to write executable scripts based on given source code or error messages, and it would occasionally send fictitious messages to objects.
 To fail means to terminate without finding a solution: sometimes, our agent would stop after conducting a couple of unsuccessful experiments, stating that further knowledge about a system would be required.
 In one example, the agent explicitly rejected the task of extracting an API key from the object graph of a version control system because it would be ``not allowed to provide confidential information''.
 
@@ -85,4 +85,4 @@ despite being presented extensive examples of the syntax and relevant interfaces
 While we could filter out these errors by dynamically testing completions, this reduces the quantity and the effective performance of suggestions substantially.
 Completions generally exhibited an acceptable diversity over the different provided examples even with a naive prompt design.
 Still, by chaining multiple prompts or increasing the temperature of the model, it would be possible to generate more diverse completions while sacrificing the performance or correctness of results.
-For stage-2 generations~(see \cref{sec:suggestions/generation}), the agent generally usually provided satifactory results for recontextualizing completions to a similar user input even when using the less powerful model \gptfouromini; only if the distance between stage-1 generations and user inputs grew too large (because we did not re-run stage-1 generations frequently enough), the model would tend to hallucinate fictitious names again.
+During stage-2 generations, the agent usually provided satifactory results for recontextualizing completions to a similar user input even when using the less powerful model \gptfouromini; only if the distance between stage-1 generations and user inputs grew too large (because we did not re-run stage-1 generations frequently enough), the model would tend to hallucinate fictitious names again.

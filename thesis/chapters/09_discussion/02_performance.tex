@@ -17,7 +17,7 @@ While memory consumption did not exceed \qty{100}{MB} in our experiments, respon
 	\label{tab:discussion/performance/overview}
 \end{table}
 
-\subsection{Response Times}
+\subsection*{Response Times}
 \label{sec:discussion/performance/latencies}
 
 % TODO: generally: spell out units or use \qty? use ca./circa/about/approximately/take/consume/require/present/past? be consitent about 1.1 to 1.3 seconds (repeating snoun or not?)
@@ -56,7 +56,7 @@ Response times for semantic conversations largely depend on the amount of contex
 for simple questions (e.g., the first two messages in \cref{fig:application/conversation/text}), response times usually vary between 2 and 4 seconds, while complex questions that involve sequential experiments (especially those caused by internal trial and error of the agent) can result in response times between 5 to 15 seconds or more in some cases.
 By streaming responses character-wise from the API, we reduce the delay to the start of the answer by factors between \qty{20}{\percent} and \qty{80}{\percent}.
 
-\subsection{Memory Consumption}
+\subsection*{Memory Consumption}
 \label{sec:discussion/performance/memory}
 
 Maintaining embeddings for larger corpora of documents can require substantial amounts of storage.
@@ -71,7 +71,7 @@ Using this configuration, a semantic corpus of all methods in the standard image
 It would be possible to further improve memory consumption while trading off accuracy or speed by further reducing embedding sizes or offloading embeddings to disk (and maintaining an index for them in the image memory).
 Alternatively, training a smaller embedding model for our particular use case of conceptual similarity of Smalltalk code could allow to reduce memory consumption while maintaining a high accuracy.
 
-\subsection{Monetary Cost}
+\subsection*{Monetary Cost}
 \label{sec:discussion/performance/money}
 
 When using a cloud embedding model, monetary cost for semantic suggestions occur when updating semantic corpora or embedding inputs such as current workspace contents for querying corpora.

@@ -22,7 +22,7 @@ This can result not only in unintended invoices but also overcautiousness in dev
 Through the \semtex framework, we provide different tools for addressing these challenges and thus improving the development experience of semantic-application programmers:
 a \emph{conversation editor} for prototyping generative agents, a \emph{mocking provider} for replacing slow and expensive language models, and means for \emph{price estimation} and \emph{expense watching}.
 
-\subsection{Conversation Editor}
+\subsection*{Conversation Editor}
 \label{sec:semtex/tools/editor}
 
 The \emph{conversation editor} is a graphical tool through that programmers can prototype and debug generative agents.
@@ -66,7 +66,7 @@ the \emph{default mode} only shows user and assistant messages, whereas the \emp
 So, while the advanced mode is intended for prototyping and debugging, the former mode functions as an interface for end users.
 The conversation editor also constitutes a composable UI component that can be reused by semantic applications such as our conversational prototype for the semantic workspace~(see \cref{sec:implementation/conversations}).
 
-\subsection{Mocking Provider}
+\subsection*{Mocking Provider}
 \label{sec:semtex/tools/mocking}
 
 \semtex implements a mocking provider with different \emph{mocking models} that simulate the behavior of real language models through simple heuristics.
@@ -76,7 +76,7 @@ The \code{MockingEmbeddingModel} embeds each document as a small vector based on
 By temporarily using mocking models, programmers can ensure the deterministic behavior of semantic application while testing them or developing other parts of a system.
 Finally, they can avoid additional latencies or costs.
 
-\subsection{Price Estimation and Expense Watching}
+\subsection*{Price Estimation and Expense Watching}
 \label{sec:semtex/tools/pricing}
 
 To facilitate planning of expenses, model providers offer means for \emph{estimating} the prices of requests before actually submitting them to an API.
