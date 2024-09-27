@@ -5,7 +5,6 @@
 
 \begin{figure}
 	\centering
-	% todo: consider only one arrow color OR make them look more different (colors)
 	\includegraphics[width=\textwidth]{01_workflow/workflow.png}
 	\caption[Our model of an \emph{augmented exploratory programming workflow}.]{
 		Our model of an augmented exploratory programming workflow.
@@ -15,20 +14,21 @@
 	\label{fig:approach/workflow/workflow}
 \end{figure}
 
-We want to address the challenges of the traditional exploratory programming workflow which are caused by the limited support of exploratory programming systems and manifest as semantic distances, information overload, and interruptions in programmers.
-To this end, we propose an \emph{augmented exploratory programming workflow} which describes collaborations between programmers and systems at higher abstraction levels and introduces the notion of \emph{semantic exploratory programming systems} which integrate semantic technologies to support programmers at conceptual steps in their research process~(\cref{fig:approach/workflow/workflow}).
+In the traditional exploratory programming workflow, programmers receive limited support from programming systems, which causes semantic distances, information overload, and frequent interruptions.
+To address these challenges, we propose an \emph{augmented exploratory programming workflow}, which describes collaborations between programmers and systems at higher abstraction levels and introduces the notion of \emph{semantic exploratory programming systems}, which integrate semantic technologies to support programmers at conceptual research steps such as planning or understanding~(\cref{fig:approach/workflow/workflow}).
 
-In the augmented exploratory programming workflow, programmers can provide semantic context from their research process such as questions and plans to the exploratory programming system.
+In our augmented workflow, programmers can provide semantic context from their research process to the exploratory programming system, such as questions, plans, and previous experiments.
 The system builds on this context to ``think along'' and continue the research process on its own:
-it attempts to conduct next likely exploratory steps such as planning and executing experiments, deducing results, or answering questions and shares its work to the programmer at different granularities.
-For example, a programmer could provide a high-level question to the system and receive a list of suggested experiments to execute, or the programmer could perform their own experiments and receive an automated summary of deduced results from the system.
-Thus, programmers can either \emph{delegate} tasks to the system to avoid interruptions or \emph{cooperate} with it to benefit from the capabilities of semantic technologies---such as processing high quantities of information---and \emph{augment} their workflow with additional context.
+it attempts to conduct next likely steps such as planning and executing experiments, deducing results, or answering questions and shares its work to the programmer at different granularities.
+For example, a programmer could provide a high-level question to the system and receive a list of suggested experiments to execute; or they could perform their own experiments and receive an automated summary of deduced results from the system.
+Thus, programmers can either \emph{delegate} tasks to the system to avoid interruptions, or they can \emph{cooperate} with it to benefit from semantic technologies and \emph{augment} their workflow with additional context.
 
-To support this workflow, we propose \emph{semantic exploratory programming systems} that build upon traditional exploratory programming systems and combine them with semantic technologies to make the semantic context at higher abstraction levels of the exploratory research process accessible.
-For example, this allows exploratory programming systems to interpret questions and plans, contextualize and analyze experiments, or summarize results and answer questions.
-Based on this, semantic exploratory programming systems can replicate previous human steps of the research process and suggest possible continuations.
+To support this workflow, we propose \emph{semantic exploratory programming systems}:
+these systems build upon traditional exploratory programming systems and connects them with semantic technologies to gain access to the semantic context at higher abstraction levels of the research process.
+For example, this connection allows exploratory programming systems to interpret questions and plans, contextualize and analyze experiments, or summarize results and answer questions.
+Using that context, semantic exploratory programming systems can replicate the previous research steps of programmers and suggest possible next steps.
 
-To access and contribute to the exploratory research process of human beings, semantic exploratory programming systems require new \emph{semantic interfaces} through that programmers can provide contextual artifacts as inputs and retrieve semantic suggestions and answers as outputs.
+To access and contribute to the exploratory research process of programmers, semantic exploratory programming systems require new \emph{semantic interfaces} through that programmers can provide contextual artifacts as inputs and retrieve semantic suggestions and answers as outputs.
 Concretely, we propose three types of semantic interface mechanisms:
 
 \begin{description}
@@ -37,11 +37,11 @@ Concretely, we propose three types of semantic interface mechanisms:
 	Based on these observations, it attempts to reconstruct their underlying plans and uses them for anticipating and suggesting further experiments to the programmer.
 
 	\item[Semantic inputs:]
-	The semantic exploratory programming system reinterprets existing or introduces new interfaces through that programmers can express their current \emph{plans}.
+	The semantic exploratory programming system reinterprets existing or introduces new interfaces, through which programmers can express their current \emph{plans}.
 	For example, this involves reading quick notes of programmers, observing the setup of experiments before the programmer executes them, or---hypothetically---also listening to programmers thinking out aloud during their work.
-	Based on these inputs, the system can develop a more precise image of the programmer's plans and provide more relevant suggestions to them.
+	Based on these inputs, the system can develop a more precise understanding of the programmer's plans and provide more relevant suggestions to them.
 
-	Further, the system can also attempt to reconstruct the overarching \emph{question} of the programmer based on the provided plans.
+	Furthermore, the system can also attempt to reconstruct the overarching \emph{question} of the programmer based on the provided plans.
 	This serves as a base for anticipating further plans and developing suggestions for them even before programmers express these plans to the system.
 
 	Finally, the system can offer new interfaces through that programmers can explicitly express high-level questions.

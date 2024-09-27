@@ -4,7 +4,7 @@
 \label{sec:approach/workspace}
 
 To study our concept of an augmented exploratory programming workflow, we describe the \emph{semantic workspace} as a conceptual framework for semantic exploratory programming systems that contains different \emph{semantic exploratory programming tools}.
-Within this framework, we investigate different manifestations of the augmented exploratory programming workflow through semantic tools that support programmers at different levels at abstraction in their research process and combine different types of semantic interfaces.
+Within this framework, we investigate different manifestations of the augmented exploratory programming workflow through semantic tools that support programmers at different levels at abstraction in their research process and use different types of semantic interfaces.
 
 \begin{figure}
 	\centering
@@ -122,8 +122,6 @@ Semantic suggestions can be applied for different types of plans and experimenta
 	\noindent
 	%This information is prepared and provided to the programmer to provide starting points for further research.
 	Additionally, the system might also summarize the results to extract and suggest particular debugging and solution strategies (such as checking the state of an object, initializing a resource, or inserting a missing exception handler).
-
-	% todo: müssen mal schauen, ob wir hier zu viel details von retrieval vorwegnehmen. einerseits sind wir schon ziemlich detailliert, andererseits technisch gesehen nicht vollständig (z. b. tests, global bindings, type of documetnation artifacts).
 %\end{description}
 
 \ParSep
@@ -136,7 +134,7 @@ This does not only accelerate particular research activities but also augments t
 
 Similarly to semantic suggestions, \emph{semantic completions} observe the activity of programmers in the system and proactively provide them with further contextually relevant suggestions.
 However, semantic completions support programmers at higher levels of abstraction in their research process:
-instead of tracking manual experiments of programmers and reconstructing their possible plans from these, semantic completions exploit existing interfaces of exploratory programming systems through that programmers can express their plans, and create an image of these plans directly.
+instead of tracking manual experiments of programmers and reconstructing their possible plans from these, semantic completions exploit existing interfaces of exploratory programming systems through that programmers can express their plans, and derive an understanding of these plans directly.
 Concretely, these interfaces involve different types of editors through that programmers create and edit text, code, or domain-specific objects.
 The semantic workspace does not wait until the programmer finishes their input and submits it to the system but tracks their editing activity continuously (e.g., as they type or click) to follow along their plans.
 
@@ -161,7 +159,7 @@ Semantic completions can be applied to different types of planning activities th
 \paragraph{Prototyping}
 While programmers write or edit the code of a script or method (e.g., through a textual or visual editor), the system observes their activity and derives their plans.
 It automatically researches similar methods, correlated class and method names, and relevant documentation artifacts.
-Based on this information, it synthetizes possible code snippets (that may range from single expressions to entire methods) and suggests them as contextually adjusted completions to the programmer in their editor.
+Based on this information, it synthesizes possible code snippets (that may range from single expressions to entire methods) and suggests them as contextually adjusted completions to the programmer in their editor.
 
 Optionally, these contextualized suggestions can also be dynamically enriched.
 For example, the system can present a completed code expression together with the result of evaluating it (using available context such as call stacks, Babylonian examples, or symbolic execution, see %\crefrange{par:background/expsys/tools/debugging}{par:background/expsys/tools/symbex}
@@ -169,12 +167,9 @@ For example, the system can present a completed code expression together with th
 \cpageref{sec:background/expsys/tools}%
 ) or display the effect of a completed method, such as a preview of a graphical prototype.
 
-% todo: concrete example here?
-
-\paragraph{Natural-language communication}
-% todo: find better name for this? documentation? human-to-human communication?
-Another frequent activity of programmers regards to writing messages for human communication with other programmers, such as documentation artifacts, bug reports, and commit messages.
-This can be considered as another type of plans and experiments that programmers conduct to express their intentions to the system and benefit from the outputs of the system (e.g., through answers to their questions from other programmers or through reminders to their ``future selves'' about their original intentions)\footnote{This perspective can also apply to source code which ``must be written for people to read,
+\paragraph{Human communication}
+Another frequent activity of programmers regards to writing text to communicate with other programmers, such as documentation artifacts, bug reports, and commit messages.
+This can be considered as another type of plans and experiments that programmers conduct to express their intentions to the system and benefit from the outputs of the system (e.g., through answers to their questions from other programmers or through reminders to their ``future selves'' about their original intentions)\footnote{Arguably, this perspective can also be applied to source code which ``must be written for people to read,
 and only incidentally for machines to execute''~\cite[p.~xxii]{abelson1996structure}.}.
 
 Semantic completions can assist programmers with writing such natural-language text by automatically browsing and suggesting relevant classes, methods, or other artifacts such as bug reports and commits, generating example experiments, and completing the sentences started by programmers to fill in this information.
@@ -184,8 +179,6 @@ For example, when a programmer creates a bug report, the system could automatica
 
 Thus, semantic completions can support programmers in creating and realizing plans by directly following their intentions, generating and conducting likely experiments, and contributing insights from them to the programmers' planning activity in a contextualized form.
 This allows programmers to interact with the programming system at a more conceptual level, accelerate their workflow for trivial tasks, and explore different solutions based on an extended, diverse amount of information.
-
-% todo: fehlt uns hier noch offensichtliches?
 
 \subsection{Semantic Conversations}
 \label{sec:approach/workspace/conversations}
@@ -208,7 +201,7 @@ The programmer can ask follow-up questions based on an answer by the system, and
 Internally, the system executes an entire instance of the (potentially nested) research process on its own: it generates a plan to answer the question, generates, executes, and analyzes one or several experiments, repeats as necessary, and finally creates an answer to the question based on the gained results.
 
 Following the object-oriented philosophy of many exploratory programming systems such as Smalltalk systems, we define one reference object from the system for each semantic conversation.
-Thus, just like programmers can send messages to objects through inspect and interact with them, they can also ask them natural-language questions through semantic conversations.
+Thus, just like programmers can send messages to objects to inspect and interact with them, they can also ask them natural-language questions through semantic conversations.
 
 \begin{example}
 	A programmer inspects an order object from a shopping system and wants to know when the order was created.
@@ -219,6 +212,6 @@ Thus, just like programmers can send messages to objects through inspect and int
 
 Reference objects can be arbitrary objects from the system, ranging from domain objects over code objects such as classes and methods to derived artifacts of software systems such as test results, program traces, and views from other tools.
 
-Thus, semantic conversations provide an abstract, reactive interface through that programmers can express questions about objects and communicate with the system in natural language.
+Thus, semantic conversations provide an abstract, reactive interface, through which programmers can express questions about objects and communicate with the system in natural language.
 This allows them to avoid context switches and distractions and handle overarching research processes more efficiently.
 At the same time, the system is able to process more information than the programmer within the same time, creating a chance to provide them with a more extensive overview of a part of the software system within a single conversation.

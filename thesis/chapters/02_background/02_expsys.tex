@@ -24,15 +24,13 @@ Smalltalk is a strictly object-oriented language: everything is an object, and e
 Smalltalk is \emph{class-based}, meaning that (in contrast to prototype-based languages such as JavaScript), every object is an instance of a class (which is another regular object), and object behavior is usually defined as methods on classes and organized within \emph{protocols} (also referred to a \emph{message categories}).
 
 As an environment, Smalltalk distinguishes itself by its interactive, image-based, and self-sustained architecture~\cite{goldberg1984smalltalk}.
-Smalltalk systems are \emph{interactive} in that programmers can inspect and modify any object in the system at runtime.
-They are \emph{image-based} in that the whole system state (i.e., the object graph) is serializable and can be saved and restored as a single file, called an \emph{image}.
-They are \emph{self-sustained} in that a vast majority of system concepts are implemented in the system itself and thus are explorable and malleable by programmers.
+Smalltalk systems are \emph{interactive}, allowing programmers to inspect and modify any object in the system at runtime.
+They are \emph{image-based}, meaning that the whole system state (i.e., the object graph) is serializable and can be saved and restored as a single file, called an \emph{image}.
+They are \emph{self-sustained}, as a vast majority of system concepts are implemented in the system itself and thus are explorable and malleable by programmers.
 For example, programmers can inspect and modify the compiler, debugging tools, or even the user interface of the system at runtime~\cite{taeumel2016evolving}.
 
-\emph{Squeak} is a modern, portable implementation of Smalltalk that extends the original Smalltalk-80 system with a rich toolset and the \emph{Morphic} framework for direct-manipulation user interfaces~\cite{ingalls1997back,ingalls2020evolution,thiede2023squeak}.
+\emph{Squeak} is a modern, portable implementation of Smalltalk that extends the original Smalltalk-80 system with a rich toolset and the \emph{Morphic} framework for tangible direct-manipulation user interfaces~\cite{ingalls1997back,ingalls2020evolution,thiede2023squeak}.
 Through Morphic, programmers can build and modify graphical user interfaces interactively, explore and debug the implementation of applications, and manage multiple tasks and projects in parallel.
-
-% todo: tangibiliity explizit erwähnen?
 
 %\subsection{The Squeak Toolset}
 \subsection*[The Squeak Toolset]{%
@@ -42,7 +40,7 @@ Through Morphic, programmers can build and modify graphical user interfaces inte
 }
 \label{sec:background/expsys/tools}
 
-Exploratory programming systems such as Squeak provide different kinds of interfaces and tools through that programmers can execute experiments in traditional exploratory programming systems to answer questions.
+Exploratory programming systems such as Squeak provide different kinds of interfaces and tools, through which programmers can execute experiments in traditional exploratory programming systems to answer questions.
 While we focus on the Squeak"/Smalltalk ecosystem in our overview of such tools, many tooling concepts have also been adopted by other exploratory programming systems, and some have been influenced by other systems.
 
 In Squeak, one central tool is the \emph{workspace} which lays the foundation for various exploratory programming questions~\cites[chap.~6]{goldberg1984smalltalk}[sec.~1.4]{thiede2023squeak}.
@@ -57,7 +55,6 @@ However, workspaces can also serve as a starting point for better integrated exp
 	\begin{minipage}{\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{02_expsys/squeak_tools.png}
-		% todo: larger?
 		\caption[A collection of \emph{exploratory programming tools} in the Squeak"/Smalltalk system.]{
 			A collection of different interconnected tools in the exploratory programming system Squeak"/Smalltalk.
 			At the heart is the workspace \Circled{1} through which programmers can execute \emph{do-it} code snippets to retrieve information from objects.
@@ -84,12 +81,13 @@ However, workspaces can also serve as a starting point for better integrated exp
 	\label{par:background/expsys/tools/browsing}
 	Through browsing tools, programmers can explore and modify the implementation, protocols, and documentation of classes~\cite[sec.~6.2]{thiede2023squeak}.
 	In Squeak, different code browsers allow programmers to navigate and search software systems along their organization and inner relationships:
-	\emph{system browsers} provide access to classes through package structures or class hierarchies~\cite[chap.~9]{goldberg1984smalltalk}; \emph{message traces} and similar tools can be used to explore methods through different usage graphs~\cite[chap.~10]{goldberg1984smalltalk}.
-	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name~\cite{thiede2022augmenting}; other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), or a full-text search through source code and comments.
+	\emph{system browsers} provide access to classes through package structures or class hierarchies~\cite[chap.~9]{goldberg1984smalltalk}; \emph{message traces} and similar tools can be used to explore methods through different \emph{usage graphs}~\cite[chap.~10]{goldberg1984smalltalk}.
+	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name (also referred to as \emph{selector})~\cite{thiede2022augmenting}; other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), or a full-text search through source code and comments.
 	\footnotetext{%
 		\label{fn:dynamic_dispatching}
 		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet might activate.
 	}
+	In general, for any code objects (such as a class or method), we employ the term \emph{users} to address its successors in a usage graph (such as its senders or dependent classes).
 
 	Thus, code browsing tools provide means for programmers to answer questions about the organization and implementation of systems through high-level and task-specific views and query interfaces.
 
@@ -97,15 +95,13 @@ However, workspaces can also serve as a starting point for better integrated exp
 	\paragraph{Debugging tools}
 	\label{par:background/expsys/tools/debugging}
 	In the first place, (symbolic) debuggers were designed to allow programmers to examine faulty programs by executing them step-by-step and finding the underlying cause of a bug~\cites[sec.~17.4]{goldberg1983smalltalk}[sec.~18f.]{goldberg1984smalltalk}.
-	However, debuggers have also proven as useful tools for exploring the behavior of software systems beyond bug-fixing, as they provide a concrete context for comprehending abstract source code and navigating through an actual call graph of a program~\cite[sec.~6.4]{thiede2023squeak}.
+	However, debuggers have also proven to be useful tools for exploring the behavior of software systems beyond bug-fixing, as they provide a concrete context for comprehending abstract source code and navigating through an actual call graph of a program~\cite[sec.~6.4]{thiede2023squeak}.
 	Many tools also support \emph{programming in the debugger} to modify the behavior of a running program, which allows for a ``programming into existence'' practice for interface-first, iterative prototyping~\cite{rosson1993active}.
 	\emph{Babylonian programming} environments promote a similar practice by integrating the execution context of different examples into regular code browsing tools~\cite{rauch2019babylonian}.
 
 	\emph{Back-in-time debuggers} (also referred to as \emph{time-travel debuggers} or \emph{omniscient debuggers}) record the execution of a program or re-run it repeatedly to allow programmers to explore it independently of the original execution order~\cite{lewis2003debugging,pothier2009back,perscheid2014follow}.
-	On top of such an omniscient perspective on programs, they offer different interfaces for navigating programs along objects, dataflows~\cite{lienhard2009taking}, or state changes~\cite{thiede2023object,thiede2023time} or for visualizing the program execution~\cite{thiede2024bringing}. % cornelissen2008execution
+	On top of such an omniscient perspective on programs, they offer different interfaces for navigating programs along objects, dataflows~\cite{lienhard2009taking}, or state changes~\cite{thiede2023object,thiede2023time} or for visualizing the program execution~\cite{cornelissen2008execution,thiede2024bringing}.
 	For example, the \name{Whyline} approach provides a query interface where programmers can combine prepared natural-language blocks to ask a range of questions about the causes of certain events in a program~\cite{ko2004designing}.
-
-	% todo: just another summary here?
 
 	%\item[Symbolic execution tools]
 	\paragraph{Symbolic execution tools}
@@ -131,7 +127,7 @@ However, workspaces can also serve as a starting point for better integrated exp
 	%\item[Code completion tools]
 	\paragraph{Code completion tools}
 	\label{par:background/expsys/tools/completion}
-	Autocompletion tools support programmers at writing code by automatically suggesting possibly relevant message names (also referred to as \emph{selectors}) and variables next to the text caret.
+	Autocompletion tools support programmers at writing code by automatically suggesting possibly relevant message names and variables next to the text caret.
 	Suggestions can be contextualized in various degrees, e.g., by considering the syntactic context of existing code, usage statistics from the current programming session~\cite{robbes2008program}, or information from runtime or typing systems~\cite{pluquet2009fast}.
 	Some modern code completion tools also employ large language models to suggest completions of entire statements or methods~(see \cref{sec:background/semtec}).
 
@@ -141,5 +137,3 @@ However, workspaces can also serve as a starting point for better integrated exp
 \ParSep
 
 By using and combining different kinds of tools offered by exploratory programming systems, programmers can derive more informed answers to questions and delegate low-level parts of their research process to the system.
-
-% todo: screenshots?

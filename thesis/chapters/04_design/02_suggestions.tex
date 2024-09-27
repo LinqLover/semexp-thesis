@@ -3,11 +3,11 @@
 \section{A Blackboard Framework for Managing Suggestions}
 \label{sec:design/suggestions}
 
-When the suggestion engine is invoked, it first captures the implicit context of programmers as \emph{artifacts}---for example, currently viewed methods, recent experiments, or quick notes.
+When the suggestion engine is invoked, it first captures the implicit context of programmers as \emph{artifacts}---for example, currently viewed methods, recent experiments, or notes.
 It then executes different \emph{strategies} to suggest further artifacts based on the former.
 For example, given a currently viewed method, different strategies could suggest senders of this method, similar methods, or related documentation artifacts.
-To anticipate larger parts of the programmer's research process, suggestions are not limited to the initial input artifacts but can also be derived from prior suggestions.
-In our example, a fourth strategy could extract and suggest popular message sends from similar methods. % todo: i.e., correlated names - use this term here?
+To anticipate larger parts of the programmer's research process, suggestions are not limited to initial input artifacts but can also be derived from prior suggestions.
+In our example, a fourth strategy could extract and suggest popular message sends from similar methods.
 
 These requirements create a high complexity in the suggestion engine, which has to manage different types of artifacts, strategies, and a convoluted dataflow.
 To handle this complexity and maintain flexibility in the design of new artifacts and strategies, we define a \emph{blackboard framework} that organizes artifacts and orchestrates strategies.
@@ -42,9 +42,8 @@ for example, identical or equivalent artifacts that have been produced by multip
 To support debugging and observability, strategies can also be executed synchronously, and a provenance mechanism stores the original strategy and its input artifacts for every produced artifact.
 
 \begin{example}
-	% todo: update names with suggestions chapter
 	A programmer has drafted a new method and a short list of todo notes in their programming system.
-	To provide them with further possibly relevant message sends for their method draft, the semantic workspace invokes the suggestion engine with both artifacts and requests suggestions of the role ``correlated message''.
+	To provide them with further possibly relevant message sends for their method draft, the semantic workspace invokes the suggestion engine with both artifacts and requests suggestions of the role ``correlated message''~(\cref{fig:design/suggestions/example}).
 
 	Once invoked, the suggestion engine identifies two strategies that can suggest correlated messages: a \emph{correlated selectors} strategy and a \emph{method harvester} strategy~(see \cpageref{sec:suggestions/search/correlations}).
 	Both strategies require artifacts of the role ``similar method'', which are currently not present on the board.

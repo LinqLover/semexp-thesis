@@ -53,7 +53,7 @@ Even simple questions might demand the full attention and structured thinking fr
 	when has this order been filed? I can find that out by inspecting this object. Ah, it has a \code{creationDate} field, but oh no, why is this just a plain number? It could be a Unix timestamp. How can I convert that into a human-readable representation? Is there any method on \code{Date} that does this for me? Seems not so. Maybe \code{DateAndTime}? Yes, \code{DateAndTime fromUnixTime: creationDate} should do the job ... but wait, surely this order has not been created in year 56170? Is this actually a millisecond timestamp? Okay, so I can divide it by 1000 and try again ... fix that syntax slip ... alright, so this order has been filed on March 14th this year. What was I going to do again?
 }%\end{quote}
 
-We note two major challenges in the exploratory programming workflow for that traditional exploratory programming systems have not yet found sufficient solutions: \emph{semantic distances} and \emph{information overload}.
+We note two major challenges in the exploratory programming workflow that traditional exploratory programming systems have not yet found sufficient solutions for: \emph{semantic distances} and \emph{information overload}.
 First, programmers regularly face substantial \emph{semantic distances} between their high-level intentions and the low-level interfaces of systems.
 Programmers have to manually bridge these distances by translating conceptual questions into technical operations and interpreting technical results in terms of their mental model.
 
@@ -71,11 +71,11 @@ At the same time, the recent progress of artificial intelligence (AI) and machin
 Search and recommendation algorithms on online marketplaces, social-media platforms, and streaming services use \emph{document embeddings}~\cite{mikolov2013efficient,devlin2019bert} to find objects based on their \emph{semantics} or meaning. %(from Ancient Greek \emph{sēmantikós}, i.e., significance or meaning).
 Generative AI tools such as ChatGPT\footnote{\url{https://chat.openai.com/}}, Claude\footnote{\url{https://claude.ai/}}, and others~\cite{vaswani2017attention,radford2018improving,zhao2023survey} employ \emph{large language models} (LLMs) to help people create, automate, and learn. %have been widely adopted by people and companies in the last two years for creating, automating, and learning.
 
-In particular, many programmers have started to leverage generative AI: millions of developer generate code with the help of code completion tools such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and others, or they use conversational agents such as GitHub Copilot Chat%\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}}
- to explore and modify code bases.
+In particular, many programmers have started to leverage generative AI: millions of developer generate code with the help of code completion tools such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and others, or they use conversational agents such as GitHub Copilot Chat %\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}}
+to explore and modify code bases.
 Similarly, tools such as Microsoft Visual Studio IntelliCode\footnote{\url{https://visualstudio.microsoft.com/services/intellicode/}} and Sourcegraph\footnote{\url{https://sourcegraph.com/}} employ embeddings to find and rank relevant source code snippets.
 
-We subsume both these technologies---\emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs---under the term \emph{semantic technologies}.
+We subsume both technologies---\emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs---under the term \emph{semantic technologies}.
 
 %\ParSep
 \section*{Research Objective and Structure}
@@ -109,7 +109,7 @@ This leads us to our research question:
 	How can we augment the exploratory programming workflow by integrating semantic technologies into exploratory programming systems?
 \end{quote}
 
-That is, we want to study possible applications of semantic technologies for exploratory programming, investigate tool designs and interaction mechanisms for giving programmers convenient access to these technologies, and collect practical considerations for the design and implementation of such tools.
+That is, we want to study possible applications of semantic technologies for exploratory programming, investigate tool designs and interaction mechanisms to give programmers easy access to these technologies, and collect practical considerations for the design and implementation of such tools.
 
 In answer to this question, our thesis statement reads as follows:
 %
@@ -133,7 +133,7 @@ To study this hypothesis, we make the following contributions:
 
 We make all artifacts of our research available in a public GitHub repository\footnote{\url{https://github.com/hpi-swa-lab/SemanticSqueak}}. % todo: commit all experiments!
 
-We organize the remainder of this thesis as follows:
+We organize the work presented in this thesis as follows:
 %
 \begin{description}[noextralabelsep]
 	\item[\Cref{cha:background}] introduces theoretical foundations behind exploratory programming (systems) and semantic technologies and describes how the challenges of the former may be addressed by the opportunities of the latter.

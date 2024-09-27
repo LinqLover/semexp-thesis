@@ -4,10 +4,10 @@
 \label{sec:background/semtec}
 
 At the same time, different AI methods for information processing have gained popularity over the last few years that promise better user support in various domains---including programming---by approaching information based on their semantics.
-Concretely, we use the term \emph{semantic technologies} to refer two methods, namely \emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs.
+Concretely, we use the term \emph{semantic technologies} to refer to two methods, namely \emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs.
 
-Both technologies approach the semantic information of textual data through the concept of \emph{embeddings}.
-An embedding is a numeric representation of a \emph{document} (such as a single word, a (source) text, or also another embeddable object such as an image~\cite{dosovitskiy2021image}) through a high-dimensional vector whose components describe the relatedness of the document to different \emph{features}~\cite{mikolov2013efficient,devlin2019bert}.
+Both technologies approach the semantic content of textual data through the concept of \emph{embeddings}.
+An embedding is a numeric representation of a \emph{document} (such as a single word, a (source) text, or also another embeddable object such as a picture~\cite{dosovitskiy2021image}) through a high-dimensional vector whose components describe the relatedness of the document to different \emph{features}~\cite{mikolov2013efficient,devlin2019bert}.
 Features can represent arbitrary kinds of properties or topics, such as (programming) language, sentiment, or length, but in many settings, they are used to encode continuous combinations of various concepts through dimensional reduction.
 In this setting, the distance of two embeddings in the vector space indicates the similarity of their associated documents with regard to the employed concepts.
 This lays the foundation for performing different arithmetic operations to compare, organize, or sort documents in a given context.
@@ -49,9 +49,9 @@ Here, we provide a high-level overview of transformer models.
 As we intend to introduce a general notion of language models to the exploratory programming community, we focus on their conceptual operating principles and deliberately omit mathematical and technical details.
 
 From a macroscopic viewpoint, a transformer model employs several neural networks to translate a text from an input language into a text in an output language~(\cref{fig:background/semtec/transformer}).
-Possible languages include natural languages, programming languages, other formal languages, or (patchwise sequential representations of) multimedia data such as images~\cite{dosovitskiy2021image} or sounds~\cite{gong2021ast}.
+Possible languages include natural languages, programming languages, other formal languages, or (patchwise sequential representations of) multimedia data such as pictures~\cite{dosovitskiy2021image} or sounds~\cite{gong2021ast}.
 The model is usually trained by supervised learning using a set of input-output pairs.
-Internally, a full transformer consists of two components: the \emph{encoder} and the \emph{decoder}:
+Internally, a full transformer consists of two components (even though modern language models rarely combine both of them): the \emph{encoder} and the \emph{decoder}:
 %
 \begin{description}[noextralabelsep]
 	\item[The encoder] converts the input text into a sequence of \emph{contextualized token embeddings}.
@@ -149,11 +149,11 @@ To mitigate these problems in parts, several techniques have been established:
 
 \ParSep
 
-Due to their foundations of machine learning methods, semantic technologies make it possible to process and synthetize information based on their context and semantics.
+Due to their foundation in machine learning methods, semantic technologies make it possible to process and synthesize information based on their context and semantics.
 We believe that this creates an opportunity to tackle the limitations of traditional exploratory programming systems, which are restricted to technical interfaces at lower abstraction levels.
 
 \begin{example}
-	A programmer seeks help at the scenario of building a UI prototype from \cpageref{ex:background/challenges}.
+	A programmer seeks help at the task of building a UI prototype from \cpageref{ex:background/challenges}.
 	A traditional tool could support them merely by suggesting lexically related names or systematically testing all permutations or modifications of a code snippet.
 	On the other hand, a semantic tool could \emph{understand} the underlying intent of the programmer, find contextually relevant classes and names, apply them in plausible combinations, or research and fix runtime errors along the way autonomously.
 \end{example}

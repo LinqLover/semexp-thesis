@@ -21,7 +21,7 @@ On the other hand, we argue that semantic distance presents a greater---and larg
 This is because traditional tools are not capable of \emph{understanding} the underlying concepts and semantics of the information they display and process and thus are limited in their ability to associate different pieces of information.
 Similarly, they lack knowledge and comprehension of the higher-level questions and goals of programmers, making it impossible in many situations to transfer required information into the desired context.
 
-The necessary mapping between the technical model of systems and the mental model of users can be described as overall design challenges through the two \emph{gulfs of execution and evaluation}~\cite{norman1986cognitive}:
+The necessary mapping between the technical model of systems and the mental model of programmers can be described as overall design challenges through the two \emph{gulfs of execution and evaluation}~\cite{norman1986cognitive}:
 the gulf of execution references the programmers' challenges to express their questions as inputs the system's interface, while the gulf of evaluation represents their challenges to translate the outputs from the system back into their mental model.
 In exploratory programming, the gulf of execution typically includes activities such as planning and conducting experiments by using tools or writing code, while the gulf of evaluation contains tasks such as comprehending and summarizing technical outputs such as comprehensive lists or long and complex source code~\cite{rein2020empirical}.
 
@@ -32,7 +32,7 @@ In exploratory programming, the gulf of execution typically includes activities 
 	they have to write syntactically valid code, browse the available packages and protocols of a UI framework to find required class and method names, and fix any bugs that they accidentally created in their implementation until they achieve a running prototype.
 
 	Analogously, researching existing solutions that solve similar problems to the current matter of programmers involves a lot of manual labor and low-level interactions with systems.
-	Traditional code search tools such as Squeak's message trace~(see \cref{sec:background/expsys/tools}) primarily provide technical interfaces only that take a syntactic perspective on source code.
+	Traditional code search tools such as Squeak's message trace primarily provide technical interfaces only that take a syntactic perspective on source code.
 	%For instance, they usually offer lexical search functions which are insufficient to find related concepts that use synonyms, class- or package-based filters which cannot be used to hide entire kinds of solutions (such as tests), or sorting functions based on the popularity or recency of source code which only correlate poorly with the semantic similarity or relevance of solutions.
 	For instance, programmers might want to find methods that implement a certain concept, but message traces only offer lexical search functions which cannot identify concepts or find synonyms.
 	Programmers might want to exclude certain kinds of solutions (such as tests or special metaprogramming code), but message traces can filter methods based their class and package names only.
