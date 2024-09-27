@@ -3,18 +3,18 @@
 \section{Semantic Search}
 \label{sec:suggestions/search}
 
-In the following, we describe different strategies for finding similar artifacts (such as similar methods) and correlated artifacts that are based on the former (such as messages that are frequently sent by similar methods).
+In the following, we describe multiple strategies for finding similar artifacts (such as similar methods) and correlated artifacts that are based on the former (such as messages that are frequently sent by similar methods).
 
 \subsection*{Similarity Search}
 \label{sec:suggestions/search/similar}
 
 A central strategy for similarity search in the suggestion engine is \emph{semantic search using document embeddings}~\cite{lewis2020retrieval,mikolov2013efficient}.
 For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts with a reduced dimension size of 256~(see \cpageref{sec:discussion/performance/memory}).}, search a vector database of all other available artifacts (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
-Thus, the reconstruction of programmers' intentions in semantic search manifests as the semantic embeddings of their experimental activities.
+Thus, we \emph{reconstruct} the programmers' intentions by mapping their experimental artifacts into an embedding space, and we \emph{anticipate} their next steps by finding similar artifacts in this space.
 
 However, embedding-based search is only applicable to a limited extent:
 first, computing and storing embeddings involves noticeable costs in terms of time, storage, and financial expenses.
-Second, the embedding search might be too sensitive to the format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
+Second, the embedding search might be too sensitive to the syntactical format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
 Similarly, when queried with an unfinished draft of a method or script, embedding-based search will primarily find artifacts of a similar length such as stub methods rather than fully implemented methods.
 
 To overcome these limitations, we provide another search strategy based on the TF-IDF (term frequency and inverse document frequency) metric~\cite{salton1988term}.
@@ -31,9 +31,8 @@ For this, the term frequency of a term $t$ in a document $d$, the inverse docume
 
 By combining the TF-IDF scores of a document for all terms in the corpus into a vector, we can embed the document into a high-dimensional embedding space.
 This allows us to compare two documents based on their cosine similarity analogously to other types of embeddings.
-% todo: include corpus + cosine similarity in background
 
-Other than transformer-based embeddings, TF-IDF embeddings are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms and homonyms).
+Other than transformer-based embeddings, TF-IDF vectors are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms and homonyms).
 However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores might not need to be caculated for every term.
 
 \begin{example}
@@ -44,29 +43,28 @@ However, they can be simpler to calculate, especially in the context of ranking 
 
 In our prototype, we use TF-IDF search for methods based on the selectors and references to classes and variables in a method retrieved from its bytecode.
 We apply a binary weighting scheme for term frequencies (simplifying their definition to $\text{tf}(t, d) = 1_{\{d(t) > 0\}}$) and exponentially weight inverse document frequencies with a power of $4$.
-This approach yields a satisfying quality of results and a satisfying performance of search (typically 250 milliseconds for \qty{25}{MB} of source code) even without maintaining an index.
+In our experiments, this approach commonly yielded relevant results and showed a sufficient performance (typically 250 milliseconds for \qty{25}{MB} of source code) even without maintaining an index.
 
 \subsection*{Correlation Search for Code Artifacts}
 \label{sec:suggestions/search/correlations}
 
-% todo: find source for this?
+After finding similar artifacts to a set of input artifacts, we can extract frequent parts from them.
+In statistical terms, we say each of these parts \emph{correlates} with the functional---or semantic---characteristics of artifacts like the input artifact.
+For code-related artifacts such as methods or documentation, their parts are the different code artifacts used by the similar artifacts, such as invoked methods, instantiated classes, or referenced variables.
+Their cumulative occurrence suggests a higher probability that programmers might also want to consider them for the input artifacts they are writing.
+This resembles the concept of \emph{collaborative filtering} (``customers who liked this also liked...''), though this studies interactions of users with artifacts, while our approach analyzes dependencies between (different types of) artifacts~\cite{su2009survey}.
 
-After finding similar artifacts to a set of input artifacts, we can extract frequent parts from them in a second step.
-Statistically speaking, we say these parts \emph{correlate} with the structure of artifacts like the input artifacts.
-For code-related artifacts such as methods or documentation, this are the different code artifacts used by the similar artifacts, such as invoked methods, instantiated classes, or referenced variables.
-Their cumulative occurence increases the probability that programmers might also want to consider them for the input artifacts they are writing. % todo: is this correct language?
-
-To extract these used artifacts from a given method, we employ two different data sources: a \emph{static dependency graph} and a \emph{dynamic dependency graph}.
+To extract used artifacts from a given method, we employ two different data sources: a \emph{static dependency graph} and a \emph{dynamic dependency graph}.
 
 The \emph{static dependency graph} is modeled from the terms in a method that are accessible from the abstract syntax tree (AST) or bytecode of the method.
-In our prototype for Smalltalk, we extract all literals from a method and filter them for message selectors, local variable references, and bindings to classes and global variables.
+In our prototype for Smalltalk, we extract all literals from the bytecode of a method and filter them for message selectors, local variable references, and bindings to classes and global variables.
 
 However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages~(see \cref{fn:dynamic_dispatching}).
 Using a \emph{dynamic dependency graph}, we enrich this information with the execution context from Babylonian examples for each similar method artifact.
 In our prototype, we employ a \emph{method harvester} that runs all examples in an instrumented interpreter using \name{SimulationStudio} to construct this graph\footnote{Inspired by the \emph{type harvesting} approach of \cite{haupt2011type}.}.
 Thus, we can suggest a set of concrete methods that are executed by many similar methods.
 
-We rank correlated artifacts based on their number of occurences in the similar artifacts, weighted by the relevance of these similar artifacts.
+We rank correlated artifacts based on their number of occurences in the similar artifacts, weighted by the relevance of the latter.
 
 % todo: simplify vocabulary here? pretty many "artifacts" in some sentences!
 
@@ -82,7 +80,7 @@ We rank correlated artifacts based on their number of occurences in the similar 
 		circle := \interm{Circle} new. \n
 		color := \interm{Color} \interm{red}.
 	\end{multicode}
-	Based on the used identifiers, the suggestion engine identifies similar methods such as:
+	Based on the used names, the suggestion engine identifies similar methods such as:
 	\begin{itemize}
 		\item High similarity (3 common terms):
 		\begin{multicode}
@@ -112,6 +110,4 @@ We rank correlated artifacts based on their number of occurences in the similar 
 		\item \code{\#shadow:} (used in 1 moderately similar method)
 	\end{itemize}
 	Thus, the programmer can complete their script by using the most likely suggestion.
-	% todo: too slow?
-	% todo: color legend?
 \end{example}

@@ -19,6 +19,4 @@ This second stage requires fewer context (only the prior completion and the new 
 This allows the agent to minimize the request to the LLM and employ a smaller model.
 Additionally, recontextualization can be implemented (partially) through non-semantic heuristics such as substring matching or diffing of ASTs.
 
-Through this separation, the suggestion engine needs to execute the first generation stage with a low frequency only when the programmer performs larger changes to a draft or manually requests new generations, while the second stage can be executed with a high frequency but lower latencies and costs.
-
-% todo: does this require an example?
+Through this separation, the suggestion engine executes the first generation stage with a low frequency only when the programmer performs larger changes to a draft (such as adding several new lines) or manually requests new generations, while the second stage can be executed with a high frequency but lower latencies and costs.

@@ -11,10 +11,10 @@ We address both requirements through a \emph{ranking unit} in the suggestion eng
 The requirements for a ranking order are various and depend on the context of the suggestions.
 Some roles of suggestion artifacts, such as similar or correlated artifacts, have a relevance score to a reference artifact that should influence their ranking (e.g., to select the most similar artifacts).
 In other situations, such as when suggesting users of a class or method, the suggestions should explicitly provide a broad overview of all available data and not respect any reference artifact.
-Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to formatting chronologic information.
+Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to formatting dates.
 In this situation, both suggestions relevant to the problem and suggestions exemplifying different uses of the protocol matter are desired.
 
-We identify four different \emph{objectives} for ranking suggestions, which must be balanced differently depending on the context in which the suggestion engine is invocated:
+We identify four \emph{objectives} for ranking suggestions, which must be balanced differently depending on the context in which the suggestion engine is invocated:
 
 \begin{description}
 	\item[Relevance]
@@ -34,9 +34,10 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	\end{align}
 
 	\item[Diversity]
-	A ranking must contain diverse suggestions that display different types and topics from the corpus.
+	A ranking must contain diverse suggestions that display different highly types and topics from the corpus.
 
-	We formalize the diversity of a ranking by adding all mutual distances between two suggestions, which explicitly promotes outliers from different regions of the embedding space:
+	We formalize the diversity of a ranking by adding all mutual distances between two suggestions.
+	Other than irredundancy, which merely avoids duplicates, this objective explicitly promotes outliers from different regions of the embedding space:
 	\begin{align}
 		\text{Diversity}(L) = \sum_{i, j \in L} 1 - S(i, j)
 	\end{align}
@@ -44,8 +45,8 @@ We identify four different \emph{objectives} for ranking suggestions, which must
 	\item[Representativeness]
 	A ranking must represent the full corpus to the best possible extent by containing suggestions that cover the entire distribution of the corpus.
 
-	A comprehensive operationalization of this objective would provide little intuition but can be approached by comparing statistical properties (such as the mean and standard deviation) of the ranking to that of the corpus and requiring the difference to be minimal.
-	A more elaborated measure would be the Kantorovich distance~\cite{vaserstein1969markov} which indicates the cost of transforming the distribution of the corpus into that of the ranking, and which should also be minimized.
+	While a comprehensive operationalization of this objective would provide little intuition, we can approach it by comparing statistical properties (such as the mean and standard deviation) of the ranking to that of the corpus and requiring the difference to be minimal.
+	For a more elaborated measure, we could require a minimal Kantorovich distance~\cite{vaserstein1969markov}, which indicates the cost of transforming the distribution of the corpus into that of the ranking.
 \end{description}
 
 \noindent
@@ -66,7 +67,7 @@ To meet these requirements, we present four ranking methods and discuss how they
 
 \paragraph{Top-k selection}
 We sort all suggestions based on their relevance score and select the $k$ most relevant artifacts.
-
+%
 This approach maximizes the relevance of the ranking.
 However, it can also maximize the redundancy of results if the relevance score depends on the similarity of artifacts because of the transitivity of similarity.
 At the same time, diversity and representativeness are typically minimized because the selection explicitly focuses on most similar artifacts.

@@ -18,7 +18,7 @@
 	\end{minipage}
 \end{figure}
 
-The suggestion engine defines different types and roles of artifacts and different strategies for recording and linking different kinds of information from the programming system.
+The suggestion engine defines several types and roles of artifacts and several strategies for recording and linking different kinds of information from the programming system.
 
 We distinguish between three groups of artifacts:
 
@@ -35,7 +35,6 @@ We distinguish between three groups of artifacts:
 	A programmer who is editing a method has a higher statistical probability to use some of these correlated artifacts.
 
 	Beyond code artifacts, the suggestion engine might also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communications from information sources that are related to the development of the software system.
-	% todo: emphasize anywhere again that browsing is experiment?
 
 	\item[Generated artifacts] are newly synthesized experiments from the suggestion engine.
 
@@ -45,5 +44,5 @@ We distinguish between three groups of artifacts:
 \end{description}
 
 For each suggestable role of artifact, the suggestion engines defines one or multiple strategies that process and combine prior artifacts and produce new artifacts.
-For example, we implement multiple strategies for searching similar methods based on their intentions and interface usage, provide different ways to extract correlated messages from methods based on static and dynamic call graphs, and employ different LLMs and heuristics through the exploratory programming agent for combining retrieved artifacts into new code expressions.
+For example, we (i) implement multiple strategies for searching similar methods based on their intentions and interface usage; (ii) we provide different ways to extract correlated messages from methods based on static and dynamic call graphs; and (iii) we employ different LLMs and heuristics through the exploratory programming agent for combining retrieved artifacts into new code expressions.
 \Cref{fig:suggestions/overview/graph} provides an overview of all available types of artifacts and strategies in our prototype.
