@@ -28,11 +28,26 @@
 \usepackage[utf8]{inputenx}
 \usepackage[backend=biber,backref=true]{biblatex}
 \AfterPackage*{biblatex}{\ExecuteBibliographyOptions{
-	maxnames=32,
+	maxnames=16,
 	url=true
 }}
 \usepackage[linktoc=all]{hyperref}
+\DeclareSourcemap{
+	\maps[datatype=bibtex, overwrite]{
+		\map{
+			\perdatasource{thesis.bib}
+			\step[fieldset=KEYWORDS, fieldvalue={, }, appendstrict]
+			\step[fieldset=KEYWORDS, fieldvalue=bib-regular, append]
+		}
+		\map{
+			\perdatasource{thesis-ai.bib}
+			\step[fieldset=KEYWORDS, fieldvalue={, }, appendstrict]
+			\step[fieldset=KEYWORDS, fieldvalue=bib-ai, append]
+		}
+	}
+}
 \addbibresource{thesis.bib}
+\addbibresource{thesis-ai.bib}
 
 \input{commands}
 
@@ -135,11 +150,20 @@
 \thimport[chapters]{11_conclusion}
 
 
-%\printbibliography[heading=bibintoc]
 \clearpage
 \appendix
 \input{appendix}
-\printbibliography[heading=bibintoc]
+%\printbibliography[heading=bibintoc]
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\markboth{Bibliography}{Bibliography}
+\defbibheading{subbibliography}{%
+	\section*{#1}
+	\markboth{Bibliography}{#1}
+	\pdfbookmark[2]{#1}{bibliography.#1}
+}
+\printbibliography[heading=subbibliography, title={Programming and Software Engineering}, keyword=bib-regular]
+\printbibliography[heading=subbibliography, title={Artificial Intelligence and Machine Learning}, keyword=bib-ai]
 \backmatter
 \markboth{}\relax
 
