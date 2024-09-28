@@ -16,7 +16,7 @@ This class extends the responsibilities of a regular collection for containing a
 	\includegraphics[width=\textwidth]{01_model/search.png}
 	\caption[The general object model for semantic search in \semtex.]{
 		The general object model for semantic search in \semtex (UML class diagram with Smalltalk-styled method signatures; default multiplicities are $1$; dashed arrows indicate the return class of message sends).
-		Programmers can use the entry class \code{SemanticCorpus} (\bold{\textcolor{red}{red}}) to index domain objects with an embedding model and search, rank, or cluster them.
+		Programmers can use the entry class \code{SemanticCorpus} (\bold{\textcolor[HTML]{c00000}{red}}) to index domain objects with an embedding model and search, rank, or cluster them.
 	}
 	\label{fig:semtex/model/search}
 \end{figure}
@@ -52,14 +52,14 @@ Additionally, the semantic corpus also supports cluster-based selection of repre
 To support text generation and machine reasoning, we integrate different conversational LLMs into \semtex.
 For this, the framework defines a \code{SemanticConversation} class~(\cref{fig:semtex/model/conversation}).
 A conversation consists of a sequence of \code{Message}s each of with is specified with a \code{role} (either system, user, or assistant) and a \code{text}.
-A programmer can set up a conversation with a sequence of initial messages, such as a system message for providing instructions and a user message for the first question of the user, and ask the conversation to \code{complete} itself, which will request the (stateless) LLM and append a new generated assistant message to the conversation.
+A programmer can set up a conversation with a sequence of initial messages, such as a system message for providing instructions and a user message for the first question of the user, and ask the conversation to complete itself, which will request the (stateless) LLM and append a new generated assistant message to the conversation.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{01_model/conversation.png} % TODO: complete -> getAssistantMessage
+	\includegraphics[width=\textwidth]{01_model/conversation.png}
 	\caption[The general object model for conversational agents in \semtex.]{
 		The general object model for conversational agents in \semtex (UML class diagram with same semantics as before).
-		Programmers can create a \code{SemanticConversation} (\bold{\textcolor{red}{red}}) with a set of messages and request an answer from a conversation model or implement an \code{Agent} class (\bold{\textcolor{red}{red}}) and declare callable functions via pragmas on it.
+		Programmers can create a \code{SemanticConversation} (\bold{\textcolor[HTML]{c00000}{red}}) with a set of messages and request an answer from a conversation model or implement an \code{Agent} class (\bold{\textcolor[HTML]{004080}{blue}}) and declare callable functions via pragmas on it.
 	}
 	\label{fig:semtex/model/conversation}
 \end{figure}
