@@ -4,17 +4,18 @@
 \label{sec:suggestions/ranking}
 
 Many strategies produce a number of suggestions that is neither managable for human programmers nor for exploratory programming agents using state-of-the-art LLMs.
-This is because semantic search methods, other than traditional search methods, usually do not provide a binary classifier for the relevance of a document but compute a continuous score (e..g, the cosine distance in embedding-based search).
-This creates the need for sorting and filtering suggestions before returning them to the requestor.
+This is because semantic search methods, other than traditional search methods, usually do not provide a binary classifier for the relevance of a document but compute a continuous score (e.g, the cosine distance in embedding-based search).
+Thus, we need to sort and filter suggestions before returning them to the requestor.
 We address both requirements through a \emph{ranking unit} in the suggestion engine that computes a ranking order for all suggestions and returns the first $k$ suggestions from this ranking to the requestor.
 
-The requirements for a ranking order are various and depend on the context of the suggestions.
+The requirements for ranking orders are various and depend on the context of the suggestions.
 Some roles of suggestion artifacts, such as similar or correlated artifacts, have a relevance score to a reference artifact that should influence their ranking (e.g., to select the most similar artifacts).
 In other situations, such as when suggesting users of a class or method, the suggestions should explicitly provide a broad overview of all available data and not respect any reference artifact.
-Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to formatting dates.
+Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to date-formatting tasks.
 In this situation, both suggestions relevant to the problem and suggestions exemplifying different uses of the protocol matter are desired.
 
-We identify four \emph{objectives} for ranking suggestions, which must be balanced differently depending on the context in which the suggestion engine is invocated:
+We identify four \emph{objectives} for ranking suggestions, which must be balanced differently depending on the context in which the suggestion engine is invocated.
+While we describe each objective with a formula, we have not used these formulas for a rigorous quantitative evaluation of different ranking methods but only provide them for a mathematical intuition.
 
 \begin{description}
 	\item[Relevance]
@@ -28,15 +29,15 @@ We identify four \emph{objectives} for ranking suggestions, which must be balanc
 	\item[Irredundancy]
 	A ranking must not contain multiple highly similar suggestions that do not add value to the exploration, such as different almost identical versions of a method.
 
-	We measure this objective by counting the number of suggestion pairs $(i, j)$ in the ranking that do not deceed a treshold $\theta$ for their mutual similarity $S(i, j)$:
+	We measure this objective by counting the number of suggestion pairs $(i, j)$ in the ranking that do not deceed a small threshold $\theta$ for their mutual similarity $S(i, j)$:
 	\begin{align}
 		\text{Irredundancy}(L) = | \{ i, j \in L \mid S(i, j) > \theta \} |
 	\end{align}
 
 	\item[Diversity]
-	A ranking must contain diverse suggestions that display different highly types and topics from the corpus.
+	A ranking must contain diverse suggestions that display highly different types and topics from the corpus.
 
-	We formalize the diversity of a ranking by adding all mutual distances between two suggestions.
+	We formalize the diversity of a ranking by summing up all mutual distances between two suggestions.
 	Other than irredundancy, which merely avoids duplicates, this objective explicitly promotes outliers from different regions of the embedding space:
 	\begin{align}
 		\text{Diversity}(L) = \sum_{i, j \in L} 1 - S(i, j)
@@ -50,17 +51,18 @@ We identify four \emph{objectives} for ranking suggestions, which must be balanc
 \end{description}
 
 \noindent
-To meet these requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
+To meet all requirements, we present four ranking methods and discuss how they balance all objectives differently~(\cref{fig:suggestions/ranking/method_objectives}): \emph{top-k selection}, \emph{probabilistic sampling}, \emph{clustering}, and \emph{probabilistic sampling from clusters}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{03_ranking/method_objectives.png}
 	\caption[Different methods for semantic ranking achieve different trade-offs between our defined objectives.]{
 		The discussed methods for semantic ranking achieve different trade-offs between our defined objectives.
-		Top-k selection delivers the most relevant ranking but selects redundant, homogeneous, and non-representative items.
-		%Probabilistic sampling maximizes diversity and representativeness but does ignores the relevance or redundance of items.
-		Probabilistic sampling maximizes diversity and representativeness, while clustering can improve the irredundancy of items.
-		With probabilistic sampling from clusters, we find a moderate balance of all objectives.
+		Top-k selection (\bold{\textcolor[HTML]{c00000}{red}}) delivers the most relevant ranking but selects redundant, homogeneous, and non-representative items.
+		Probabilistic sampling (\bold{\textcolor[HTML]{e09600}{yellow}}) maximizes diversity, while clustering (\bold{\textcolor[HTML]{00b050}{green}}) can improve the irredundancy and representativeness of items.
+		With probabilistic sampling from clusters (\bold{\textcolor[HTML]{004080}{blue}}), we find a moderate balance of all objectives.
+
+		Note that this sketch shows a broad comparison of methods only, and exact metrics would heavily depend on the distribution of original suggestions and on the choice of hyperparameters (such as temperature) for each method.
 	}
 	\label{fig:suggestions/ranking/method_objectives}
 \end{figure}
@@ -79,19 +81,19 @@ We convert the relevance scores of the corpus into a probability distribution by
 \end{align}
 Based on this probability distribution, we randomly sample $k$ unique artifacts.
 Through a temperature parameter $T$, the probability distribution can be sharpened or flattened, modeling the ranking closer to top-k selection or uniform random selection, respectively.
-This approach corresponds to the \emph{softmax} function used in several machine learning application.
+This approach corresponds to the \emph{softmax} function used in several machine learning applications.
 
 In comparison with all other discussed methods, probabilistic sampling maximizes the diversity of the ranking if a medium to high temperature is used.
-Similarly, the irredundancy of results is improved slightly.
+Similarly, the irredundancy of results is slightly better than for top-k-selection.
 However, results are significantly less relevant to the query or representative of the corpus.
 
 \paragraph{Clustering}
-We cluster the corpus into $k$ groups by using an algorithm such as k-means.
+We cluster the corpus into $k$ groups by using a partition-based algorithm such as k-means.
 From each cluster, we select the most representative artifact (i.e., the center of the cluster).
 
-Cluster-based selection maximizes the irredundancy and representativeness of the ranking.
-On the downside, it does not honor the relevance of artifacts by any means.
-Also, cluster centers present a lower diversity than sampling-based methods as they neglect outliers.
+Cluster-based selection maximizes the irredundancy and improves the representativeness of the ranking.
+On the downside, it does not honor the relevance of artifacts.
+Also, cluster centers present a lower diversity than probabilistic sampling as they neglect outliers.
 
 \paragraph{Probabilistic sampling from clusters}
 We group the corpus into $k$ clusters, assign a probability to each cluster based on the relevance score of their center, and sample random clusters.
@@ -99,14 +101,14 @@ For each occurence of a cluster, we select the next most relevant artifact from 
 Similar to plain probabilistic sampling, this method can be controlled through a temperature parameter.
 
 Cluster-based probabilistic sampling provides a trade-off between the other discussed methods with respect to all considered objectives:
-in our experiments, it yielded a moderate relevance of suggestions that is between that of top-k selection and plain probabilistic sampling, a moderate representativeness close to probabilistic sampling, and a sufficient irredundancy and diversity between probabilistic sampling and clustering.
+in our experiments, it yielded a moderate relevance of suggestions that is between that of top-k selection and plain probabilistic sampling, a moderate diversity close to clustering, and a sufficient irredundancy and representativeness.
 
 \begin{genericbox}{Failed attempts}
 	We also experimented with two other ranking methods that did not yield usable results for us:
 
 	\subparagraph{Explicitly amplifying diversity}
 	We computed the diversity of each artifact as their average distance to all other artifacts and added that to the artifact score.
-	Despite experimenting with different weights and scalings, we were not able to create rankings that would combine relevance and diversity in a satisfying way.
+	Despite experimenting with different weights and scalings, we were not able to create rankings that would combine relevance and diversity in a useful way.
 
 	\subparagraph{Clustering from an RBF-transformed embedding space}
 	We transformed the embedding space of the corpus using a radial basis function (RBF) centered around the reference artifact before clustering it.
