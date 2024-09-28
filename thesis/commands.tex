@@ -109,8 +109,8 @@
 \usepackage{environ}
 \newif\ifpreviewing
 \ifdraft{%
-	% just convenience for some PDF readers
-	\previewingtrue  % Comment out this line to revert to standard behavior; restore landscape pages to A4
+	% just convenience for some PDF readers (e.g., pdf.js)
+	%\previewingtrue  % Enable this to shrink landscape pages to A5
 }{}
 \makeatletter
 \newbox\landscapefigure@saved@page
@@ -146,7 +146,6 @@
 	\edef\@tempa{\csname fps@figure\endcsname}%
 	\global\let\DefaultFigureOptions\@tempa
 \endgroup
-\makeatother
 \makeatother
 
 % add new figure Z option for landscape page
@@ -190,7 +189,6 @@
 %\ExplSyntaxOff
 % TODO: does not work with \textquotesingle, does not break within single words
 % workaround instead:
-\hyphenation{Se-man-tic-Search-Re-sult-Rank-ing}
 \hyphenation{does-Not-Un-der-stand}
 
 % line breaks anywhere in long sequences (e.g., as part of certain URLs)
@@ -199,9 +197,9 @@
 % Semantic markup
 \newcommand\bold[1]{\textbf{#1}}
 \renewcommand\code[1]{%
-	\texttt{#1}}
-	%\texttt{\camelCaseHyphenated{#1}}}
 	%\textsf{#1}} % This looks more like Smalltalk
+	\texttt{#1}} % in this work the distinction between code and natural language is more important
+	%\texttt{\camelCaseHyphenated{#1}}}
 \newcommand\hardcode[1]{%
 	\texttt{#1}}
 \newcommand\name[1]{\textsc{#1}}
@@ -209,8 +207,8 @@
 	\renewcommand\t{\null\qquad}%
 	\newcommand\n{\newline}%
 	\begin{quote}%
-		\ttfamily%
 		%\sffamily% % This looks more like Smalltalk
+		\ttfamily% % in this work the distinction between code and natural language is more important
 		\setlength{\parindent}{0pt}%
 		\raggedright%
 	}{\end{quote}}
@@ -253,7 +251,6 @@
 		before upper	= {\parindent=\globalparindent},
 		},
 }
-% todo refactor: automatically provide paragraph/section here
 \newtcolorbox{smallbox}{
 	smallbox,
 	breakable,
@@ -289,7 +286,7 @@
 }{
 	\endsmallbox%
 }
-\newenvironment{summary}{% TODO: rename to chaptersummary
+\newenvironment{summary}{%
 	\largebox
 	\section*{Chapter Summary}\vspace{-1em}
 	\setlist[1]{leftmargin=2em}

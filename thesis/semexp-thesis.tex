@@ -19,7 +19,6 @@
 %  print - do not color links
 %
 \PassOptionsToPackage{disable}{todonotes}
-\PassOptionsToPackage{russian}{babel}
 \RequirePackage[svgnames,dvipsnames*,x11names]{xcolor} % WORKAROUND for incompatibility of tabularray and colortbl (https://github.com/krono/swathesis/issues/64)
 % TODO: adjust options for print (+twoside, -draft, +print)
 \documentclass[draft,master]{swathesis}
@@ -53,7 +52,8 @@
 
 \usepackage{uni-titlepage}
 \TitlePageStyle[
-	subject=master,academicgrade={Master of Science},
+	subject=master,
+	academicgrade={Master of Science},
 ]{hpi-swa}
 
 \supervisors{%
@@ -69,8 +69,7 @@
 
 \author{Christoph Thiede}
 \location{Berlin}
-% TODO metadata
-% hide extratitle in oneside mode
+% hide extratitle (schmutztitel) in oneside mode
 \makeatletter
 \if@twoside
 \extratitle{\raggedleft Thiede, \\ Augmented Exploratory Programming\par}

@@ -13,7 +13,6 @@
 \label{cha:introduction}
 
 In the realm of software development, curiosity is essential for understanding problems and finding solutions.
-%As programmers want to develop a new feature, fix a bug, or just understand a system, they need to gather a plethora of insights:
 Programmers spend a large amount of time searching for useful interfaces, concepts, and methods---and they spend a similar amount of time understanding systems, plugging concepts together, and experimenting with prototypes.
 All of this involves raising many different questions:
 \emph{%
@@ -33,19 +32,13 @@ Good conversations are vivid, rapid, rich: many answers lead to new thoughts, re
 \emph{Exploratory programming systems}~\cite{sandberg1988smalltalk,rein2018exploratory} are designed to support such conversations by offering several \emph{tools}, through which programmers can interact with software systems (or their parts) to answer questions.
 One prominent exploratory programming system is \emph{Squeak"/Smalltalk}~\cite{goldberg1983smalltalk,thiede2023squeak}, where \emph{objects} serve as the main building block for defining systems. %creating and running programs.
 Objects execute behavior by sending messages to each other, and they handle messages by accessing and changing their internal state.
-%Programmers can explore the objects in a system by using tools to inspect and modify their state and behavior.
 Through tools of the Smalltalk system, programmers can explore and develop the objects in a running system by inspecting and modifying their state and behavior.
 
 In Squeak, a central tool for exploratory programming is the \emph{workspace}:
-%through it, programmers can prototype new solutions, browse existing implementations, or inspect objects from the live system.
-%through its text-based interface,
 here, programmers can write and evaluate scripts to prototype new solutions, browse the classes of objects to research and discover existing implementations and protocols, or inspect particular objects and send them messages to explore their state and capabilities.
-%for example, a Smalltalk programmer can use an \emph{inspector} to search the internal state of an object, study the source code of a class in a \emph{browser} to discover helpful protocols and methods, or evaluate a script in a \emph{workspace} to try out methods and their combinations.
 
-%\ParSep
 \section*{The Cost of Questioning}
 
-%However, every question has its price.
 However, exploratory conversations can be expensive.
 Even simple questions might demand the full attention and structured thinking from programmers:
 \emph{%
@@ -63,13 +56,11 @@ If they nevertheless decide to skim all available information, they are frequent
 
 All these mental overheads and distractions impede exploratory conversations and restrain programmers from maintaining their flow~\cite{csikszentmihalyi2008flow}, exhausting expedient options, and finding feasible solutions.
 
-%\ParSep
 \section*{AI to the Rescue?}
 
-%On the other hand, the ongoing progress of artificial intelligence (AI) and machine learning (ML) methods has already simplified and enriched various other domains.
 At the same time, the recent progress of artificial intelligence (AI) and machine learning (ML) methods has already supported users and programmers at bridging barriers and handling extensive information in various domains.
-Search and recommendation algorithms on online marketplaces, social-media platforms, and streaming services use \emph{document embeddings}~\cite{mikolov2013efficient,devlin2019bert} to find objects based on their \emph{semantics} or meaning. %(from Ancient Greek \emph{sēmantikós}, i.e., significance or meaning).
-Generative AI tools such as ChatGPT\footnote{\url{https://chat.openai.com/}}, Claude\footnote{\url{https://claude.ai/}}, and others~\cite{vaswani2017attention,radford2018improving,zhao2023survey} employ \emph{large language models} (LLMs) to help people create, automate, and learn. %have been widely adopted by people and companies in the last two years for creating, automating, and learning.
+Search and recommendation algorithms on online marketplaces, social-media platforms, and streaming services use \emph{document embeddings}~\cite{mikolov2013efficient,devlin2019bert} to find objects based on their \emph{semantics} or meaning.
+Generative AI tools such as ChatGPT\footnote{\url{https://chat.openai.com/}}, Claude\footnote{\url{https://claude.ai/}}, and others~\cite{vaswani2017attention,radford2018improving,zhao2023survey} employ \emph{large language models} (LLMs) to help people create, automate, and learn.
 
 In particular, many programmers have started to leverage generative AI: millions of developer generate code with the help of code completion tools such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and others, or they use conversational agents such as GitHub Copilot Chat %\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}}
 to explore and modify code bases.
@@ -77,32 +68,9 @@ Similarly, tools such as Microsoft Visual Studio IntelliCode\footnote{\url{https
 
 We subsume both technologies---\emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs---under the term \emph{semantic technologies}.
 
-%\ParSep
 \section*{Research Objective and Structure}
 
-%Yet, only few approaches have used the capabilities of semantic technologies to improve the exploratory programming workflow. % oldtodo: vague and bold - make kind of improvement more precise? cite existing work here?
-%However,
 We believe that semantic technologies have significant potential to support exploratory programmers in processing extensive information and bridging semantic distances.
-%This leads us to our primary research question:
-%
-%\begin{quote}
-%	How can tool developers use semantic technologies to improve the exploratory programming experience?
-%\end{quote}
-%
-%We decompose this question into the following secondary research questions:
-%
-%\begin{enumerate}[label=RQ\arabic*]
-%	\item \bold{How can tool developers use semantic technologies to gather, process, and augment information for exploratory programmers?}
-%		How can they retrieve relevant information from the programming system? How can they analyze this information and generate new knowledge?
-%		How can they manage information throughout this process?
-%	\item \bold{How can tool developers integrate new semantic capabilities into the exploratory programming workflow?}
-%		How should they design programming tools that harness the potential of semantic capabilities?
-%		How can exploratory programmers interact with these capabilities, and how does this affect their programming experience?
-%		In light of new semantic capabilities, can existing UI languages and mechanisms of exploratory programming systems uphold their adequacy, or do new, more semantics-oriented interfaces offer greater benefits?
-%	\item \bold{What are practical considerations for tool developers that use semantic technologies?}
-%		What current challenges and limitations of semantic technologies should they be aware of and how can they cope with them?
-%		How can they design semantic interfaces to achieve both a good user experience and developer experience?
-%\end{enumerate}
 This leads us to our research question:
 %
 \begin{quote}
@@ -114,12 +82,10 @@ That is, we want to study possible applications of semantic technologies for exp
 In answer to this question, our thesis statement reads as follows:
 %
 \begin{quote}
-	%By integrating means for programmers into exploratory programming systems to closely collaborate with semantic technologies, tool developers can augment and streamline the exploratory programming workflow.
 	By tightly integrating \emph{semantic interfaces} into exploratory programming systems through which programmers can easily delegate flexible portions of their workflow to \emph{intelligent agents} and thus closely \emph{collaborate} with semantic technologies, we can augment and streamline the exploratory programming workflow.
 \end{quote}
 
 For this, we propose a model for an \emph{augmented exploratory programming workflow} in which the exploratory activities of programmers are tracked and anticipated, and in which programmers are enabled to access and interact with AI-suggested experiments and results through a \emph{semantic workspace}.
-%We believe that our approach will allow tool developers to tightly integrate semantic technologies into exploratory programming systems, streamline and augment the exploratory workflow, and provide a solid programming experience to programmers by enabling them to cooperate with intelligent tools.
 We believe that our approach will allow tool developers to design tools for exploratory programming systems that provide an improved programming experience to programmers by enabling them to collaborate with semantic technologies.
 
 To study this hypothesis, we make the following contributions:
@@ -128,7 +94,6 @@ To study this hypothesis, we make the following contributions:
 	\item We propose the \emph{augmented exploratory programming workflow}, which captures the traditional process and challenges of exploratory programmers and describes possible starting points for integrating semantic technologies.
 	\item We present a new \emph{semantic workspace} as a conceptual design for exploratory programming systems that support an augmented exploratory programming workflow by providing new or enhanced \emph{semantic interfaces} for programmers.
 	\item We describe our architecture of a \emph{semantic exploration kernel} with different components that use semantic technologies to augment exploratory programming tools, namely \emph{semantic suggestions} and \emph{semantic conversations}, and we implement a prototype for Squeak"/Smalltalk using OpenAI's language models.
-	%\item We discuss the feasibility and limitations, programming experience, and development considerations of our approach by implementing a prototype of the semantic workspace in Squeak"/Smalltalk using OpenAI's transformer models and by showcasing different applications of the prototype.
 \end{enumerate}
 
 We make all artifacts of our research available in a public GitHub repository\footnote{\url{https://github.com/hpi-swa-lab/SemanticSqueak}}. % todo: commit all experiments!
