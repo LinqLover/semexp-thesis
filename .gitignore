@@ -22,6 +22,9 @@
 semexp-thesis*.pdf
 semexp-thesis.pgs
 
+# text4ht
+semexp-thesis.tmp
+
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
 
@@ -274,3 +277,9 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+
+# old figure backups (isn't it terrible?)
+*0.png
+*-[1-9].png
+*-[1-9][0-9].png
