@@ -20,9 +20,9 @@
 %
 \PassOptionsToPackage{disable}{todonotes}
 \RequirePackage[svgnames,dvipsnames*,x11names]{xcolor} % WORKAROUND for incompatibility of tabularray and colortbl (https://github.com/krono/swathesis/issues/64)
-% TODO: adjust options for print (+twoside, -draft, +print)
+% TODO deploy: adjust options for print (-draft, +print)
 \documentclass[draft,master]{swathesis}
-\KOMAoption{twoside}{off}
+\KOMAoption{twoside}{on}
 \KOMAoption{appendixprefix}{false}
 \usepackage[utf8]{inputenx}
 \usepackage[backend=biber,backref=true]{biblatex}
@@ -63,9 +63,8 @@
 }
 
 % SUBMISSION DATE
-% TODO metadata
-% \setdate{2012}{04}{05}
-% \date{\datedate}
+\setdate{2024}{09}{30}
+\date{\datedate}
 
 \author{Christoph Thiede}
 \location{Berlin}
@@ -77,7 +76,7 @@
 \makeatother
 \title{The Semantic Workspace:\texorpdfstring{\\[-4pt]}{} Augmenting Exploratory Programming\texorpdfstring{\\[0pt]}{} with Integrated Generative AI Tools}
 %\subtitle{This is Optionally Optional}
-\othertitle{Der semantische Workspace:\\[-4pt] Augmentierung explorativer Programmierung\\[0pt] mittels integrierter generativer KI-Werkzeuge}
+\othertitle{Der semantische Workspace:\\[-4pt] Augmentierung explorativer Programmierung\\[0pt] durch die Integration generativer KI-Werkzeuge}
 %\othersubtitle{Ein Untertitel ist optional}
 \AtEndPreamble{\hypersetup{
 	pdfkeywords	= {exploratory programming, semantic technologies, generative AI, LLMs, semantic search, document embeddings, Squeak, Smalltalk, GPT},
@@ -99,7 +98,7 @@
 }
 \makeatother
 \newbool{enableSqueakDecorations}
-\setbool{enableSqueakDecorations}{true} % TODO: disable for submission
+\setbool{enableSqueakDecorations}{false}
 \ifbool{enableSqueakDecorations}{%
 	%\AddToHook{shipout/background}{%
 	\AddToShipoutPictureBG*{% % todo: does not work in twoside mode ... but we won't want it there anyway
