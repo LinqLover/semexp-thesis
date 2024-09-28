@@ -22,7 +22,7 @@ This class extends the responsibilities of a regular collection for containing a
 \end{figure}
 
 For each object, the corpus computes and stores an \code{embedding} vector that is represented by a \code{FloatArray}, allowing for efficient comparison, memory consumption, and serialization.
-To compute embeddings, the corpus is provided with a \code{EmbeddingModel} (which may be implemented by different providers, see \cref{sec:semtex/providers}) and a \code{EmbeddingConfig} for controlling the embedding properties such as the length of embedding vectors.
+To compute embeddings, the corpus is provided with an \code{EmbeddingModel} (which may be implemented by different providers, see \cref{sec:semtex/providers}) and an \code{EmbeddingConfig} for controlling the embedding properties such as the length of embedding vectors.
 To embed non-textual object elements, the corpus can be provided with a \emph{text conversion} function through composition or specialization (e.g., by registering an evaluable block or overriding a method)\footnote{Currently accessible through \code{SemanticPluggableCorpus}.}.
 
 The semantic corpus provides methods for searching objects that are \emph{similar} to a reference object or to a natural-language \emph{query} string.
