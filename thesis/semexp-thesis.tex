@@ -166,22 +166,28 @@
 \backmatter
 \markboth{}\relax
 
-% BAMA-O (2023) §30.6
-%  Am Schluss der Arbeit hat die Kandidatin bzw. der Kandidat zu versichern,
-%  dass sie bzw. er die Arbeit selbstständig verfasst und keine anderen
-%  Quellen und Hilfsmittel als die angegebenen benutzt hat.
-% TODO: recheck
-%\makeatletter
-%\gdef\statementcontent{%
-%	Hiermit versichere ich, dass ich die vorliegende Arbeit selbständig verfasst sowie ausschließlich angegebene oder zulässige Quellen und Hilfsmittel benutzt habe.
-%}
-%\makeatother
-% english
-\makeatletter
-\gdef\swa@statementname{Declaration of Authorship}
-\gdef\statementcontent{%
-	I hereby certify that I have written this thesis independently and have used only the sources and tools indicated or permitted.
-}
-\pdfbookmark{Declaration of Authorship}{doa}\defaultstatement
+\newbool{swastatement}
+\setbool{swastatement}{false}
+\ifbool{swastatement}{%
+	% BAMA-O (2023) §30.6
+	%  Am Schluss der Arbeit hat die Kandidatin bzw. der Kandidat zu versichern,
+	%  dass sie bzw. er die Arbeit selbstständig verfasst und keine anderen
+	%  Quellen und Hilfsmittel als die angegebenen benutzt hat.
+	%\makeatletter
+	%\gdef\statementcontent{%
+	%	Hiermit versichere ich, dass ich die vorliegende Arbeit selbständig verfasst sowie ausschließlich angegebene oder zulässige Quellen und Hilfsmittel benutzt habe.
+	%}
+	%\makeatother
+	% english
+	\makeatletter
+	\gdef\swa@statementname{Declaration of Authorship}
+	\gdef\statementcontent{%
+		I hereby certify that I have written this thesis independently and have used only the sources and tools indicated or permitted.
+	}
+	\pdfbookmark{Declaration of Authorship}{doa}\defaultstatement
+
+	\noindent\\
+	This document has been published digitally and is valid without a signature.
+}{}
 
 \end{document}
