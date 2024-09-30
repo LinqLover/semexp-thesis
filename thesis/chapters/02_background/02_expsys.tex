@@ -87,7 +87,6 @@ However, workspaces can also serve as a starting point for better integrated exp
 	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name (also referred to as \emph{selector}); other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), and a full-text search through source code and comments.
 	\footnotetext{
 		\label{fn:dynamic_dispatching}
-		% todo: recheck layout position
 		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet might activate.
 	}
 	In general, for any code objects (such as a class or method), we employ the term \emph{users} to address its successors in a usage graph (such as its senders or dependent classes).

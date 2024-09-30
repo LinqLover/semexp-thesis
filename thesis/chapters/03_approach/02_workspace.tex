@@ -6,17 +6,6 @@
 To study our concept of an augmented exploratory programming workflow, we describe the \emph{semantic workspace} as a conceptual framework for semantic exploratory programming systems that contain different \emph{semantic exploratory programming tools}.
 Within this framework, we investigate different manifestations of the augmented exploratory programming workflow through semantic tools that support programmers at different levels of abstraction in their research process and use different types of semantic interfaces.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=.85\textwidth]{02_workspace/spectrum.png}
-	\caption[The support spectrum of different \emph{semantic tools} in the semantic workspace.]{
-		The support spectrum of different tools in the semantic workspace.
-		Low-level semantic tools collect context from tracking the actions of programmers in the programming system and \emph{augment} their exploration through new suggestions.
-		High-level semantic tools retrieve explicit conceptual descriptions from programmers and \emph{automate} a larger part of the research process.
-	}
-	\label{fig:approach/workspace/spectrum}
-\end{figure}
-
 All of these manifestations can be arranged along a spectrum based on their degree of support between two extremes~(\cref{fig:approach/workspace/spectrum}):
 
 \begin{description}
@@ -30,6 +19,17 @@ All of these manifestations can be arranged along a spectrum based on their degr
 	Rather than augmenting the exploratory programming workflow, they tend to \emph{automate} parts of it and provide programmers with aggregated results and answers instead of low-level suggestions.
 \end{description}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.85\textwidth]{02_workspace/spectrum.png}
+	\caption[The support spectrum of different \emph{semantic tools} in the semantic workspace.]{
+		The support spectrum of different tools in the semantic workspace.
+		Low-level semantic tools collect context from tracking the actions of programmers in the programming system and \emph{augment} their exploration through new suggestions.
+		High-level semantic tools retrieve explicit conceptual descriptions from programmers and \emph{automate} a larger part of the research process.
+	}
+	\label{fig:approach/workspace/spectrum}
+\end{figure}
+
 Orthogonally to their degree of support, semantic tools can exhibit reactive or proactive interaction mechanisms:
 reactive tools expect an explicit question or invocation by the programmer, while proactive tools observe the steps of programmers in the background and make suggestions before a programmer explicitly requests support.
 Similar to the degree of support, semantic tools can combine characteristics of both interaction mechanisms.
@@ -39,7 +39,7 @@ The choice between augmenting and automating, or between reactive and proactive 
 In the semantic workspace, we propose three concepts for novel semantic tools that can be added on top of traditional exploratory programming systems and that together provide different means for exploratory programmers to augment and partially automate their workflow:
 
 \begin{description}[noextralabelsep]
-	\item[Semantic suggestions] anticipate the plans of programmers by continuously monitoring their experimental activities and proactively suggesting further experiments as well as optional summaries.
+	\item[Semantic suggestions] anticipate the plans of programmers by continuous-\linebreak ly monitoring their experimental activities and proactively suggesting further experiments as well as optional summaries.
 	\item[Semantic completions] monitor the planning activities of programmers as they draft code or text in editors, automatically generate and conduct experiments, and proactively provide contextualized suggestions such as code snippets in the editor.
 	\item[Semantic conversations] provide an interface through which programmers can express conceptual questions about objects (such as domain objects or classes) in natural language and retrieve answers at the same abstraction level.
 	Internally, an exploratory programming agent conducts the necessary plans, experiments, and deductions to generate answers.
@@ -48,6 +48,11 @@ In the following, we describe each semantic tool concept in detail.
 
 \subsection{Semantic Suggestions}
 \label{sec:approach/workspace/suggestions}
+
+The approach of \emph{semantic suggestions} is to augment the research process of exploratory programmers by providing them with possible experiments based on their previous experimental activities.
+For this, the semantic workspace tracks the experiments that programmers execute through the interfaces of traditional exploratory programming systems such as do-its, code browsers, and method finders.
+Based on these observed experiments, it attempts to reconstruct the plans of programmers, such as an intention to understand the (scattered) implementation of a concept or to develop a new prototype for a user interface.
+Using this reconstructed plan, the semantic workspace then generates further potentially relevant experiments and suggests them to the programmer.
 
 \begin{figure}
 	\centering
@@ -58,11 +63,6 @@ In the following, we describe each semantic tool concept in detail.
 	}
 	\label{fig:approach/workspace/suggestions}
 \end{figure}
-
-The approach of \emph{semantic suggestions} is to augment the research process of exploratory programmers by providing them with possible experiments based on their previous experimental activities.
-For this, the semantic workspace tracks the experiments that programmers execute through the interfaces of traditional exploratory programming systems such as do-its, code browsers, and method finders.
-Based on these observed experiments, it attempts to reconstruct the plans of programmers, such as an intention to understand the (scattered) implementation of a concept or to develop a new prototype for a user interface.
-Using this reconstructed plan, the semantic workspace then generates further potentially relevant experiments and suggests them to the programmer.
 
 Suggestions are proactively generated and presented in a list-like interface, such as a dock that is placed next to other tools in the system through which programmers conduct experiments~(\cref{fig:approach/workspace/suggestions}).
 %Suggested experiments typically revolve around research activities such as browsing code or documentation.

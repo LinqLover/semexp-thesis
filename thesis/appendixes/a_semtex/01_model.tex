@@ -85,8 +85,8 @@ Analogously to semantic corpora, each conversation is configured through a \code
 	\end{multicode}
 \end{example}
 
-Additionally, \semtex supports the construction of class-based agents by providing the base class \code{SemanticAgent}, which clients can specialize to provide custom instructions and functions.
-The \code{SemanticAgent} class provides a custom DSL (domain-specific language) for specifying function signatures with its arguments, their constraints (such as argument types and optional arguments), and their descriptions through method pragmas.
+Additionally, \semtex supports the construction of class-based agents through the base class \code{SemanticAgent}, which clients can specialize to provide custom instructions and functions.
+It provides a custom DSL (domain-specific language) for specifying function signatures with its arguments, their constraints (such as argument types and optional arguments), and their descriptions through method pragmas.
 The agent class will automatically dispatch function calls and handle errors from called functions.
 
 \begin{example}

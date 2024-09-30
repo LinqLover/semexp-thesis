@@ -127,14 +127,14 @@ Being statistical models without an actual understanding of matters in human ter
 To mitigate these problems in parts, several techniques have been established:
 %
 \begin{description}
-	\item[Fine-tuning:] Adjust the output style and behavior of models by training a base model on a curated set of positive examples of texts or conversations~\cite{kojima2022large,wei2022finetuned}.
+	\item[Fine-tuning:] Adjust the output style and behavior of models by training a base model on a set of positive examples of texts or conversations~\cite{kojima2022large,wei2022finetuned}.
 
 	\item[Prompt engineering:] Adjust the output style and behavior by strategically developing prompts and instructions that are (more) likely to influence models in an intended way~\cite{white2023prompt}.
 	For example, \emph{chain-of-thought} prompting instructs models to explicate thoughts through inner monologue (``think out loud'') or express upfront plans in a certain structure, which has been shown to improve their problem-solving abilities~\cite{wei2023chainofthought}.
 
 	Unlike fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, often affecting its performance~\cite{zhao2023survey}\footnote{While it is possible to cache the contextualized input embeddings produced in the decoder, only few cloud-based LLMs such as Anthropic Claude currently support this functionality through their API.}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 
-	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or in order to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
+	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
 	This often includes semantic retrieval methods.
 
 	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a \gptfouro model, and instructs it to answer the query based on the provided information.\footnote{
