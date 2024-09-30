@@ -3,7 +3,7 @@
 \section{A New Opportunity: Semantic Technologies}
 \label{sec:background/semtec}
 
-At the same time, different AI methods for information processing have gained popularity over the last few years that promise better user support in various domains---including programming---by approaching information based on its semantics.
+At the same time, different AI methods for information processing have gained popularity over the last few years, which promise better user support in various domains---including programming---by approaching information based on its semantics.
 Concretely, we use the term \emph{semantic technologies} to refer to two methods: \emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs.
 
 Both technologies approach the semantic content of textual data through the concept of \emph{embeddings}.
@@ -40,7 +40,7 @@ This lays the foundation for performing different arithmetic operations to compa
 	\label{fig:background/semtec/transformer}
 \end{figure}
 
-The language models that power semantic technologies---\emph{embedding models} that compute embedding representations of documents and \emph{generative LLMs} that produce plausible texts (usually referred to as simply LLMs)---are commonly based on (different subsets of) the \emph{transformer architecture}~\cite{vaswani2017attention}%
+The language models that power semantic technologies---\emph{embedding models} that compute embedding representations of documents and \emph{generative LLMs} that produce plausible text (often referred to as simply LLMs)---are commonly based on (different subsets of) the \emph{transformer architecture}~\cite{vaswani2017attention}%
 \footnote{
 	We acknowledge the existence of alternative architectures such as long-short term memory (LSTMs), latent semantic analysis (LSA), convolutional neural networks (CNNs), and hybrid approaches.
 	Still, we restrict our focus in this short introduction to the transformer architecture, which is used predominantly in modern large general-purpose embedding and text generation models~\cite{oralkbekova2023contemporary}.
@@ -49,7 +49,7 @@ Here, we provide a high-level overview of transformer models.
 As we intend to introduce a general notion of language models to the exploratory programming community, we focus on their conceptual operating principles and deliberately omit mathematical and technical details.
 
 From a macroscopic viewpoint, a transformer model employs several neural networks to translate a text from an input language into a text in an output language~(\cref{fig:background/semtec/transformer}).
-Possible languages include natural languages, programming languages, other formal languages, or (patchwise sequential representations of) multimedia data such as pictures~\cite{dosovitskiy2021image} or sounds~\cite{gong2021ast}.
+Possible languages include natural languages, programming languages, other formal languages, and (patchwise sequential representations of) multimedia data such as pictures~\cite{dosovitskiy2021image} and sounds~\cite{gong2021ast}.
 The model is usually trained by supervised learning using a large set of input-output pairs.
 Internally, a full transformer consists of two components (even though modern language models rarely combine both of them): the \emph{encoder} and the \emph{decoder}:
 %
@@ -57,13 +57,13 @@ Internally, a full transformer consists of two components (even though modern la
 	\item[The encoder] converts the input text into a sequence of \emph{contextualized token embeddings}.
 	For that, it first splits up the text into a sequence of tokens from a finite alphabet (such as words or parts of words) and embeds these tokens using a pre-trained lookup table.
 	It then contextually enriches these embeddings through multiple layers that comprise a self-attention mechanism and a feed-forward neural network.
-	Through self-attention, the different input tokens are put in relation to each other based on multiple aspects such as syntactical, lexical, or positional relationships.
+	Through self-attention, the different input tokens are put in relation to each other based on multiple aspects such as syntactical, lexical, and positional relationships.
 	As a result, the contextualized token embeddings describe the semantics of each token in the context of the input text.
 
 	\begin{example}
-		In the text ``Squeak image'', an encoder would embed the token ``Squeak'' closer to other tokens describing programming systems such as ``Smalltalk'' or ``Jupyter''.
-		%However, in the sentence ``Squeak and rattle'', the same token would be embedded closer to automative-related tokens such as ``buzz'' or ``NVH''.
-		However, in the sentence ``Squeak mouse'', the same token would be embedded closer to toy-related tokens such as ``noise'' or ``rubber''.
+		In the text ``Squeak image'', an encoder would embed the token ``Squeak'' closer to other tokens describing programming systems such as ``Smalltalk'' and ``Jupyter''.
+		%However, in the sentence ``Squeak and rattle'', the same token would be embedded closer to automative-related tokens such as ``buzz'' and ``NVH''.
+		However, in the sentence ``Squeak mouse'', the same token would be embedded closer to toy-related tokens such as ``noise'' and ``rubber''.
 	\end{example}
 
 	\item[The decoder] is invoked multiple times with a sequence of contextualized input token embeddings to \emph{infer} (i.e., generate) a likely output text or a probability distribution of output texts.
@@ -137,13 +137,13 @@ To mitigate these problems in parts, several techniques have been established:
 	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or in order to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
 	This often includes semantic retrieval methods.
 
-	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a \gptfouro model, and instructs it to answer the query based on the provided information\footnote{
+	For example, the Microsoft Copilot integration in Bing performs one or a few web searches based on the query of the user, feeds the result into a \gptfouro model, and instructs it to answer the query based on the provided information.\footnote{
 		Microsoft. 2023-11-21. \emph{How Copilot Works.}
 		URL:
 		%\url{https://www.microsoft.com/en-us/bing/do-more-with-ai/how-bing-chat-works} (accessed 2024-05-29)
 		\url{http://archive.today/2024.05.30-235455/https://www.microsoft.com/en-us/bing/do-more-with-ai/how-bing-chat-works}%
 		.
-	}.
+	}
 	Alternatively, agents can proactively call functions to retrieve required information.
 	Thus, RAG addresses the challenge of information recall and moves it from training a model to searching and using information presented in the prompt.
 \end{description}

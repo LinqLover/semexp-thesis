@@ -23,7 +23,7 @@ Similarly, they lack knowledge and comprehension of the higher-level questions a
 
 The necessary mapping between the technical model of systems and the mental model of programmers can be described as overall design challenges through the two \emph{gulfs of execution and evaluation}~\cite{norman1986cognitive}:
 the gulf of execution references the programmers' challenges to express their questions as inputs to the system's interface, while the gulf of evaluation represents their challenges to translate the outputs from the system back into their mental model.
-In exploratory programming, the gulf of execution typically includes activities such as planning and conducting experiments by using tools or writing code, while the gulf of evaluation contains tasks such as comprehending and summarizing technical outputs such as comprehensive lists or long and complex source code~\cite{rein2020empirical}.
+In exploratory programming, the gulf of execution typically includes activities such as planning and conducting experiments by using tools or writing code, while the gulf of evaluation contains tasks such as comprehending and summarizing technical outputs like comprehensive lists or long and complex source code~\cite{rein2020empirical}.
 
 \begin{example}[5]
 	\label{ex:background/challenges}
@@ -34,7 +34,7 @@ In exploratory programming, the gulf of execution typically includes activities 
 	Analogously, researching existing solutions that solve problems similar to the current matter of programmers involves a lot of manual labor and low-level interactions with systems.
 	Traditional code search tools such as Squeak's message trace primarily provide technical interfaces that only take a syntactic perspective on source code.
 	%For instance, they usually offer lexical search functions which are insufficient to find related concepts that use synonyms, class- or package-based filters which cannot be used to hide entire kinds of solutions (such as tests), or sorting functions based on the popularity or recency of source code which only correlate poorly with the semantic similarity or relevance of solutions.
-	For instance, programmers might want to find methods that implement a certain concept, but message traces only offer lexical search functions,  which cannot identify concepts or find synonyms.
+	For instance, programmers might want to find methods that implement a certain concept, but message traces only offer lexical search functions, which cannot identify concepts or find synonyms.
 	Programmers might want to exclude certain kinds of solutions (such as tests or special metaprogramming code), but message traces can only filter methods based on their class and package names.
 	Programmers might want to sort results by their conceptual relevance to their overarching question, but most code search tools are limited to popularity- or recency-based sort functions.
 	Thus, programmers spend a lot of their research time manually identifying results as ``obviously'' irrelevant rather than investigating and learning from relevant samples.

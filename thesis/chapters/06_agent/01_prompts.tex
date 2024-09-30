@@ -3,7 +3,7 @@
 \section{Implementing Policies through Prompts}
 \label{sec:agent/prompts}
 
-We define a set of \emph{policies} that define the behavior and the communication styles of the exploratory agent:
+We define a set of \emph{policies}, which define the behavior and the communication styles of the exploratory agent:
 
 \begin{description}
 	\item[Identity and context:]
@@ -18,7 +18,7 @@ We define a set of \emph{policies} that define the behavior and the communicatio
 	\item[Output format:]
 	The agent shall provide brief and concise answers and avoid long sentences unless requested otherwise.
 	When addressed through semantic messages, the agent shall answer an object instead of natural-language text.
-	Objects can be fetched from the system or be created by the agent; in particular, primitive values (such as numbers or booleans) or dynamically structured JSON objects are preferred.
+	Objects can be fetched from the system or be created by the agent; in particular, primitive values (such as numbers and booleans) or dynamically structured JSON objects are preferred.
 \end{description}
 
 To configure the agent to follow these policies, we describe them comprehensively in the system prompt of the agent conversation~(\cref{fig:agent/prompts/design}).

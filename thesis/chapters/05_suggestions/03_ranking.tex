@@ -6,10 +6,10 @@
 Many strategies produce a number of suggestions that is neither manageable for human programmers nor for exploratory programming agents using state-of-the-art LLMs.
 This is because semantic search methods, unlike traditional search methods, usually do not provide a binary classifier for the relevance of a document but compute a continuous score (e.g., the cosine distance in embedding-based search).
 Thus, we need to sort and filter suggestions before returning them to the requestor.
-We address both requirements through a \emph{ranker} in the suggestion engine that computes a ranking order for all suggestions and returns the first $k$ suggestions from this ranking to the requestor.
+We address both requirements through a \emph{ranker} in the suggestion engine, which computes a ranking order for all suggestions and returns the first $k$ suggestions from this ranking to the requestor.
 
 The requirements for ranking orders are various and depend on the context of the suggestions.
-Some roles of suggestion artifacts, such as similar or correlated artifacts, have a relevance score to a reference artifact that should influence their ranking (e.g., to select the most similar artifacts).
+Some roles of suggestion artifacts, such as similar or correlated artifacts, have a relevance score to a reference artifact, which should influence their ranking (e.g., to select the most similar artifacts).
 In other situations, such as when suggesting users of a class or method, suggestions should explicitly provide a broad overview of all available data and not respect any reference artifact.
 Between both extremes, gradations exist: for example, the exploratory programming agent might request senders of a method in the context of a broader topic, such as users of the \code{WriteStream>>nextPut:} method in Squeak that are related to date-formatting tasks.
 In this situation, both suggestions relevant to the problem and suggestions exemplifying different uses of the protocol are desired.

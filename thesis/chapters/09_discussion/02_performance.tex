@@ -60,10 +60,9 @@ By streaming responses character-wise from the API, we reduce the delay before t
 Maintaining embeddings for larger corpora of documents can require substantial amounts of storage.
 In the current implementation of \semtex, we store embeddings in the image memory and do not maintain additional indexes (but instead perform a linear search).
 To balance memory consumption against precision, we shorten all document embeddings of OpenAI's \code{text-embedding-3-large} model (which supports truncating embedding vectors through Matryoshka Representation Learning~\cite{kusupati2024matryoshka}) from 3072 to 256 dimensions (each encoded as a 32-bit float).
-This reduces the accuracy of semantic retrieval compared to the full embedding size by an average loss in relevance scores of about $\pm 0.05$%
+This reduces the accuracy of semantic retrieval compared to the full embedding size by an average loss in relevance scores of about $\pm 0.05$.%
 %\footnote{Christoph Thiede and Curt Kennedy: ``Re: It looks like 'text-embedding-3' embeddings are truncated"/scaled versions from higher dim version''. OpenAI Developer Forum, 2024-02-07. URL: \url{https://web.archive.org/web/20240413011050/https://community.openai.com/t/it-looks-like-text-embedding-3-embeddings-are-truncated-scaled-versions-from-higher-dim-version/602276\#post_14}}
-\footnote{Christoph Thiede and Curt Kennedy: Discussion on the quality loss in similarity search when shortening embeddings. In: \emph{It Looks Like \code{text-embedding-3} Embeddings Are Truncated"/Scaled Versions from Higher Dim Version}. OpenAI Developer Forum, 2024-02-07. URL: \url{https://web.archive.org/web/20240413011050/https://community.openai.com/t/it-looks-like-text-embedding-3-embeddings-are-truncated-scaled-versions-from-higher-dim-version/602276\#post_14}}%
-.
+\footnote{Christoph Thiede and Curt Kennedy: Discussion on the quality loss in similarity search when shortening embeddings. In: \emph{It Looks Like \code{text-embedding-3} Embeddings Are Truncated"/Scaled Versions from Higher Dim Version}. OpenAI Developer Forum, 2024-02-07. URL: \url{https://web.archive.org/web/20240413011050/https://community.openai.com/t/it-looks-like-text-embedding-3-embeddings-are-truncated-scaled-versions-from-higher-dim-version/602276\#post_14}.}
 
 Using this configuration, a semantic corpus of all methods in the standard image consumes about \qty{90}{MB}, and a corpus of all classes consumes about \qty{4}{MB}.
 It would be possible to further improve memory consumption while trading off accuracy or speed by further reducing embedding sizes or offloading embeddings to disk (and maintaining an index for them in the image memory).
@@ -85,7 +84,7 @@ These costs would be considered impractical in most settings and emphasize the n
 
 Monetary costs for semantic conversations vary depending on the complexity of questions and answers, ranging from \USD{0.10} to \USD{0.50} for simple questions but rising to several dollars when encountering a lot of trial and error for more challenging questions.
 For a programmer who adopts semantic object interfaces in their everyday toolset, this would involve expenses of at least \USD{5} per hour even when estimating the number of questions a programmer expresses very conservatively as 10 per hour~\cite{kubelka2018road}; following Jevon's paradox, the actual cost could be many times higher as programmers might become negligent of their expenses.%
-\footnote{%
+\footnote{
 	We also experimented with OpenAI's \code{gpt-3.5-0125} model instead of \code{gpt-4o-2024-05-13}.
 	While this would improve response times and reduce costs by 5 to 10 times, \gptthreefive models are noticeably less capable, requiring us to ask questions five times or more (due to the non-deterministic behavior of LLMs) before we would get a helpful answer, if at all.
 	%(For comparison: using \gptfouro, the same---yet not representative---sample of questions led to satisfying answers in more than 80\% of requests.)

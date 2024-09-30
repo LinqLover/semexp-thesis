@@ -32,13 +32,12 @@ It allows programmers to inspect and modify all parts of a conversation, such as
 
 For example, programmers can engage in prompt engineering by drafting different versions of system instructions and function specifications and comparing their effects (by \emph{duplicating} the conversation window using the eponymous Morphic halo handle in Squeak).
 Moreover, they can simulate the behavior of certain function calls or former assistant replies without implementing them.
-Thus, the conversation editor allows programmers to test agents and explore the efficacy of different prompts%
-\footnote{%
+Thus, the conversation editor allows programmers to test agents and explore the efficacy of different prompts.%
+\footnote{
 	Similar possibilities are offered by several other tools such as the \emph{OpenAI chat playground} (\url{https://platform.openai.com/playground/chat}).
 	However, existing tools are typically not integrated into the live programming system, which impedes prototyping, since programmers need to connect language models with other artifacts and logic.
 	In addition, our conversation editor can also be used for post-mortem debugging and exploring actual conversations from a semantic application.
-}%
-.
+}
 
 \begin{figure}[t]
 	\centering
@@ -69,7 +68,7 @@ The conversation editor also constitutes a composable UI component that can be r
 \subsection*{Mocking Provider}
 \label{sec:semtex/tools/mocking}
 
-\semtex implements a mocking provider with different \emph{mocking models} that simulate the behavior of real language models through simple heuristics.
+\semtex implements a mocking provider with different \emph{mocking models}, which simulate the behavior of real language models through simple heuristics.
 The \code{MockingConversationModel} answers a static assistant message for each request (which can be adjusted through parameters in the \code{SemanticConversationConfig}).
 The \code{MockingEmbeddingModel} embeds each document as a small vector based on the term frequencies of a short hard-coded list of words.
 
@@ -83,12 +82,11 @@ To facilitate planning of expenses, model providers offer means for \emph{estima
 Additionally, they \emph{log} the expenses from submitted requests.
 For this, they use a combination of usage statistics returned from API responses (such as the number of processed tokens) and local (approximating) cost models.
 
-This allows for the construction of \emph{expense watchers} that display the expenses for semantic operations in single tools such as the conversation editor or in the global system~(\cref{fig:semtex/tools/pricing/expense_watchers})%
-\footnote{%
+This allows for the construction of \emph{expense watchers}, which display the expenses for semantic operations in single tools such as the conversation editor or in the global system~(\cref{fig:semtex/tools/pricing/expense_watchers}).%
+\footnote{
 	This resembles common usage dashboards of cloud services such as OpenAI (\url{https://platform.openai.com/usage}).
 	However, expense watchers in \semtex detail costs with a finer granularity and improve visibility through direct integration into the programming system.
-}%
-.
+}
 Thus, programmers gain improved trust and transparency regarding pecuniary costs of language models.
 
 \begin{figure}

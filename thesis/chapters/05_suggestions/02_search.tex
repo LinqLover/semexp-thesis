@@ -56,12 +56,12 @@ This resembles the concept of \emph{collaborative filtering} (``customers who li
 
 To extract used artifacts from a given method, we employ two different data sources: a \emph{static dependency graph} and a \emph{dynamic dependency graph}.
 
-The \emph{static dependency graph} is modeled from the terms in a method that are accessible from the abstract syntax tree (AST) or bytecode of the method.
+The \emph{static dependency graph} is modeled from the terms in a method, which are accessible from the abstract syntax tree (AST) or bytecode of the method.
 In our prototype for Smalltalk, we extract all literals from the bytecode of a method and filter them for message selectors, local variable references, and bindings to classes and global variables.
 
 However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages~(see \cref{fn:dynamic_dispatching} on \cpageref{fn:dynamic_dispatching}).
 Using a \emph{dynamic dependency graph}, we enrich this information with the execution context from Babylonian examples for each similar method artifact.
-In our prototype, we employ a \emph{method harvester} that runs all examples in an instrumented interpreter using \name{SimulationStudio} to construct this graph\footnote{Inspired by the \emph{type harvesting} approach of \cite{haupt2011type}.}.
+In our prototype, we employ a \emph{method harvester}, which runs all examples in an instrumented interpreter using \simstudio to construct this graph.\footnote{Inspired by the \emph{type harvesting} approach of \cite{haupt2011type}.}
 Thus, we can suggest a set of concrete methods that are executed by many similar methods.
 
 We rank correlated artifacts based on their number of occurrences in the similar artifacts, weighted by the relevance of the latter.

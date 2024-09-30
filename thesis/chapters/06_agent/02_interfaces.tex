@@ -35,6 +35,6 @@ For example, while it could be elegant to have the agent retrieve the protocols 
 	At the time of writing, a similar technique is used in ChatGPT when browsing long documents.
 }, we offer a dedicated \code{browse\-Class()} function for this purpose instead.
 
-To avoid dangerous side effects of AI-generated code such as data loss or system crashes, it is also possible to evaluate all requested scripts in a lightweight sandbox or only apply their side effects after manual review.
+To avoid dangerous side effects of AI-generated code such as data loss and system crashes, it is also possible to evaluate all requested scripts in a lightweight sandbox or only apply their side effects after manual review.
 However, this imposes the additional complexity of managing ``different realities'' on the agent~\cite{rehwaldt2012exploring}, and the isolation layer can impact the overall performance of experiments.
 In our prototype, we provided an option to disable the sandbox and left it disabled most of the time, as we only observed a small number of unintended side effects~(see \cpageref{sec:discussion/feasibility/agent}).

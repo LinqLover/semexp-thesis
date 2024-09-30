@@ -56,7 +56,7 @@ If semantic tools err or fail or programmers suspect them thereof, semantic abst
 During this, they need to either understand the previous attempts of the system and correct them or discard the system's work and make most of the effort again.
 
 Realizing that trust in current semantic technologies is limited, we emphasize that the behavior of semantic programming tools must be explainable, so that programmers can verify answers or build upon their experiments and developers of semantic tools can debug problems.
-For semantic suggestions and completions, we have implemented a provenance mechanism in the suggestion engine that allows programmers to understand the context of suggestions~(see \cpageref{idx:design/suggestions/provenance}).
+For semantic suggestions and completions, we have implemented a provenance mechanism in the suggestion engine, which allows programmers to understand the context of suggestions~(see \cpageref{idx:design/suggestions/provenance}).
 For semantic conversations, we have included an option for displaying all experiments and thought processes of the exploratory agent.
 Despite these approaches, explaining the representations of large embedding models for semantic search and the decisions and attention of generative LLMs for autonomous agents are evolving challenges~\cites{chefer2021generic}[sec.~8.1.3]{zhao2023survey}, and large parts of the semantic workspace effectively remain gray boxes.
 In addition, even when the internal steps of the system are explained conceptually, we acknowledge the intrinsic complexity programmers face when switching between abstraction levels to understand these concepts.

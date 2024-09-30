@@ -11,7 +11,7 @@ Our implementation of semantic completions reuses the framework of the suggestio
 	\caption[Integration of semantic completions into the \name{Autocompletion} tool for Squeak.]{
 		Our integration of semantic completions into the \name{Autocompletion} tool for Squeak, here invoked from an inspector on a \code{DateAndTime} object.
 		Correlated names are displayed with a \bold{\textcolor[HTML]{598db3}{blue}} star and generated expressions are displayed with an \bold{\textcolor{orange!80!black}{orange}} star.
-		Programmers can select an entry to read details such as documentation, usage examples, or a preview of its result, and press Tab to insert it into their editor.
+		Programmers can select an entry to read details such as documentation, usage examples, and a preview of its result, and press Tab to insert it into their editor.
 	}
 	\label{fig:implementation/completions}
 \end{figure}
@@ -26,4 +26,4 @@ We hook into the presentation of entries to enrich suggested names with usage in
 Second, we include contextualized generated expressions~(see \cref{sec:suggestions/generation}) into the completion menu.
 Analogously to the suggestion space, semantic completions are computed asynchronously in the background to avoid noticeable delays in the user interface.
 
-To generate a preview of the result of generated expressions, we run them in the editor context inside an isolated sandbox of \name{SimulationStudio} and include the results in the presentation of each entry.
+To generate a preview of the result of generated expressions, we run them in the editor context inside an isolated sandbox of \simstudio and include the results in the presentation of each entry.

@@ -20,7 +20,8 @@ To support receiving generated text chunks incrementally and avoid delays, the c
 	URL:
 	%\url{https://html.spec.whatwg.org/commit-snapshots/\seqsplit{25aaad7f6a10785efe041fb05a597400e700ef10}/\#server-sent-events}%
 	\href{https://html.spec.whatwg.org/commit-snapshots/25aaad7f6a10785efe041fb05a597400e700ef10/\#server-sent-events}{https://html.spec.whatwg.org/commit-snapshots/\seqsplit{25aaad7f6a10785efe041fb05a597400e700ef10}/\#server-sent-events}%
+	.
 } emitted by the API, transform them into an internal \code{Generator}, and update the returned \code{SemanticMessage} asynchronously for each new chunk.
-Users that request streamed completions initially receive an empty \code{SemanticMessage} and can subscribe to observer signals for incorporating each appended chunk into their data model or interface (such as a graphical display).
+Clients that request streamed completions initially receive an empty \code{SemanticMessage} and can subscribe to observer signals for incorporating each appended chunk into their data model or interface (such as a graphical display).
 
 Next to the OpenAI provider, \semtex also implements a \emph{mocking provider} for simulating real language models~(see \cref{sec:semtex/tools/mocking}).

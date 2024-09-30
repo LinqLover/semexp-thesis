@@ -75,7 +75,7 @@ However, workspaces can also serve as a starting point for better integrated exp
 	The standard inspection tools in Squeak are the \emph{inspector} and \emph{explorer}, which provide low-level access to the list of instance variables or fields in an object~\cites[chap.~8]{goldberg1984smalltalk}[sec.~6.3]{thiede2023squeak}.
 
 	However, inspection tools can also provide higher-level, domain-specific interfaces to objects:
-	for example, \emph{collection inspectors} display and manipulate the effective elements of different types of collection objects independently of their internal data structure; other systems such as \name{Glamorous Toolkit}'s \emph{moldable inspector} promote domain-specific visualizations of objects such as charts or graphs~\cite{chis2015moldable}.
+	for example, \emph{collection inspectors} display and manipulate the effective elements of different types of collection objects independently of their internal data structure; other systems such as \name{Glamorous Toolkit}'s \emph{moldable inspector} promote domain-specific visualizations of objects such as charts and graphs~\cite{chis2015moldable}.
 	Thus, programmers can directly find answers to more conceptual questions such as ``How are these nodes connected?'' without writing technical do-it scripts on their own.
 
 	%\item[Code browsing tools]
@@ -85,8 +85,9 @@ However, workspaces can also serve as a starting point for better integrated exp
 	In Squeak, different code browsers allow programmers to navigate and search software systems along their organization and inner relationships:
 	\emph{system browsers} provide access to classes through package structures or class hierarchies~\cite[chap.~9]{goldberg1984smalltalk}; \emph{message traces} and similar tools can be used to explore methods through different \emph{usage graphs}~\cites[chap.~10]{goldberg1984smalltalk}{thiede2022augmenting}.
 	For example, the \emph{senders"/implementors} mechanism allows programmers to browse an (approximate\footnotemark) static call graph of methods that send or implement a given message name (also referred to as \emph{selector}); other types of graph queries include references and assignments to variables, methods that contain certain literals (constants), and a full-text search through source code and comments.
-	\footnotetext{%
+	\footnotetext{
 		\label{fn:dynamic_dispatching}
+		% todo: recheck layout position
 		Messages in Smalltalk are dispatched dynamically, and traditional Smalltalk systems do not have a typing system, preventing them from accurately predicting which methods a message send in a code snippet might activate.
 	}
 	In general, for any code objects (such as a class or method), we employ the term \emph{users} to address its successors in a usage graph (such as its senders or dependent classes).
@@ -110,15 +111,15 @@ However, workspaces can also serve as a starting point for better integrated exp
 	\label{par:background/expsys/tools/symbex}
 	\emph{Symbolic execution engines} make it possible to execute programs and send messages to objects despite the lack of concrete context by substituting unknown state with symbols and executing all possible code paths concurrently~\cite{cadar2013symbolic,thiede2023symbolic}.
 	This provides a basis for exploratory programming tools that can search the behavior of objects through speculative execution.
-	Squeak's \emph{method finder} allows programmers to find unknown methods by specifying constraints over the inputs and outputs of message sends~\cite[sec.~1.8]{thiede2023squeak}%
+	Squeak's \emph{method finder} allows programmers to find unknown methods by specifying constraints over the inputs and outputs of message sends~\cite[sec.~1.8]{thiede2023squeak}.%
 	\footnote{While Squeak does not include a symbolic execution engine at the time of writing, the method finder employs equivalent brute-force strategies to resolve the provided constraints.}%
 	\footnote{
-		Another version of Squeak's built-in method finder, which supports more generic types of symbolic queries, is available through the \name{SimulationStudio} package.
+		Another version of Squeak's built-in method finder, which supports more generic types of symbolic queries, is available through the \simstudio package.
 		Christoph Thiede: ``Method Finder 2.'' The general-purpose Squeak developers list, 2022-09-20. URL:
 		%\url{https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M}.
-		\url{https://web.archive.org/web/20240630205751/https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M/}
-	}%
-	.
+		\url{https://web.archive.org/web/20240630205751/https://lists.squeakfoundation.org/archives/list/squeak-dev@lists.squeakfoundation.org/thread/N4OM3BYARXMOFDF4ONM7IZWR7727WU2M/}%
+		.
+	}
 	Tools such as \name{IntelliTest}\footnote{
 		%\url{https://learn.microsoft.com/en-us/visualstudio/test/intellitest-manual}
 		\url{https://web.archive.org/web/20240530170603/https://learn.microsoft.com/en-us/visualstudio/test/intellitest-manual/?view=vs-2022}
@@ -133,7 +134,7 @@ However, workspaces can also serve as a starting point for better integrated exp
 	Suggestions can be contextualized in various degrees, e.g., by considering the syntactic context of existing code, usage statistics from the current programming session~\cite{robbes2008program}, or information from runtime or typing systems~\cite{haupt2011type}.
 	Many modern code completion tools also employ large language models to suggest completions of entire statements or methods~(see \cref{sec:background/semtec}).
 
-	Beside accelerating typing, code completion tools also support the research process of exploratory programmers by providing them with possible answers to questions about the usage of protocols (``What messages can I send to this variable?'') and making manual research through code browsing tools superfluous in some cases.
+	Beside accelerating typing, code completion tools also support the research process of exploratory programmers by providing them with possible answers to questions about the usage of protocols (``What messages can I send to this variable?'') and making manual research through code browsing tools superfluous in some cases~\cite{barka2023grounded}.
 %\end{description}
 
 \ParSep

@@ -17,6 +17,6 @@ In the second stage, the prior generations are \emph{recontextualized} to adjust
 For example, recontextualization would remove prefixes from the completions that the programmer has already typed manually, apply recent renamings in the draft to completions, or align them with other recent restructurings or updates by the programmer.
 This second stage requires less context (only the prior completion and the new draft) and reduced reasoning.
 This allows the agent to minimize the request to the LLM and employ a smaller model.
-Additionally, recontextualization can be implemented (partially) through non-semantic heuristics such as substring matching or AST merging.
+Additionally, recontextualization can be implemented (partially) through non-semantic heuristics such as substring matching and AST merging.
 
 Through this separation, the suggestion engine executes the first generation stage with a low frequency only when the programmer performs larger changes to a draft (such as adding several new lines) or manually requests new generations, while the second stage can be executed with a high frequency but lower latencies and costs.

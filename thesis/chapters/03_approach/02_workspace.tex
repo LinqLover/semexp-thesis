@@ -92,7 +92,7 @@ Semantic suggestions can be applied for different types of plans and experimenta
 	%senders of the currently viewed methods (i.e., methods that possibly invoke the former methods, see \cref{par:background/expsys/tools/browsing}), the comment and implementation of messages that the current methods send, the comment and definition of classes that the current methods reference, \emph{similar} methods (e.g., methods that pursue the same goal or include common strategies)
 
 	\noindent
-	Beyond code artifacts, the system could also suggest other types of semantic suggestions in this context, such as relevant excerpts from related documentation artifacts, design documents, or specifications.
+	Beyond code artifacts, the system could also suggest other types of semantic suggestions in this context, such as relevant excerpts from related documentation artifacts, design documents, and specifications.
 
 	Depending on the quantity and complexity of related artifacts, the system might also summarize all suggestions; for example, by describing the implementation of a scattered concept or shortening and paraphrasing documentation artifacts.
 
@@ -149,7 +149,7 @@ The semantic workspace does not wait until the programmer finishes their input a
 \end{figure}
 
 Feedback from semantic completions is provided to programmers through conceptual, highly contextualized results instead of single experiment suggestions.
-This manifests as a list of completions that are integrated into the editor interface and represent possible continuations of the preliminary plan that programmers have typed into the editor.
+This manifests as a list of completions, which are integrated into the editor interface and represent possible continuations of the preliminary plan that programmers have typed into the editor.
 
 To generate these completions, the semantic workspace internally predicts, executes, and evaluates possible experiments of programmers based on their observed plans, similarly to semantic suggestions.
 After that, results are filtered, aggregated, and transformed into the input context of the programmer.

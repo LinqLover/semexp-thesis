@@ -3,19 +3,19 @@
 \section{Domain Model}
 \label{sec:semtex/model}
 
-We describe our domain model of semantic technologies for programming semantic searches and conversational agents.
+We describe our domain model of semantic technologies for programming semantic retrieval systems and conversational agents.
 
-\subsection*{Semantic Search}
-\label{sec:semtex/model/search}
+\subsection*{Semantic Retrieval}
+\label{sec:semtex/model/retrieval}
 
-To model semantic search in the context of the Squeak ecosystem, \semtex defines the central class \code{SemanticCorpus} as a specialization of the \code{Set} class from the Collections package~(\cref{fig:semtex/model/search}).
+To model semantic retrieval in the context of the Squeak ecosystem, \semtex defines the central class \code{SemanticCorpus} as a specialization of the \code{Set} class from the Collections package~(\cref{fig:semtex/model/search}).
 This class extends the responsibilities of a regular collection for containing any number of (domain) objects with those of a vector store for searching and filtering objects based on document embeddings.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{01_model/search.png}
-	\caption[The object model for semantic search in \semtex.]{
-		The general object model for semantic search in \semtex (UML class diagram with Smalltalk-styled method signatures; default multiplicities are $1$; dashed arrows indicate the return class of message sends).
+	\caption[The object model for semantic retrieval in \semtex.]{
+		The general object model for semantic retrieval in \semtex (UML class diagram with Smalltalk-styled method signatures; default multiplicities are $1$; dashed arrows indicate the return class of message sends).
 		Programmers can use the entry class \code{SemanticCorpus} (\bold{\textcolor[HTML]{c00000}{red}}) to index domain objects with an embedding model and search, rank, or cluster them (\bold{\textcolor{gray}{gray}} classes are provided by the Squak base system).
 	}
 	\label{fig:semtex/model/search}
@@ -26,7 +26,7 @@ To compute embeddings, the corpus is provided with an \code{EmbeddingModel} (whi
 To embed non-textual object elements, the corpus can be provided with a \emph{text conversion} function through composition or specialization (e.g., by registering an evaluable block or overriding a method)\footnote{Currently accessible through \code{SemanticPluggableCorpus}.}.
 
 The semantic corpus provides methods for searching objects that are \emph{similar} to a reference object or to a natural-language \emph{query} string.
-For each search, it answers a \code{SearchResultSet}, which contains a \emph{relevance score} for each object in the corpus\footnote{At the time of writing, these classes have not yet been extracted from the \code{SemanticCorpus} in our public implementation.}.
+For each search, it answers a \code{SearchResultSet}, which contains a \emph{relevance score} for each object in the corpus.\footnote{At the time of writing, these classes have not yet been extracted from the \code{SemanticCorpus} in our public implementation.}
 A result set can be \emph{ranked} into a \code{SearchResultRanking} of a finite length using the different ranking methods discussed in \cref{sec:suggestions/ranking}, such as top-k selection and probabilistic sampling.
 Additionally, the semantic corpus also supports cluster-based selection of representative objects without a reference object.
 
@@ -86,7 +86,7 @@ Analogously to semantic corpora, each conversation is configured through a \code
 \end{example}
 
 Additionally, \semtex supports the construction of class-based agents by providing the base class \code{SemanticAgent}, which clients can specialize to provide custom instructions and functions.
-The \code{SemanticAgent} class provides a custom DSL (domain-specific language) for specifying function signatures with its arguments, their constraints (such as argument types or optional arguments), and their descriptions through method pragmas.
+The \code{SemanticAgent} class provides a custom DSL (domain-specific language) for specifying function signatures with its arguments, their constraints (such as argument types and optional arguments), and their descriptions through method pragmas.
 The agent class will automatically dispatch function calls and handle errors from called functions.
 
 \begin{example}
