@@ -499,6 +499,9 @@
 
 % circled numbers
 \usepackage{circledsteps}
+% avoid old-style numbers from template in circled numbers
+\let\oldCircled\Circled
+\renewcommand{\Circled}[1]{\oldCircled{\liningnums{#1}}}
 \newcommand{\CircledInverted}[2][]{%
     \CircledParamOpts{fill color=black, inner color=white, outer color=none, #1}{1}{#2}%
 }
