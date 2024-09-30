@@ -3,7 +3,7 @@
 Master's thesis by Christoph Thiede.  
 Supervised by [Robert Hirschfeld](https://github.com/roberthirschfeld), [Marcel Taeumel](https://github.com/marceltaeumel), and [Lukas Böhme](https://github.com/boehmchen).
 
-Read the thesis here: **[💾 PDF](https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf)**
+Read the thesis here: **[💾 PDF (twoside)](https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf)** or **[💾 PDF (oneside)](https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis-oneside.pdf)**
 
 **Available artifacts:**
 - https://github.com/hpi-swa-lab/SemanticSqueak
