@@ -20,11 +20,11 @@ From the focused windows, we extract the currently browsed classes and methods o
 \end{figure}
 
 In the suggestion space, we display similar code and documentation artifacts, correlated code artifacts, and an optional summary of them.
-Suggestions are updated continously in the background as the programmer conducts experiments by browsing methods or writing code or notes.
+Suggestions are updated continuously in the background as the programmer conducts experiments by browsing methods or writing code or notes.
 
 To enable semantic retrieval of all classes and methods in the image, we maintain either of them in a semantic corpus~(i.e., a vector store of \semtex).
-\footnote{We truncate methods to their first \num{10000} characters to exclude ``data methods'' that define constants such as multimedia data, since they might exceed the context window of the embedding model and rarely contain interesting information for programmers. While a typical Smalltalk image still contains many shorter data methods, this heuristic already reduced the usage of the embedding model by approximated \qty{13}{\percent} in our experiments.}
-We subscribe to the \code{SystemChangeNotifier} interface to incoporate updates from the system.
+\footnote{We truncate methods to their first \num{10000} characters to exclude ``data methods'' that define constants such as multimedia data, since they might exceed the context window of the embedding model and rarely contain interesting, human-readable information. While a typical Smalltalk image still contains many shorter data methods, this heuristic already reduced the token consumption of the embedding model by approximated \qty{13}{\percent} in our experiments.}
+We subscribe to the \code{SystemChangeNotifier} interface to incorporate updates from the system.
 We compute embeddings for new documents asynchronously in the background after the current world cycle has ended (i.e., \code{[aCorpus computeEmbeddings] future forkAt: Processor systemBackgroundPriority}).
 This strategy allows for bulk-updating the corpus and avoiding the overhead of multiple requests to the OpenAI API after many code changes have been applied as part of a single operation (such as installing a package).
-At the same time, corpus updates are run in the background without introducing noticable lags.
+At the same time, corpus updates are run in the background without noticeable lags.

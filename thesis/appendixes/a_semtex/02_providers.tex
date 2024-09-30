@@ -13,7 +13,7 @@ As the default provider, we implemented a basic client for the OpenAI API%
 }.
 The client accesses the HTTP endpoints using Squeak's \code{WebClient} package and supports token-based authentication and rate limits.
 
-To support incremental receipt of generated text chunks and avoid delays, the client can handle \emph{server-sent events}\footnote{%
+To support receiving generated text chunks incrementally and avoid delays, the client can handle \emph{server-sent events}\footnote{%
 	``Server-Sent Events''.
 	In: \emph{HTML Living Standard}, section 9.2.
 	WHATWG, 2024-06-26.

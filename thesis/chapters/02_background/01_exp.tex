@@ -4,7 +4,7 @@
 \label{sec:background/exp}
 
 \emph{Exploratory programming} is a software engineering practice that promotes a notion of projects where programmers have a rather emergent than upfront understanding of the problem domain~\cite{sandberg1988smalltalk,kery2017exploring,rein2018exploratory}:
-for example, they might not know how a new user interface should look and feel like to achieve a good user experience, or they might be unaware of the facilities and limitations that an existing code base or framework provides.
+for example, they might not know how a new user interface should look and feel to achieve a good user experience, or they might be unaware of the facilities and limitations that an existing code base or framework provides.
 To acquire such knowledge, the exploratory programming practice tightly intertwines reverse engineering, prototyping, and testing in an iterative manner~\cite{taeumel2022pattern}.
 
 \begin{figure}
@@ -14,7 +14,7 @@ To acquire such knowledge, the exploratory programming practice tightly intertwi
 		A single research process instance in the exploratory programming workflow.
 		Exploratory programmers start with a question about the system.
 		To answer the question, they plan one or multiple experiments, execute them by interacting with the system through tools, and observe their results.
-		They repeat until they have acquired enough information and then combine them to answer the initial question.
+		They repeat until they have acquired enough information and then combine it to answer the initial question.
 	}
 	\label{fig:background/exp/simple_process}
 \end{figure}
@@ -25,11 +25,11 @@ To refine their comprehension, they ask questions and find answers to them.
 \Cref{fig:background/exp/simple_process} displays a single instance of a \emph{research process} in our exploratory programming workflow model.
 
 Finding answers requires programmers to descend from the conceptual level of the original questions (their \emph{mental model}) into a lower abstraction level where they can dissect questions into their underlying terms, concepts, and technical foundations (the \emph{technical model}).
-Here, they interact with the underlying systems by planning, executing, and evaluating a substantial number of \emph{experiments} and repeat until they are able to provide an answer to the original question.
-Experiments include a wide range of activities that are aimed at the generation of knowledge:
-for example, programmers can research information in the documentation or implementation of a system or related communication platforms; inspect objects of a system at runtime to understand their internal state; run scripts to test interfaces and observe their effect; build and test prototypes; etc.
+Here, they interact with the underlying systems by planning, executing, and evaluating a---potentially large---number of \emph{experiments} and repeat until they are able to answer the original question.
+Experiments include a wide range of activities aimed at generating knowledge:
+for example, programmers can research information in the documentation or implementation of a system or related communication platforms; inspect objects of a system at runtime to understand their internal state; run scripts to test interfaces and observe their effect; build and test prototypes; and so on.
 
-For nontrivial questions, the research process often spans multiple abstraction levels, as the experiments that programmers plan to answer high-level questions still exhibit an abstraction level that is too high to directly communicate them to the system.
+For nontrivial questions, the research process often spans multiple abstraction levels, as the experiments that programmers plan to answer high-level questions are still too abstract to directly communicate them to the system.
 Thus, programmers need to handle abstract experiments as new, subordinate questions and answer them on a lower abstraction level.
 This leads to a \emph{hierarchical research process} in which programmers gradually descend into the implementation details of the subjects of questions until they reach the interfaces of the system through which they can execute technical experiments.
 \Cref{fig:background/exp/complex_process} displays a complex research process that exploratory programmers walk through when answering a high-level question.
@@ -46,10 +46,10 @@ This leads to a \emph{hierarchical research process} in which programmers gradua
 \end{figure}
 
 \begin{example}
-	A programmer might wish to design a new user interface (``How could a convenient UI look like?'').
+	A programmer might wish to design a new user interface (``How could a convenient UI look?'').
 	To answer this question, they plan to experiment with different UI concepts that they want to test through small prototypes (``Let's build a tree-based or pane-based interface and play around with it!'').
 
-	However, to execute these experiments, the programmer needs to perform subordinate research processes in which they conduct further experiments to implement and test single prototypes (``How can I create a tree widget? How can I retrieve the required data? How many interactions are required to navigate through this UI?'').
+	However, to execute these experiments, the programmer needs to perform subordinate research processes in which they conduct further experiments to implement and test individual prototypes (``How can I create a tree widget? How can I retrieve the required data? How many interactions are required to navigate through this UI?'').
 
-	Recursively, some of these research processes might yield further experiments that need to be further broken down before they can be communicated to the system (``What classes does this package provide to build widgets? What messages does this class understand? What usage patterns do existing users of this class show?'').
+	Recursively, some of these research processes might yield further experiments that need to be broken down before they can be communicated to the system (``What classes does this package provide to build widgets? What messages does this class understand? What usage patterns do existing users of this class show?'').
 \end{example}

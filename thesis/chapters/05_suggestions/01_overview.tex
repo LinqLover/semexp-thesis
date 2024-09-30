@@ -9,8 +9,10 @@
 		\includegraphics[height=17\baselineskip]{01_overview/graph.png}
 		\caption[Merge graph of all available artifact types and strategies in the suggestion engine.]{
 			Merge graph of all available artifact types and strategies in the suggestion engine.
-			\bold{\textcolor{gray}{Gray}} boxes represent artifact types (grouped by their roles\footnotemark), \bold{\gradientHSB{colorful}{-45,240,200}{195,240,200}} boxes represent strategies, and arrows display possible inputs and outputs.
-			\footnotetext{Technically, each box represents a tuple of an artifact type and an artifact role. For example, ``open method'', ``sender'', and ``similar method'' are all artifacts of the type ``method'' in different roles.}
+			\bold{\textcolor{gray}{Gray}} boxes represent artifact types (grouped by their roles\footnote{%
+				Technically, each gray box represents a tuple of an artifact type and an artifact role.
+				For example, ``open method'', ``sender'', and ``similar method'' are all artifacts of the type ``method'' in different roles.
+			}), \bold{\gradientHSB{colorful}{-45,240,200}{195,240,200}} boxes represent strategies, and arrows display possible inputs and outputs.
 			Arrows starting or ending in a group of artifacts or strategies refer to all of its items.
 			For sake of simplicity, we do not distinguish optional and required inputs in this figure.
 		}
@@ -25,24 +27,24 @@ We distinguish between three groups of artifacts:
 \begin{description}[noextralabelsep]
 	\item[Input artifacts] are captured from the original exploratory session and experiments of the programmer.
 
-	This includes code artifacts such as \emph{methods} and \emph{classes} that the programmer is browsing or editing, \emph{do-it scripts} that they are writing or executing, and other types of information such as \emph{to-do lists} and \emph{bug reports} that they are interacting with.
+	This includes code artifacts such as \emph{methods} and \emph{classes} that the programmer is browsing or editing, \emph{do-it scripts} that they are writing or executing, and other types of information such as \emph{notes} and \emph{bug reports} that they are interacting with.
 
 	\item[Retrieved artifacts] refer to any piece of information that is available in the programming system and has been identified by the suggestion engine as potentially relevant for the next steps of the programmer's research process.
 
 	Most retrieved artifacts relate to the implementation of systems: \emph{users} of code artifacts such as message senders, class users, and variable references provide context about their tasks and interfaces.
 	\emph{Similar code artifacts} exemplify how other methods and classes solve related problems, use similar protocols, or implement similar interfaces.
-	From the later, \emph{correlated code artifacts} can be extracted to summarize common building blocks of similar solutions, such as frequently sent messages, executed methods, instantiated classes, and references variables.
-	A programmer who is editing a method has a higher statistical probability to use some of these correlated artifacts.
+	From the latter, \emph{correlated code artifacts} can be extracted to summarize common building blocks of similar solutions, such as frequently sent messages, executed methods, instantiated classes, and referenced variables.
+	A programmer who is editing a method has a higher probability to use some of these correlated artifacts.
 
-	Beyond code artifacts, the suggestion engine might also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communications from information sources that are related to the development of the software system.
+	Beyond code artifacts, the suggestion engine might also find \emph{documentation artifacts}, \emph{revision notes}, \emph{bug reports}, or other forms of communication from information sources that are related to the development of the software system.
 
-	\item[Generated artifacts] are newly synthesized experiments from the suggestion engine.
+	\item[Generated artifacts] are new experiments that the suggestion engine has synthesized.
 
 	This includes generated and contextualized \emph{code expressions} based on similar and correlated artifacts.
 	Generated code expressions can range from single message sends to entire class definitions and method implementations.
 	However, the suggestion engine might also generate other types of artifacts to outline cluttered implementations, summarize long documentation artifacts, or suggest a list of steps to debug an error based on prior developer communications.
 \end{description}
 
-For each suggestable role of artifact, the suggestion engines defines one or multiple strategies that process and combine prior artifacts and produce new artifacts.
-For example, we (i) implement multiple strategies for searching similar methods based on their intentions and interface usage; (ii) we provide different ways to extract correlated messages from methods based on static and dynamic call graphs; and (iii) we employ different LLMs and heuristics through the exploratory programming agent for combining retrieved artifacts into new code expressions.
+For each suggestable role of artifact, the suggestion engine defines one or multiple strategies that process and combine prior artifacts and produce new artifacts.
+For example, we (i) implement multiple strategies for searching similar methods based on their intentions and interface usage; (ii) provide different ways to extract correlated messages from methods based on static and dynamic call graphs; and (iii) employ different LLMs and heuristics through the exploratory programming agent for combining retrieved artifacts into new code expressions.
 \Cref{fig:suggestions/overview/graph} provides an overview of all available types of artifacts and strategies in our prototype.

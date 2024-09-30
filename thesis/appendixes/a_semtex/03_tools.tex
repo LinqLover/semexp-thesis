@@ -6,12 +6,12 @@
 Developing semantic applications (i.e., programs that rely on semantic technologies) presents particular challenges to programmers, including nondeterministic behavior, latencies, and cost of language models.
 
 First, language models behave \emph{nondeterministically} in many settings, which can impede testing.
-In particular, generative LLMs exhibit characteristics of a chaotic system, meaning that small changes in the provided input might cause large changes in their outputs.
+In addition, generative LLMs exhibit characteristics of a chaotic system, meaning that small changes in the provided input might cause large changes in their outputs.
 For example, if the user phrases the same question using slightly different words, an agent might interpret the task very differently and fail to solve it appropriately.
 Thus, the behavior of LLMs is often poorly predictable.
 
 Second, requesting language models to process large amounts of information can involve notable \emph{latencies}, which result from the intrinsic speed of models and possible rate limits of APIs.
-For example, embedding or describing all methods in a typical Squeak image using contemporary OpenAI models might take between five and ten minutes~(see \cref{sec:discussion/performance}).
+For example, embedding or describing all methods in a typical Squeak image using contemporary OpenAI models might take several minutes~(see \cref{sec:discussion/performance}).
 These delays can reduce the experience of temporal immediacy for programmers who are prototyping or testing semantic applications.
 
 Third, \emph{pecuniary costs} often arise when using cloud models.
@@ -25,18 +25,18 @@ a \emph{conversation editor} for prototyping generative agents, a \emph{mocking 
 \subsection*{Conversation Editor}
 \label{sec:semtex/tools/editor}
 
-The \emph{conversation editor} is a graphical tool through that programmers can prototype and debug generative agents.
-It allows programmers to inspect and modify all parts of a conversation such as messages, functions, and function calls using a text-based WYSIWYG\footnote{WYSIWYG: What you see is what you get.} interface and a custom DSL.
+The \emph{conversation editor} is a graphical tool through which programmers can prototype and debug generative agents.
+It allows programmers to inspect and modify all parts of a conversation, such as messages, functions, and function calls, using a text-based WYSIWYG\footnote{WYSIWYG: What you see is what you get.} interface and a custom DSL.
 
 \FloatBarrier
 
-For example, programmers can engage in prompt engineering by drafting different versions of system instructions and function specification and comparing their effect (by duplicating the conversation window using the eponymous Morphic halo handle in Squeak).
+For example, programmers can engage in prompt engineering by drafting different versions of system instructions and function specifications and comparing their effects (by \emph{duplicating} the conversation window using the eponymous Morphic halo handle in Squeak).
 Moreover, they can simulate the behavior of certain function calls or former assistant replies without implementing them.
 Thus, the conversation editor allows programmers to test agents and explore the efficacy of different prompts%
 \footnote{%
 	Similar possibilities are offered by several other tools such as the \emph{OpenAI chat playground} (\url{https://platform.openai.com/playground/chat}).
 	However, existing tools are typically not integrated into the live programming system, which impedes prototyping, since programmers need to connect language models with other artifacts and logic.
-	In addition, our conversation editor can also be used for post-mortem-debugging and exploring actual conversations from a semantic application.
+	In addition, our conversation editor can also be used for post-mortem debugging and exploring actual conversations from a semantic application.
 }%
 .
 
@@ -73,7 +73,7 @@ The conversation editor also constitutes a composable UI component that can be r
 The \code{MockingConversationModel} answers a static assistant message for each request (which can be adjusted through parameters in the \code{SemanticConversationConfig}).
 The \code{MockingEmbeddingModel} embeds each document as a small vector based on the term frequencies of a short hard-coded list of words.
 
-By temporarily using mocking models, programmers can ensure the deterministic behavior of semantic application while testing them or developing other parts of a system.
+By temporarily using mocking models, programmers can ensure the deterministic behavior of semantic applications while testing them or developing other parts of a system.
 Finally, they can avoid additional latencies or costs.
 
 \subsection*{Price Estimation and Expense Watching}
@@ -104,7 +104,7 @@ Thus, programmers gain improved trust and transparency regarding pecuniary costs
         \centering
         \includegraphics[width=\textwidth]{03_tools/pricing/conversation_metrics.png}
         \caption{A tooltip in the conversation editor provides detailed information on the prior costs of a conversation and estimates the tokens and price for answering the next user message.}
-        \label{fig:semtex/tools/piricing/expense_watchers/completion_metrics}
+        \label{fig:semtex/tools/pricing/expense_watchers/completion_metrics}
     \end{subfigure}
 	\caption[Through \emph{expense watchers}, programmers can track the costs of semantic expenses within the programming system.]{
 		Through \emph{expense watchers}, programmers can track the costs of semantic expenses within the programming system.

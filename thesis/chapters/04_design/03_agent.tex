@@ -6,7 +6,7 @@
 \begin{figure}
 	\centering
 	\includegraphics[width=.9\textwidth]{03_agent/framework.png}
-	\caption[Our approach of \emph{semantic object interfaces} for semantic exploratory programming systems.]{
+	\caption[Our approach of \emph{semantic object interfaces} for semantic ex\-plo\-ra\-to\-ry programming systems.]{
 		Our approach of semantic object interfaces for semantic exploratory programming systems.
 		The programmer expresses high-level, contextual, and often natural-language questions about an object to the interface and receives answers on the same abstraction level.
 		Internally, an \emph{exploratory programming agent} (\bold{\textcolor[HTML]{c00000}{red}}) translates these questions and interacts with the system to perform low-level experiments.
@@ -15,28 +15,28 @@
 \end{figure}
 
 To delegate parts of the research process to the exploratory programming system, we construct an \emph{exploratory programming agent}, which uses a generative LLM for planning, generating experiments, and communicating with the programmer in natural language.
-To connect the agent with the programming system, we propose the design of an \emph{semantic object interface}, which describes the communication between the programmer, the agent, and the system~\cite{thiede2024talking}~(\cref{fig:design/agent/framework}).
-Our approach follows the object-oriented paradigm of many programming systems in that semantic object interfaces focus on a single object from the running system.
-Thus, semantic object interfaces resemble traditional message sending to objects, and programmers can interact with objects via the agent by the means of natural-language and semantic questions.
+To connect the agent with the programming system, we propose the design of \emph{semantic object interfaces}, which describes the communication between the programmer, the agent, and the system~\cite{thiede2024talking}.
+This design follows the object-oriented paradigm of many programming systems in that semantic object interfaces focus on a single object from the running system.
+Thus, semantic object interfaces resemble traditional message sending to objects, and programmers can interact with objects via the agent by means of natural-language and semantic questions.
 
-As part of this framework, the agent takes high-level and context-dependent \emph{semantic} questions from the programmer and translates them into low-level technical experiments to answer the questions.
+As part of this framework, the agent takes high-level and context-dependent \emph{semantic} questions from the programmer and translates them into low-level technical experiments to answer the questions~(\cref{fig:design/agent/framework}).
 Our framework comprises three fundamental actors:
 
 \begin{description}[noextralabelsep]
 	\item[The programmer] conducts a larger exploratory research process, from which different questions arise.
 	The programmer asks such questions about an object in a system and expects answers on a similar level of abstraction.
-	These questions are \emph{semantic} and conceptual, which means they are expressed in the programmer's mental model and vocabulary, typically have an informal or natural-language style, and often depend on the context of previous questions and answers.
+	These questions are \emph{semantic} and conceptual, meaning that they are expressed in the programmer's mental model and vocabulary, typically have an informal or natural-language style, and often depend on the context of previous questions and answers.
 
 	\item[The object] is any object in the system, for example a particular domain object, a code object (such as a class or method), or an artifact from the programming system (such as a call graph, a benchmark, or a program trace).
 	It is part of an \emph{object graph}, which embeds it into a larger context of the system.
 	It is also linked to an \emph{implementation}, which describes the object's behavior through further objects and may be specified using code, tests, or other forms such as contracts.
 
-	Objects can be accessed either by sending them \emph{messages} (which in many languages is also referred to as \emph{invoking methods}) or through \emph{reflection interfaces} that expose their internal state, implementation, or location in the object graph.
+	Objects can be accessed either by sending them \emph{messages} or through \emph{reflection interfaces} that expose their internal state, implementation, or location in the object graph.
 
 	\item[The exploratory programming agent] is an intelligent mediator between the programmer and the object in the system.
 	It automatically translates conceptual questions from the programmer into interactions with the system and translates the results of these interactions back into answers for the programmer.
 
-	Internally, the agent conducts research processes autonomusly: it interprets the programmer's question, develops a plan, designs and conducts experiments, evaluates their results, and repeats as necessary (until all required information has been collected) before delivering a reasoned answer to the questions and returns it to the programmer.
+	Internally, the agent conducts research processes autonomously: it interprets the programmer's question, develops a plan, designs and conducts experiments, evaluates their results, and repeats as necessary (until all required information has been collected) before delivering a reasoned answer to the questions and returning it to the programmer.
 
 	The agent uses two resources: a set of \emph{policies} and a \emph{conversation history}.
 	\emph{Policies} define abstract agent behavior, such as the types and frequency of experiments and the format of answers.
@@ -66,16 +66,17 @@ Our framework allows programmers to ask arbitrary questions about objects in a s
 To answer both functional and epistemic questions, the agent automatically conducts experiments by utilizing three types of interfaces that most existing programming systems already offer:
 
 \begin{description}[noextralabelsep]
-	\item[State inspection] allows the internal information of objects to be explored, for instance, by looking up a variable or enumerating all properties.
+	\item[State inspection] allows the internal information of objects to be explored.
+	For example, the agent can look up a variable or enumerate all properties of an object.
 	\item[Implementation browsing] explores the specified behavior of objects\linebreak{}through their \emph{protocols}, \emph{implementation}, and \emph{documentation}.
 	\emph{Protocols} refer to the set of messages an object understands.
 	\emph{Implementation} includes the source code of objects or classes, but also their integration within the global system through call graphs or related concepts (e.g., senders or program traces) for understanding the usage of objects by example.
 	\emph{Documentation} can be provided through comments, examples, or alternative system descriptions.
 
 	Following the singularity of objects and meta objects noted above, implementation browsing of domain objects equals state inspection of their classes, but is associated with a different connotation by adhering to the context of the original object.
-	For example, using symbolic execution methods, both the state and effective behavior of objects can explored at once.
+	For example, using symbolic execution methods, both the state and effective behavior of objects can be explored at once.
 	\item[Message sending] constitutes regular communication with objects to activate their behavior.
-	As opposed to state inspection and implementation browsing, normal messages can be sent without requiring reflective capabilities.\footnote{From our classification, we exclude special reflective messages such as \code{instVarNamed:} in Smalltalk as well as restricted visibility of messages such as the \code{private} access modifiers in Java.}
+	As opposed to state inspection and implementation browsing, normal messages can be sent without requiring reflective capabilities.\footnote{From our classification, we exclude special reflective messages such as \code{\#instVarNamed:} in Smalltalk as well as restricted visibility of messages such as the \code{private} access modifiers in Java.}
 \end{description}
 
 Note that the agent generally does not require any manual preparation for specific systems and packages from domain experts or programmers but will learn about the system on its own.
@@ -113,8 +114,8 @@ We propose to extend these interfaces with semantic capabilities: object inspect
 \end{figure}
 
 Inspection tools allow programmers to explore and manipulate the internal state of objects through a list of variables or properties.
-We propose a new \emph{conversation mode} in inspection tools that allow programmers to ask semantic questions about an object~(\cref{fig:design/agent/interfaces/inspector}).
-Thus, in addition to the usually technical state inspection, they can then also chat with an object through the exploratory programming agent.
+We propose a new \emph{conversation mode} for inspection tools that allows programmers to ask semantic questions about an object~(\cref{fig:design/agent/interfaces/inspector}).
+Thus, in addition to usual technical state inspection, they can also chat with an object through the exploratory programming agent.
 
 Through the chat interface, programmers can express questions in natural language without needing to know the vocabulary and protocols of the object's domain.
 Additionally, they can ask follow-up questions in the context of a conversation without repeating or editing their original thoughts, like in a real-life conversation between two programmers.
@@ -138,7 +139,7 @@ For instance, the above example could be expressed as any of the following:
 
 	self orderItems theOneWithHighestAmount.
 \end{multicode}
-Like regular messages, semantic messages can also pass arguments, e.g.:
+Like regular messages, semantic messages can also pass arguments, such as:
 \begin{multicode}
 	aProduct numberOfSalesTo: aCustomer.
 
@@ -146,7 +147,7 @@ Like regular messages, semantic messages can also pass arguments, e.g.:
 \end{multicode}
 
 \noindent
-Thus, programmers can maintain their scripting flow when asking questions even if they are unaware of certain protocols, and they do not have to express questions using specific protocols and syntax or implement algorithms for more problems.
+Thus, programmers can maintain their scripting flow when asking questions even if they are unaware of certain protocols, and they do not have to express questions using specific protocols and syntax or implement algorithms for more complex problems.
 
 \ParSep
 

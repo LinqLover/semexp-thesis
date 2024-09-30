@@ -353,6 +353,14 @@
 \usepackage[nameinlink]{cleveref}
 \crefalias{subappendix}{section}
 
+% labels to arbitrary places in text
+\makeatletter
+\newcommand{\textlabel}[1]{%
+  \phantomsection%
+  \label{#1}%
+}
+\makeatother
+
 % ensure footnote references include chapter number
 %\labelformat{footnote}{\thechapter.#1}
 % In fact, this is more complicated because we want different formats for \cref and \footref.

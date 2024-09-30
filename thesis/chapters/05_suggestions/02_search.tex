@@ -9,20 +9,20 @@ In the following, we describe multiple strategies for finding similar artifacts 
 \label{sec:suggestions/search/similar}
 
 A central strategy for similarity search in the suggestion engine is \emph{semantic search using document embeddings}~\cite{lewis2020retrieval,mikolov2013efficient}.
-For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts with a reduced dimension size of 256~(see \cpageref{sec:discussion/performance/memory}).}, search a vector database of all other available artifacts (such as methods in the system) for documents with close embeddings, and return the top $k$ most similar results.
+For this, we embed each query (i.e., each input artifact) using a text embedding model\footnote{In our prototype, we use OpenAI's \code{text-embedding-3-large} model for embedding any artifacts and choose a reduced dimension size of 256~(see \cpageref{sec:discussion/performance/memory}).}, search a vector database of all other available artifacts (such as methods in the system) for documents with nearby embeddings, and return the top $k$ most similar results.
 Thus, we \emph{reconstruct} the programmers' intentions by mapping their experimental artifacts into an embedding space, and we \emph{anticipate} their next steps by finding similar artifacts in this space.
 
 However, embedding-based search is only applicable to a limited extent:
 first, computing and storing embeddings involves noticeable costs in terms of time, storage, and financial expenses.
-Second, the embedding search might be too sensitive to the syntactical format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogenous artifacts (such as the implementation and documentation of the same method).
-Similarly, when queried with an unfinished draft of a method or script, embedding-based search will primarily find artifacts of a similar length such as stub methods rather than fully implemented methods.
+Second, the embedding search might be too sensitive to the syntactical format of documents unless the model is specifically trained or documents are preprocessed, which can reduce the recall when comparing heterogeneous artifacts (such as the implementation and documentation of the same method).
+Similarly, when queried with an unfinished draft of a method or script, embedding-based search will primarily find artifacts of a similar length---such as stub methods---rather than fully implemented methods.
 
 To overcome these limitations, we provide another search strategy based on the TF-IDF (term frequency and inverse document frequency) metric~\cite{salton1988term}.
-This metric is based on the assumption that the less often a term occurs in a corpus of documents, the more important each occurence of this term in a particular document is for the semantics of this document.
-For example, stopwords in natural language (e.g., common words such as ``and'' or ``is'') or keywords and general-purpose identifiers from standard frameworks in programming languages (e.g., \code{self} or \code{ifTrue:} in Smalltalk) have a low significance about specific documents (on their own), while rare words or method names are more commonly associated with specific domain concepts.
+This metric is based on the assumption that the less often a term occurs in a corpus of documents, the more important each occurrence of this term in a particular document is for the semantics of this document.
+For example, stopwords in natural language (e.g., common words such as ``and'' or ``is'') or keywords and general-purpose identifiers from standard frameworks in programming languages (e.g., \code{self} or \code{ifTrue:} in Smalltalk) generally have a low significance for specific documents, while rare words or method names are more commonly associated with specific domain concepts.
 
 Thus, we can estimate the similarity of two documents by comparing the occurrences of each term (or \emph{term frequencies}) in both documents, weighted by their rareness (or \emph{inverse document frequencies}).
-For this, the term frequency of a term $t$ in a document $d$, the inverse document frequency of a document $d$ in a corpus $D$, and the TF-IDF score are commonly defined as follows, with $d(t)$ indicating the number of occurences of $t$ in $d$:
+For this, the term frequency of a term $t$ in a document $d$, the inverse document frequency of a document $d$ in a corpus $D$, and the TF-IDF score are commonly defined as follows, with $d(t)$ indicating the number of occurrences of $t$ in $d$:
 \begin{align}
 	\text{tf}(t, d)	&= \frac{d(t)}{\sum_{t' \in d} d(t')} \\
 	\text{idf}(t, D)	&= \log \frac{|D|}{|\{d \in D \mid d(t) > 0\}|} \\
@@ -33,7 +33,7 @@ By combining the TF-IDF scores of a document for all terms in the corpus into a 
 This allows us to compare two documents based on their cosine similarity analogously to other types of embeddings.
 
 Other than transformer-based embeddings, TF-IDF vectors are sparse and ignore the mutual relation of words in a document as well as the semantics of words (such as synonyms and homonyms).
-However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores might not need to be caculated for every term.
+However, they can be simpler to calculate, especially in the context of ranking similar documents to a reference document, where TF-IDF scores do not need to be calculated for every term.
 
 \begin{example}
 	In a corpus with the three documents ``Squeak is a system for programmers'', ``Smalltalk is a programming language'', and ``The squeak mouse is a birthday present for the dog'', a TF-IDF search will consider the first and the third document most similar to each other due to their shared use of the term ``Squeak''.
@@ -59,42 +59,42 @@ To extract used artifacts from a given method, we employ two different data sour
 The \emph{static dependency graph} is modeled from the terms in a method that are accessible from the abstract syntax tree (AST) or bytecode of the method.
 In our prototype for Smalltalk, we extract all literals from the bytecode of a method and filter them for message selectors, local variable references, and bindings to classes and global variables.
 
-However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages~(see \cref{fn:dynamic_dispatching}).
+However, this approach only offers limited insight into the actual methods that are executed through message sends due to the dynamic dispatching of late binding programming languages~(see \cref{fn:dynamic_dispatching} on \cpageref{fn:dynamic_dispatching}).
 Using a \emph{dynamic dependency graph}, we enrich this information with the execution context from Babylonian examples for each similar method artifact.
 In our prototype, we employ a \emph{method harvester} that runs all examples in an instrumented interpreter using \name{SimulationStudio} to construct this graph\footnote{Inspired by the \emph{type harvesting} approach of \cite{haupt2011type}.}.
 Thus, we can suggest a set of concrete methods that are executed by many similar methods.
 
-We rank correlated artifacts based on their number of occurences in the similar artifacts, weighted by the relevance of the latter.
+We rank correlated artifacts based on their number of occurrences in the similar artifacts, weighted by the relevance of the latter.
 
 \begin{example}
 	A programmer is writing a script to create a red circle.
-	Their incompleted draft looks like this:
+	Their incomplete draft looks like this:
 	\definecolor{intermbasecolor}{RGB}{0,128,64}
 	\newcommand*\interm[1]{\setlength{\fboxsep}{0pt}\colorbox{intermbasecolor!30}{\strut{}#1}}
 	\newcommand*\coterm[1]{\setlength{\fboxsep}{0pt}\colorbox{red!30}{\strut{}#1}}
 	\let\oldmulticode\multicode \let\endoldmulticode\endmulticode
 	\RenewDocumentEnvironment{multicode}{}{\setlength{\baselineskip}{1em}\oldmulticode}{\endoldmulticode}
 	\begin{multicode}
-		circle := \interm{Circle} new. \n
+		circle := \interm{Circle} \interm{new}. \n
 		color := \interm{Color} \interm{red}.
 	\end{multicode}
 	Based on the used names, the suggestion engine identifies similar methods such as:
 	\begin{itemize}
 		\item High similarity (3 common terms):
 		\begin{multicode}
-			circle := \interm{Circle} new. \n
+			circle := \interm{Circle} \interm{new}. \n
 			circle \coterm{color:} \interm{Color} \coterm{green}. \n
 			circle \coterm{border:} \#thick.
 		\end{multicode}
 		\item Moderate similarity (2 common terms):
 		\begin{multicode}
-			triangle := \coterm{Triangle} new. \n
+			triangle := \coterm{Triangle} \interm{new}. \n
 			triangle \coterm{color:} \interm{Color} \coterm{green}. \n
 			triangle \coterm{shadow:} true.
 		\end{multicode}
 		\item Low similarity (1 common term):
 		\begin{multicode}
-			rectangle := \coterm{Rectangle} new. \n
+			rectangle := \coterm{Rectangle} newSquare. \n
 			rectangle \coterm{borderColor:} \interm{Color} \coterm{blue}.
 		\end{multicode}
 	\end{itemize}
@@ -107,5 +107,5 @@ We rank correlated artifacts based on their number of occurences in the similar 
 		\item \code{\#border:} (used in 1 highly similar method)
 		\item \code{\#shadow:} (used in 1 moderately similar method)
 	\end{itemize}
-	Thus, the programmer can complete their script by using the most likely suggestion.
+	Thus, the programmer can complete their script by choose from the most likely suggestions.
 \end{example}

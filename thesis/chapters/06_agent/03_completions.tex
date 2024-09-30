@@ -9,7 +9,7 @@ Because up-to-date and immediate completions are desired throughout the entire p
 To optimize the exploratory programming agent for this use case, we provide the LLM with an extensive pre-generated context but disable its function interfaces and limit the research process of the agent to a single invocation of the model.
 That is, we eliminate the autonomy of the agent to improve its performance.
 
-In our prototype for semantic code completions, we statically (i.e., at development time) anticipate a range of likely experiments required by the agent and dynamically (i.e,. prior to the only invocation of the LLM) execute them and present their results to the agent for stage-1 generations.
+In our prototype for semantic code completions, we statically (i.e., at development time) anticipate a range of likely experiments required by the agent and dynamically (i.e., prior to the only invocation of the LLM) execute them and present their results to the agent for stage-1 generations.
 These pre-generated experiments include browsing the definition, protocols, and messages of the receiver class of the current draft, correlated classes provided with the same information, and the source code of correlated methods.
 If a current receiver object is available (e.g., when the programmer is typing their draft into the script pane of an inspector), we also include its full state (i.e., all instance variables and truncated variable fields).
 
@@ -27,13 +27,13 @@ To mitigate the limited proficiency of \gptfouro regarding the Smalltalk program
 	\caption[Optimized prompt design of the exploratory programming agent for generating stage-1 code completions.]{
 		Optimized prompt design of the exploratory programming agent for generating stage-1 code completions.
 		Instead of enabling the agent to perform different experiments autonomously, we provide it with extensive pre-generated information and request a final answer in a single invocation of the LLM.
-		(Fields with ellipsis (...) have been abbreviated for this thesis but appear untruncated in the LLM context.)
+		(Fields with ellipsis (...) have been abbreviated for this figure but appear untruncated in the LLM context.)
 	}
 	\label{fig:agent/completions/prompt_design_1}
 \end{figure}
 
 As for other invocations of the agent, we instruct it to engage in inner monologue before returning a single code completion.
-We request the LLM to return $k \in [5, 20]$ completions in parallel, which multiplies the cost for the outputs but not for the provided context, while latencies are typically not increased due to elastic scaling of the API.
+We request the LLM to return $k \in [5, 20]$ completions in parallel, which multiplies the cost for the outputs but not for the provided context, while latencies are typically not increased due to elastic scaling of the API service.
 \Cref{fig:agent/completions/prompt_design_1} displays the full prompt schema of our agent for generating a semantic code completion.
 
 For stage-2 generations (recontextualizations), we invoke the smaller, more efficient \gptfouromini model\footnote{Used in version \code{gpt-4o-mini-2024-07-18}.} once for each previously generated stage-1 completion, provide it with the previous completion expression as well as the updated draft of the programmer, and instruct it to adjust the previous expression~(\cref{fig:agent/completions/prompt_design_2}).

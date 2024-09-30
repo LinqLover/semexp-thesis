@@ -43,6 +43,7 @@ However, exploratory conversations can be expensive.
 Even simple questions might demand the full attention and structured thinking from programmers:
 \emph{%
 %\begin{quote}\itshape
+	\label{ex:introduction/order}
 	when has this order been filed? I can find that out by inspecting this object. Ah, it has a \code{creationDate} field, but oh no, why is this just a plain number? It could be a Unix timestamp. How can I convert that into a human-readable representation? Is there any method on \code{Date} that does this for me? Seems not so. Maybe \code{DateAndTime}? Yes, \code{DateAndTime fromUnixTime: creationDate} should do the job ... but wait, surely this order has not been created in year 56170? Is this actually a millisecond timestamp? Okay, so I can divide it by 1000 and try again ... fix that syntax slip ... alright, so this order has been filed on March 14th this year. What was I going to do again?
 }%\end{quote}
 
@@ -62,9 +63,9 @@ At the same time, the recent progress of artificial intelligence (AI) and machin
 Search and recommendation algorithms on online marketplaces, social-media platforms, and streaming services use \emph{document embeddings}~\cite{mikolov2013efficient,devlin2019bert} to find objects based on their \emph{semantics} or meaning.
 Generative AI tools such as ChatGPT\footnote{\url{https://chat.openai.com/}}, Claude\footnote{\url{https://claude.ai/}}, and others~\cite{vaswani2017attention,radford2018improving,zhao2023survey} employ \emph{large language models} (LLMs) to help people create, automate, and learn.
 
-In particular, many programmers have started to leverage generative AI: millions of developer generate code with the help of code completion tools such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and others, or they use conversational agents such as GitHub Copilot Chat %\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}}
+In particular, many programmers have started to leverage generative AI for software development: millions of developers generate code with the help of code completion tools such as GitHub Copilot\footnote{\url{https://github.com/features/copilot}}, Tabnine\footnote{\url{https://www.tabnine.com/}}, and others, or they use conversational agents such as GitHub Copilot Chat %\footnote{\url{https://docs.github.com/en/copilot/github-copilot-chat}}
 to explore and modify code bases.
-Similarly, tools such as Microsoft Visual Studio IntelliCode\footnote{\url{https://visualstudio.microsoft.com/services/intellicode/}} and Sourcegraph\footnote{\url{https://sourcegraph.com/}} employ embeddings to find and rank relevant source code snippets.
+Similarly, tools such as Visual Studio IntelliCode\footnote{\url{https://visualstudio.microsoft.com/services/intellicode/}} and Sourcegraph\footnote{\url{https://sourcegraph.com/}} employ embeddings to find and rank relevant source code snippets.
 
 We subsume both technologies---\emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs---under the term \emph{semantic technologies}.
 
@@ -77,7 +78,7 @@ This leads us to our research question:
 	How can we augment the exploratory programming workflow by integrating semantic technologies into exploratory programming systems?
 \end{quote}
 
-That is, we want to study possible applications of semantic technologies for exploratory programming, investigate tool designs and interaction mechanisms to give programmers easy access to these technologies, and collect practical considerations for the design and implementation of such tools.
+That is, we want to study possible applications of semantic technologies for exploratory programming, investigate tool designs and interaction mechanisms to give programmers simple access to these technologies, and collect practical considerations for the design and implementation of such tools.
 
 In answer to this question, our thesis statement reads as follows:
 %
@@ -86,14 +87,14 @@ In answer to this question, our thesis statement reads as follows:
 \end{quote}
 
 For this, we propose a model for an \emph{augmented exploratory programming workflow} in which the exploratory activities of programmers are tracked and anticipated, and in which programmers are enabled to access and interact with AI-suggested experiments and results through a \emph{semantic workspace}.
-We believe that our approach will allow tool developers to design tools for exploratory programming systems that provide an improved programming experience to programmers by enabling them to collaborate with semantic technologies.
+We believe that our approach will allow tool developers to design tools for exploratory programming systems that improve the experience of programmers by enabling them to collaborate with semantic technologies.
 
 To study this hypothesis, we make the following contributions:
 %
 \begin{enumerate}%[label=C\arabic*]
 	\item We propose the \emph{augmented exploratory programming workflow}, which captures the traditional process and challenges of exploratory programmers and describes possible starting points for integrating semantic technologies.
 	\item We present a new \emph{semantic workspace} as a conceptual design for exploratory programming systems that support an augmented exploratory programming workflow by providing new or enhanced \emph{semantic interfaces} for programmers.
-	\item We describe our architecture of a \emph{semantic exploration kernel} with different components that use semantic technologies to augment exploratory programming tools, namely \emph{semantic suggestions} and \emph{semantic conversations}, and we implement a prototype for Squeak"/Smalltalk using OpenAI's language models.
+	\item We describe our architecture of a \emph{semantic exploration kernel} with different components that use semantic technologies to augment exploratory programming tools, and we implement a prototype for Squeak"/Smalltalk using language models by OpenAI.
 \end{enumerate}
 
 We make all artifacts of our research available in a public GitHub repository\footnote{\url{https://github.com/hpi-swa-lab/SemanticSqueak}}. % todo: commit all experiments!
@@ -101,7 +102,7 @@ We make all artifacts of our research available in a public GitHub repository\fo
 We organize the work presented in this thesis as follows:
 %
 \begin{description}[noextralabelsep]
-	\item[\Cref{cha:background}] introduces theoretical foundations behind exploratory programming (systems) and semantic technologies and describes how the challenges of the former may be addressed by the opportunities of the latter.
+	\item[\Cref{cha:background}] introduces theoretical foundations behind exploratory programming systems and semantic technologies and describes how the challenges of the former may be addressed by the opportunities of the latter.
 	\item[\Cref{cha:approach}] presents our model of the augmented exploratory programming workflow and describes our conception of a semantic workspace.
 	\item[\Cref{cha:design}] describes the high-level architecture of the semantic exploration kernel and explains its fundamental components: a \emph{suggestion engine} and a \emph{semantic exploratory agent}.
 	\item[\Cref{cha:suggestions}] discusses the application of semantic retrieval methods for suggesting experiments.

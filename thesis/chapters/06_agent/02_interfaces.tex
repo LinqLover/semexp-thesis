@@ -6,12 +6,12 @@
 \begin{table}
 	\centering
 	\footnotesize
-	\thimport{02_interfaces/functions}
 	\caption[The function interface that connects our exploratory programming agent to the Squeak"/Smalltalk system.]{
 		The function interface that connects our exploratory programming agent to the Squeak"/Smalltalk system.
 		Most browsing functions are designed to return extensive information, reducing the need for subsequent function calls.
 	}
 	\label{tab:agent/functions/interface}
+	\thimport{02_interfaces/functions}
 \end{table}
 
 To define a set of functions through which the agent can access the system, we imitate the actions that programmers can take in traditional exploratory programming systems.
@@ -22,7 +22,7 @@ Below, we discuss two challenges in designing these functions: the granularity o
 \paragraph{Granularity of function calls}
 An important trade-off regards the amount of information that is requested through a single function call:
 for example, when browsing a class, the agent could either first request a list of protocols in a class and then request the message names within relevant protocols, or request the entire list of message names for all protocols at once.
-In our prototype, we generally choose a medium-to-coarse-grained function design because for many cloud-based LLMs such as OpenAI's GPT models, the cost of processed tokens is quadratic in the number of sequentially requested function calls (as every newly requested function call requires a new API request and processing of the prior conversation).
+In our prototype, we generally choose a medium-to-coarse-grained function design because for many cloud-based LLMs such as OpenAI's GPT models, the cost of processed tokens is quadratic in the number of sequentially requested function calls (because every newly requested function call requires a new API request and processing of the prior conversation).
 
 \paragraph{Evaluating code}
 Unspecialized LLMs are not always proficient in particular programming languages:
@@ -31,8 +31,10 @@ To support the model in correcting its own errors, we extend a small number of b
 for example, because \gptfouro often forgets necessary brackets when chaining message sends, we extend all \code{MessageNotUnderstood} errors from the system with an explaining comment and provide an example of correcting an incorrect message chain, which the model then considers in the next attempt.
 
 We reduce the dependency of the agent on language proficiency by exposing most interfaces through dedicated functions instead of instructing the model to access them through evaluating reflection code.
-For example, while it could be elegant to have the agent retrieve the protocols of a class by calling \code{eval("(Smalltalk at: aClassName) organization categories")}\footnote{A similar technique is used in the current version of ChatGPT Plus when browsing long documents.}, we offer a dedicated \code{browse\-Class()} function for this purpose instead~(\cref{tab:agent/functions/interface}).
+For example, while it could be elegant to have the agent retrieve the protocols of a class by calling \code{eval("(Smalltalk at: aClassName) organization categories")}\footnote{
+	At the time of writing, a similar technique is used in ChatGPT when browsing long documents.
+}, we offer a dedicated \code{browse\-Class()} function for this purpose instead.
 
-To avoid dangerous side effects of AI-generated code such as data loss or system crashes, it is also possible to evaluate all requested scripts in a lightweight sandbox\footnote{\url{https://github.com/LinqLover/SimulationStudio}} or only apply their side effects to the after manual review.
+To avoid dangerous side effects of AI-generated code such as data loss or system crashes, it is also possible to evaluate all requested scripts in a lightweight sandbox or only apply their side effects after manual review.
 However, this imposes the additional complexity of managing ``different realities'' on the agent~\cite{rehwaldt2012exploring}, and the isolation layer can impact the overall performance of experiments.
 In our prototype, we provided an option to disable the sandbox and left it disabled most of the time, as we only observed a small number of unintended side effects~(see \cpageref{sec:discussion/feasibility/agent}).

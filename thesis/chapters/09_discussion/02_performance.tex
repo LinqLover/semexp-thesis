@@ -4,7 +4,7 @@
 \label{sec:discussion/performance}
 
 In our setting with cloud-based language models and local vector stores, resource consumption mainly manifests as response times in semantic retrieval and the exploratory programming agent, memory consumption for semantic corpora (vector stores), and monetary costs for using language model services.
-While memory consumption did not exceed \qty{100}{MB} in our experiments, response times and monetary costs of our prototype suggest that semantic completions and conversations demand further optimizations~(\cref{tab:discussion/performance/overview}).
+While memory consumption did not exceed \qty{100}{MB} in our experiments, response times and monetary costs of our prototype indicate that semantic completions and conversations demand further optimizations~(\cref{tab:discussion/performance/overview}).
 
 \begin{table}
 	\centering
@@ -12,7 +12,7 @@ While memory consumption did not exceed \qty{100}{MB} in our experiments, respon
 	\thimport{02_performance/overview}
 	\caption[Main response times and memory consumptions for the tools in our prototype of the semantic workspace.]{
 		Main response times and memory consumptions for the tools in our prototype of the semantic workspace.
-		Scattering of values is caused by the varying complexity of tasks, different suggestion strategies employed, and the uncertain frequency with that programmers may use tools.
+		Scattering of values is caused by the varying complexity of tasks, different suggestion strategies employed, and the uncertain frequency with which programmers may use tools.
 	}
 	\label{tab:discussion/performance/overview}
 \end{table}
@@ -38,21 +38,21 @@ Since \qty{75}{\percent} of methods in the standard image contain not more than 
 However, a few methods may contain more than 500 literals (usually ``data methods'' that contain serialized objects such as images or sounds), causing query times of 10 seconds or more.
 
 Correlation search and ranking typically consume 2--5 milliseconds only.
-Thus, a full pass of creating semantic suggestions for an open workspace typically requires between 500 and 700 miliseconds.
+In total, a full pass of creating semantic suggestions for an open workspace typically requires between 500 and 700 milliseconds.
 To reduce these latencies, we could use local, smaller embedding models and maintain indices for semantic and TF-IDF search.
 
 \paragraph{Exploratory programming agent}
 \label{par:discussion/performance/latencies/agent}
 
 Generating semantic completions took between 10 and 15 seconds in our experiments, which is mainly caused by the large context we pass to the exploratory programming agent.
-By optimizing the prompt, varying the amount of contextual information depending on the complexity of the problem, or pre-training a LLM for Smalltalk code completions, these latencies could be reduced.
+By optimizing the prompt, varying the amount of contextual information depending on the complexity of the problem, or pre-training an LLM for Smalltalk code completions, these latencies could be reduced.
 While it would be possible to stream completions similarly to agent responses in semantic conversations, we generally cannot validate incomplete expressions or preview their results, which would hinder effective filtering of noise in the completion menu.
 Stage-2 generations for recontextualization took between 1.1 and 1.3 seconds in our experiments due to their lower complexity.
 This makes it realistic to recontextualize completions whenever programmers add or change a few words; however, for a higher interactivity, it would be necessary to employ even smaller, preferably local models for this stage or complement LLM-based recontextualization with non-semantic heuristics as proposed in \cref{sec:suggestions/generation}.
 
-Response times for semantic conversations largely depend on the amount of context provided such as previous messages in the conversation and required experiments:
-for simple questions (e.g., the first two messages in \cref{fig:application/conversation/text}), response times usually vary between 2 and 4 seconds, while complex questions that involve sequential experiments (especially those caused by internal trial and error of the agent) can result in response times between 5 to 15 seconds or more in some cases.
-By streaming responses character-wise from the API, we reduce the delay to the start of the answer by factors between \qty{20}{\percent} and \qty{80}{\percent}.
+Response times for semantic conversations largely depend on the amount of context provided, such as previous messages in the conversation and required experiments:
+for simple questions (e.g., the first two messages in \cref{fig:application/conversation/text}), response times usually vary between 2 and 4 seconds, while complex questions that involve sequential experiments (especially those caused by internal trial and error of the agent) can result in response times between 5 to 15 seconds or more in a few cases.
+By streaming responses character-wise from the API, we reduce the delay before the start of the answer by factors between \qty{20}{\percent} and \qty{80}{\percent}.
 
 \subsection*{Memory Consumption}
 \label{sec:discussion/performance/memory}
@@ -72,9 +72,9 @@ Alternatively, training a smaller embedding model for our particular use case of
 \subsection*{Monetary Cost}
 \label{sec:discussion/performance/money}
 
-When using a cloud embedding model, monetary cost for semantic suggestions occur when updating semantic corpora or embedding inputs such as current workspace contents for querying corpora.
+When using a cloud embedding model, monetary cost for semantic suggestions occurs when updating semantic corpora or embedding inputs such as current workspace contents for querying corpora.
 Using OpenAI's \code{text-embedding-3-large} model, embedding all methods and classes in the standard image costs approximately \USD{0.85} (US dollars).
-During our experiments over six months, regular code changes that we performed ourselves or installed as updates of the Squeak Trunk image accounted for less than \USD{0.05} per month.
+During our experiments within the last six months, regular code changes that we performed ourselves or installed as updates of the Squeak Trunk image accounted for less than \USD{0.05} per month.
 Embedding an average method draft or workspace script for querying averaged to \qty{0.01}{\cent} (US cents), and even long scripts (\qty{200}{SLOC}) never exceeded costs of \qty{0.1}{\cent}.
 Assuming a programmer would type continuously into a workspace and we would update suggestions every 5 seconds, this would generate costs of fewer than \USD{0.08} per hour.
 
@@ -87,13 +87,13 @@ Monetary costs for semantic conversations vary depending on the complexity of qu
 For a programmer who adopts semantic object interfaces in their everyday toolset, this would involve expenses of at least \USD{5} per hour even when estimating the number of questions a programmer expresses very conservatively as 10 per hour~\cite{kubelka2018road}; following Jevon's paradox, the actual cost could be many times higher as programmers might become negligent of their expenses.%
 \footnote{%
 	We also experimented with OpenAI's \code{gpt-3.5-0125} model instead of \code{gpt-4o-2024-05-13}.
-	While this would improve response times and even reduce costs by 5 to 10 times, \gptthreefive models are noticeably less capable, requiring us to ask questions five times or more (due to the non-deterministic behavior of LLMs) before we would get a helpful answer, if at all.
+	While this would improve response times and reduce costs by 5 to 10 times, \gptthreefive models are noticeably less capable, requiring us to ask questions five times or more (due to the non-deterministic behavior of LLMs) before we would get a helpful answer, if at all.
 	%(For comparison: using \gptfouro, the same---yet not representative---sample of questions led to satisfying answers in more than 80\% of requests.)
 }
 
 \ParSep
 
 Considering the ongoing trend of more powerful, faster, and less energy-consuming language models being developed, we assume that the latencies and expenses for invoking the suggestion engine and the exploratory programming agent could become small enough to no longer pose a practical barrier for programmers and organizations with more affluent budgets.%
-\footnote{We acknowledge the high variance in budgets worldwide. For example, an experienced programmer in Silicon Valley with a three-digit hourly wage might regularly afford semantic conversations or even semantic completions today, while an entry-level programmer in an underdeveloped economy who earns less than \USD{1} per hour could likely not even afford semantic suggestions.}
-For illustration, while we were working on this thesis for about twelve months, OpenAI's respective flagship LLM (from \code{gpt-4-0613} to \code{gpt-4o-2024-08-06}) has improved by a factor of at least two in speed and by a factor of six in monetary cost.
-At the same time, we are viewing \emph{small language models} as a promising alternative to cloud-based models, since they could be trained to handle particular tasks such as generating Smalltalk code completions or engaging in exploratory programming competently and efficiently and they could be run on commodity hardware with reduced response times~\cite{magister2023teaching}.
+\footnote{We acknowledge the high variance in budgets worldwide. For example, a senior developer in Silicon Valley with a three-digit hourly wage might regularly afford semantic conversations or even semantic completions today, while an entry-level programmer in a developing economy who earns less than \USD{1} per hour could likely not even afford semantic suggestions.}
+For illustration, during the last twelve months, OpenAI's respective flagship LLM (from \code{gpt-4-0613} to \code{gpt-4o-2024-08-06}) has improved by a factor of at least two in speed and by a factor of six in monetary cost.
+At the same time, we see \emph{small language models} as a promising alternative to cloud-based models, as they could be trained to handle particular tasks such as generating Smalltalk code completions or engaging in exploratory programming competently and efficiently and could be run on commodity hardware with reduced response times~\cite{magister2023teaching}.

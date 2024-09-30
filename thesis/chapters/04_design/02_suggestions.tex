@@ -23,7 +23,7 @@ To handle this complexity and maintain flexibility in the design of new artifact
 	\label{fig:design/suggestions/classes}
 \end{figure}
 
-The framework defines a central board on that different artifacts can be arranged.
+The framework defines a central board, on which different artifacts can be arranged.
 Each artifact is specified with a \emph{role} (such as input artifact, similar artifact, or method sender) and a \emph{type} (such as class, method, or documentation).
 Additionally, the board contains a set of strategies, each of which is able to consume given artifacts and produce more artifacts.
 Each strategy can specify a set of \emph{required roles} for the artifacts it consumes as well as a set of \emph{output roles} for the artifacts it produces.
@@ -39,10 +39,10 @@ Finally, the requestor can access or stream the resulting artifacts from the boa
 The board framework also provides strategies for organizing artifacts:
 for example, identical or equivalent artifacts that have been produced by multiple strategies can be merged, artifacts can be grouped based on their role, type, or metadata, and they can be sorted based on ranks provided by prior strategies.
 
-To support debugging and observability, strategies can also be executed synchronously, and a provenance mechanism stores the original strategy and its input artifacts for every produced artifact.
+To support debugging and observability, strategies can also be executed synchronously, and a provenance mechanism\textlabel{idx:design/suggestions/provenance} remembers the original strategy and its input artifacts for every produced artifact.
 
 \begin{example}
-	A programmer has drafted a new method and a short list of todo notes in their programming system.
+	A programmer has drafted a new method and a short list of to-do notes in their programming system.
 	To provide them with further possibly relevant message sends for their method draft, the semantic workspace invokes the suggestion engine with both artifacts and requests suggestions of the role ``correlated message''~(\cref{fig:design/suggestions/example}).
 
 	Once invoked, the suggestion engine identifies two strategies that can suggest correlated messages: a \emph{correlated selectors} strategy and a \emph{method harvester} strategy~(see \cpageref{sec:suggestions/search/correlations}).
@@ -53,8 +53,8 @@ To support debugging and observability, strategies can also be executed synchron
 	\vspace{\baselineskip}
 	\begin{center}
 		\includegraphics[width=\textwidth]{02_suggestions/example.png}
-		\captionof{figure}[The involved artifacts and scheduled strategies of invoking the blackboard framework to find correlated methods for a given input method and notes.]{
-			The involved artifacts and scheduled strategies of invoking the blackoard framework with our example.
+		\captionof{figure}[The involved artifacts and scheduled strategies for invoking the blackboard framework to find correlated methods for a given input method and notes.]{
+			The involved artifacts and scheduled strategies for invoking the blackboard framework with our example.
 		}
 		\label{fig:design/suggestions/example}
 	\end{center}
@@ -64,9 +64,9 @@ To support debugging and observability, strategies can also be executed synchron
 	Finally, the resulting artifacts are ranked based on the original similarity scores and the correlation scores.
 \end{example}
 
-Thus, our blackboard framework shares characteristics from two earlier approaches: \emph{blackboard systems} and \emph{data orchestration pipelines}.
+Thus, our blackboard framework shares characteristics from two existing approaches: \emph{blackboard systems} and \emph{data orchestration pipelines}.
 First, it resembles the \emph{blackboard architecture pattern}~\cite[p.~71ff.]{buschmann1996pattern} and \emph{blackboard systems} from early expert systems~\cite{hayes1985blackboard}, where different \emph{knowledge sources} successively populate a \emph{blackboard} orchestrated by a \emph{control shell}.
-Second, it is related to \emph{data orchestration pipelines} which model and execute a directed acyclic graph of \emph{tasks}~\cite{talia2013workflow}.
+Second, it is related to \emph{data orchestration pipelines}, which model and execute a directed acyclic graph of \emph{tasks}~\cite{talia2013workflow}.
 
-However, our blackboard framework follows a more structured approach than traditional blackboard systems in that all strategies define static output roles, allowing to predict the dataflow in advance and scheduling strategies in a top-down manner as opposed to the bottom-up method of blackboard systems.
+However, our blackboard framework follows a more structured approach than traditional blackboard systems in that all strategies define static output roles, allowing to predict the dataflow in advance and schedule strategies in a top-down manner (as opposed to the bottom-up method of blackboard systems).
 At the same time, the blackboard framework offers greater flexibility than data orchestration pipelines, which typically model direct dependencies between tasks rather than data roles, and thus allows for the implicit choice and combination of different strategies.

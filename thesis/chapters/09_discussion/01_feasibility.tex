@@ -1,6 +1,6 @@
 % !TEX root = ../../semexp-thesis.tex
 
-\section*{Potential of Semantic Technologies}
+\section{Potential of Semantic Technologies}
 \label{sec:discussion/feasibility}
 
 To deliver relevant suggestions and conversations for semantic tools, the semantic exploration kernel hinges on the capabilities of the underlying semantic technologies.
@@ -23,11 +23,11 @@ Still, we believe that these observations are no fundamental limitations to our 
 In our prototype of the suggestion engine, we implemented semantic retrieval for method and class artifacts.
 For semantic suggestions and ranking, our implementation employs document embeddings as well as term-based methods (TF-IDF and correlation search).
 
-In our experiments, we generally experienced suggestions from embedding-based search as helpful.
-For example, we could reuse suggested similar implementations in many situations, discovered some unexpected duplications during code browsing, and were able to understand documentation commentary that was scattered about multiple methods in context.
+In our experiments, we mostly experienced suggestions from embedding-based search as helpful.
+For example, we could reuse suggested similar implementations in many situations, discovered some unexpected duplications during code browsing, and were able to understand documentation commentary that was scattered across multiple methods in context.
 However, the \code{text-embedding-3-large} model by OpenAI that we used offers limited capabilities for encoding abstract concepts of source code but overemphasizes specific vocabulary and document size.
 This impedes semantic similarity search and semantic ranking, in particular reducing the relevance and irredundancy of ranked suggestions.
-We believe that the fitness of embeddings could be improved by fine-tuning an embedding model for conceptual similarity, using ad-hoc fine-tuned text embeddings~\cite{su2023one}, or preprocessing documents with the help of another LLM prior to embedding them.
+We believe that the fitness of embeddings could be improved by fine-tuning an embedding model exclusively for conceptual similarity, using ad-hoc fine-tuned text embeddings~\cite{su2023one}, or preprocessing documents with the help of another LLM prior to embedding them.
 
 Being too sensitive to the document size, semantic search using embeddings also cannot be used to find related methods to an early unfinished draft of the programmer~(see \cpageref{sec:suggestions/search/similar}).
 For this purpose, our TF-IDF search strategy yielded better results.
@@ -52,7 +52,7 @@ In one example, the agent explicitly rejected the task of extracting an API key 
 
 \begin{genericbox}{Examples}
 	To quantify the abilities of our current agent, a larger evaluation based on representative data from actual exploratory programming sessions would be required, which is outside the scope of this work.
-	However, we can illustrate its current state through a few anecdotical examples.
+	However, we can illustrate its current state through a few anecdotal examples.
 
 	For the questions about the \code{Text} object from \cref{sec:application/conversation}, the agent delivered correct and useful answers in approximately \qty{80}{\percent} of all requests.
 	In the remaining cases, it would fail to locate the required interface for retrieving all attributes of the text but only return the attributes for the first character; reinvent the wheel and spend many times tokens and seconds more manually accessing the underlying data; or suggest non-functional or idiosyncratic code snippets for the third question.
@@ -73,16 +73,16 @@ However, in most situations, we could send follow-up messages to the conversatio
 Several weaknesses of our agent are due to two limited capabilities of the \gptfouro model we used:
 first, this model showed a limited proficiency regarding the Smalltalk programming language and standard libraries, and it often mixed up protocols from different Smalltalk dialects such as Squeak and Pharo.
 Second and more importantly, despite our prompt, the model only applied the exploratory paradigm to a limited degree and was not eager enough to consider and try out a larger number of different classes and messages.
-We believe that by training a model on an extended set of Squeak"/Smalltalk source code and fine-tuning it for exploratory practices, both these abilities could be further improved.%
+We believe that by training a model on an extended set of Squeak"/Smalltalk source code and fine-tuning it for exploratory practices, both these capabilities could be further improved.%
 \footnote{
 	For comparison, ChatGPT's code interpreter shows a higher proficiency in writing Python code for computational notebooks, using proprietary libraries to summarize documents, and correcting its own coding errors.
 	We argue that these are similar and trainable traits to the typical system interactions in exploratory programming.
 }
-Alternatively, even a more systematic approach to prompt engineering with extended chain-of-thought or few-shot prompts might improve these capabilities.
+Alternatively, even a more systematic approach to prompt engineering with extended chain-of-thought or few-shot prompts might improve the agent's behavior.
 
 The limited language proficiency of the model was also a critical limitation when generating semantic completions:
 despite being presented extensive examples of the syntax and relevant interfaces, the agent produced invalid completions in \qty{50}{\percent}--\qty{75}{\percent} of all cases.
 While we could filter out these errors by dynamically testing completions, this reduces the quantity and the effective performance of suggestions substantially.
 Completions generally exhibited an acceptable diversity over the different provided examples even with a naive prompt design.
 Still, by chaining multiple prompts or increasing the temperature of the model, it would be possible to generate more diverse completions while sacrificing the performance or correctness of results.
-During stage-2 generations, the agent usually provided satifactory results for recontextualizing completions to a similar user input even when using the less powerful model \gptfouromini; only if the distance between stage-1 generations and user inputs grew too large (because we did not re-run stage-1 generations frequently enough), the model would tend to hallucinate fictitious names again.
+During stage-2 generations, the agent usually provided satisfactory results for recontextualizing completions to a similar user input even when using the less powerful model \gptfouromini; only if the distance between stage-1 generations and user inputs grew too large (because we did not re-run stage-1 generations frequently enough), the model would tend to hallucinate fictitious names again.

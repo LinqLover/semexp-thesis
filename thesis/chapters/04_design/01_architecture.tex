@@ -13,7 +13,7 @@
 		\capparagraph{Legend.}
 		New components are \bold{\gradientHSB{colorful}{-45,240,200}{195,240,200}} and existing components are \bold{\textcolor{gray}{gray}}.
 		Arrows indicate dependencies from a higher-level component to a lower-level component.
-		\CircledInverted{Numbers} reference the chapter, appendix, or section in this thesis that further describes a component.
+		\CircledInverted{Numbers} reference the chapter, section, or appendix in this thesis that further describes a component.
 	}
 	\label{fig:design/architecture/architecture}
 \end{figure}
@@ -31,23 +31,23 @@ The semantic exploration kernel consists of two components for processing the se
 	\item[The exploratory programming agent] receives explicit questions and answers them by autonomously conducting exploratory research processes.
 	It connects to its environment through \emph{semantic object interfaces}, which allow programmers to ask semantic questions to objects in the system~(\cref{sec:design/agent}).
 	Internally, it employs a generative LLM to support natural-language conversations and machine reasoning.
-	The agent is configured through a set of \emph{policies} that define its behavior and a set of \emph{system functions} through that the agent can interact with objects in the system~(\cref{cha:agent}).
+	The agent is configured through a set of \emph{policies} that define its behavior and a set of \emph{system functions} through which the agent can interact with objects in the system~(\cref{cha:agent}).
 \end{description}
 
 The suggestion engine and the exploratory programming agent can interact with each other:
 particular strategies that require reasoning about other artifacts or code generation invoke the exploratory programming agent.
 In the other direction, when the agent needs a broader overview of system parts, it will employ the suggestion engine to retrieve relevant artifacts.
 
-Both the semantic workspace and the semantic exploration kernel depend on a traditional exploratory programming system~(\cref{cha:implementation}).
+Both the semantic workspace and the semantic exploration kernel require a traditional exploratory programming system~(\cref{cha:implementation}).
 The semantic workspace integrates semantic interfaces for its tools into the existing programming system, for example, through a completion menu in code editors or a conversational interface in several exploration tools.
 Similarly, it also hooks into the existing user interface to observe experiments through artifacts such as opened tabs and windows.
 The exploration kernel interacts with the traditional system to access classes, methods, and objects for retrieving suggestions or executing experiments.
 
-In our implementation, semantic workspace and exploration kernel also depend on a couple of other packages:
+In our implementation, the semantic workspace and the exploration kernel also depend on a couple of other packages:
 
 \begin{description}
 	\item[\semtex:]
-	The exploration kernel uses our \semtex framework, which provides access to semantic technologies for retrieving documents, generating text with conversational LLMs, and implementing specialized agents\footnote{\url{https://github.com/hpi-swa-lab/Squeak-SemanticText}}~(\cref{apx:semtex}).
+	The exploration kernel uses our \semtex framework\footnote{\url{https://github.com/hpi-swa-lab/Squeak-SemanticText}}, which provides access to semantic technologies for retrieving documents, generating text with conversational LLMs, and implementing specialized agents~(\cref{apx:semtex}).
 	This framework also provides a graphical user interface component for conversational agents, which is employed by the semantic workspace for semantic conversations.
 
 	\item[\name{SimulationStudio}:]

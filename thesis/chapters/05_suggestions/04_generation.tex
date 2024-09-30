@@ -3,20 +3,20 @@
 \section{Semantic Generation}
 \label{sec:suggestions/generation}
 
-Another group of strategies in the suggestion engine implements the generation of semantic completions, that is, synthesized artifacts that continue the draft of a code artifact, documentation artifact, or a similar artifact written by a programmer.
+Another group of strategies in the suggestion engine implements the generation of semantic completions, that is, synthesized artifacts that continue a programmer's draft of a code artifact, documentation artifact, or a similar artifact.
 These synthesized artifacts are based on other types of artifacts such as similar methods, correlated classes, or documentation excerpts.
 The actual generation is delegated to the exploratory programming agent, which employs generative LLMs for creating semantically relevant completions~(see \cref{cha:agent}).
 
-However, the requirement for interactive completions conflicts with the high latencies and monetary costs of the exploring programming agent:
-on the one hand, semantic completions should not introduce temporal distances in the research process of programmers but be updated with a high frequency to always honor the latest input of the programmer.
+However, the requirement for interactive completions conflicts with the high latencies and monetary costs of the exploratory programming agent:
+on the one hand, semantic completions should not introduce temporal distances in the research process of programmers but be updated with a high frequency to always reflect the latest input from the programmer.
 On the other hand, the agent fundamentally depends on invocations of resource-intensive generative LLMs that typically involve latencies of several seconds for complex requests.
 
 To solve this conflict, we divide the generation of semantic completions into two stages.
 In the first stage, the agent performs a full generation of completions based on extensive context from other suggested artifacts and a comprehensive chain of thought.
 In the second stage, the prior generations are \emph{recontextualized} to adjust them to minor changes in the original draft.
-For example, recontextualization would remove prefixes from the completions that the programmer already has typed manually, apply recent renamings in the draft to completions, or align them with other recent restructurings or updates by the programmer.
-This second stage requires fewer context (only the prior completion and the new draft) and reduced reasoning.
+For example, recontextualization would remove prefixes from the completions that the programmer has already typed manually, apply recent renamings in the draft to completions, or align them with other recent restructurings or updates by the programmer.
+This second stage requires less context (only the prior completion and the new draft) and reduced reasoning.
 This allows the agent to minimize the request to the LLM and employ a smaller model.
-Additionally, recontextualization can be implemented (partially) through non-semantic heuristics such as substring matching or diffing of ASTs.
+Additionally, recontextualization can be implemented (partially) through non-semantic heuristics such as substring matching or AST merging.
 
 Through this separation, the suggestion engine executes the first generation stage with a low frequency only when the programmer performs larger changes to a draft (such as adding several new lines) or manually requests new generations, while the second stage can be executed with a high frequency but lower latencies and costs.

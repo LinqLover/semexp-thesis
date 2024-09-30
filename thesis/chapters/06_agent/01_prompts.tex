@@ -8,7 +8,7 @@ We define a set of \emph{policies} that define the behavior and the communicatio
 \begin{description}
 	\item[Identity and context:]
 	The agent shall identify as an exploratory programming agent who supports the programmer in exploring an object in a system.
-	In conversation mode, the \emph{assistant} shall also identify as the focused object itself, allowing users to address the object in the second person within the chat and thus increasing the experienced semantic immediacy%
+	In conversation mode, the \emph{assistant} shall also identify as the reference object itself, allowing users to address the object in the second person within the chat and thus increasing the experienced semantic immediacy%
 	\footnote{This follows the conversation style of message sends which are usually named in imperative or interrogative speech (such as the cascade-terminating message \code{\#yourself} in Smalltalk).}%
 	.
 	\item[Traits for problem solving and tool usage:]
@@ -43,14 +43,14 @@ For example, for the class \code{Context}, which represents a stack frame in a d
 	\end{threeparttable}
 	\caption[Schematic prompt design for conversations of the exploratory programming agent with the user and the system.]{
 		Schematic prompt design for conversations of the exploratory programming agent with the user and the system.
-		We translate policies for the identity, strategies, and output formats of the agent are translated to detailed instructions.
+		We translate policies for the identity, strategies, and output formats of the agent into detailed instructions.
 		Through pre-generated assistant messages and tool calls, we stimulate the agent to engage in inner monologue and several experiments.
 	}
 	\label{fig:agent/prompts/design}
 \end{figure}
 
 This pre-generated conversation prefix serves several purposes:
-first, it provides a broad context about the object to the agent within the first invocation, which serves as the base for further experiments by the agent or maybe contains the necessary information already.
+first, it provides some broad context about the object to the agent within the first invocation, which serves as the base for further experiments by the agent or maybe contains the necessary information already.
 Second, the first likely actions of the agent are anticipated, improving the average response time of the agent.
 Third, the prefix ``stimulates'' the agent toward an exploratory mindset, engagement in inner monologue, and eagerness to perform several experiments.
 Thus, pre-generated conversation prefixes present a hybrid of zero-shot chain-of-thought prompting~\cite{kojima2022large}, few-shot prompting~\cite{brown2020language}, and retrieval-augmented generation~\cite{lewis2020retrieval}.

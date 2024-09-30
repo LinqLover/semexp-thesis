@@ -3,8 +3,8 @@
 \section{Semantic Conversations}
 \label{sec:implementation/conversations}
 
-To implement the exploratory programming agent in our prototype, we define several specializations of the \code{SemanticAgent} class from \semtex.
-Each version of the agent contains instructions for a different type of semantic object interfaces as discussed in \cref{sec:design/agent/interfaces}: a conversation mode for object inspectors and a language extension for semantic messaging.
+To implement the exploratory programming agent in our prototype, we define several specializations of the \code{SemanticAgent} class from \semtex~(see \cref{sec:semtex/model}).
+Each version of the agent contains instructions for a different type of semantic object interface as discussed in \cref{sec:design/agent/interfaces}: a conversation mode for object inspectors and a language extension for semantic messaging.
 
 To add a new conversation mode to Squeak's inspector tools, we redirect all requests to the \code{Inspector} class by the toolset to a decorator.
 This decorator inserts a new \code{chat} item at the beginning of the inspector's field list, which references a conversation with our exploratory programming agent.
@@ -14,8 +14,8 @@ Second, the decorator embeds a minimal version of the conversation editor GUI (g
 	\begin{minipage}{\textwidth}
 		\centering
 		\includegraphics[width=.7\textwidth]{03_conversations/inspector.png}
-		\caption[Our integration of semantic conversations into Squeak's inspector.]{
-			Our integration of a semantic conversations into Squeak's inspector (here: ``chat'' item in the field list on the left).
+		\caption[Integration of semantic conversations into Squeak's inspector.]{
+			Our integration of semantic conversations into Squeak's inspector (here: ``chat'' item in the field list on the left).
 			In this example, the user chats with an archive of the Squeak mailing list\footnote{\url{https://github.com/hpi-swa-lab/squeak-inbox-talk}} to identify exceptionally large posts.
 		}
 		\label{fig:implementation/conversations/inspector}
@@ -32,7 +32,7 @@ Because we desired a distinction between regular and semantic messages during ou
 
 		aProduct semanticProxy numberOfSalesTo: aCustomer.
 	\end{multicode}
-	\item[The \code{?} and \code{!} operators] take the semantic message as an argument selector:
+	\item[The \code{\;?\;} and \code{!} operators] take the semantic message as an argument selector: % WORKAROUND for inconsistent spaces
 	\begin{multicode}
 		self ? \#mostOftenBoughtArticle.
 

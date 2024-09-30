@@ -22,7 +22,7 @@ and (iii) \emph{semantic conversations}, through which programmers can ask conce
 We have described our design of a \emph{semantic exploration kernel}~(\cref{cha:design}) to harness semantic technologies for programming tools through two main components:
 a \emph{suggestion engine}, which collects artifacts and experiments of programmers in our blackboard framework and defines different retrieval strategies for searching and recommending further artifacts;
 and an \emph{exploratory programming agent}, which employs LLMs to plan and conduct experiments, interacts with the system through technical interfaces and generated code, and communicates with programmers through high-level interfaces.
-To create suggestions, we have explored different approaches for finding \emph{similar} and \emph{correlated} artifacts based on semantic embeddings and call graphs, and we have compared different ranking methods such as top-k selection, probabilistic sampling, and clustering to optimize for the relevance, diversity, irredundancy, and representativeness of results, finding that \emph{probabilistic sampling from clusters} balanced all objectives most effectively~(\cref{cha:suggestions}).
+To create suggestions, we have explored different approaches for finding \emph{similar} and \emph{correlated} artifacts based on semantic embeddings and call graphs; and we have compared different ranking methods such as top-k selection, probabilistic sampling, and clustering to optimize for the relevance, diversity, irredundancy, and representativeness of results, finding that \emph{probabilistic sampling from clusters} balanced all objectives most effectively~(\cref{cha:suggestions}).
 To construct a viable exploratory programming agent based on the \gptfouro model, we have defined behavioral policies through prompts and designed system functions for automated experiments~(\cref{cha:agent}).
 Finally, we have implemented these ideas in a prototype for the Squeak"/Smalltalk environment by using our \semtex framework and the OpenAI API~(\cref{cha:implementation}).
 
@@ -45,17 +45,19 @@ To this end, we will also consider compiling datasets for training and evaluatin
 	\url{http://archive.today/2024.09.24-013825/https://www.forbes.com/councils/forbesbusinesscouncil/2024/07/15/gaio-the-next-generation-of-seo/}
 }
 
-Another opportunity would be the conduction of a quantitative user study to determine the optimal degree of augmentation versus automation tools for maximizing the productivity and experience of exploratory programmers, as well as to identify types of semantic interfaces that programmers prefer for delegating parts of their work to the system.
+Another opportunity would be the conduction of a quantitative user study to determine the optimal degree of augmentation versus automation tools for maximizing the productivity and experience of exploratory programmers.
+Within this study, we could also attempt to identify types of semantic interfaces that programmers prefer for delegating parts of their work to the system.
 
 Finally, we want to explore further means for enabling and fostering a broader collaboration of programmers and semantic exploratory programming systems.
 On the one hand, this could be achieved by tracking more exploratory activities of programmers to capture their context for semantic tools.
 On the other hand, we want to improve means for keeping programmers ``in the loop'' while semantic agents conduct research on their own.
-This involves finding better ways to explain the results and steps of semantic technologies, including technical model interpretability~\cite{chefer2021generic} and tools or visualizations for human-readable explanations, as well as defining scope policies for the experiments and decisions of agents and creating a channel for inquiries from systems to programmers.
+This involves finding better ways to explain the results and steps of semantic technologies, including technical model interpretability~\cite{chefer2021generic} and tools or visualizations for human-readable explanations.
+Furthermore, we want to define scope policies for the experiments and decisions of agents and establish an explicit channel for inquiries from systems back to programmers.
 By integrating semantic suggestions into different programming tools---such as relevance-based ranking in code search tools or contextual stack-trace filters in (omniscient) debuggers---, we also want to expand fine-grained, proactive support of semantic technologies in exploratory programming systems.
 Ultimately, we envision a form of semantic exploratory programming in which the system continuously ``thinks along'' the actions of a programmer (like a helpful pair programmer) by anticipating their intentions, exploring different ways to fulfill them through deep reasoning and research, and offering distilled results to allow programmers stay in their flow.
 
 \ParSep
 
 Much about the future of programming in an era of evolving AI technologies and possibly artificial general intelligence~\cite{bubeck2023sparks} remains uncertain~\cite{tanimoto2023five}.
-While it is likely that low-level programming tasks will be further automated, analyzing domains and conceptualizing possible solutions have proven as two of the hardest---and possibly hardest to automate---parts of software engineering.
+While it is likely that low-level programming tasks will be further automated, analyzing domains and conceptualizing possible solutions have proven to be two of the hardest---and possibly hardest to automate---parts of software engineering.
 We believe that on the journey toward a ``generational shift'' in programming~\cite{sarkar2023code} and beyond, semantic tools can play a crucial role in supporting programmers to focus on high-level problems while communicating with running systems in a more natural way for an expedient, exploratory programming practice.

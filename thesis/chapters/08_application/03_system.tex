@@ -23,7 +23,7 @@ This allows users to select domain objects on their screen to talk to them in na
 At the same time, domain developers are not required to put manual effort into writing prompts or preparing contextual information for LLMs, as the agent still fetches all required information by itself through automated experiments.
 For example, in a project management system that organizes task items in boards and lanes, a user could select a lane and ask for a semantic filtration or summary of the items it contains~(\cref{fig:application/system/project}).
 
-We apply this concept to graphical, object-oriented programming systems such as Squeak"/Smalltalk, where tools such as code browsers, (projectional) editors, (back-in-time) debuggers, and profilers represent views on underlying code objects and their derived artifacts such as classes in packages, code blocks in methods, and call stacks or program traces.
+We apply this concept to graphical, object-oriented programming systems such as Squeak"/Smalltalk, where tools such as code browsers, (projectional) editors, (back-in-time) debuggers, and profilers represent views on underlying code objects and artifacts derived from them such as classes in packages, code blocks in methods, and call stacks or program traces.
 In this way, programmers can chat with code objects to ask for the responsibilities or collaborators of a class~(\cref{fig:application/system/browser}), explain or refactor a code block~(\cref{fig:application/system/editor}), search for the origin of values or cause of state changes in a program stack or slice~(\cref{fig:application/system/debugger}), identify the bottlenecks in a program trace, and more.
 
 \FloatBarrier
@@ -31,8 +31,8 @@ In this way, programmers can chat with code objects to ask for the responsibilit
 \begin{figure}[Z]
 	\centering
 	\includegraphics[width=\linewidth]{chapters/08_application/03_system/browser.png}
-	\caption[In a semantic code browser, programmers can engage in natural-language conversations with classes to explore them, e.g., by asking for their responsibilities or collaborators.]{
-		In a semantic code browser (here: the default system browser of Squeak 6.1Alpha), programmers can engage in natural-language conversations with classes to explore them, e.g., by asking for their responsibilities or collaborators.
+	\caption[In a semantic code browser, programmers can engage in natural-language conversations with classes to explore them.]{
+		In a semantic code browser (here: the default system browser of Squeak 6.1Alpha), programmers can engage in natural-language conversations with classes to explore them, for example, by asking for their responsibilities or collaborators.
 	}
 	\label{fig:application/system/browser}
 \end{figure}

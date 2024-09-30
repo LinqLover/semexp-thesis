@@ -3,13 +3,13 @@
 \section{A New Opportunity: Semantic Technologies}
 \label{sec:background/semtec}
 
-At the same time, different AI methods for information processing have gained popularity over the last few years that promise better user support in various domains---including programming---by approaching information based on their semantics.
-Concretely, we use the term \emph{semantic technologies} to refer to two methods, namely \emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs.
+At the same time, different AI methods for information processing have gained popularity over the last few years that promise better user support in various domains---including programming---by approaching information based on its semantics.
+Concretely, we use the term \emph{semantic technologies} to refer to two methods: \emph{semantic retrieval} using document embeddings and \emph{text generation} using LLMs.
 
 Both technologies approach the semantic content of textual data through the concept of \emph{embeddings}.
 An embedding is a numeric representation of a \emph{document} (such as a single word, a (source) text, or also another embeddable object such as a picture~\cite{dosovitskiy2021image}) through a high-dimensional vector whose components describe the relatedness of the document to different \emph{features}~\cite{mikolov2013efficient,devlin2019bert}.
 Features can represent arbitrary kinds of properties or topics, such as (programming) language, sentiment, or length, but in many settings, they are used to encode continuous combinations of various concepts through dimensional reduction.
-In this setting, the distance of two embeddings in the vector space indicates the similarity of their associated documents with regard to the employed concepts.
+In this setting, the distance between two embeddings in the vector space indicates the similarity of their associated documents with regard to the employed concepts.
 This lays the foundation for performing different arithmetic operations to compare, organize, or sort documents in a given context.
 
 \begin{genericbox}{Approaching a definition}
@@ -21,7 +21,7 @@ This lays the foundation for performing different arithmetic operations to compa
 
 	To understand the semantics of a document, a rational agent (whether human or machine) typically has to employ different kinds of \emph{context}: a comprehensive understanding of the used language(s), any surrounding information (such as an ongoing conversation or programming session), and relevant \emph{concepts} (ranging from common sense knowledge to domain-specific vocabulary).
 
-	In compiler theory, the term semantics is also used for \emph{semantic analysis}, which refers to a validation or error correction stage that comprises tasks such as scope resolution and type checking after a syntax tree has been produced in a former \emph{syntax analysis} or compiling stage.
+	In compiler theory, the term semantics is also used for \emph{semantic analysis}, which refers to a validation stage that comprises tasks such as scope resolution and type checking after a syntax tree has been produced in a former \emph{syntax analysis} or compiling stage.
 	However, in this work, we use the term semantics exclusively for conceptual or common sense-based interpretations, and thus subsume any information from traditional code analysis tools such as type inference under the term syntax.
 \end{genericbox}
 
@@ -32,30 +32,31 @@ This lays the foundation for performing different arithmetic operations to compa
 	\centering
 	\includegraphics[width=\linewidth]{04_semtec/transformer.png}
 	\caption[A high-level overview of the \emph{transformer architecture} for large language models that embed and generate text.]{
-		A high-level overview of the transformer architecture, which is used by many language models for translating text from one language (here: English) to another (here: Japanese).
+		A high-level overview of the transformer architecture, which is used by many traditional language models for translating text from one language (here: English) to another (here: Japanese).
 		The encoder computes embeddings for each input token and contextualizes them with each other.
-		The decoder sequentially generates the output text based on the input embeddings and the previous output prefix by contextualizing them together and predicting the next token.
-		\emph{Text embedding models} only employ the encoder component of a transformer, while many \emph{text generation models} only use the decoder and treat the input text as an output prefix instead (\textcolor[HTML]{c00000}{red} arrow).
+		The decoder sequentially generates the output text based on the input embeddings and the preceding output prefix by contextualizing them together and predicting the next token.
+		\emph{Text embedding models} use only the encoder component of a transformer, while many \emph{text generation models} use only the decoder and treat the input text as an output prefix instead (\textcolor[HTML]{c00000}{red} arrow).
 	}
 	\label{fig:background/semtec/transformer}
 \end{figure}
 
-The language models that power semantic technologies---\emph{embedding models} that compute embedding representations of documents and \emph{generative LLMs} that can produce plausible texts (usually referred to as shortly LLMs)---are commonly based on (different subsets of) the \emph{transformer architecture}~\cite{vaswani2017attention}%
+The language models that power semantic technologies---\emph{embedding models} that compute embedding representations of documents and \emph{generative LLMs} that produce plausible texts (usually referred to as simply LLMs)---are commonly based on (different subsets of) the \emph{transformer architecture}~\cite{vaswani2017attention}%
 \footnote{
-	We acknowledge the existence of alternative architectures such as long-short term memory (LSTMs), latent semantic analysis (LSA), convolutional neural networks (CNNs), and hybrid approaches but restrict our focus in this short introduction to the transformer architecture, which is used predominantly in modern large general-purpose embedding and text generation models~\cite{oralkbekova2023contemporary}.
+	We acknowledge the existence of alternative architectures such as long-short term memory (LSTMs), latent semantic analysis (LSA), convolutional neural networks (CNNs), and hybrid approaches.
+	Still, we restrict our focus in this short introduction to the transformer architecture, which is used predominantly in modern large general-purpose embedding and text generation models~\cite{oralkbekova2023contemporary}.
 }.
 Here, we provide a high-level overview of transformer models.
 As we intend to introduce a general notion of language models to the exploratory programming community, we focus on their conceptual operating principles and deliberately omit mathematical and technical details.
 
 From a macroscopic viewpoint, a transformer model employs several neural networks to translate a text from an input language into a text in an output language~(\cref{fig:background/semtec/transformer}).
 Possible languages include natural languages, programming languages, other formal languages, or (patchwise sequential representations of) multimedia data such as pictures~\cite{dosovitskiy2021image} or sounds~\cite{gong2021ast}.
-The model is usually trained by supervised learning using a set of input-output pairs.
+The model is usually trained by supervised learning using a large set of input-output pairs.
 Internally, a full transformer consists of two components (even though modern language models rarely combine both of them): the \emph{encoder} and the \emph{decoder}:
 %
 \begin{description}[noextralabelsep]
 	\item[The encoder] converts the input text into a sequence of \emph{contextualized token embeddings}.
-	For that, it first splits up the text into a sequence of tokens from a finite alphabet (such as words or parts of words) and embeds these tokens using a pre-learned lookup table.
-	It then contextually enriches these embeddings through multiple layers that comprise of a self-attention mechanism and a feed-forward neural network.
+	For that, it first splits up the text into a sequence of tokens from a finite alphabet (such as words or parts of words) and embeds these tokens using a pre-trained lookup table.
+	It then contextually enriches these embeddings through multiple layers that comprise a self-attention mechanism and a feed-forward neural network.
 	Through self-attention, the different input tokens are put in relation to each other based on multiple aspects such as syntactical, lexical, or positional relationships.
 	As a result, the contextualized token embeddings describe the semantics of each token in the context of the input text.
 
@@ -67,10 +68,10 @@ Internally, a full transformer consists of two components (even though modern la
 
 	\item[The decoder] is invoked multiple times with a sequence of contextualized input token embeddings to \emph{infer} (i.e., generate) a likely output text or a probability distribution of output texts.
 	At each invocation, the transformer predicts the next output token given the contextualized input embeddings and all previously generated output tokens.
-	It contextually enriches the previous output tokens and combines them with the input embeddings through a self- and cross-attentive stack similar as in the encoder.
-	From the contextually enriched output token embeddings, it selects the embedding next to the previous generated token and converts it into a probability distribution of tokens.
-	This process is repeated until the output sequence ends with a special end token.
-	Through a \emph{beam search}, the transformer can explore multiple paths of the (usually infinite) probability tree of possible outputs instead of greedily only considering the most likely token at each step.
+	It contextually enriches the previous output tokens and combines them with the input embeddings through a self- and cross-attentive stack, similar to the encoder.
+	From the contextually enriched output token embeddings, it selects the embedding next to the previously generated token and converts it into a probability distribution of tokens.
+	This process is repeated until the output sequence is terminated with a special end token.
+	Through a \emph{beam search}, the transformer can explore multiple paths of the (usually infinite) probability tree of possible outputs instead of greedily considering only the most likely token at each step.
 
 	Text inference in the decoder can be configured through several hyperparameters that modify the probability distributions of output tokens:
 	for example, a \emph{temperature} factor and a \emph{nucleus sampling rate} can alter or truncate the variance of outputs, often associated with the creativity of the model~\cite{holtzman2020curious}; \emph{frequency penalties} can control the repetitiveness of outputs; or \emph{token biases} can prioritize particular tokens~\footnote{
@@ -86,39 +87,40 @@ In the following, we describe how transformers are used by embedding models for 
 \subsection*{Semantic Retrieval with Embedding Models}
 \label{sec:background/semtec/retrieval}
 
-To compute a \emph{document embedding} (also referred to as \emph{sentence embedding} or \emph{text embedding}) of a text, models such as \name{BERT} (bidirectional encoder representations from transformers) %, \name{XLNet}, and \name{T5}
+To compute a \emph{document embedding} of a text (also referred to as \emph{sentence embedding} or \emph{text embedding}), models such as \name{BERT} (bidirectional encoder representations from transformers) %, \name{XLNet}, and \name{T5}
 use only the encoder component of transformers, which was trained using self-supervised learning, and aggregate the resulting embedding sequence into a single embedding vector~\cite{devlin2019bert,raffel2023exploring}.
-\emph{Semantic retrieval systems} (also referred to as \emph{vector databases} or \emph{vector stores}) compute and index document embeddings for objects such as web pages, files, or source code~\cite{lewis2020retrieval}.
+\emph{Semantic retrieval systems} (also referred to as \emph{vector databases} or \emph{vector stores}) compute and index document embeddings for objects such as web pages, files, or source code~\cite{husain2020codesearchnet,lewis2020retrieval}.
 This allows them to efficiently perform a \emph{similarity search} in order to recommend semantically related objects to a given object.
 
 Semantic retrieval systems can also offer a more general form of \emph{semantic search} by taking a free-form query from a user, embedding it, and comparing it to the existing document embeddings.
-Based on the training of the embedding model, this can even yield useful results when query and documents are in different formats.
-For this, search quality can be improved by transforming queries and documents into a consistent representation through preprocessing prior to computing embeddings, e.g., by generating possible questions for documents or hypothetical relevant documents (\emph{hypothetical document embeddings}, \name{HyDE})~\cite{mao2021generation,gao2022precise} for questions using static heuristics or another language model.
+Based on the training of the embedding model, this can even yield useful results when query and documents are in different formats (such as questions and answers).
+For this use case, search quality can be improved by transforming queries and documents into a consistent representation by preprocessing them prior to computing embeddings.
+For example, it is possible to generate potential questions for documents or to generate fictitious, relevant documents for questions (\emph{hypothetical document embeddings}, \name{HyDE})~\cite{mao2021generation,gao2022precise} by using static heuristics or another language model.
 
-Other popular applications of document embeddings include clustering (for unsupervised grouping and anomaly detection) and classification (for supervised grouping, e.g., based on languages or sentiments).
+Other popular applications of document embeddings include clustering tasks (for unsupervised grouping and anomaly detection) and classification tasks (for supervised grouping, e.g., based on languages or sentiments).
 
 \subsection*{Text Generation with LLMs}
 \label{sec:background/semtec/generation}
 
-Generative LLMs such as \name{GPT} (generative pre-trained transformer), \name{LLaMA}, and \name{PaLM} use only the decoder component of transformers:
+Modern generative LLMs such as \name{GPT} (generative pre-trained transformer), \name{LLaMA}, and \name{PaLM} use only the decoder component of transformers:
 instead of encoding and transforming an input text, they treat it as a part of the output text and generate a likely completion of that~\cite{radford2018improving,openai2024gpt4}.
 They are usually trained using a combination of self-supervised learning with large text corpora and reinforcement learning from human feedback (RLHF) to fine-tune completions~\cite{ouyang2022training}.
 
-One of the earliest practical applications of LLMs that had a wider impact on the programming community was integrated \emph{semantic code completion} tools such as GitHub Copilot, Tabnine, CodeWhisperer, and others~\cite{chen2021evaluating,barka2023grounded} that suggest additions to the code a programmer has typed in an editor before.
+One of the earliest practical applications of LLMs that had a wider impact on the programming community was integrated \emph{semantic code completion} tools such as GitHub Copilot, Tabnine, CodeWhisperer, and others~\cite{chen2021evaluating,barka2023grounded}, which suggest additions to the code a programmer has typed in an editor.
 
 Beyond simple text completion, LLMs can also be trained to adhere to certain text formats and patterns and follow \emph{instructions} in the prompt, allowing the construction of specialized \emph{agents} with different characteristics:
 %
 \begin{description}[noextralabelsep]
 	\item[Conversational agents] engage in conversations with human \emph{users} by generating messages (that complete a conversation history) on behalf of a virtual \emph{assistant}~\cite{bai2022training}.
 	Optionally, \emph{system} messages can be used to provide further instructions to agents.
-	For example, OpenAI's ChatGPT, Anthrophic Claude, or GitHub Copilot Chat allow users to write, edit, review, or summarize text or source code or discuss a wide range of topics through a chat interface~\cite{openai2024gpt4}.
+	For example, OpenAI's ChatGPT, Anthropic Claude, and GitHub Copilot Chat allow users to write, edit, review, or summarize text or source code, or discuss a wide range of topics through a chat interface~\cite{openai2024gpt4}.
 
-	\item[Autonomous agents] are instructed to generate \emph{inner monologues} that mimic structured thinking, resulting in basic capabilities for self-organized problem solving such as a step-by-step analysis~\cite{yang2023autogpt}.
+	\item[Autonomous agents] are designed to generate \emph{inner monologues} that mimic structured thinking, resulting in basic capabilities for self-organized problem solving such as step-by-step analysis~\cite{yang2023autogpt}.
 
-	Additionally, they can be enabled via pre-training or instructions to access external systems through \emph{function calls}: an LLM emits a special output sequence that requests the invocation of a system function with a set of arguments, a handler executes this invocation and passes back the result with the text to the LLM, and the LLM continues the generation based on the result~\cite{hao2023toolkengpt,mialon2023augmented,yang2023autogpt}.
-	For instance, when presented with a mathematical word problem, \gptfouro can break down the task, plan a solution approach, and source out primitive arithmetic tasks to an external calculator function~\cite{openai2024gpt4}.
+	Additionally, they can be enabled via pre-training or instructions to access external systems through \emph{function calls}: an LLM emits a special output sequence that requests the invocation of a system function with a set of arguments, a handler executes this invocation and passes back the result to the LLM, and the LLM continues the generation based on the result~\cite{hao2023toolkengpt,mialon2023augmented,yang2023autogpt}.
+	For instance, when presented with a mathematical word problem, \gptfouro can break down the task, plan a solution approach, and delegate primitive arithmetic tasks to an external calculator function~\cite{openai2024gpt4}.
 
-	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} and \name{ChatDev} orchestrate multiple agents that cooperate intending to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
+	Building on the concept of autonomous agents, \emph{multi-agent frameworks} such as \name{MetaGPT} and \name{ChatDev} orchestrate multiple agents that cooperate to solve complex problems such as software development~\cite{hong2023metagpt,qian2023communicative}.
 \end{description}
 
 Being statistical models without an actual understanding of matters in human terms, LLMs suffer from several weaknesses such as limited logical reasoning, not adhering to instructions, and \emph{hallucinations} where false information is generated~\cite{openai2024gpt4}.
@@ -128,9 +130,9 @@ To mitigate these problems in parts, several techniques have been established:
 	\item[Fine-tuning:] Adjust the output style and behavior of models by training a base model on a curated set of positive examples of texts or conversations~\cite{kojima2022large,wei2022finetuned}.
 
 	\item[Prompt engineering:] Adjust the output style and behavior by strategically developing prompts and instructions that are (more) likely to influence models in an intended way~\cite{white2023prompt}.
-	For example, \emph{chain-of-thought} prompting instructs models to explicate thoughts through inner monologue (``think out aloud'') or express upfront plans in a certain structure and has been shown to improve their problem-solving abilities~\cite{wei2023chainofthought}.
+	For example, \emph{chain-of-thought} prompting instructs models to explicate thoughts through inner monologue (``think out loud'') or express upfront plans in a certain structure, which has been shown to improve their problem-solving abilities~\cite{wei2023chainofthought}.
 
-	Unlike fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, often affecting its performance~\cite{zhao2023survey}\footnote{While it is possible to cache the contextualized input embeddings produced in the decoder, only few cloud-based LLMs such as Anthrophic Claude support this functionality through their API.}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
+	Unlike fine-tuning, prompt engineering can be applied to any model without retraining, but the prompt must be presented to the LLM for each generation, often affecting its performance~\cite{zhao2023survey}\footnote{While it is possible to cache the contextualized input embeddings produced in the decoder, only few cloud-based LLMs such as Anthropic Claude currently support this functionality through their API.}, and often several iterations are required to develop effective prompts~\cite{white2023prompt}.
 
 	\item[Retrieval-augmented generation (RAG):] To mitigate the limited abilities of LLMs to recall rarely seen information, or in order to provide them with new information, gather excerpts from external sources through traditional algorithms (such as database lookups and full-text searches) and include them in the prompt~\cite{lewis2020retrieval}.
 	This often includes semantic retrieval methods.
@@ -143,18 +145,24 @@ To mitigate these problems in parts, several techniques have been established:
 		.
 	}.
 	Alternatively, agents can proactively call functions to retrieve required information.
-	Thus, RAG moves the challenge of information recall from training a model to searching and using information that are presented in the prompt.
+	Thus, RAG addresses the challenge of information recall and moves it from training a model to searching and using information presented in the prompt.
 \end{description}
 
 \ParSep
 
-Due to their foundation in machine learning methods, semantic technologies make it possible to process and synthesize information based on their context and semantics.
+Due to their foundation in machine learning methods and training on extensive data, semantic technologies make it possible to process and synthesize information based on its context and semantics.
 We believe that this creates an opportunity to tackle the limitations of traditional exploratory programming systems, which are restricted to technical interfaces at lower abstraction levels.
 
 \begin{example}
-	A programmer seeks help at the task of building a UI prototype from \cpageref{ex:background/challenges}.
+	A programmer seeks help with the task of building a UI prototype from \cpageref{ex:background/challenges}.
 	A traditional tool could support them merely by suggesting lexically related names or systematically testing all permutations or modifications of a code snippet.
-	On the other hand, a semantic tool could \emph{understand} the underlying intent of the programmer, find contextually relevant classes and names, apply them in plausible combinations, or research and fix runtime errors along the way autonomously.
+	On the other hand, a semantic tool could \emph{understand}\footnotemark the underlying intent of the programmer, find contextually relevant classes and names, apply them in plausible combinations, or research and fix runtime errors autonomously along the way.
 \end{example}
+\footnotetext{
+	We acknowledge the fundamental technical differences between human thinking and machine reasoning.
+	However, contemporary generative LLMs have demonstrated good approximations of human thought processes in several specific domains.
+	Therefore, in this thesis, we use the terms \emph{understanding} and \emph{thinking} in reference to machine agents without consistently putting them in italics or quotation marks.
+	We remain mindful, though, of the limited abilities of artificial agents, particularly in areas such as logical reasoning, common-sense knowledge, and ``intuitive'' ideas of concepts.
+}
 
-By integrating semantic technologies into exploratory programming systems, we envision to provide wider-ranging, conceptual, and contextual support for programmers within their exploratory workflow.
+By integrating semantic technologies into exploratory programming systems, we envision providing broader, conceptual, and contextual support for programmers within their exploratory workflow.

@@ -11,7 +11,7 @@ For this, we analyze the main influences of the semantic workspace on the experi
 
 We propose semantic interfaces for programming in this thesis because we intend to assist programmers in handling the---typically hierarchical---research process of common exploratory practices and thus improve their experience of semantic immediacy.
 This experience crucially depends on the quality of cooperation between programmers and the semantic programming system.
-The quality of cooperation consists of effective communication, division of labor, and trust into the system.
+The quality of cooperation consists of effective communication, division of labor, and trust in the system.
 
 \paragraph{Level of abstraction}
 \label{par:discussion/experience/process/abstraction}
@@ -33,16 +33,16 @@ To ask follow-up questions, programmers do not have to repeat or modify existing
 
 Analogously, answers of semantic conversations are provided in natural language that programmers usually do not have to ``decode'' into familiar concepts.
 Finally, answers can be customized and personalized based on the intentions and preferences of programmers: for example, novice programmers could ask the exploratory programming agent to explain its proposed solutions step-by-step, while experts might prefer concise outputs that align closer with their own mental model.
-Thus, semantic interfaces reduce the gulfs of execution and evaluation and thus contribute to the semantic immediacy of programmers.
+Thus, semantic interfaces reduce the gulfs of execution and evaluation and contribute to the semantic immediacy of programmers.
 
-At the same time, natural language interfaces can remove incentives of programmers to precisely explicate their thoughts, as conversational agents are rather good at resolving uncertainties and ambiguities in questions autonomically.
+At the same time, natural language interfaces can remove incentives for programmers to precisely explicate their thoughts, as conversational agents are rather good at resolving uncertainties and ambiguities in questions autonomously.
 However, explication of thought is a critical part of common problem-solving strategies.
 While programmers will usually wish to delegate a problem to the exploratory programming system when they use a semantic interface, explicating particular questions can also help them better understand overarching questions and problems.
 So, by commonly relying on vague natural language questions, programmers may impede their own research activities in the short or long term.
 
 \begin{example}
 	A programmer might ask ``when an order was filed'' while they are creating a user interface for a shop system.
-	Only when they are forced to manually translate ``filed'' into technical terms of the order interface---such as \code{creationDate}, \code{submissionDate}, or \code{receiptDate}---, they might realize that there are multiple options and start thinking about what information exactly they want to display to users.
+	Only when they are forced to manually translate ``filed'' into technical terms of the order interface---such as \code{creationDate}, \code{submissionDate}, or \code{receiptDate}---might they realize that there are multiple options and start thinking about what information exactly they want to display to users.
 	If the programming system is tasked to answer this question, it may lack the overarching context of the intended user interface and make a decision on its own that does not necessarily align with the---yet undeveloped---goals of the programmer.
 \end{example}
 
@@ -56,10 +56,10 @@ If semantic tools err or fail or programmers suspect them thereof, semantic abst
 During this, they need to either understand the previous attempts of the system and correct them or discard the system's work and make most of the effort again.
 
 Realizing that trust in current semantic technologies is limited, we emphasize that the behavior of semantic programming tools must be explainable, so that programmers can verify answers or build upon their experiments and developers of semantic tools can debug problems.
-For semantic suggestions and completions, we have implemented a provenance mechanism in the suggestion engine that allows programmers to understand the context of suggestions~(see \cref{sec:design/suggestions}).
+For semantic suggestions and completions, we have implemented a provenance mechanism in the suggestion engine that allows programmers to understand the context of suggestions~(see \cpageref{idx:design/suggestions/provenance}).
 For semantic conversations, we have included an option for displaying all experiments and thought processes of the exploratory agent.
 Despite these approaches, explaining the representations of large embedding models for semantic search and the decisions and attention of generative LLMs for autonomous agents are evolving challenges~\cites{chefer2021generic}[sec.~8.1.3]{zhao2023survey}, and large parts of the semantic workspace effectively remain gray boxes.
-In addition, even when the internal steps of the system are explained conceptually, we acknowledge the intrinsic complexity for programmers in understanding these concepts.
+In addition, even when the internal steps of the system are explained conceptually, we acknowledge the intrinsic complexity programmers face when switching between abstraction levels to understand these concepts.
 
 \paragraph{Level of support}
 \label{par:discussion/experience/process/support}
@@ -75,7 +75,7 @@ Even when the accuracy of semantic technologies evolves in the future, the law o
 
 On the other hand, augmentation interfaces do not involve a fundamental change in the workflow of programmers but allow them to retain their familiar methods.
 In this setting, suggestions by semantic tools are rather optional and not strictly expected, making their failures less drastic or disruptive.
-For example, suggestions for similar methods or code completions only provide selective inspirations for programmers but are never exhaustive, so programmers will still commonly conduct own research beyond the provided recommendations.
+For example, suggestions for similar methods or code completions only provide selective inspirations for programmers but are never exhaustive, so programmers will still commonly conduct their own research beyond the provided recommendations.
 In addition, programmers may actively seek to engage in subordinate research processes on their own for educational purposes or intrinsic motivation to low-level coding~\cite{tanimoto2023five}.
 
 \subsection*{Integration into Programming System}
@@ -85,7 +85,7 @@ In our prototype of the semantic workspace, we attempt to minimize spatial and s
 To this end, we integrate semantic conversations directly into object inspectors and other exploration tools, so programmers can ask semantic questions as easily as they can select traditional elements (such as variables or menu commands) in these tools.
 Semantic messages further reduce spatial and semantic distances when programmers are currently interacting with objects through scripts, since they allow asking high-level questions through the same scripting interface.
 
-We place semantic completions into the autocompletion menu of workspaces and code browsers to assure that they are not farther away than a few lines from the text cursor of the programmer.
+We place semantic completions into the autocompletion menu of workspaces, code browsers, and related tools to assure that they are not farther away than a few lines from the text cursor of the programmer, thus minimizing spatial distances.
 
 On the other hand, semantic suggestions are more comprehensive, so we collect them in a suggestion space that is located in a separate docking bar at the edge of the screen and thus more distant to the current focus window of the programmer.
 This reduces the chance of programmers discovering relevant suggestions unless they are actively looking at the suggestion space.
@@ -96,9 +96,9 @@ Finally, the traditional equivalent to the suggestion space---opening multiple c
 \label{sec:discussion/experience/performance}
 
 A noticeable resource consumption can impede the programming experience in different ways:
-large response times can reduce the experience of temporal immediacy, but programmers usually accept delays of up to 4 seconds for common tasks, though delays below 1--2 seconds are preffered for frequent tasks~\cite[p.~473]{shneiderman2005designing}.
+large response times can reduce the experience of temporal immediacy, but programmers usually accept delays of up to 4 seconds for common tasks, though delays below 1--2 seconds are preferred for frequent tasks~\cite[p.~473]{shneiderman2005designing}.
 These thresholds are usually met by our prototypes for semantic completions and simple semantic suggestions.
-However, the delay of semantic completions and some semantic conversations for complex questions may challenge the patience of programmers, until LLMs are further accelerated.
+However, the delays of semantic completions and some semantic conversations for complex questions might challenge the patience of programmers, until LLMs are further accelerated.
 
 Beyond the three conventional dimensions of immediacy proposed by \cite{ungar1997debugging}, we observed a fourth kind of ``psychological distance'' when dealing with monetary costs in our experiments.
 When using semantic completions and conversations, we were constantly afraid of causing expenses (``How expensive will this completion be? Could that answer really be worth two dollars?''), which frequently kept us from using them more frequently, even though we did not exhaust our available research budget.
