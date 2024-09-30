@@ -1,7 +1,7 @@
 # The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools
 
-Master thesis by Christoph Thiede.  
-Supervised by Robert Hirschfeld, Marcel Taeumel, and Robert Hirschfeld.
+Master's thesis by Christoph Thiede.  
+Supervised by [Robert Hirschfeld](https://github.com/roberthirschfeld), [Marcel Taeumel](https://github.com/marceltaeumel), and [Lukas Böhme](https://github.com/boehmchen).
 
 **Available artifacts:**
 - https://github.com/hpi-swa-lab/SemanticSqueak
