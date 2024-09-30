@@ -496,6 +496,12 @@
 \UseTblrLibrary{counter,varwidth}
 % vertical centering of figures in tblr cells
 \usepackage[export]{adjustbox}
+% convenient way to define cmds for tabularray columns that allow for empty cells
+\newcommand{\NewTblrCmd}[2]{%
+	\newcommand{#1}[1]{%
+		\ifthenelse{\isempty{##1}}{}{#2}%
+	}%
+}
 
 % circled numbers
 \usepackage{circledsteps}
