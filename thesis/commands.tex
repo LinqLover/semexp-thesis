@@ -286,9 +286,19 @@
 }{
 	\endsmallbox%
 }
+\newif\ifinappendix
+\let\oldappendix\appendix
+\renewcommand{\appendix}{
+	\oldappendix
+	\inappendixtrue
+}
 \newenvironment{summary}{%
 	\largebox
-	\section*{Chapter Summary}\vspace{-1em}
+	\section*{%
+		\ifbool{inappendix}
+			{Appendix Summary}
+			{Chapter Summary}%
+	}\vspace{-1em}
 	\setlist[1]{leftmargin=2em}
 }{%
 	\endlargebox%
