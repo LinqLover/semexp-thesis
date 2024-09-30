@@ -34,11 +34,13 @@
 \makeatother
 
 % hide draft info
-\makeatletter
-\AtBeginDocument{
-	\sbox{\swa@draftPageLine}{}
-}
-\makeatother
+\ifdraft{%
+	\makeatletter
+	\AtBeginDocument{
+		\sbox{\swa@draftPageLine}{}
+	}
+	\makeatother%
+}{}
 
 % patch date format
 \usepackage[style=iso]{datetime2}
