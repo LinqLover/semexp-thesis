@@ -3,6 +3,8 @@
 Master's thesis by Christoph Thiede.  
 Supervised by [Robert Hirschfeld](https://github.com/roberthirschfeld), [Marcel Taeumel](https://github.com/marceltaeumel), and [Lukas Böhme](https://github.com/boehmchen).
 
+Read the thesis here: **[💾 PDF](https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf)**
+
 **Available artifacts:**
 - https://github.com/hpi-swa-lab/SemanticSqueak
 - https://github.com/hpi-swa-lab/Squeak-SemanticText
@@ -38,8 +40,8 @@ Short version:
 	institution = {Hasso Plattner Institute},
 	address = {Potsdam, Germany},
 	type = {Master's Thesis},
-	keywords	= {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
-	url = {https://github.com/LinqLover/semexp-thesis},
+	keywords = {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
+	url = {https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf},
 }
 ```
 
@@ -63,8 +65,8 @@ We propose an augmented exploratory programming workflow that integrates semanti
 Our semantic exploration kernel uses semantic technologies to power these tools with a suggestion engine for recommending and contextualizing artifacts, and with an exploratory programming agent for autonomous experiments and conversations with programmers. We explore embedding- and term-based strategies for searching and ranking artifacts, and we design prompts and system interfaces for an agent based on the GPT-4o model.
 
 We successfully used a prototype of the semantic workspace for Squeak/Smalltalk to augment different exploratory activities. From our experience, semantic tools show promise in streamlining the exploratory programming workflow, but they must be further optimized to master exploratory practices and semantic understanding and to reduce time and resource consumption. We believe that our work is an important step toward a new era of semantic exploratory programming, where programmers and deeply intelligent agents collaborate effectively to comprehend and extend large systems.},
-	keywords	= {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
-	url = {https://github.com/LinqLover/semexp-thesis},
+	keywords = {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
+	url = {https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf},
 }</code></pre>
 </details>
 
