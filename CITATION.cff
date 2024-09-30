@@ -29,5 +29,5 @@ preferred-citation:
   year: 2024
   pages: 161
   location: "Potsdam, Germany"
-  publisher: "Hasso Plattner Institute"
+  institution: "Hasso Plattner Institute"
   keywords: [exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT]
