@@ -80,4 +80,4 @@ swth clean && swth go
 
 Worked on my machine with pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian). It is also possible to substitute `swth` by latexmk (version 4.76), even though multiple reruns might be required after changing the bibliography.
 
-Figures were created with PowerPoint 365 Online (not recommended to try at home), inspired by Marcel Taeumel's fanastic drawing style (Segoe Print, sketchy lines - freehand and scribble).
+Figures were created with PowerPoint 365 Online (not recommended to try at home), inspired by Marcel Taeumel's fantastic drawing style (Segoe Print, sketchy lines - freehand and scribble).
