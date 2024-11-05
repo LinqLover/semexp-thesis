@@ -70,6 +70,18 @@ We successfully used a prototype of the semantic workspace for Squeak/Smalltalk 
 }</code></pre>
 </details>
 
+## Artifacts and Paper
+
+I attempt to provide all relevant artifacts for this reseearch in this repository:
+
+https://github.com/hpi-swa-lab/SemanticSqueak
+
+This work has also let to a conference paper published and presented at Onward! 2024:
+
+- Christoph Thiede, Marcel Taeumel, Lukas Böhme, and Robert Hirschfeld. 2024. [Talking to Objects in Natural Language: Toward Semantic Tools for Exploratory Programming.](https://dl.acm.org/doi/10.1145/3689492.3690049) In *Proceedings of the 2024 ACM SIGPLAN International Symposium on New Ideas, New Paradigms, and Reflections on Programming and Software (Onward! ’24)*, October 20–25, 2024, Pascadena, California. ACM, New York, NY, USA, 17 pages. DOI: [10.1145/3689492.3690049](https://dl.acm.org/doi/10.1145/3689492.3690049). [Slides](./slides/Onward24%20Talking%20to%20Objects.pdf)/[Poster](./posters/Onward24%20Talking%20to%20Objects.pdf)/[Transcript](https://linqlover.github.io/LinqLover/transcripts/Onward24%20Talking%20to%20Objects.html).
+
+For more information, pelase refer to the above GitHub repository.
+
 ## Building
 
 Uses the [swathesis](https://github.com/krono/swathesis) template (plus many customizations).
