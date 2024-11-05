@@ -28,10 +28,11 @@ Read the thesis here: **[💾 PDF (twoside)](https://github.com/LinqLover/semexp
 
 ## Citing
 
-Short version:
+> Christoph Thiede. 2024. *The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools.* Master’s Thesis. Hasso Plattner Institute, 161 pages. To be defended. URL: <https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf>
 
-```bib
-@thesis{thiede2024semantic,
+<details>
+<summary>BibTeX citation file (short version)</summary>
+<pre><code>@thesis{thiede2024semantic,
 	title = {The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools},
 	author = {Christoph Thiede},
 	year = {2024},
@@ -42,13 +43,11 @@ Short version:
 	type = {Master's Thesis},
 	keywords = {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
 	url = {https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf},
-}
-```
-
-Long version:
+}</code></pre>
+</details>
 
 <details>
-<summary>Citation</summary>
+<summary>BibTeX citation file (long version)</summary>
 <pre><code>@thesis{thiede2024semantic,
 	title = {The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools},
 	author = {Christoph Thiede},
