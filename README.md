@@ -32,15 +32,15 @@ Read the thesis here: **[💾 PDF (twoside)](https://github.com/LinqLover/semexp
 
 <details>
 <summary>BibTeX citation file (short version)</summary>
-<pre><code>@thesis{thiede2024semantic,
+<pre><code>@mastersthesis{thiede2024semantic,
 	title = {The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools},
-	author = {Christoph Thiede},
+	author = {Thiede, Christoph},
 	year = {2024},
-	month = {9},
+	month = sep,
 	day = {30},
-	institution = {Hasso Plattner Institute},
+	school = {Hasso Plattner Institute},
 	address = {Potsdam, Germany},
-	type = {Master's Thesis},
+	type = {Master's thesis},
 	keywords = {exploratory programming, semantic technologies, generative AI, LLMs, semantic retrieval, document embeddings, Squeak, Smalltalk, GPT},
 	url = {https://github.com/LinqLover/semexp-thesis/releases/download/submission/semexp-thesis.pdf},
 }</code></pre>
@@ -48,15 +48,15 @@ Read the thesis here: **[💾 PDF (twoside)](https://github.com/LinqLover/semexp
 
 <details>
 <summary>BibTeX citation file (long version)</summary>
-<pre><code>@thesis{thiede2024semantic,
+<pre><code>@mastersthesis{thiede2024semantic,
 	title = {The Semantic Workspace: Augmenting Exploratory Programming with Integrated Generative AI Tools},
-	author = {Christoph Thiede},
+	author = {Thiede, Christoph},
 	year = {2024},
-	month = {9},
+	month = sep,
 	day = {30},
-	institution = {Hasso Plattner Institute},
+	school = {Hasso Plattner Institute},
 	address = {Potsdam, Germany},
-	type = {Master's Thesis},
+	type = {Master's thesis},
 	abstract = {In the exploratory programming practice, programmers iteratively ask questions and run experiments to understand and develop software systems. However, traditional exploratory programming workflows often lead to distractions and information overload, as programmers need to handle numerous implementation artifacts. Meanwhile, semantic technologies—text generation using large language models (LLMs) and semantic retrieval using embeddings—are establishing themselves in other development practices to assist in writing and searching code.
 
 We propose an augmented exploratory programming workflow that integrates semantic technologies into programming systems, allowing programmers to interact with them through more conceptual interfaces. Our semantic workspace introduces three semantic programming tools for augmenting and automating exploration: semantic suggestions anticipate the intentions of programmers and recommend possible experiments, semantic completions continue their plans through contextualized suggestions, and semantic conversations enable high-level, natural-language questions about objects.
